@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>counter · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300..700&family=IBM+Plex+Sans+Hebrew:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/counter.css">
+<style>
+  /* Direction: fintech report, deep green on paper */
+  :root {
+    --c-canvas: oklch(97.5% 0.008 150); --c-surface: oklch(94.5% 0.012 150); --c-surface-2: oklch(90% 0.02 150);
+    --c-ink: oklch(24% 0.05 160); --c-ink-2: oklch(38% 0.04 160); --c-muted: oklch(52% 0.03 160); --c-rule: oklch(86% 0.015 150);
+    --c-accent: oklch(62% 0.16 150); --c-accent-ink: oklch(98% 0.01 150); --c-focus: oklch(55% 0.16 150);
+    --f-display: "IBM Plex Sans", "IBM Plex Sans Hebrew", system-ui, sans-serif; --f-body: "IBM Plex Sans", "IBM Plex Sans Hebrew", system-ui, sans-serif; --f-mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  .head { padding-block: var(--sp-8) var(--sp-6); display: grid; gap: var(--sp-4); max-inline-size: 760px; }
+  .mono { font: 500 var(--fs-xs)/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-muted); }
+  .head h1 { font-size: var(--fs-3xl); font-weight: 400; letter-spacing: -0.035em; line-height: 1; }
+  .head p { color: var(--c-ink-2); font-size: var(--fs-lg); }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); border-block: 1px solid var(--c-rule); }
+  .stat { padding: var(--sp-6) var(--sp-5); display: grid; gap: var(--sp-3); align-content: start; border-inline-start: 1px solid var(--c-rule); }
+  .stat:first-child { border-inline-start: 0; padding-inline-start: 0; }
+  .stat .n { font-size: var(--fs-2xl); font-weight: 300; letter-spacing: -0.03em; line-height: 1; }
+  .stat p { color: var(--c-muted); font-size: var(--fs-sm); max-inline-size: 24ch; }
+  .roll-band { background: var(--c-ink); color: var(--c-canvas); margin-block: var(--sp-8); border-radius: var(--r-lg); padding: clamp(24px, 5vw, 72px); display: grid; gap: var(--sp-6); }
+  @media (min-width: 900px) { .roll-band { grid-template-columns: 1fr auto; align-items: end; } }
+  .roll-band .big { font-size: clamp(3rem, 1.5rem + 7vw, 8.5rem); font-weight: 300; letter-spacing: -0.04em; line-height: 1; }
+  .roll-band .mono { color: color-mix(in oklab, var(--c-canvas) 60%, transparent); }
+  .price { display: grid; gap: var(--sp-2); justify-items: start; }
+  .price .p { font-size: var(--fs-2xl); font-weight: 500; color: var(--c-accent); }
+  .spacer { block-size: 40vh; }
+</style>
+</head>
+<body>
+<main class="container">
+  <header class="head">
+    <p class="mono" data-he="דוח שנתי · 2025">Annual report · 2025</p>
+    <h1 data-he="שנה אחת של חנות קטנה, במספרים">One year of a small online store, in numbers</h1>
+    <p data-he="הנתונים אמיתיים ומעוגלים. המספרים מתעדכנים לפי השפה של הדף.">Figures are rounded. Number formatting follows the page language.</p>
+  </header>
+  <section class="stats" aria-label="Key figures" data-he-aria-label="נתונים מרכזיים">
+    <div class="stat"><span class="n" data-fx="counter" data-to="12480">12,480</span><p data-he="הזמנות נשלחו מהמחסן בחולון">orders shipped from the Holon warehouse</p></div>
+    <div class="stat"><span class="n" data-fx="counter" data-to="3200000" data-format="currency-compact" data-currency="ILS">₪3.2M</span><p data-he="מחזור מכירות, כולל מע״מ">in sales, including VAT</p></div>
+    <div class="stat"><span class="n" data-fx="counter" data-to="98.6" data-decimals="1" data-format="percent">98.6%</span><p data-he="מההזמנות הגיעו תוך יומיים">of orders arrived within two days</p></div>
+    <div class="stat"><span class="n" data-fx="counter" data-to="4.9" data-decimals="1" data-suffix=" / 5">4.9 / 5</span><p data-he="דירוג ממוצע מ-1,900 ביקורות">average rating from 1,900 reviews</p></div>
+  </section>
+  <section class="roll-band">
+    <div>
+      <p class="mono" data-he="ביקורים באתר, variant=roll">Site visits, variant=roll</p>
+      <div class="big" data-fx="counter" data-variant="roll" data-to="2026114">2,026,114</div>
+    </div>
+    <div class="price">
+      <p class="mono" data-he="מחיר ממוצע לסל">Average basket</p>
+      <span class="p" data-fx="counter" data-variant="roll" data-to="349" data-format="currency" data-currency="ILS">₪349</span>
+    </div>
+  </section>
+  <div class="spacer"></div>
+</main>
+<script src="_demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/counter.js"></script>
+</body>
+</html>

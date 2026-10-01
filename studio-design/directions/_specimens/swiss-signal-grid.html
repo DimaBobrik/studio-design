@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Swiss Signal Grid · specimen</title>
+<meta name="he-title" content="Swiss Signal Grid · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Heebo:wght@300..900&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/swiss-signal-grid.md */
+:root {
+  --c-canvas: oklch(98.6% 0.004 255); --c-surface: oklch(96.4% 0.005 255); --c-surface-2: oklch(92.5% 0.006 255);
+  --c-ink: oklch(17% 0.012 255); --c-ink-2: oklch(33% 0.012 255); --c-muted: oklch(52% 0.010 255);
+  --c-rule: oklch(84% 0.008 255); --c-accent: oklch(45% 0.20 264); --c-accent-ink: oklch(98.6% 0.004 255);
+  --c-focus: oklch(50% 0.22 264);
+  --f-display: "Archivo", "Heebo", system-ui, sans-serif; --f-body: "Archivo", "Heebo", system-ui, sans-serif;
+  --f-mono: ui-monospace, "SFMono-Regular", Menlo, monospace; --f-outlier: "Archivo", "Heebo", sans-serif; /* used at font-stretch 62% for labels */
+  --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-base: clamp(1rem, 0.96rem + 0.15vw, 1.0625rem);
+  --fs-lg: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem); --fs-xl: clamp(1.6rem, 1.3rem + 1vw, 2.25rem);
+  --fs-2xl: clamp(2.25rem, 1.6rem + 2.4vw, 3.75rem); --fs-3xl: clamp(3rem, 1.8rem + 4.8vw, 6rem);
+  --fs-display: clamp(3.25rem, 1rem + 9.5vw, 8.5rem);
+  --lh-tight: 0.9; --lh-body: 1.55; --tr-display: -0.045em; --tr-label: 0.06em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 72px; --sp-9: 112px; --sp-10: 168px;
+  --section-y: clamp(72px, 7vw + 32px, 168px); --gutter: clamp(16px, 2.2vw, 32px); --maxw: 1520px;
+  --r-sm: 0px; --r-md: 0px; --r-lg: 0px; --r-pill: 0px; /* radius_system 0: square "pills"; dot marks use 50% */
+  --ease-out: cubic-bezier(0.2, 0, 0, 1); --ease-in: cubic-bezier(0.6, 0, 1, 1); --ease-in-out: cubic-bezier(0.7, 0, 0.3, 1);
+  --d-fast: 120ms; --d-med: 240ms; --d-slow: 480ms;
+  --shadow-1: 0 0 0 1px var(--c-rule); --shadow-2: 0 0 0 2px var(--c-ink);
+}
+:root[dir="rtl"] { --lh-tight: 1.0; --fs-display: clamp(2.75rem, 1rem + 8vw, 7rem); }
+</style>
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); }
+[lang="he"] { --f-display: "Heebo", sans-serif; --f-body: "Heebo", sans-serif; }
+.cap { font-stretch: 62%; font-weight: 600; font-size: 12px; letter-spacing: var(--tr-label); }
+[lang="he"] .cap { font-size: 13px; }
+.g { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); }
+.cols { position: absolute; inset: 0; pointer-events: none; z-index: 0; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); padding-inline: var(--gutter); max-inline-size: var(--maxw); margin-inline: auto; }
+.cols span { border-inline: 1px solid color-mix(in oklab, var(--c-rule) 55%, transparent); transform-origin: 50% 0; }
+.nav { block-size: 64px; align-items: center; position: relative; z-index: 2; }
+.nav .wm { grid-column: 1 / span 4; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.03em; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.nav .wm i { inline-size: .7em; block-size: .7em; background: var(--c-accent); display: inline-block; }
+.nav ul { grid-column: 9 / span 4; display: flex; justify-content: space-between; list-style: none; margin: 0; padding: 0; font-weight: 500; font-size: var(--fs-sm); }
+.nav a { text-decoration: none; }
+.hero { position: relative; min-block-size: calc(78dvh - 64px); align-content: end; padding-block: var(--sp-8) var(--sp-7); z-index: 1; }
+.hero h1 { grid-column: 1 / span 10; font-weight: 800; font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); text-transform: lowercase; margin-inline-start: -0.04em; }
+[lang="he"] .hero h1 { font-weight: 900; text-transform: none; }
+.hero .lede { grid-column: 9 / span 4; margin-block-start: var(--sp-6); font-size: var(--fs-lg); line-height: 1.35; }
+[lang="he"] .hero .lede { font-weight: 300; }
+.hero .meta { grid-column: 1 / span 6; grid-row: 2; align-self: end; display: flex; gap: var(--sp-6); align-items: center; }
+.qd { position: absolute; inset-block-start: var(--sp-7); inset-inline-end: 0; inline-size: 120px; aspect-ratio: 1; background: var(--c-accent); border-start-start-radius: 100%; }
+.bar { inline-size: 64px; block-size: 3px; background: var(--c-accent); }
+.btn { display: inline-flex; align-items: center; block-size: 48px; padding-inline: 22px; background: var(--c-accent); color: var(--c-accent-ink); font-weight: 600; text-decoration: none; position: relative; isolation: isolate; overflow: clip; }
+.btn::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--c-ink); clip-path: inset(0 100% 0 0); transition: clip-path var(--d-med) var(--ease-out); }
+[dir="rtl"] .btn::before { clip-path: inset(0 0 0 100%); }
+.btn:hover::before, .btn.is-hover::before { clip-path: inset(0); }
+.btn.is-focus { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.link { font-weight: 600; text-decoration: underline 2px; text-underline-offset: .3em; }
+.lines { position: relative; z-index: 1; padding-block: var(--sp-7) var(--section-y); overflow: clip; }
+.lines .num { position: absolute; inset-block-start: -.1em; inset-inline-end: -.05em; font-weight: 800; font-size: 40vw; line-height: .8; letter-spacing: -0.06em; color: color-mix(in oklab, var(--c-ink) 7%, transparent); pointer-events: none; }
+.lines h2 { grid-column: 1 / span 5; font-weight: 700; font-size: var(--fs-2xl); line-height: .95; letter-spacing: -0.035em; }
+.tbl { grid-column: 4 / span 9; margin-block-start: var(--sp-7); display: grid; gap: 1px; background: var(--c-rule); border-block: 1px solid var(--c-rule); }
+.tbl > div { display: grid; grid-template-columns: 80px 1fr 1fr 120px; gap: var(--gutter); padding: var(--sp-4) 0; background: var(--c-canvas); align-items: baseline; }
+.tbl b { font-weight: 800; font-size: var(--fs-xl); letter-spacing: -0.03em; }
+.tbl .t { font-variant-numeric: tabular-nums; text-align: end; }
+.sq { display: inline-block; inline-size: .6em; block-size: .6em; background: var(--c-accent); margin-inline-end: 8px; }
+@media (max-width: 900px) {
+  .nav ul { display: none; } .nav .wm { grid-column: 1 / -1; }
+  .hero h1, .hero .lede, .hero .meta, .lines h2, .tbl { grid-column: 1 / -1; grid-row: auto; } .hero .meta { margin-block-start: var(--sp-6); flex-wrap: wrap; } .qd { inline-size: 64px; }
+  .tbl > div { grid-template-columns: 56px 1fr 80px; } .tbl > div > :nth-child(3) { display: none; }
+}
+</style>
+</head>
+<body>
+<div style="position: relative">
+<div class="cols" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+<header class="nav g container"><a class="wm" href="#"><i aria-hidden="true"></i><span data-he="קו הכרמל">karmel line</span></a><ul role="list"><li><a href="#" data-he="קווים">Lines</a></li><li><a href="#" data-he="לוחות זמנים">Timetables</a></li><li><a href="#" data-he="תעריפים">Fares</a></li><li><a href="#" data-he="נגישות">Access</a></li></ul></header>
+<main>
+<section class="hero g container">
+  <span class="qd" aria-hidden="true"></span>
+  <h1 data-he="כל 4 דקות, מ-05:12 עד 00:40.">every 4 minutes, from 05:12 to 00:40.</h1>
+  <div class="meta"><a class="btn" href="#" data-spec-btn data-he="לתכנון נסיעה">Plan a trip</a><a class="link" href="#" data-he="מצב הקווים עכשיו">Line status now</a></div>
+  <p class="lede" data-he="שלושה קווי רכבת קלה, 41 תחנות וכרטיס אחד לכל העיר. כל התחנות נגישות לכיסאות גלגלים.">Three light-rail lines, 41 stations and one ticket for the whole city. Every station is step-free.</p>
+</section>
+<section class="lines g container">
+  <span class="num" aria-hidden="true" dir="ltr">3</span>
+  <h2 data-he="שלושה קווים, ציר אחד.">three lines, one spine.</h2>
+  <div class="tbl" role="table" aria-label="Lines" data-he-aria-label="קווים">
+    <div role="row"><b role="cell" dir="ltr">K1</b><span role="cell" data-he="בת גלים – חוף הכרמל">Bat Galim – Carmel Beach</span><span role="cell" class="cap" data-he="16 תחנות">16 stations</span><span role="cell" class="t" dir="ltr">4 min</span></div>
+    <div role="row"><b role="cell" dir="ltr">K2</b><span role="cell" data-he="הדר – מרכז חורב">Hadar – Horev Centre</span><span role="cell" class="cap" data-he="13 תחנות">13 stations</span><span role="cell" class="t" dir="ltr">6 min</span></div>
+    <div role="row"><b role="cell" dir="ltr"><span class="sq" aria-hidden="true"></span>K3</b><span role="cell" data-he="נמל – אוניברסיטה">Port – University</span><span role="cell" class="cap" data-he="12 תחנות · חדש">12 stations · new</span><span role="cell" class="t" dir="ltr">8 min</span></div>
+  </div>
+</section>
+</main>
+</div>
+<section class="spec-system" data-spec-system data-display="every 4 minutes" data-display-he="כל 4 דקות"></section>
+<footer class="spec-foot"><span>Specimen · swiss-signal-grid · fictional transit authority “Karmel Line”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script>
+/* signature: grid rules draw in once (scaleY 0→1, 30ms stagger) */
+(function () { if (!window.gsap || SD.reduced()) return; gsap.from('.cols span', { scaleY: 0, duration: .48, ease: 'power3.out', stagger: .03 }); })();
+</script>
+</body>
+</html>

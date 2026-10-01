@@ -1,0 +1,12 @@
+/* studio-design fx · lathe.css — layout for fx/lathe.js (surface-of-revolution object). Logical properties only. */
+.sd-lathe { position: relative; display: block; margin: 0; aspect-ratio: var(--lathe-ratio, 10 / 13); inline-size: 100%; }
+.sd-lathe > img, .sd-lathe > canvas { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: contain; }
+.sd-lathe > canvas { opacity: 0; transition: opacity 600ms var(--ease-out); }
+.sd-lathe.is-live > canvas { opacity: 1; }
+.sd-lathe.is-live > img { opacity: 0; }
+.sd-lathe[role="slider"] { cursor: grab; touch-action: pan-y; }
+.sd-lathe[role="slider"]:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 6px; }
+.sd-lathe.is-dragging { cursor: grabbing; }
+/* scroll stage: ScrollTrigger pins it; without ScrollTrigger it simply scrolls */
+.sd-lathe-stage { position: relative; }
+@media (prefers-reduced-motion: reduce) { .sd-lathe > canvas { transition: none; } }

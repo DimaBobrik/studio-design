@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pdp · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/pdp.css">
+<link rel="stylesheet" href="../fx/accordion.css">
+<style>
+  :root {
+    --c-canvas: oklch(98.5% 0.002 250); --c-surface: oklch(95.5% 0.004 250); --c-surface-2: oklch(91% 0.006 250);
+    --c-ink: oklch(18% 0.01 250); --c-ink-2: oklch(36% 0.01 250); --c-muted: oklch(54% 0.01 250); --c-rule: oklch(88% 0.006 250);
+    --c-accent: oklch(62% 0.2 28); --c-accent-ink: #fff; --c-focus: oklch(55% 0.2 28);
+    --f-display: "Geist", "Rubik", system-ui, sans-serif; --f-body: "Geist", "Rubik", system-ui, sans-serif; --r-md: 14px; --header-h: 64px;
+    --tr-display: -0.035em;
+  }
+  .bar { position: sticky; inset-block-start: 0; z-index: var(--z-header); block-size: var(--header-h); background: var(--c-canvas); border-block-end: 1px solid var(--c-rule); }
+  .bar .container { display: flex; align-items: center; justify-content: space-between; block-size: 100%; font-size: var(--fs-sm); }
+  .bar b { font-size: 18px; letter-spacing: -0.03em; }
+  .crumbs { font-size: var(--fs-xs); color: var(--c-muted); padding-block: var(--sp-5); }
+  .crumbs a { text-decoration: none; }
+  .kick { font-size: var(--fs-xs); color: color-mix(in oklab, var(--c-accent) 72%, var(--c-ink)); font-weight: 600; letter-spacing: var(--tr-label); text-transform: uppercase; }
+  .lede { color: var(--c-ink-2); }
+  .rating { display: flex; align-items: center; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--c-muted); }
+  .rating i { color: var(--c-ink); font-style: normal; letter-spacing: 2px; }
+  .perks { display: grid; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--c-ink-2); padding: var(--sp-4); border-radius: var(--r-md); background: var(--c-surface); }
+  .sd-acc { --acc-pad-y: 16px; } .sd-acc__item > summary { font-family: var(--f-body); font-size: var(--fs-base); font-weight: 500; }
+  .more { padding-block: var(--sp-9); }
+  .more h2 { font-size: var(--fs-3xl); max-inline-size: 16ch; }
+</style>
+</head>
+<body>
+<header class="bar"><div class="container"><b data-he="אורביט">Orbit</b><span data-he="סל (0)">Cart (0)</span></div></header>
+<main class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="#" data-he="אוזניות">Headphones</a> / <span data-he="מרידיאן">Meridian</span></nav>
+  <section class="sd-pdp" data-fx="pdp" data-swap-attribute=\"color\" data-variations='[{"id":301,"attributes":{"color":"sand","bundle":"solo"},"price":1290,"sku":"MER-SAN-S","in_stock":true},{"id":302,"attributes":{"color":"sand","bundle":"travel"},"price":1480,"sku":"MER-SAN-T","in_stock":true},{"id":303,"attributes":{"color":"graphite","bundle":"solo"},"price":1290,"sku":"MER-GRA-S","in_stock":true},{"id":304,"attributes":{"color":"graphite","bundle":"travel"},"price":1480,"sku":"MER-GRA-T","in_stock":true,"stock":2},{"id":305,"attributes":{"color":"sage","bundle":"solo"},"price":1340,"sku":"MER-SAG-S","in_stock":true},{"id":306,"attributes":{"color":"sage","bundle":"travel"},"price":1530,"sku":"MER-SAG-T","in_stock":false}]' data-label-choose="Choose options" data-label-oos="Out of stock" data-he-attr-data-label-oos="אזל מהמלאי" data-label-low="Only {n} left" data-he-attr-data-label-low="נותרו {n} בלבד" data-currency="ILS" data-locale="en-IL" data-he-attr-data-locale="he-IL" data-he-attr-data-label-slide="תמונה {n} מתוך {total}" data-he-attr-data-label-added="נוסף לסל">
+    <div class="sd-pdp__gallery">
+      <ul class="sd-pdp__slides" data-cols="2" role="list">
+        <li class="sd-pdp__slide" data-key="sand"><img src="https://picsum.photos/seed/hp-sand/900/1125" alt="Meridian headphones in Sand" data-he-alt="אוזניות מרידיאן בצבע חול" width="900" height="1125"></li>
+        <li class="sd-pdp__slide" data-key="graphite"><img src="https://picsum.photos/seed/hp-graphite/900/1125" alt="Meridian headphones in Graphite" data-he-alt="אוזניות מרידיאן בצבע גרפיט" width="900" height="1125" loading="lazy"></li>
+        <li class="sd-pdp__slide" data-key="sage"><img src="https://picsum.photos/seed/hp-sage/900/1125" alt="Meridian headphones in Sage" data-he-alt="אוזניות מרידיאן בצבע מרווה" width="900" height="1125" loading="lazy"></li>
+        <li class="sd-pdp__slide" data-key="detail"><img src="https://picsum.photos/seed/hp-detail/900/1125" alt="Memory-foam ear cushion close-up" data-he-alt="תקריב כרית אוזן מקצף זיכרון" width="900" height="1125" loading="lazy"></li>
+        <li class="sd-pdp__slide" data-key="life"><img src="https://picsum.photos/seed/hp-life/900/1125" alt="Wearing Meridian on a train" data-he-alt="מרידיאן ברכבת" width="900" height="1125" loading="lazy"></li>
+      </ul>
+    </div>
+    <div class="sd-pdp__buy">
+      <div class="stack" style="--stack: var(--sp-3)">
+        <p class="kick" data-he="חדש · מהדורה 2">New · Second edition</p>
+        <h1 class="sd-pdp__title" data-he="מרידיאן, אוזניות אלחוטיות">Meridian wireless headphones</h1>
+        <div class="rating"><i aria-hidden="true">★★★★★</i><span data-he="4.8 מתוך 5 · 312 ביקורות">4.8 out of 5 · 312 reviews</span></div>
+        <p class="sd-pdp__price" data-pdp-price>₪1,290</p>
+        <p class="lede" data-he="סינון רעשים שמכבד את השקט, 42 שעות סוללה ומבנה אלומיניום שמחזיק עשור.">Noise cancelling that respects quiet, 42 hours of battery and an aluminium frame built to last a decade.</p>
+      </div>
+      <fieldset class="sd-pdp__opt">
+        <legend><span data-he="צבע:">Colour:</span> <b data-pdp-variant-label data-he="חול">Sand</b></legend>
+        <div class="sd-pdp__choices">
+          <label><input type="radio" name="color" value="sand" data-label="Sand" data-he-attr-data-label="חול" data-slide="sand" data-price="1290" data-id="meridian-sand" checked><span class="sd-pdp__swatch" style="--sw:#d9c8b0"></span><span class="sr-only" data-he="חול">Sand</span></label>
+          <label><input type="radio" name="color" value="graphite" data-label="Graphite" data-he-attr-data-label="גרפיט" data-slide="graphite" data-price="1290" data-id="meridian-graphite"><span class="sd-pdp__swatch" style="--sw:#3a3d42"></span><span class="sr-only" data-he="גרפיט">Graphite</span></label>
+          <label><input type="radio" name="color" value="sage" data-label="Sage" data-he-attr-data-label="מרווה" data-slide="sage" data-price="1340" data-id="meridian-sage"><span class="sd-pdp__swatch" style="--sw:#9aa892"></span><span class="sr-only" data-he="מרווה">Sage</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="sd-pdp__opt">
+        <legend><span data-he="מארז:">Bundle:</span> <b data-pdp-variant-label data-he="אוזניות בלבד">Headphones only</b></legend>
+        <div class="sd-pdp__choices">
+          <label><input type="radio" name="bundle" value="solo" data-label="Headphones only" data-he-attr-data-label="אוזניות בלבד" checked><span class="sd-pdp__pill" data-he="בלבד">Solo</span></label>
+          <label><input type="radio" name="bundle" value="travel" data-label="Travel case" data-he-attr-data-label="נרתיק נסיעות"><span class="sd-pdp__pill" data-he="+ נרתיק">+ Case</span></label>
+          <label><input type="radio" name="bundle" value="studio" disabled><span class="sd-pdp__pill" data-he="סטודיו (אזל)">Studio (sold out)</span></label>
+        </div>
+      </fieldset>
+      <p class="stock" data-pdp-stock aria-live="polite"></p>
+      <button class="sd-pdp__atc" type="button" data-pdp-atc data-add-to-cart data-id="meridian-sand" data-name="Meridian" data-price="1290" data-variant="Sand"><span data-he="הוספה לסל">Add to cart</span></button>
+      <div class="perks"><span data-he="✓ משלוח חינם תוך 2 ימי עסקים">Free delivery in 2 business days</span><span data-he="החזרה עד 30 יום, בלי שאלות">30-day returns, no questions</span><span data-he="אחריות יבואן רשמי לשנתיים">Two-year official warranty</span></div>
+      <div class="sd-acc" data-fx="accordion" data-exclusive="true">
+        <details class="sd-acc__item"><summary><span class="sd-acc__q" data-he="מפרט">Specifications</span><span class="sd-acc__icon" aria-hidden="true"></span></summary><div class="sd-acc__body"><p data-he="דרייברים 40 מ״מ, Bluetooth 5.4, LDAC, משקל 262 גרם.">40 mm drivers, Bluetooth 5.4, LDAC, 262 g.</p></div></details>
+        <details class="sd-acc__item"><summary><span class="sd-acc__q" data-he="משלוחים והחזרות">Delivery and returns</span><span class="sd-acc__icon" aria-hidden="true"></span></summary><div class="sd-acc__body"><p data-he="משלוח חינם לכל הארץ. איסוף החזרה מהבית ללא עלות.">Free nationwide delivery. Free return pickup from your door.</p></div></details>
+      </div>
+    </div>
+    <div class="sd-pdp__bar">
+      <img data-pdp-bar-img src="https://picsum.photos/seed/hp-sand/120/150" alt="" width="44" height="52">
+      <div class="sd-pdp__bar-info"><b data-he="מרידיאן">Meridian</b><span data-pdp-price>₪1,290</span></div>
+      <button class="sd-pdp__atc" type="button" data-pdp-bar-atc data-he="הוספה לסל">Add to cart</button>
+    </div>
+  </section>
+  <section class="more"><h2 data-he="נבנו לשעות הארוכות של היום.">Built for the long hours of the day.</h2></section>
+  <section class="more" style="padding-block-start:0"><p class="lede" data-he="עוד תוכן כדי לגלול ולראות את הסרגל הדביק.">More content so you can scroll and see the sticky bar.</p></section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Flip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="_demo.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/pdp.js"></script>
+<script src="../fx/accordion.js"></script>
+</body>
+</html>

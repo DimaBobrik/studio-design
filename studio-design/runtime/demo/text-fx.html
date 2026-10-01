@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>text-fx · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..600&family=Rubik:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/text-fx.css">
+<style>
+  /* Direction: dark engineering studio, acid lime accent */
+  :root {
+    --c-canvas: oklch(15% 0.01 250); --c-surface: oklch(19% 0.012 250); --c-surface-2: oklch(26% 0.015 250);
+    --c-ink: oklch(96% 0.005 250); --c-ink-2: oklch(78% 0.01 250); --c-muted: oklch(62% 0.012 250); --c-rule: oklch(28% 0.012 250);
+    --c-accent: oklch(90% 0.2 125); --c-accent-ink: oklch(18% 0.02 125); --c-focus: oklch(90% 0.2 125);
+    --f-display: "Geist", "Rubik", system-ui, sans-serif; --f-body: "Geist", "Rubik", system-ui, sans-serif; --f-mono: "Geist Mono", "Rubik", ui-monospace, monospace;
+    color-scheme: dark;
+  }
+  nav.top { display: flex; justify-content: space-between; align-items: center; padding-block: var(--sp-5); border-block-end: 1px solid var(--c-rule); }
+  nav.top b { font-weight: 700; letter-spacing: -0.03em; }
+  nav.top ul { display: flex; gap: var(--sp-5); font-size: var(--fs-sm); }
+  nav.top a { text-decoration: none; color: var(--c-ink-2); }
+  nav.top a:hover { color: var(--c-ink); }
+  .hero { padding-block: clamp(80px, 14vh, 180px) var(--sp-8); display: grid; gap: var(--sp-6); }
+  .status { font: 500 var(--fs-xs)/1.4 var(--f-mono); color: var(--c-accent); letter-spacing: 0.04em; display: inline-flex; gap: var(--sp-2); align-items: center; }
+  .status::before { content: ""; inline-size: 7px; block-size: 7px; border-radius: 50%; background: var(--c-accent); box-shadow: 0 0 12px var(--c-accent); }
+  .hero h1 { font-size: var(--fs-display); font-weight: 600; letter-spacing: -0.05em; line-height: 0.95; max-inline-size: 13ch; }
+  :lang(he) .hero h1 { letter-spacing: -0.01em; }
+  .hero h1 .sd-rotate, .hero h1 [data-mode="rotate"] { color: var(--c-accent); }
+  .hero p { color: var(--c-ink-2); font-size: var(--fs-lg); max-inline-size: 46ch; }
+  .ctas { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: var(--sp-3); padding: 16px 24px; border-radius: var(--r-pill); font-weight: 600; text-decoration: none; background: var(--c-accent); color: var(--c-accent-ink); }
+  .btn.ghost { background: transparent; color: var(--c-ink); border: 1px solid var(--c-rule); }
+  .btn svg { inline-size: 16px; block-size: 16px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1px; background: var(--c-rule); border: 1px solid var(--c-rule); border-radius: var(--r-md); overflow: clip; margin-block-end: var(--sp-9); }
+  .cell { background: var(--c-canvas); padding: var(--sp-6) var(--sp-5); display: grid; gap: var(--sp-3); }
+  .cell .code { font: 500 var(--fs-xl)/1.1 var(--f-mono); color: var(--c-ink); letter-spacing: -0.02em; }
+  .cell p { color: var(--c-muted); font-size: var(--fs-sm); }
+  .cell a { color: var(--c-accent); font: 500 var(--fs-sm)/1 var(--f-mono); text-decoration: none; justify-self: start; }
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="top" aria-label="Main" data-he-aria-label="ראשי">
+    <b data-he="סטודיו קוד">Kod Studio</b>
+    <ul role="list" data-fx="text-fx" data-mode="roll">
+      <li><a href="#" data-he="עבודות">Work</a></li>
+      <li><a href="#" data-he="שירותים">Services</a></li>
+      <li><a href="#" data-he="אודות">About</a></li>
+      <li><a href="#" data-he="צור קשר">Contact</a></li>
+    </ul>
+  </nav>
+  <header class="hero">
+    <p class="status" data-fx="text-fx" data-mode="scramble" data-trigger="load" data-he="כל המערכות פועלות · זמן תגובה 42ms">All systems operational · p95 42ms</p>
+    <h1><span data-he="אנחנו בונים ">We build </span><span data-fx="text-fx" data-mode="rotate" data-words="storefronts|booking flows|brand sites|dashboards" data-he-data-words="חנויות|מערכות הזמנה|אתרי מותג|דשבורדים" data-he="חנויות" data-cycles="0">storefronts</span><span data-he=" לעסקים שרוצים לגדול"> for businesses that want to grow</span></h1>
+    <p data-he="פיתוח WordPress ו-React עם ביצועים מדודים, נגישות מלאה ותמיכה בעברית מהיום הראשון.">WordPress and React builds with measured performance, full accessibility and Hebrew support from day one.</p>
+    <div class="ctas">
+      <a class="btn" href="#" data-fx="text-fx" data-mode="roll"><span data-roll-label data-he="התחילו פרויקט">Start a project</span><svg class="flip-x" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M9.3 3.3 8 4.6 10.4 7H2v2h8.4L8 11.4l1.3 1.3L14 8z"/></svg></a>
+      <a class="btn ghost" href="#" data-fx="text-fx" data-mode="roll" data-stagger="none" data-he="לתיק העבודות">See our work</a>
+    </div>
+  </header>
+  <section class="grid">
+    <div class="cell"><span class="code" data-fx="text-fx" data-mode="scramble" dir="ltr">LCP 1.1s</span><p data-he="זמן טעינה ממוצע לדף מוצר בנייד">Median product-page load on mobile</p><a href="#" data-fx="text-fx" data-mode="scramble" data-trigger="hover" data-he="פרטים ←">Read the audit →</a></div>
+    <div class="cell"><span class="code" data-fx="text-fx" data-mode="scramble" dir="ltr">WCAG 2.2 AA</span><p data-he="כל פרויקט עובר בדיקת נגישות לפני עלייה">Every project passes an accessibility audit before launch</p><a href="#" data-fx="text-fx" data-mode="scramble" data-trigger="hover" data-he="הצהרת נגישות ←">Our checklist →</a></div>
+    <div class="cell"><span class="code" data-fx="text-fx" data-mode="scramble" dir="ltr">RTL / LTR</span><p data-he="עברית ואנגלית מאותו קוד, בלי כפילויות">Hebrew and English from one codebase</p><a href="#" data-fx="text-fx" data-mode="scramble" data-trigger="hover" data-he="איך זה עובד ←">How it works →</a></div>
+  </section>
+</div>
+<script src="_demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrambleTextPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/text-fx.js"></script>
+</body>
+</html>

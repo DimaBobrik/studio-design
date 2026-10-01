@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Whisper Studio · specimen</title>
+<meta name="he-title" content="Whisper Studio · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200..700&family=Rubik:wght@300..600&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/whisper-studio.md */
+:root {
+  --c-canvas: oklch(98.4% 0.004 300); --c-surface: oklch(96% 0.006 300); --c-surface-2: oklch(92.5% 0.008 300);
+  --c-ink: oklch(16% 0.010 300); --c-ink-2: oklch(34% 0.010 300); --c-muted: oklch(53.5% 0.01 300);
+  --c-rule: oklch(88% 0.008 300); --c-accent: oklch(50% 0.25 268); --c-accent-ink: oklch(98.4% 0.004 300);
+  --c-focus: oklch(50% 0.25 268);
+  --f-display: "Hanken Grotesk", "Rubik", system-ui, sans-serif; --f-body: "Hanken Grotesk", "Rubik", system-ui, sans-serif;
+  --f-mono: ui-monospace, Menlo, monospace; --f-outlier: "Hanken Grotesk", sans-serif;
+  --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-base: 1.0625rem; --fs-lg: 1.3125rem; --fs-xl: clamp(1.6rem, 1.3rem + 1vw, 2.1rem);
+  --fs-2xl: clamp(2.2rem, 1.6rem + 2.2vw, 3.4rem); --fs-3xl: clamp(2.9rem, 1.8rem + 4vw, 5rem);
+  --fs-display: clamp(3rem, 1.2rem + 5.8vw, 6.75rem);
+  --lh-tight: 1.0; --lh-body: 1.6; --tr-display: -0.035em; --tr-label: 0.01em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 36px; --sp-7: 56px; --sp-8: 96px; --sp-9: 128px; --sp-10: 184px;
+  --section-y: clamp(80px, 7vw + 36px, 184px); --gutter: clamp(20px, 3.5vw, 56px); --maxw: 1320px;
+  --r-sm: 10px; --r-md: 20px; --r-lg: 24px; --r-pill: 999px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --d-fast: 160ms; --d-med: 420ms; --d-slow: 900ms;
+  --shadow-1: none; --shadow-2: 0 30px 60px -40px oklch(30% 0.05 300 / 0.35);
+}
+:root[dir="rtl"] { --tr-display: 0; --lh-tight: 1.1; }
+</style>
+<link rel="stylesheet" href="../../runtime/fx/bg-kit.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+:root { --img-spark-2: oklch(68% 0.21 40); }
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); }
+[lang="he"] { --f-display: "Rubik", sans-serif; --f-body: "Rubik", sans-serif; }
+.nav { display: flex; align-items: center; gap: var(--sp-6); block-size: 64px; font-size: var(--fs-sm); font-weight: 500; }
+.nav .wm { font-weight: 300; font-size: 1.5rem; letter-spacing: -0.04em; text-decoration: none; margin-inline-end: auto; }
+.nav ul { display: flex; gap: var(--sp-6); list-style: none; margin: 0; padding: 0; color: var(--c-ink-2); } .nav a { text-decoration: none; }
+.btn { display: inline-flex; align-items: center; block-size: 48px; padding-inline: 26px; border-radius: var(--r-pill); background: var(--c-ink); color: var(--c-canvas); font-weight: 500; text-decoration: none; transition: background var(--d-fast); }
+.btn:hover, .btn.is-hover { background: var(--c-ink-2); }
+.btn.is-focus { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.tl { text-decoration: underline 1px; text-underline-offset: .2em; }
+.nav .btn { block-size: 40px; padding-inline: 20px; }
+.hero { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--sp-5); padding-block: var(--sp-8) var(--sp-8); min-block-size: calc(100dvh - 64px); align-content: center; }
+.hero h1 { grid-column: 1 / span 9; grid-row: 1; font-weight: 300; font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); position: relative; z-index: 2; }
+.art { grid-column: 5 / span 8; grid-row: 2; aspect-ratio: 2.6; border-radius: var(--r-lg); position: relative; overflow: clip; margin-block-start: -64px; z-index: 1; }
+.art .ring { position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px oklch(100% 0 0 / .35); z-index: 1; }
+.hero .low { grid-column: 1 / span 4; grid-row: 2; margin-block-start: var(--sp-6); align-self: start; display: grid; gap: var(--sp-6); justify-items: start; }
+.hero .low p { font-size: var(--fs-lg); color: var(--c-ink-2); line-height: 1.5; }
+.hero .low .row { display: flex; gap: var(--sp-5); align-items: center; }
+.cards { display: grid; grid-template-columns: 7fr 5fr; gap: var(--sp-5); padding-block: var(--sp-7) var(--section-y); border-block-start: 1px solid var(--c-rule); }
+.card { background: var(--c-surface); border-radius: var(--r-md); padding: var(--sp-6); display: grid; gap: var(--sp-4); align-content: start; }
+.card h3 { font-weight: 500; font-size: var(--fs-lg); }
+.card p { color: var(--c-ink-2); }
+.player { display: flex; align-items: center; gap: var(--sp-4); background: var(--c-canvas); border-radius: var(--r-sm); padding: var(--sp-3) var(--sp-4); }
+.player button { inline-size: 40px; block-size: 40px; border-radius: 50%; background: var(--c-ink); color: var(--c-canvas); display: grid; place-items: center; font-size: 12px; }
+.player .slot { flex: 1; block-size: 40px; place-items: center start; padding: 0 10px; --slot-bg: var(--c-surface-2); border-radius: 6px; }
+.big { font-weight: 300; font-size: var(--fs-3xl); letter-spacing: -0.04em; line-height: 1; }
+@media (max-width: 900px) {
+  .nav ul { display: none; }
+  .hero h1, .hero .low, .art { grid-column: 1 / -1; grid-row: auto; } .art { margin-block: var(--sp-5) 0; }
+  .cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header class="nav container"><a class="wm" href="#">murmur</a><ul role="list"><li><a href="#" data-he="קולות">Voices</a></li><li><a href="#" data-he="אולפן">Studio</a></li><li><a href="#" data-he="מחקר">Research</a></li><li><a href="#" data-he="מחירים">Pricing</a></li></ul><a class="btn" href="#" data-he="לנסות">Try it</a></header>
+<main class="container">
+<section class="hero">
+  <h1 data-he="קול שנשמע כאילו הוא באמת בחדר.">A voice that sounds like it is in the room.</h1>
+  <figure class="art" data-fx="shader-bg" data-preset="mesh-gradient" data-colors="--c-accent|--img-spark-2|--c-surface-2|oklch(80% .1 300)" data-speed=".15" data-distortion=".9" data-swirl=".35" aria-hidden="true"><span class="ring"></span></figure>
+  <div class="low"><p data-he="Murmur מקליטה, משכפלת ומערבבת קולות אנושיים לספרי אודיו, פודקאסטים ומשחקים. בלי רעש רקע ובלי רובוטיות.">Murmur records, clones and mixes human voices for audiobooks, podcasts and games. No hiss, no robot.</p>
+    <div class="row"><a class="btn" href="#" data-spec-btn data-he="לנסות בחינם">Try it free</a><a class="tl" href="#" data-he="להאזין לדוגמה">Hear a sample</a></div></div>
+</section>
+<section class="cards">
+  <article class="card"><h3 data-he="דוגמה: פרק ראשון, קריינית בת 60">Sample: chapter one, narrator aged 60</h3><p data-he="אותו טקסט, שלוש גרסאות: הקלטה מקורית, שיבוט, ושיבוט אחרי ערבוב.">The same passage in three takes: original recording, clone, and clone after mixing.</p>
+    <div class="player"><button aria-label="Play" data-he-aria-label="ניגון">▶</button><div class="slot"><span data-he="[אודיו: דוגמה של 20 שניות, מקור אמיתי]">[Audio: 20 s sample, real source]</span></div><span dir="ltr" style="font-variant-numeric: tabular-nums">0:20</span></div></article>
+  <article class="card" style="background: var(--c-surface-2)"><span class="big" dir="ltr">48 kHz</span><p data-he="דגימה מקורית, בלי דחיסה, ייצוא ישיר ל-WAV.">Native sample rate, uncompressed, straight to WAV.</p></article>
+</section>
+</main>
+<section class="spec-system" data-spec-system data-extra="--img-spark-2" data-display="in the room" data-display-he="באמת בחדר"></section>
+<footer class="spec-foot"><span>Specimen · whisper-studio · fictional voice studio “murmur”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script src="../../runtime/fx/shader-bg.js"></script>
+</body>
+</html>

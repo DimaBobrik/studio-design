@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shader-bg · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=Rubik:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<style>
+  /* Each section redefines tokens locally to show that presets read tokens. */
+  :root {
+    --f-display: "Bricolage Grotesque", "Rubik", system-ui, sans-serif; --f-body: "Bricolage Grotesque", "Rubik", system-ui, sans-serif;
+    --c-canvas: oklch(97% 0.012 70); --c-surface: oklch(94% 0.02 60); --c-surface-2: oklch(86% 0.07 40);
+    --c-ink: oklch(20% 0.03 280); --c-ink-2: oklch(34% 0.03 280); --c-muted: oklch(50% 0.03 280); --c-rule: oklch(80% 0.02 280);
+    --c-accent: oklch(64% 0.2 20); --c-accent-ink: oklch(98% 0.01 70); --c-focus: oklch(55% 0.2 280);
+  }
+  .hero { min-block-size: 100svh; display: grid; align-content: end; padding-block: var(--sp-9) var(--sp-7); color: var(--c-ink); background: var(--c-canvas); }
+  .hero .container { display: grid; gap: var(--sp-5); }
+  .tag { font: 500 var(--fs-xs)/1 var(--f-body); letter-spacing: var(--tr-label); text-transform: uppercase; display: inline-flex; gap: var(--sp-2); align-items: center; padding: var(--sp-2) var(--sp-3); border-radius: var(--r-pill); border: 1px solid color-mix(in oklab, currentColor 30%, transparent); inline-size: fit-content; backdrop-filter: blur(6px); }
+  .tag::before { content: ""; inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--c-accent); }
+  .hero h2 { font-size: var(--fs-display); font-weight: 480; line-height: 0.92; letter-spacing: -0.045em; max-inline-size: 12ch; }
+  :lang(he) .hero h2 { letter-spacing: 0; font-weight: 500; line-height: 1; }
+  .hero p { font-size: var(--fs-lg); max-inline-size: 38ch; }
+  .row { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: var(--sp-2); padding: 14px 22px; border-radius: var(--r-pill); background: var(--c-ink); color: var(--c-canvas); text-decoration: none; font-weight: 500; }
+  .btn.ghost { background: transparent; color: inherit; border: 1px solid color-mix(in oklab, currentColor 35%, transparent); }
+
+  .s-grain { --c-ink: oklch(16% 0.03 260); --c-accent: oklch(70% 0.17 55); --c-surface-2: oklch(62% 0.13 20); color: oklch(96% 0.01 80); background: var(--c-ink); }
+  .s-grain .btn { background: oklch(96% 0.01 80); color: oklch(16% 0.03 260); }
+  .s-rays { --c-ink: oklch(14% 0.04 265); --c-accent: oklch(72% 0.13 230); --c-surface-2: oklch(80% 0.06 200); --c-canvas: oklch(97% 0.01 230); color: oklch(97% 0.01 230); background: var(--c-ink); align-content: center; text-align: center; }
+  .s-rays .container { justify-items: center; }
+  .s-rays .btn { background: oklch(97% 0.01 230); color: oklch(14% 0.04 265); }
+  .s-dither { --c-canvas: oklch(93% 0.02 95); --c-accent: oklch(52% 0.16 150); --c-ink: oklch(22% 0.03 150); }
+  .panel { background: var(--c-canvas); padding: var(--sp-6); border-radius: var(--r-md); max-inline-size: 640px; box-shadow: var(--shadow-2); display: grid; gap: var(--sp-4); }
+  .panel h2 { font-size: var(--fs-3xl); }
+  .s-flute { --c-accent: oklch(66% 0.19 330); --c-surface-2: oklch(80% 0.11 60); --c-ink-2: oklch(35% 0.12 290); --c-ink: oklch(15% 0.02 290); color: oklch(98% 0.005 290); background: var(--c-ink); }
+  .s-flute .btn { background: oklch(98% 0.005 290); color: oklch(15% 0.02 290); }
+  .s-photo { color: #fff; background: #222; }
+  .s-photo .btn { background: #fff; color: #111; }
+  .s-photo::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, oklch(12% 0.02 150 / 0.75), oklch(12% 0.02 150 / 0) 60%); pointer-events: none; }
+</style>
+</head>
+<body>
+<main>
+  <section class="hero" data-fx="shader-bg" data-preset="mesh-gradient" data-colors="--c-canvas | --c-surface-2 | --c-accent | oklch(80% 0.09 300)" data-pause-button="true">
+    <div class="container">
+      <span class="tag" data-he="mesh-gradient · צבעים מהטוקנים">mesh-gradient · token colors</span>
+      <h2 data-he="טיפוח שמרגיש כמו בוקר שקט">Skincare that feels like a slow morning</h2>
+      <p data-he="פורמולות קצרות, רכיבים שקופים, ומשלוח חינם מעל 250 ₪.">Short formulas, transparent ingredients, and free delivery over ₪250.</p>
+      <div class="row"><a class="btn" href="#" data-he="לחנות">Shop the range</a><a class="btn ghost" href="#" data-he="איך זה עובד">How it works</a></div>
+    </div>
+  </section>
+
+  <section class="hero s-grain" data-fx="shader-bg" data-preset="grain-gradient" data-shape="wave" data-color-back="--c-ink">
+    <div class="container">
+      <span class="tag" data-he="grain-gradient · wave">grain-gradient · wave</span>
+      <h2 data-he="פסטיבל ג׳אז בנמל, אוגוסט">Harbour jazz nights, this August</h2>
+      <p data-he="ארבעה ערבים, שלוש במות ומוזיקה עד חצות.">Four evenings, three stages, music until midnight.</p>
+      <div class="row"><a class="btn" href="#" data-he="לכרטיסים">Get tickets</a></div>
+    </div>
+  </section>
+
+  <section class="hero s-rays" data-fx="shader-bg" data-preset="god-rays" data-offset-x="-0.35" data-offset-y="-0.7">
+    <div class="container">
+      <span class="tag" data-he="god-rays">god-rays</span>
+      <h2 data-he="השינה שלך, מכוילת מחדש">Your sleep, recalibrated</h2>
+      <p data-he="תוכנית של שישה שבועות שנבנתה עם מעבדת שינה אוניברסיטאית.">A six-week programme built with a university sleep lab.</p>
+      <div class="row"><a class="btn" href="#" data-he="התחילו ניסיון">Start the trial</a></div>
+    </div>
+  </section>
+
+  <section class="hero s-dither" data-fx="shader-bg" data-preset="dithering" data-shape="warp" data-type="4x4" data-px-size="3">
+    <div class="container">
+      <div class="panel">
+        <span class="tag" data-he="dithering · warp · 4x4">dithering · warp · 4x4</span>
+        <h2 data-he="כלי פיתוח לצוותים קטנים">Build tooling for small, fast teams</h2>
+        <p data-he="פריסה בלחיצה, סביבות תצוגה לכל ענף, ולוגים שאפשר לקרוא.">One-click deploys, a preview for every branch, and logs you can actually read.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero s-flute" data-fx="shader-bg" data-preset="fluted-glass" data-shape="lines" data-size="0.35" data-distortion="0.6">
+    <div class="container">
+      <span class="tag" data-he="fluted-glass · גרדיאנט טוקנים">fluted-glass · token gradient</span>
+      <h2 data-he="פנים, אור, זכוכית מחורצת">Interiors, light and reeded glass</h2>
+      <p data-he="סטודיו לעיצוב פנים למרחבי אירוח ובוטיק.">An interior studio for hospitality and boutique spaces.</p>
+    </div>
+  </section>
+
+  <section class="hero s-photo" data-fx="shader-bg" data-preset="fluted-glass" data-image="https://picsum.photos/seed/lobbylight/1600/1000" data-shape="linesIrregular" data-size="0.45" data-shadows="0.35">
+    <div class="container">
+      <span class="tag" data-he="fluted-glass · תמונה">fluted-glass · photo</span>
+      <h2 data-he="מלון בוטיק, 24 חדרים">A boutique hotel, 24 rooms</h2>
+    </div>
+  </section>
+</main>
+<script src="_demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/shader-bg.js"></script>
+</body>
+</html>

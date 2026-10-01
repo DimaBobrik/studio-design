@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Media Bento Night · specimen</title>
+<meta name="he-title" content="Media Bento Night · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Onest:wght@400;500;600&family=Heebo:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/media-bento-night.md */
+:root {
+  --c-canvas: oklch(16% 0.008 285); --c-surface: oklch(21% 0.010 285); --c-surface-2: oklch(26% 0.012 285);
+  --c-ink: oklch(96% 0.005 285); --c-ink-2: oklch(84% 0.008 285); --c-muted: oklch(66% 0.010 285);
+  --c-rule: oklch(31% 0.012 285); --c-accent: oklch(68% 0.26 355); --c-accent-ink: oklch(16% 0.008 285);
+  --c-focus: oklch(75% 0.2 355);
+  --c-sticker: oklch(89% 0.17 100); /* promo stickers only */
+  --f-display: "Unbounded", "Heebo", system-ui, sans-serif; --f-body: "Onest", "Heebo", system-ui, sans-serif;
+  --f-mono: ui-monospace, Menlo, monospace; --f-outlier: "Unbounded", sans-serif;
+  --fs-xs: 0.75rem; --fs-sm: 0.8125rem; --fs-base: 0.9375rem; --fs-lg: 1.125rem; --fs-xl: 1.5rem;
+  --fs-2xl: clamp(1.9rem, 1.4rem + 1.8vw, 2.8rem); --fs-3xl: clamp(2.4rem, 1.6rem + 3vw, 4rem);
+  --fs-display: clamp(2.6rem, 1.4rem + 4.2vw, 5.25rem); /* modest: media dominates */
+  --lh-tight: 1.02; --lh-body: 1.5; --tr-display: -0.02em; --tr-label: 0.01em;
+  --sp-1: 4px; --sp-2: 6px; --sp-3: 8px; --sp-4: 12px; --sp-5: 16px; --sp-6: 24px; --sp-7: 32px; --sp-8: 48px; --sp-9: 72px; --sp-10: 112px;
+  --section-y: clamp(40px, 4vw + 16px, 96px); --gutter: clamp(10px, 1.4vw, 20px); --maxw: 1760px;
+  --r-sm: 8px; --r-md: 14px; --r-lg: 20px; --r-pill: 999px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); --ease-in: cubic-bezier(0.64, 0, 0.78, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --d-fast: 140ms; --d-med: 260ms; --d-slow: 520ms;
+  --shadow-1: 0 0 0 1px var(--c-rule); --shadow-2: 0 20px 50px -20px oklch(0% 0 0 / 0.7);
+}
+:root[dir="rtl"] { --tr-display: 0; }
+</style>
+<link rel="stylesheet" href="../../runtime/fx/bg-kit.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); --grain-opacity: .25; }
+[lang="he"] { --f-display: "Heebo", sans-serif; }
+.nav { display: flex; align-items: center; gap: var(--sp-6); block-size: 56px; padding-inline: var(--gutter); font-size: 14px; font-weight: 500; }
+.nav .wm { font-family: var(--f-display); font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; text-decoration: none; margin-inline-end: var(--sp-6); }
+.nav ul { display: flex; gap: var(--sp-6); list-style: none; margin: 0; padding: 0; color: var(--c-ink-2); } .nav ul li::after { content: " ▾"; font-size: 10px; color: var(--c-muted); }
+.nav a { text-decoration: none; } .nav .sp { margin-inline-start: auto; }
+.btn { display: inline-flex; align-items: center; gap: 8px; block-size: 44px; padding-inline: 20px; border-radius: var(--r-pill); background: var(--c-accent); color: var(--c-accent-ink); font-weight: 600; text-decoration: none; transition: background var(--d-fast); }
+.btn:hover, .btn.is-hover { background: oklch(73% 0.26 355); }
+.btn.is-focus { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.btn--tile { background: var(--c-surface-2); color: var(--c-ink); }
+.nav .btn { block-size: 38px; }
+.wall { display: grid; grid-template-columns: minmax(300px, 30%) 1fr; gap: var(--gutter); padding: var(--sp-3) var(--gutter) var(--gutter); min-block-size: calc(100dvh - 56px); }
+.intro { display: flex; flex-direction: column; justify-content: space-between; padding: var(--sp-7) var(--sp-5) var(--sp-5); }
+.intro h1 { font-family: var(--f-display); font-weight: 700; font-size: min(var(--fs-display), 4.1vw); text-wrap: balance; line-height: var(--lh-tight); letter-spacing: var(--tr-display); }
+[lang="he"] .intro h1 { font-weight: 800; font-size: min(calc(var(--fs-display) * 1.1), 5vw); }
+.prompt { background: var(--c-surface); border-radius: var(--r-lg); padding: var(--sp-5); display: grid; gap: var(--sp-5); box-shadow: var(--shadow-1); }
+.prompt p { color: var(--c-ink-2); font-size: var(--fs-lg); line-height: 1.4; }
+.prompt .row { display: flex; justify-content: space-between; align-items: center; gap: var(--sp-4); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; } .chips span { block-size: 30px; padding-inline: 12px; border-radius: 999px; background: var(--c-surface-2); display: inline-flex; align-items: center; font-size: 12px; color: var(--c-ink-2); }
+.pills { display: flex; gap: 6px; margin-block-start: var(--sp-6); flex-wrap: wrap; } .pills span { block-size: 34px; padding-inline: 14px; border-radius: 999px; background: var(--c-surface); display: inline-flex; align-items: center; font-size: 13px; }
+.pills span[aria-pressed="true"] { background: var(--c-accent); color: var(--c-accent-ink); font-weight: 600; }
+.bento { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: calc((100dvh - 56px - 8px - 3 * var(--gutter)) / 3); gap: var(--gutter); grid-auto-flow: dense; }
+.t { position: relative; border-radius: var(--r-md); overflow: clip; background: var(--c-surface); }
+.t img, .t video { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; }
+.t.w2 { grid-column: span 2; } .t.h2 { grid-row: span 2; }
+.t .cap { position: absolute; inset-block-end: 10px; inset-inline-start: 10px; padding: 4px 10px; border-radius: 999px; background: oklch(16% .008 285 / .6); font-size: 12px; font-weight: 500; color: var(--c-ink); }
+.t .play { position: absolute; inset-block-start: 10px; inset-inline-end: 10px; inline-size: 30px; block-size: 30px; border-radius: 50%; background: oklch(16% .008 285 / .6); display: grid; place-items: center; font-size: 10px; }
+.sticker { position: absolute; z-index: 3; padding: 8px 12px; border-radius: var(--r-sm); background: var(--c-sticker); color: var(--c-canvas); font-family: var(--f-display); font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: .02em; line-height: 1.2; box-shadow: var(--shadow-2); }
+.s1 { inset-block-start: 14px; inset-inline-end: 54px; rotate: -4deg; } .s2 { inset-block-start: 14px; inset-inline-end: 14px; rotate: 3deg; background: var(--c-accent); }
+@media (max-width: 900px) {
+  .nav ul, .nav .sp { display: none; } .nav .btn { margin-inline-start: auto; }
+  .wall { grid-template-columns: 1fr; } .intro { padding: var(--sp-5) 0; gap: var(--sp-6); } .intro h1 { font-size: 2.4rem; }
+  .bento { grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; }
+}
+</style>
+</head>
+<body class="bg-grain">
+<header class="nav"><a class="wm" href="#">loopframe</a><ul role="list"><li data-he="וידאו">Video</li><li data-he="תמונות">Image</li><li data-he="קול">Voice</li><li data-he="עריכה">Edit</li></ul><a class="sp" href="#" data-he="מחירים">Pricing</a><a href="#" data-he="כניסה">Sign in</a><a class="btn" href="#" data-he="ליצור">Create</a></header>
+<main>
+<section class="wall">
+  <div class="intro">
+    <div><h1 data-he="מצלמים את העיר שדמיינתם.">Shoot the city you imagined.</h1>
+      <div class="pills" aria-label="Filter" data-he-aria-label="סינון"><span aria-pressed="true" data-he="הכול">All</span><span data-he="קולנועי">Cinematic</span><span data-he="לופים">Loops</span><span data-he="אנימציה">Animation</span></div></div>
+    <form class="prompt" onsubmit="return false"><label class="sr-only" for="p" data-he="תיאור הסצנה">Describe the scene</label>
+      <p id="p" data-he="קו רקיע בשקיעה, המצלמה עולה לאט, אורות נדלקים בחלונות…">A skyline at dusk, the camera rises slowly, lights come on in the windows…</p>
+      <div class="row"><div class="chips"><span dir="ltr">16:9</span><span dir="ltr">8 s</span><span data-he="תנועה איטית">Slow motion</span></div><a class="btn" href="#" data-spec-btn data-he="ליצור">Create</a></div></form>
+  </div>
+  <div class="bento" aria-label="Recent outputs" data-he-aria-label="יצירות אחרונות">
+    <figure class="t w2 h2"><video autoplay muted loop playsinline poster="../../runtime/demo/assets/skyline-poster.webp"><source src="../../runtime/demo/assets/skyline.webm" type="video/webm"><source src="../../runtime/demo/assets/skyline.mp4" type="video/mp4"></video><span class="play" aria-hidden="true">❚❚</span><figcaption class="cap">Dusk rise · Loop v3</figcaption><span class="sticker s1" data-he="חדש · 4K">New · 4K</span></figure>
+    <figure class="t"><img src="../../runtime/demo/assets/skyline-frames/f_02.webp" alt="" style="object-position: 70% 30%; transform: scale(1.6)"><figcaption class="cap">Noon · Still</figcaption></figure>
+    <figure class="t h2"><img src="../../runtime/demo/assets/skyline-frames/f_40.webp" alt="" style="object-position: 30% 50%; transform: scale(2.2); transform-origin: 30% 70%"><figcaption class="cap">Night · 9:16</figcaption></figure>
+    <figure class="t"><img src="../../runtime/demo/assets/skyline-frames/f_24.webp" alt="" style="filter: grayscale(1) contrast(1.3)"><figcaption class="cap">Noir preset</figcaption></figure>
+    <figure class="t w2"><img src="../../runtime/demo/assets/skyline-frames/f_30.webp" alt="" style="object-position: 50% 80%"><figcaption class="cap">Golden hour · Pan</figcaption><span class="sticker s2" data-he="ביטול רקע">Cut-out</span></figure>
+    <figure class="t"><img src="../../runtime/demo/assets/skyline-frames/f_44.webp" alt="" style="object-position: 80% 100%; transform: scale(1.5); transform-origin: 80% 100%; filter: hue-rotate(150deg) saturate(1.5)"><figcaption class="cap">Teal grade · Still</figcaption></figure>
+  </div>
+</section>
+<section class="spec-system" data-spec-system data-extra="--c-sticker" data-display="Shoot the city" data-display-he="מצלמים את העיר"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · media-bento-night (guarded) · fictional tool “loopframe” · tiles = procedural CC0 skyline from runtime/demo/assets</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script>
+(function () { if (!window.gsap || SD.reduced()) return;
+  gsap.from('.bento .t', { scale: .96, opacity: 0, duration: .5, ease: 'power3.out', stagger: .025 });
+})();
+</script>
+</body>
+</html>

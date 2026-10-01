@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Darkroom Object · specimen</title>
+<meta name="he-title" content="Darkroom Object · דוגמית">
+<!-- Fontshare faces loaded from the Fontshare CSS API (not redistributed here; self-host them in your own project, see runtime/README.md §10) -->
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@500,600&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Albert+Sans:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400..700&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/darkroom-object.md */
+:root {
+  --c-canvas: oklch(14% 0.018 55); --c-surface: oklch(19% 0.024 55); --c-surface-2: oklch(26% 0.030 55);
+  --c-ink: oklch(92% 0.030 80); --c-ink-2: oklch(81% 0.030 75); --c-muted: oklch(63% 0.030 70);
+  --c-rule: oklch(34% 0.030 60); --c-accent: oklch(63% 0.19 45); --c-accent-ink: oklch(14% 0.018 55);
+  --c-focus: oklch(82% 0.13 70);
+  --f-display: "Clash Grotesk", "Familjen Grotesk", "Miriam Libre", system-ui, sans-serif; --f-body: "General Sans", "Albert Sans", "Miriam Libre", system-ui, sans-serif;
+  --f-mono: ui-monospace, Menlo, monospace; --f-outlier: "Clash Grotesk", "Familjen Grotesk", sans-serif;
+  --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-base: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
+  --fs-lg: clamp(1.4rem, 1.1rem + 1vw, 1.8rem); /* large mixed-case lede, ~29px */
+  --fs-xl: clamp(1.75rem, 1.4rem + 1.2vw, 2.4rem); --fs-2xl: clamp(2.25rem, 1.6rem + 2.4vw, 3.5rem);
+  --fs-3xl: clamp(3rem, 1.8rem + 4.5vw, 5.5rem); --fs-display: clamp(3rem, 1rem + 6.5vw, 7.25rem);
+  --lh-tight: 0.95; --lh-body: 1.55; --tr-display: 0.005em; --tr-label: 0.04em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 40px; --sp-7: 64px; --sp-8: 104px; --sp-9: 160px; --sp-10: 240px;
+  --section-y: clamp(96px, 9vw + 40px, 240px); --gutter: clamp(20px, 4vw, 64px); --maxw: 1360px;
+  --r-sm: 8px; --r-md: 14px; --r-lg: 28px; --r-pill: 999px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); --ease-in: cubic-bezier(0.64, 0, 0.78, 0); --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --d-fast: 200ms; --d-med: 520ms; --d-slow: 1200ms;
+  --shadow-1: 0 1px 0 oklch(100% 0 0 / 0.04) inset; --shadow-2: 0 40px 80px -30px oklch(5% 0.02 55 / 0.8);
+}
+:root[dir="rtl"] { --tr-display: 0; --lh-tight: 1.05; }
+</style>
+<link rel="stylesheet" href="../../runtime/fx/bg-kit.css">
+<link rel="stylesheet" href="../../runtime/fx/lathe.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+:root { --img-glass: oklch(86% 0.03 80); --img-amber: oklch(58% 0.14 55); }
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); }
+[lang="he"] { --f-display: "Miriam Libre", sans-serif; --f-body: "Miriam Libre", sans-serif; }
+.lab { font-size: 12px; font-weight: 500; letter-spacing: var(--tr-label); color: var(--c-muted); }
+.chip { position: absolute; z-index: 10; inset-block-start: 20px; inset-inline: 0; margin-inline: auto; inline-size: fit-content; block-size: 56px; display: flex; align-items: center; gap: var(--sp-5); padding-inline: 24px 8px; border-radius: var(--r-pill); background: color-mix(in oklab, var(--c-surface) 80%, transparent); font-size: var(--fs-sm); }
+.chip .wm { font-family: var(--f-display); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; text-decoration: none; }
+.chip a { text-decoration: none; }
+.chip .cart { block-size: 40px; padding-inline: 16px; border-radius: 999px; background: var(--c-surface-2); display: inline-flex; align-items: center; box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--c-ink) 20%, transparent); }
+.hero { position: relative; block-size: 100dvh; min-block-size: 640px; overflow: clip; --spot-color: oklch(92% .03 80 / .09); --grain-opacity: .5; }
+.spot { position: absolute; inset: 0; background: radial-gradient(60vmax 45vmax at 58% 70%, oklch(92% .03 80 / .10), transparent 70%); z-index: 0; }
+[dir="rtl"] .spot { background: radial-gradient(60vmax 45vmax at 42% 70%, oklch(92% .03 80 / .10), transparent 70%); }
+.hero h1 { position: absolute; z-index: 2; inset-inline-start: var(--gutter); inset-block-start: 15%; font-family: var(--f-display); font-weight: 500; text-transform: uppercase; font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); max-inline-size: 9ch; }
+[lang="he"] .hero h1 { font-weight: 700; font-size: calc(var(--fs-display) * 1.1); }
+.obj { position: absolute; z-index: 1; inset-inline-start: 50%; inset-block-end: -2%; block-size: 66%; aspect-ratio: 10 / 13; translate: -32% 0; }
+[dir="rtl"] .obj { translate: 32% 0; }
+.obj .sd-lathe { block-size: 100%; inline-size: auto; }
+.lede { position: absolute; z-index: 2; inset-inline-end: var(--gutter); inset-block-end: var(--sp-7); max-inline-size: 22ch; font-size: var(--fs-lg); line-height: 1.3; color: var(--c-ink); }
+.lede small { display: block; margin-block-start: var(--sp-4); }
+.credit { position: absolute; z-index: 2; inset-inline-start: var(--gutter); inset-block-end: var(--sp-7); display: grid; gap: var(--sp-3); }
+.credit .n { color: var(--c-accent); font-variant-numeric: tabular-nums; }
+.btn { display: inline-flex; align-items: center; block-size: 56px; padding-inline: 32px; border-radius: var(--r-pill); background: var(--c-ink); color: var(--c-accent-ink); font-weight: 500; text-decoration: none; transition: background var(--d-fast); }
+.btn:hover, .btn.is-hover { background: var(--c-ink-2); }
+.btn.is-focus { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.btn--ring { background: transparent; color: var(--c-ink); box-shadow: inset 0 0 0 1px var(--c-ink); }
+.spec { padding-block: var(--section-y); display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--sp-5); }
+.spec h2 { grid-column: 1 / span 5; font-family: var(--f-display); font-weight: 500; text-transform: uppercase; font-size: var(--fs-2xl); line-height: var(--lh-tight); }
+.spec dl { grid-column: 7 / span 6; margin: 0; }
+.spec dl div { display: grid; grid-template-columns: 1fr 2fr; gap: var(--sp-5); padding-block: var(--sp-4); border-block-start: 1px dashed var(--c-rule); }
+.spec dt { color: var(--c-muted); font-size: var(--fs-sm); } .spec dd { margin: 0; }
+.pills { display: flex; gap: var(--sp-2); margin-block-start: var(--sp-6); }
+.pills span { block-size: 44px; padding-inline: 20px; border-radius: 999px; background: var(--c-surface-2); display: inline-flex; align-items: center; box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--c-ink) 20%, transparent); font-size: var(--fs-sm); }
+.pills span[aria-pressed="true"] { box-shadow: inset 0 0 0 1px var(--c-ink); }
+@media (max-width: 900px) {
+  .chip > a:not(.wm):not(.cart) { display: none; }
+  .hero h1 { inset-block-start: 110px; }
+  .obj { block-size: 50%; inset-block-end: 17%; translate: -50% 0; } [dir="rtl"] .obj { translate: 50% 0; }
+  .lede { font-size: 1.15rem; inset-block-end: var(--sp-5); max-inline-size: 26ch; } .credit { display: none; }
+  .spec h2, .spec dl { grid-column: 1 / -1; }
+}
+</style>
+</head>
+<body>
+<header class="chip"><a class="wm" href="#">Vesperal</a><a href="#" data-he="הבושם">The scent</a><a href="#" data-he="הבית">House</a><a class="cart" href="#" data-he="סל · 0">Bag · 0</a></header>
+<main>
+<section class="hero bg-grain">
+  <div class="spot" aria-hidden="true"></div>
+  <h1 data-he="ארז אחרי הגשם">Cedar after rain</h1>
+  <div class="obj"><figure class="sd-lathe" data-fx="lathe" data-profile="0.26,0.33,0.36,0.37,0.37,0.36,0.33,0.24,0.1,0.085,0.085,0.1,0.16,0.16,0.16" data-material="glass" data-colors="--img-glass" data-base="--img-amber" data-dip="0.5" data-seed="4" data-elev="6" data-shadow=".35" data-light="oklch(92% .04 75)" data-drag="true" data-intro="30" data-label="Turn the bottle" data-he-attr-data-label="סובבו את הבקבוק"></figure></div>
+  <div class="credit"><span class="lab"><span class="n">N°&nbsp;3</span> · <span data-he="בקבוק זכוכית מנופחת ביד, 50 מ״ל">hand-blown glass, 50 ml</span></span><a class="btn" href="#" data-spec-btn data-he="הוספה לסל · ₪ 420">Add to bag · ₪ 420</a></div>
+  <p class="lede" data-he="בושם אחד, שבע שנים של עבודה: ארז לבנוני, עור כהה ועשן של תנור עצים.">One scent, seven years of work: Lebanese cedar, dark leather and wood-oven smoke.<small class="lab" data-he="גררו כדי לסובב">Drag to turn</small></p>
+</section>
+<section class="spec container">
+  <h2 data-he="מה יש בבקבוק">What is in the bottle</h2>
+  <dl>
+    <div><dt data-he="תו עליון">Top</dt><dd data-he="ברגמוט, פלפל ורוד">Bergamot, pink pepper</dd></div>
+    <div><dt data-he="לב">Heart</dt><dd data-he="ארז לבנוני, אירוס">Lebanese cedar, orris</dd></div>
+    <div><dt data-he="בסיס">Base</dt><dd data-he="עור, עשן, לבונה">Leather, smoke, frankincense</dd></div>
+    <div><dt data-he="ריכוז">Strength</dt><dd data-he="או דה פרפיום, 18%">Eau de parfum, 18%</dd></div>
+  </dl>
+  <div style="grid-column: 7 / span 6" class="pills"><span aria-pressed="true" dir="ltr">50 ml</span><span dir="ltr">100 ml</span><span data-he="דוגמית">Sample</span></div>
+</section>
+<section class="spec-system" data-spec-system data-extra="--img-amber" data-display="CEDAR" data-display-he="ארז"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · darkroom-object · fictional perfumer “Vesperal”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script src="../../runtime/fx/lathe.js"></script>
+</body>
+</html>

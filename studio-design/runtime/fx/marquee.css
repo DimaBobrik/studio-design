@@ -1,0 +1,18 @@
+/* studio-design fx · marquee */
+.sd-marquee { position: relative; overflow: clip; --marquee-gap: var(--sp-6); }
+.sd-marquee__track { display: flex; flex-wrap: nowrap; inline-size: max-content; gap: var(--marquee-gap); padding-inline-end: var(--marquee-gap);
+  margin: 0; padding-block: 0; padding-inline-start: 0; list-style: none; will-change: transform; }
+.sd-marquee__track > * { flex: none; }
+.sd-marquee--fade { -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+.sd-marquee--drag { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.sd-marquee--drag.is-dragging { cursor: grabbing; }
+.sd-marquee--drag img { -webkit-user-drag: none; pointer-events: none; }
+/* reduced motion: a native, keyboard-scrollable row */
+.sd-marquee--static { overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin; -webkit-mask-image: none; mask-image: none; }
+.sd-marquee--static > .sd-marquee__track { padding-inline: var(--gutter); }
+.sd-marquee--static > .sd-marquee__track > * { scroll-snap-align: start; }
+.sd-marquee__toggle { position: absolute; inset-inline-end: var(--sp-2); inset-block-end: var(--sp-2); z-index: 2; inline-size: 28px; block-size: 28px;
+  display: grid; place-items: center; border-radius: var(--marquee-toggle-radius, 50%); color: var(--c-ink);
+  background: color-mix(in oklab, var(--c-canvas) 82%, transparent); border: 1px solid color-mix(in oklab, var(--c-ink) 14%, transparent);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: opacity var(--d-fast) var(--ease-out); }
+.sd-marquee:hover .sd-marquee__toggle, .sd-marquee__toggle:focus-visible, .sd-marquee__toggle[aria-pressed="true"] { opacity: 1; }

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>testimonials · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@400;500;700&family=Frank+Ruhl+Libre:wght@500&family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/testimonials.css">
+<style>
+  :root {
+    --c-canvas: oklch(97.5% 0.008 85); --c-surface: oklch(95% 0.01 85); --c-surface-2: oklch(91% 0.012 85);
+    --c-ink: oklch(19% 0.01 270); --c-ink-2: oklch(34% 0.01 270); --c-muted: oklch(50% 0.01 270); --c-rule: oklch(84% 0.01 85);
+    --c-accent: oklch(47% 0.25 264); --c-accent-ink: #fff; --c-focus: oklch(47% 0.25 264);
+    --f-display: "Instrument Serif", "Frank Ruhl Libre", Georgia, serif; --f-body: "Manrope", "Assistant", system-ui, sans-serif;
+  }
+  .head { text-align: center; margin-block-end: var(--sp-7); }
+  .head h2 { font-size: var(--fs-3xl); font-weight: 400; }
+  .head h2 em { color: var(--c-accent); }
+  .head p { color: var(--c-muted); margin-block-start: var(--sp-4); font-size: var(--fs-sm); letter-spacing: var(--tr-label); text-transform: uppercase; }
+  :where([dir=rtl]) .head h2 { font-weight: 500; }
+</style>
+</head>
+<body>
+<section class="section sd-testi" data-fx="testimonials" data-rows="3" data-speed="40" data-he-aria="המלצות" aria-label="Testimonials" data-he-attr-data-label-pause="השהיה" data-he-attr-data-label-play="הפעלה" data-he-attr-data-label-close="סגירה" data-he-attr-data-label-open="לקריאת ההמלצה של">
+  <header class="container head">
+    <h2 data-he-html="לקוחות שחוזרים <em>שוב ושוב</em>">Clients who keep <em>coming back</em></h2>
+    <p data-he="לחצו על שם כדי לקרוא">Tap a name to read what they said</p>
+  </header>
+  <ul class="sd-testi__list container">
+        <li class="sd-testi__item"><img src="https://picsum.photos/seed/face-potter/160/160" alt="" width="48" height="48"><div><b class="sd-testi__name" data-he="מאיה לוין">Maya Levin</b><br><small class="sd-testi__role" data-he="מייסדת, לוין קרמיקה">Founder, Levin Ceramics</small></div><blockquote data-he="בנו לנו את החנות מחדש בשישה שבועות, וההזמנה הממוצעת עלתה בשליש. דפי המוצר סוף סוף מרגישים כמו הסטודיו.">They rebuilt our shop in six weeks and our average order went up by a third. The product pages finally feel like the studio.</blockquote></li>
+        <li class="sd-testi__item"><img src="https://picsum.photos/seed/face-cyclist/160/160" alt="" width="48" height="48"><div><b class="sd-testi__name" data-he="תומר אזולאי">Tomer Azoulay</b><br><small class="sd-testi__role" data-he="ראש צמיחה, פראלל אופניים">Head of Growth, Parallel Bikes</small></div><blockquote data-he="הסוכנות הראשונה ששאלה על השוליים שלנו לפני פלטת הצבעים. השלמת הרכישה עלתה ב-22%.">The first agency that asked about our margins before our colour palette. Checkout completion is up 22%.</blockquote></li>
+        <li class="sd-testi__item"><img src="https://picsum.photos/seed/face-lawyer/160/160" alt="" width="48" height="48"><div><b class="sd-testi__name" data-he="רות אדלר">Ruth Adler</b><br><small class="sd-testi__role" data-he="שותפה מנהלת, אדלר משפטים">Managing Partner, Adler Law</small></div><blockquote data-he="ברור, רגוע ונגיש. לקוחות אומרים שהאתר מסביר את העבודה שלנו טוב יותר מאיתנו בטלפון.">Clear, calm and accessible. Clients tell us the site explains our work better than we do on the phone.</blockquote></li>
+        <li class="sd-testi__item"><img src="https://picsum.photos/seed/face-engineer/160/160" alt="" width="48" height="48"><div><b class="sd-testi__name" data-he="איתן שקד">Eitan Shaked</b><br><small class="sd-testi__role" data-he="CTO, לומן הלת'">CTO, Lumen Health</small></div><blockquote data-he="מסירה נקייה, בלוקים מתועדים, אפס הפתעות בפרודקשן. הצוות שלנו עורך כל סקשן בלי להתקשר לאף אחד.">Clean handover, documented blocks, zero surprises in production. Our team edits every section without calling anyone.</blockquote></li>
+        <li class="sd-testi__item"><img src="https://picsum.photos/seed/face-chef/160/160" alt="" width="48" height="48"><div><b class="sd-testi__name" data-he="ליאור בן-עמי">Lior Ben-Ami</b><br><small class="sd-testi__role" data-he="בעלים, מלח ואבן">Owner, Salt & Stone</small></div><blockquote data-he="ההזמנות דרך האתר הוכפלו במהלך הקיץ. דף התפריט לבדו החזיר את ההשקעה.">Bookings through the site doubled over the summer. The menu page alone paid for the project.</blockquote></li>
+        <li class="sd-testi__item"><img src="https://picsum.photos/seed/face-audio/160/160" alt="" width="48" height="48"><div><b class="sd-testi__name" data-he="דנה רוזן">Dana Rosen</b><br><small class="sd-testi__role" data-he="מנהלת שיווק, אורביט אודיו">Marketing Lead, Orbit Audio</small></div><blockquote data-he="מהירות הדף עלתה מ-38 ל-94 במובייל ולא ויתרנו על אף אנימציה שהייתה חשובה לנו.">Page speed went from 38 to 94 on mobile and we did not lose a single animation we cared about.</blockquote></li>
+        <li class="sd-testi__item"><img src="https://picsum.photos/seed/face-architect/160/160" alt="" width="48" height="48"><div><b class="sd-testi__name" data-he="יואב כץ">Yoav Katz</b><br><small class="sd-testi__role" data-he="מנהל, כץ אדריכלים">Director, Katz Architects</small></div><blockquote data-he="הם התייחסו לתיק העבודות שלנו כמו לתערוכה. היום פונים אלינו לקוחות שפעם רדפנו אחריהם.">They treated our portfolio like an exhibition. We now get enquiries from clients we used to chase.</blockquote></li>
+        <li class="sd-testi__item"><img src="https://picsum.photos/seed/face-linen/160/160" alt="" width="48" height="48"><div><b class="sd-testi__name" data-he="נועה פרץ">Noa Peretz</b><br><small class="sd-testi__role" data-he="שותפה מייסדת, פילד פשתן">Co-founder, Field Linen</small></div><blockquote data-he="הערכות כנות, דמו שבועי, ויום השקה שהיה משעמם במובן הכי טוב.">Honest estimates, weekly demos, and a launch day that was boring in the best possible way.</blockquote></li>
+        <li class="sd-testi__item"><img src="https://picsum.photos/seed/face-barista/160/160" alt="" width="48" height="48"><div><b class="sd-testi__name" data-he="אמיר חדאד">Amir Haddad</b><br><small class="sd-testi__role" data-he="תפעול, הרבור קפה">Operations, Harbor Coffee</small></div><blockquote data-he="המנויים מתנהלים לבד. הצוות שלנו מבלה את ימי שישי בקלייה במקום בתשובה למיילים.">Subscriptions now run themselves. Our team spends Fridays roasting instead of answering emails.</blockquote></li>
+  </ul>
+</section>
+<section class="section container"><p style="color:var(--c-muted)">Next section.</p></section>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="_demo.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/testimonials.js"></script>
+</body>
+</html>

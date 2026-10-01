@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>scrub-video · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,800&family=Rubik:wght@400;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/scrub-video.css">
+<style>
+  :root {
+    --c-canvas: oklch(97% 0.012 70); --c-ink: oklch(20% 0.03 30); --c-ink-2: oklch(35% 0.03 30); --c-muted: oklch(50% 0.03 30); --c-rule: oklch(85% 0.02 60);
+    --c-accent: oklch(78% 0.15 65); --c-accent-ink: oklch(20% 0.03 30); --c-focus: oklch(60% 0.17 50);
+    --f-display: "Bricolage Grotesque", "Rubik", system-ui, sans-serif; --f-body: "Bricolage Grotesque", "Rubik", system-ui, sans-serif;
+  }
+  .nav { position: fixed; inset-block-start: 20px; inset-inline: 0; z-index: 50; display: flex; justify-content: center; pointer-events: none; }
+  .nav ul { pointer-events: auto; display: flex; gap: 24px; padding: 10px 24px; border-radius: 999px; background: oklch(100% 0 0 / 0.1); backdrop-filter: blur(14px) saturate(160%); border: 1px solid oklch(100% 0 0 / 0.16); list-style: none; margin: 0; }
+  .nav a { color: oklch(97% 0.02 70 / 0.9); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .sd-scrub__title h1 { font-weight: 400; }
+  .copy { max-inline-size: 60ch; }
+  .copy h2 { font-size: var(--fs-2xl); margin-block-end: var(--sp-4); }
+  .copy p { color: var(--c-ink-2); }
+  .tag { display: inline-block; font-size: var(--fs-xs); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--c-muted); margin-block-end: var(--sp-3); }
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Main"><ul><li><a href="#stay" data-he="לינה">Stay</a></li><li><a href="#dine" data-he="אוכל">Dine</a></li><li><a href="#book" data-he="הזמנה">Book</a></li></ul></nav>
+
+<!-- 1) video mode -->
+<section class="sd-scrub" data-fx="scrub-video" data-length="300" data-mode="video">
+  <div class="sd-scrub__stage">
+    <video class="sd-scrub__media" muted playsinline preload="auto" poster="assets/skyline-poster.webp" aria-hidden="true">
+      <source src="assets/skyline.webm" type="video/webm">
+      <source src="assets/skyline.mp4" type="video/mp4">
+    </video>
+    <div class="sd-scrub__brand" aria-hidden="true"><span data-he="לילה">Nocturne</span></div>
+    <img class="sd-scrub__cutout" src="assets/skyline-cutout.webp" alt="" aria-hidden="true" width="960" height="540">
+    <div class="sd-scrub__scrim"></div>
+    <div class="sd-scrub__title"><h1 data-he="העיר משאירה את האור דלוק בשבילכם.">The city keeps its lights on for you.</h1></div>
+    <div class="sd-scrub__hint" data-he="גללו">Scroll</div>
+    <div class="sd-scrub__progress" aria-hidden="true"><span></span></div>
+  </div>
+</section>
+
+<section class="section container copy" id="stay">
+  <span class="tag" data-he="מצב וידאו ← מצב פריימים">Video mode above · frame-sequence mode below</span>
+  <h2 data-he="שמונה עשרה קומות מעל הנמל">Eighteen floors above the harbour</h2>
+  <p data-he="42 חדרים, בר על הגג שנפתח בשקיעה, ומטבח שעובד עד שלוש לפנות בוקר. הסקשן הבא משתמש ברצף תמונות על קנבס במקום וידאו — העדיפות ב-iOS.">Forty-two rooms, a rooftop bar that opens at sunset and a kitchen that runs until three in the morning. The next section uses a canvas image sequence instead of video, the preferred mode on iOS.</p>
+</section>
+
+<!-- 2) frame-sequence mode -->
+<section class="sd-scrub" data-fx="scrub-video" data-length="220" data-mode="frames" data-scrub="0.3">
+  <div class="sd-scrub__stage">
+    <canvas class="sd-scrub__media" data-frames="assets/skyline-frames/f_{i}.webp" data-count="48" data-pad="2" aria-hidden="true"></canvas>
+    <div class="sd-scrub__brand" aria-hidden="true"><span data-he="נמל">Harbour</span></div>
+    <img class="sd-scrub__cutout" src="assets/skyline-cutout.webp" alt="" aria-hidden="true" width="960" height="540">
+    <div class="sd-scrub__scrim"></div>
+    <div class="sd-scrub__title"><h2 data-he="בערב הכול נראה קרוב יותר.">Evenings bring everything closer.</h2></div>
+    <div class="sd-scrub__progress" aria-hidden="true"><span></span></div>
+  </div>
+</section>
+
+<section class="section container copy" id="book">
+  <h2 data-he="הזמינו לילה">Book a night</h2>
+  <p data-he="החל מ-₪ 890 ללילה, כולל ארוחת בוקר על הגג.">From ₪890 a night, rooftop breakfast included.</p>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="_demo.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/scrub-video.js"></script>
+</body>
+</html>

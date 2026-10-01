@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>travel · studio-design demo</title>
+<meta name="he-title" content="travel · הדגמה">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Rubik:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/travel.css">
+<style>
+  /* Direction: card-issuing fintech, cool paper + one ultramarine accent; the card is the protagonist */
+  :root {
+    --c-canvas: oklch(97% 0.006 260); --c-surface: oklch(93% 0.012 260); --c-surface-2: oklch(88% 0.02 260);
+    --c-ink: oklch(19% 0.03 265); --c-ink-2: oklch(34% 0.03 265); --c-muted: oklch(47% 0.03 265); --c-rule: oklch(84% 0.015 260);
+    --c-accent: oklch(46% 0.2 268); --c-accent-ink: oklch(97% 0.01 260); --c-focus: oklch(46% 0.2 268);
+    --f-display: "Bricolage Grotesque", "Rubik", system-ui, sans-serif; --f-body: "Rubik", system-ui, sans-serif;
+    --img-card-a: oklch(46% 0.2 268); --img-card-b: oklch(30% 0.16 268); --img-chip: oklch(82% 0.09 85); --img-line: oklch(97% 0.01 260 / 0.55);
+  }
+  section { min-block-size: 100svh; display: grid; align-items: center; padding-block: var(--section-y); }
+  .row { display: grid; gap: var(--sp-7); align-items: center; }
+  @media (min-width: 860px) { .row { grid-template-columns: 1.1fr 1fr; } .row.rev > :first-child { order: 2; } }
+  h1 { font-size: var(--fs-display); font-weight: 650; line-height: 0.95; letter-spacing: -0.045em; max-inline-size: 11ch; }
+  h2 { font-size: var(--fs-3xl); font-weight: 600; line-height: 1; letter-spacing: -0.035em; max-inline-size: 14ch; }
+  :lang(he) :is(h1, h2) { letter-spacing: 0; line-height: 1.05; }
+  p.lede { font-size: var(--fs-lg); color: var(--c-ink-2); max-inline-size: 40ch; margin-block-start: var(--sp-5); }
+  .slot { aspect-ratio: 1.586; inline-size: 100%; }
+  .slot--lg { max-inline-size: 560px; justify-self: center; }
+  .slot--sm { max-inline-size: 300px; justify-self: center; }
+  .slot--md { max-inline-size: 420px; margin-inline: auto; margin-block-start: var(--sp-7); }
+  .s3 { text-align: center; } .s3 h2 { margin-inline: auto; } .s3 p.lede { margin-inline: auto; }
+  .s4 { background: var(--c-ink); color: var(--c-canvas); }
+  .s4 p.lede { color: color-mix(in oklab, var(--c-canvas) 78%, var(--c-ink)); }
+  .card-svg { inline-size: 100%; block-size: auto; filter: drop-shadow(0 30px 40px oklch(19% 0.03 265 / 0.25)); }
+  .btn { display: inline-flex; margin-block-start: var(--sp-6); padding: 14px 22px; border-radius: var(--r-pill); background: var(--c-accent); color: var(--c-accent-ink); font-weight: 500; }
+</style>
+</head>
+<body>
+<main data-fx="travel" data-line="0.5" data-hold="0.2" data-spin="8" data-min="860">
+  <section class="container">
+    <div class="row">
+      <div>
+        <h1 data-he="כרטיס אחד לכל העסק">One card for the whole business</h1>
+        <p class="lede" data-he="הנפקה מיידית, מגבלות לפי צוות ודוחות בזמן אמת. הכרטיס הוא המוצר, אז הוא מוביל את העמוד.">Instant issuing, limits per team and live reporting. The card is the product, so it leads the page.</p>
+      </div>
+      <div class="slot slot--lg" data-travel-slot data-rotate="-10">
+        <svg class="card-svg" viewBox="0 0 856 540" role="img" aria-label="Business card, front" data-he-aria-label="כרטיס עסקי, חזית"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--img-card-a)"/><stop offset="1" style="stop-color:var(--img-card-b)"/></linearGradient></defs><rect width="856" height="540" rx="36" fill="url(#g1)"/><rect x="72" y="170" width="110" height="84" rx="14" style="fill:var(--img-chip)"/><path d="M60 470 H796" style="stroke:var(--img-line)" stroke-width="2"/><circle cx="740" cy="96" r="38" style="fill:var(--img-line)"/><circle cx="700" cy="96" r="38" style="fill:var(--img-line)"/></svg>
+      </div>
+    </div>
+  </section>
+  <section class="container">
+    <div class="row rev">
+      <div>
+        <h2 data-he="מגבלות שזזות עם הצוות">Limits that move with the team</h2>
+        <p class="lede" data-he="כל כרטיס מקבל תקציב, ספקים מותרים ותוקף. משנים באפליקציה, החיוב הבא כבר מכבד את זה.">Every card gets a budget, allowed vendors and an expiry. Change it in the app and the next charge already respects it.</p>
+      </div>
+      <div class="slot slot--sm" data-travel-slot data-rotate="14">
+        <svg class="card-svg" viewBox="0 0 856 540" role="img" aria-label="Business card, angled" data-he-aria-label="כרטיס עסקי, בזווית"><rect width="856" height="540" rx="36" style="fill:var(--img-card-b)"/><rect x="72" y="170" width="110" height="84" rx="14" style="fill:var(--img-chip)"/><path d="M60 360 H796 M60 410 H560" style="stroke:var(--img-line)" stroke-width="2"/></svg>
+      </div>
+    </div>
+  </section>
+  <section class="container s3">
+    <div>
+      <h2 data-he="גב הכרטיס, בלי הפתעות">The back, without surprises</h2>
+      <p class="lede" data-he="אין מספר מודפס. הפרטים חיים באפליקציה ומתחלפים בלחיצה.">No printed number. The details live in the app and rotate with one tap.</p>
+      <div class="slot slot--md" data-travel-slot data-rotate="0">
+        <svg class="card-svg" viewBox="0 0 856 540" role="img" aria-label="Business card, back" data-he-aria-label="כרטיס עסקי, גב"><rect width="856" height="540" rx="36" style="fill:var(--img-card-a)"/><rect y="70" width="856" height="96" style="fill:var(--c-ink)"/><rect x="72" y="230" width="460" height="60" rx="8" style="fill:var(--img-line)"/></svg>
+      </div>
+    </div>
+  </section>
+  <section class="container s4">
+    <div class="row">
+      <div>
+        <h2 data-he="פתחו חשבון היום">Open an account today</h2>
+        <p class="lede" data-he="אימות תוך דקות, כרטיס פיזי תוך שלושה ימי עסקים.">Verified in minutes, a physical card within three business days.</p>
+        <a class="btn" href="#" data-he="פתיחת חשבון">Open account</a>
+      </div>
+      <div class="slot slot--lg" data-travel-slot data-rotate="-4">
+        <svg class="card-svg" viewBox="0 0 856 540" role="img" aria-label="Business card, front" data-he-aria-label="כרטיס עסקי, חזית"><rect width="856" height="540" rx="36" style="fill:var(--img-card-a)"/><rect x="72" y="170" width="110" height="84" rx="14" style="fill:var(--img-chip)"/><path d="M60 470 H796" style="stroke:var(--img-line)" stroke-width="2"/><circle cx="740" cy="96" r="38" style="fill:var(--img-line)"/><circle cx="700" cy="96" r="38" style="fill:var(--img-line)"/></svg>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="_demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/travel.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>flip-grid · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@400;500&family=Frank+Ruhl+Libre:wght@400;500&family=Heebo:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/flip-grid.css">
+<style>
+  :root {
+    --c-canvas: oklch(97.8% 0.006 85); --c-surface: oklch(94.5% 0.01 80); --c-surface-2: oklch(90% 0.012 80);
+    --c-ink: oklch(21% 0.012 60); --c-ink-2: oklch(36% 0.012 60); --c-muted: oklch(54% 0.012 60); --c-rule: oklch(87% 0.01 80);
+    --c-accent: oklch(66% 0.09 80); --c-accent-ink: oklch(21% 0.012 60); --c-focus: oklch(55% 0.1 80);
+    --f-display: "Cormorant Garamond", "Frank Ruhl Libre", Georgia, serif; --f-body: "Jost", "Heebo", system-ui, sans-serif; --r-md: 2px;
+  }
+  .head { text-align: center; margin-block-end: var(--sp-7); }
+  .head h1 { font-size: var(--fs-3xl); font-weight: 400; }
+  .head p { color: var(--c-muted); font-size: var(--fs-xs); letter-spacing: 0.2em; text-transform: uppercase; margin-block-start: var(--sp-3); }
+</style>
+</head>
+<body>
+<main class="section container">
+  <header class="head"><p data-he="הקולקציה">The collection</p><h1 data-he="תכשיטים שנשארים">Pieces made to stay</h1></header>
+  <section class="sd-fgrid" data-fx="flip-grid" id="shop">
+    <div class="sd-fgrid__tools">
+      <div class="sd-fgrid__chips" data-filter-group="category" role="group" aria-label="Filter by category" data-he-aria="סינון לפי קטגוריה">
+        <button type="button" data-filter="*" aria-pressed="true" data-he="הכול">All</button>
+        <button type="button" data-filter="rings" aria-pressed="false" data-he="טבעות">Rings</button>
+        <button type="button" data-filter="necklaces" aria-pressed="false" data-he="שרשראות">Necklaces</button>
+        <button type="button" data-filter="earrings" aria-pressed="false" data-he="עגילים">Earrings</button>
+        <button type="button" data-filter="bracelets" aria-pressed="false" data-he="צמידים">Bracelets</button>
+      </div>
+      <div class="sd-fgrid__chips" data-filter-group="metal" data-multi="true" role="group" aria-label="Filter by metal" data-he-aria="סינון לפי מתכת">
+        <button type="button" data-filter="gold" aria-pressed="false" data-he="זהב צהוב">Yellow gold</button>
+        <button type="button" data-filter="white" aria-pressed="false" data-he="זהב לבן">White gold</button>
+      </div>
+      <div class="sd-fgrid__meta">
+        <p class="sd-fgrid__count" aria-live="polite"><span data-fgrid-count>12</span> <span data-he="פריטים">pieces</span></p>
+        <fieldset class="sd-fgrid__views" aria-label="View" data-he-aria="תצוגה">
+          <label><input type="radio" name="view" value="2" aria-label="Two columns" data-he-aria="שתי עמודות"><span><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg></span></label>
+          <label><input type="radio" name="view" value="3" aria-label="Three columns" data-he-aria="שלוש עמודות" checked><span><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="1" y="1" width="4" height="4"/><rect x="6" y="1" width="4" height="4"/><rect x="11" y="1" width="4" height="4"/><rect x="1" y="6" width="4" height="4"/><rect x="6" y="6" width="4" height="4"/><rect x="11" y="6" width="4" height="4"/><rect x="1" y="11" width="4" height="4"/><rect x="6" y="11" width="4" height="4"/><rect x="11" y="11" width="4" height="4"/></svg></span></label>
+          <label data-desktop-only><input type="radio" name="view" value="4" aria-label="Four columns" data-he-aria="ארבע עמודות"><span><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="1" y="2" width="2.5" height="5"/><rect x="4.8" y="2" width="2.5" height="5"/><rect x="8.6" y="2" width="2.5" height="5"/><rect x="12.4" y="2" width="2.5" height="5"/><rect x="1" y="9" width="2.5" height="5"/><rect x="4.8" y="9" width="2.5" height="5"/><rect x="8.6" y="9" width="2.5" height="5"/><rect x="12.4" y="9" width="2.5" height="5"/></svg></span></label>
+          <label><input type="radio" name="view" value="list" aria-label="List" data-he-aria="רשימה"><span><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="1" y="2" width="4" height="4"/><rect x="7" y="3" width="8" height="2"/><rect x="1" y="10" width="4" height="4"/><rect x="7" y="11" width="8" height="2"/></svg></span></label>
+        </fieldset>
+      </div>
+    </div>
+    <ul class="sd-fgrid__list" data-view="3" role="list">
+      <li class="sd-fgrid__item" data-tags="rings gold"><a class="sd-fgrid__card" href="#">
+        <div class="sd-fgrid__media"><img src="https://picsum.photos/seed/ring1/600/750" alt="" width="600" height="750"></div>
+        <div><div class="sd-fgrid__info"><div><b data-he="טבעת סוליטר">Solitaire ring</b><small data-he="זהב צהוב 18K · 0.5 קראט">18k yellow gold · 0.5 ct</small></div><span>₪4,890</span></div>
+        <p class="sd-fgrid__desc" data-he="עבודת יד בסטודיו שלנו בתל אביב, עם תעודת גמולוגיה ואחריות לכל החיים.">Handmade in our Tel Aviv studio, with a gemological certificate and a lifetime warranty.</p></div>
+      </a></li>
+      <li class="sd-fgrid__item" data-tags="bracelets white"><a class="sd-fgrid__card" href="#">
+        <div class="sd-fgrid__media"><img src="https://picsum.photos/seed/bracelet1/600/750" alt="" width="600" height="750"></div>
+        <div><div class="sd-fgrid__info"><div><b data-he="צמיד טניס">Tennis bracelet</b><small data-he="זהב לבן · 2.1 קראט">White gold · 2.1 ct</small></div><span>₪12,400</span></div>
+        <p class="sd-fgrid__desc" data-he="עבודת יד בסטודיו שלנו בתל אביב, עם תעודת גמולוגיה ואחריות לכל החיים.">Handmade in our Tel Aviv studio, with a gemological certificate and a lifetime warranty.</p></div>
+      </a></li>
+      <li class="sd-fgrid__item" data-tags="earrings gold"><a class="sd-fgrid__card" href="#">
+        <div class="sd-fgrid__media"><img src="https://picsum.photos/seed/earring1/600/750" alt="" width="600" height="750"></div>
+        <div><div class="sd-fgrid__info"><div><b data-he="עגילי פנינה">Pearl drop earrings</b><small data-he="פנינת אקויה · זהב 14K">Akoya pearl · 14k gold</small></div><span>₪1,650</span></div>
+        <p class="sd-fgrid__desc" data-he="עבודת יד בסטודיו שלנו בתל אביב, עם תעודת גמולוגיה ואחריות לכל החיים.">Handmade in our Tel Aviv studio, with a gemological certificate and a lifetime warranty.</p></div>
+      </a></li>
+      <li class="sd-fgrid__item" data-tags="necklaces white"><a class="sd-fgrid__card" href="#">
+        <div class="sd-fgrid__media"><img src="https://picsum.photos/seed/pendant1/600/750" alt="" width="600" height="750"></div>
+        <div><div class="sd-fgrid__info"><div><b data-he="תליון הילה">Halo pendant</b><small data-he="זהב לבן · 0.3 קראט">White gold · 0.3 ct</small></div><span>₪2,980</span></div>
+        <p class="sd-fgrid__desc" data-he="עבודת יד בסטודיו שלנו בתל אביב, עם תעודת גמולוגיה ואחריות לכל החיים.">Handmade in our Tel Aviv studio, with a gemological certificate and a lifetime warranty.</p></div>
+      </a></li>
+      <li class="sd-fgrid__item" data-tags="rings white"><a class="sd-fgrid__card" href="#">
+        <div class="sd-fgrid__media"><img src="https://picsum.photos/seed/band1/600/750" alt="" width="600" height="750" loading="lazy"></div>
+        <div><div class="sd-fgrid__info"><div><b data-he="טבעת נצח">Eternity band</b><small data-he="פלטינה · 1.0 קראט">Platinum · 1.0 ct</small></div><span>₪7,200</span></div>
+        <p class="sd-fgrid__desc" data-he="עבודת יד בסטודיו שלנו בתל אביב, עם תעודת גמולוגיה ואחריות לכל החיים.">Handmade in our Tel Aviv studio, with a gemological certificate and a lifetime warranty.</p></div>
+      </a></li>
+      <li class="sd-fgrid__item" data-tags="necklaces gold"><a class="sd-fgrid__card" href="#">
+        <div class="sd-fgrid__media"><img src="https://picsum.photos/seed/chain1/600/750" alt="" width="600" height="750" loading="lazy"></div>
+        <div><div class="sd-fgrid__info"><div><b data-he="שרשרת חוליות">Link chain</b><small data-he="זהב 18K מלא · 45 ס״מ">Solid 18k gold · 45 cm</small></div><span>₪3,350</span></div>
+        <p class="sd-fgrid__desc" data-he="עבודת יד בסטודיו שלנו בתל אביב, עם תעודת גמולוגיה ואחריות לכל החיים.">Handmade in our Tel Aviv studio, with a gemological certificate and a lifetime warranty.</p></div>
+      </a></li>
+      <li class="sd-fgrid__item" data-tags="earrings white"><a class="sd-fgrid__card" href="#">
+        <div class="sd-fgrid__media"><img src="https://picsum.photos/seed/hoop1/600/750" alt="" width="600" height="750" loading="lazy"></div>
+        <div><div class="sd-fgrid__info"><div><b data-he="עגילי חישוק">Huggie hoops</b><small data-he="זהב לבן · שיבוץ">White gold · pavé</small></div><span>₪1,890</span></div>
+        <p class="sd-fgrid__desc" data-he="עבודת יד בסטודיו שלנו בתל אביב, עם תעודת גמולוגיה ואחריות לכל החיים.">Handmade in our Tel Aviv studio, with a gemological certificate and a lifetime warranty.</p></div>
+      </a></li>
+      <li class="sd-fgrid__item" data-tags="rings gold"><a class="sd-fgrid__card" href="#">
+        <div class="sd-fgrid__media"><img src="https://picsum.photos/seed/signet1/600/750" alt="" width="600" height="750" loading="lazy"></div>
+        <div><div class="sd-fgrid__info"><div><b data-he="טבעת חותם">Signet ring</b><small data-he="ניתנת לחריטה · זהב 14K">Engravable · 14k gold</small></div><span>₪2,250</span></div>
+        <p class="sd-fgrid__desc" data-he="עבודת יד בסטודיו שלנו בתל אביב, עם תעודת גמולוגיה ואחריות לכל החיים.">Handmade in our Tel Aviv studio, with a gemological certificate and a lifetime warranty.</p></div>
+      </a></li>
+      <li class="sd-fgrid__item" data-tags="bracelets gold"><a class="sd-fgrid__card" href="#">
+        <div class="sd-fgrid__media"><img src="https://picsum.photos/seed/bangle1/600/750" alt="" width="600" height="750" loading="lazy"></div>
+        <div><div class="sd-fgrid__info"><div><b data-he="צמיד קשיח">Bangle</b><small data-he="זהב 18K מרוקע">Hammered 18k gold</small></div><span>₪5,100</span></div>
+        <p class="sd-fgrid__desc" data-he="עבודת יד בסטודיו שלנו בתל אביב, עם תעודת גמולוגיה ואחריות לכל החיים.">Handmade in our Tel Aviv studio, with a gemological certificate and a lifetime warranty.</p></div>
+      </a></li>
+      <li class="sd-fgrid__item" data-tags="earrings gold"><a class="sd-fgrid__card" href="#">
+        <div class="sd-fgrid__media"><img src="https://picsum.photos/seed/emerald1/600/750" alt="" width="600" height="750" loading="lazy"></div>
+        <div><div class="sd-fgrid__info"><div><b data-he="עגילי אמרלד">Emerald studs</b><small data-he="אמרלד קולומביאני">Colombian emerald</small></div><span>₪3,900</span></div>
+        <p class="sd-fgrid__desc" data-he="עבודת יד בסטודיו שלנו בתל אביב, עם תעודת גמולוגיה ואחריות לכל החיים.">Handmade in our Tel Aviv studio, with a gemological certificate and a lifetime warranty.</p></div>
+      </a></li>
+      <li class="sd-fgrid__item" data-tags="necklaces white"><a class="sd-fgrid__card" href="#">
+        <div class="sd-fgrid__media"><img src="https://picsum.photos/seed/riviera1/600/750" alt="" width="600" height="750" loading="lazy"></div>
+        <div><div class="sd-fgrid__info"><div><b data-he="שרשרת ריביירה">Riviera necklace</b><small data-he="זהב לבן · 5.2 קראט">White gold · 5.2 ct</small></div><span>₪28,500</span></div>
+        <p class="sd-fgrid__desc" data-he="עבודת יד בסטודיו שלנו בתל אביב, עם תעודת גמולוגיה ואחריות לכל החיים.">Handmade in our Tel Aviv studio, with a gemological certificate and a lifetime warranty.</p></div>
+      </a></li>
+      <li class="sd-fgrid__item" data-tags="bracelets white"><a class="sd-fgrid__card" href="#">
+        <div class="sd-fgrid__media"><img src="https://picsum.photos/seed/cuff1/600/750" alt="" width="600" height="750" loading="lazy"></div>
+        <div><div class="sd-fgrid__info"><div><b data-he="צמיד פתוח">Cuff</b><small data-he="זהב לבן מוברש">Brushed white gold</small></div><span>₪4,400</span></div>
+        <p class="sd-fgrid__desc" data-he="עבודת יד בסטודיו שלנו בתל אביב, עם תעודת גמולוגיה ואחריות לכל החיים.">Handmade in our Tel Aviv studio, with a gemological certificate and a lifetime warranty.</p></div>
+      </a></li>
+    </ul>
+    <p class="sd-fgrid__empty" hidden data-he="אין פריטים מתאימים.">No pieces match these filters.</p>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Flip.min.js"></script>
+<script src="_demo.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/flip-grid.js"></script>
+</body>
+</html>

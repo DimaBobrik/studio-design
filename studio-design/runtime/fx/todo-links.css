@@ -1,0 +1,8 @@
+/* studio-design fx · todo-links.css — the "not in this delivery" dialog. Tokens only. */
+.sd-todo { max-inline-size: min(420px, calc(100vw - 32px)); padding: var(--sp-6); border: 1px solid var(--c-rule); border-radius: var(--r-lg);
+  background: var(--c-canvas); color: var(--c-ink); box-shadow: var(--shadow-2); }
+.sd-todo::backdrop { background: color-mix(in oklab, var(--c-ink) 35%, transparent); }
+.sd-todo__title { font-size: var(--fs-lg); margin-block-end: var(--sp-3); }
+.sd-todo__text { color: var(--c-ink-2); margin-block-end: var(--sp-5); }
+.sd-todo__close { min-block-size: 44px; padding-inline: var(--sp-5); border-radius: var(--r-pill); background: var(--c-ink); color: var(--c-canvas); }
+a[href^="#todo-"] { text-decoration-style: dashed; }

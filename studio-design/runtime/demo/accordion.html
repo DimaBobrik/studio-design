@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>accordion · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Public+Sans:wght@400;500;600&family=David+Libre:wght@500&family=Assistant:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/accordion.css">
+<style>
+  :root {
+    --c-canvas: oklch(98% 0.004 250); --c-surface: oklch(95.5% 0.008 250); --c-surface-2: oklch(92% 0.01 250);
+    --c-ink: oklch(24% 0.05 262); --c-ink-2: oklch(38% 0.03 262); --c-muted: oklch(52% 0.02 262); --c-rule: oklch(86% 0.012 262);
+    --c-accent: oklch(50% 0.12 262); --c-accent-ink: #fff; --c-focus: oklch(50% 0.16 262);
+    --f-display: "Newsreader", "David Libre", Georgia, serif; --f-body: "Public Sans", "Assistant", system-ui, sans-serif;
+  }
+  .faq { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(var(--sp-6), 6vw, var(--sp-9)); align-items: start; }
+  .faq__side { position: sticky; inset-block-start: var(--sp-7); }
+  .faq__side h2 { font-size: var(--fs-3xl); font-weight: 400; }
+  .faq__side p { color: var(--c-ink-2); margin-block-start: var(--sp-4); max-inline-size: 34ch; }
+  .btn { display: inline-flex; margin-block-start: var(--sp-6); padding: 14px 22px; border-radius: var(--r-pill); background: var(--c-ink); color: var(--c-canvas); text-decoration: none; font-weight: 600; font-size: var(--fs-sm); }
+  .kicker { font-size: var(--fs-xs); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--c-accent); font-weight: 600; margin-block-end: var(--sp-4); }
+  @media (max-width: 860px) { .faq { grid-template-columns: 1fr; } .faq__side { position: static; } }
+</style>
+</head>
+<body>
+<main class="section container faq">
+  <aside class="faq__side">
+    <p class="kicker" data-he="שאלות נפוצות">Questions we hear every week</p>
+    <h2 data-he="נגישות אתרים, בלי ז׳רגון">Website accessibility, without the jargon</h2>
+    <p data-he="עורכי דין ומומחי נגישות שבודקים, מתקנים ומלווים אתרים עסקיים מול התקנות.">Lawyers and accessibility specialists who audit, fix and defend business websites under Israeli regulations.</p>
+    <a class="btn" href="#contact" data-he="לתיאום שיחת ייעוץ">Book a 20-minute call</a>
+  </aside>
+  <div class="sd-acc" data-fx="accordion" data-exclusive="true" data-jsonld="true">
+      <details class="sd-acc__item" open>
+        <summary><span class="sd-acc__q" data-he="אילו אתרים חייבים לעמוד בתקנות הנגישות?">Which websites must meet Israeli accessibility regulations?</span><span class="sd-acc__icon" aria-hidden="true"></span></summary>
+        <div class="sd-acc__body"><p data-he="כל עסק שנותן שירות לציבור ברשת, ממרפאה ועד חנות מקוונת, חייב לעמוד בתקן הישראלי 5568 ברמה AA. לעסקים קטנים עם מחזור שנתי של פחות מ-300,000 ₪ יש חובות מקלות, אך לא פטור.">Any business that offers a service to the public online, from a clinic to an online shop, must meet Israeli Standard 5568 at level AA. Small businesses with an annual turnover under ₪300,000 have lighter duties, but not an exemption.</p></div>
+      </details>
+      <details class="sd-acc__item">
+        <summary><span class="sd-acc__q" data-he="האם תוסף נגישות מספיק?">Is an accessibility plugin enough?</span><span class="sd-acc__icon" aria-hidden="true"></span></summary>
+        <div class="sd-acc__body"><p data-he="לא. תוספי נגישות משנים צבעים וגודל גופן, אבל לא מתקנים תוויות חסרות, מלכודות מקלדת או תמונות ללא טקסט חלופי. בתי המשפט ראו בהם פתרון לא מספק כשלעצמו.">No. Overlay widgets change colours and font sizes, but they do not fix missing labels, keyboard traps or images without text alternatives. Courts have treated them as insufficient on their own.</p></div>
+      </details>
+      <details class="sd-acc__item">
+        <summary><span class="sd-acc__q" data-he="על מה נסמכת בדרך כלל תביעה?">What does a lawsuit usually claim?</span><span class="sd-acc__icon" aria-hidden="true"></span></summary>
+        <div class="sd-acc__body"><p data-he="רוב התביעות מצביעות על היעדר הצהרת נגישות, טפסים שלא ניתן למלא במקלדת וניגודיות צבעים נמוכה. פיצוי ללא הוכחת נזק יכול להגיע ל-50,000 ₪ לתביעה.">Most claims cite a missing accessibility statement, forms that cannot be completed with a keyboard, and low colour contrast. Statutory damages can reach ₪50,000 per claim without proof of harm.</p></div>
+      </details>
+      <details class="sd-acc__item">
+        <summary><span class="sd-acc__q" data-he="כמה זמן לוקחת בדיקת נגישות?">How long does an audit take?</span><span class="sd-acc__icon" aria-hidden="true"></span></summary>
+        <div class="sd-acc__body"><p data-he="בדיקה טיפוסית של אתר בן עשרים עמודים נמשכת חמישה עד שמונה ימי עבודה, כולל דוח כתוב, רשימת תיקונים לפי עדיפות וטיוטת הצהרת נגישות.">A typical audit of a twenty-page site takes five to eight working days, including a written report, a prioritised fix list and a draft accessibility statement.</p></div>
+      </details>
+      <details class="sd-acc__item">
+        <summary><span class="sd-acc__q" data-he="האם תוכלו לייצג אותנו אם כבר קיבלנו מכתב דרישה?">Can you represent us if we already received a demand letter?</span><span class="sd-acc__icon" aria-hidden="true"></span></summary>
+        <div class="sd-acc__body"><p data-he="כן. שלחו את המכתב ואת כתובת האתר, ונחזור אליכם תוך יום עבודה עם הערכת התביעה והדרך המהירה ביותר לעמידה בתקן.">Yes. Send the letter and your site address; we reply within one working day with an assessment of the claim and the fastest route to compliance.</p></div>
+      </details>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="_demo.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/accordion.js"></script>
+</body>
+</html>

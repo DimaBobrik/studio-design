@@ -1,0 +1,10 @@
+/* studio-design fx · travel — slots are static views; the live traveller flies over them */
+.sd-travel { position: relative; }
+[data-travel-slot] { display: grid; place-items: center; }
+[data-travel-slot] > img, [data-travel-slot] > svg, [data-travel-slot] > picture { inline-size: 100%; block-size: 100%; object-fit: contain; }
+.sd-travel__slot--ghost > * { opacity: 0; }
+.sd-travel__obj { position: absolute; inset-block-start: 0; inset-inline-start: 0; z-index: var(--z-raised); pointer-events: none;
+  transform-origin: 50% 50%; will-change: transform; }
+.sd-travel__frame { position: absolute; inset: 0; display: grid; place-items: center; will-change: opacity; }
+.sd-travel__frame > img, .sd-travel__frame > svg, .sd-travel__frame > picture { inline-size: 100%; block-size: 100%; object-fit: contain; }
+@media (forced-colors: active) { .sd-travel__obj { display: none; } .sd-travel__slot--ghost > * { opacity: 1; } }

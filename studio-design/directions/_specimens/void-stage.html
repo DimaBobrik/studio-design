@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Void Stage · specimen</title>
+<meta name="he-title" content="Void Stage · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,400..800&family=Fragment+Mono&family=Noto+Sans+Hebrew:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/void-stage.md */
+:root {
+  --c-canvas: oklch(13% 0.004 270); --c-surface: oklch(18% 0.005 270); --c-surface-2: oklch(23% 0.005 270);
+  --c-ink: oklch(94% 0.003 270); --c-ink-2: oklch(79% 0.003 270); --c-muted: oklch(66% 0.004 270);
+  --c-rule: oklch(94% 0.003 270 / 0.14); --c-accent: oklch(68% 0.19 42); --c-accent-ink: oklch(13% 0.004 270);
+  --c-focus: oklch(68% 0.19 42);
+  --f-display: "Mona Sans", "Noto Sans Hebrew", system-ui, sans-serif; --f-body: "Mona Sans", "Noto Sans Hebrew", system-ui, sans-serif;
+  --f-mono: "Fragment Mono", "Noto Sans Hebrew", ui-monospace, monospace; --f-outlier: "Fragment Mono", ui-monospace, monospace;
+  --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-base: 1rem; --fs-lg: 1.1875rem; --fs-xl: clamp(1.4rem, 1.15rem + 0.9vw, 1.9rem);
+  --fs-2xl: clamp(2rem, 1.3rem + 2.4vw, 3.25rem); --fs-3xl: clamp(2.6rem, 1.4rem + 4vw, 5rem);
+  --fs-display: clamp(3rem, 1rem + 7.4vw, 8.5rem); /* statement after the stage; the stage itself has no big type */
+  --lh-tight: 0.95; --lh-body: 1.55; --tr-display: -0.035em; --tr-label: 0.08em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-7: 32px; --sp-8: 48px; --sp-9: 80px; --sp-10: 140px;
+  --section-y: clamp(80px, 7vw + 32px, 160px); --gutter: clamp(16px, 2vw, 32px); --maxw: 1600px;
+  --r-sm: 6px; --r-md: 14px; --r-lg: 20px; --r-pill: 999px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.87, 0, 0.13, 1);
+  --d-fast: 160ms; --d-med: 420ms; --d-slow: 1100ms;
+  --shadow-1: none; --shadow-2: 0 0 0 1px var(--c-rule);
+  /* direction extras */
+  --stage-h: 100dvh; --hud-inset: clamp(12px, 1.4vw, 20px); --panel-w: clamp(220px, 26vw, 420px);
+  --img-floor: oklch(94% 0.003 270 / 0.07); /* floor grid lines inside the stage only */
+}
+:root[dir="rtl"] { --f-display: "Noto Sans Hebrew", "Mona Sans", sans-serif; --f-body: "Noto Sans Hebrew", "Mona Sans", sans-serif; --tr-display: 0; --tr-label: 0; }
+</style>
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); background: var(--c-canvas); color: var(--c-ink); font-stretch: 100%; }
+.hud { font-family: var(--f-mono); font-size: var(--fs-xs); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--c-ink-2); }
+[lang="he"] .hud { font-family: var(--f-body); font-size: 13px; font-weight: 500; }
+.stage { position: relative; min-block-size: var(--stage-h); overflow: clip; perspective: 1500px; perspective-origin: 50% 42%; }
+.floor { position: absolute; inset-inline: -40%; inset-block-end: -30%; block-size: 70%; transform: rotateX(78deg); transform-origin: 50% 0;
+  background: repeating-linear-gradient(90deg, var(--img-floor) 0 1px, transparent 1px 80px), repeating-linear-gradient(0deg, var(--img-floor) 0 1px, transparent 1px 80px); }
+.ring { position: absolute; inset-block-start: 34%; inset-inline-start: 50%; inline-size: var(--panel-w); list-style: none; margin: 0; padding: 0; transform-style: preserve-3d; transform: translate(-50%, -50%) translateZ(calc(var(--r) * -1)) rotateY(var(--rot, 0deg)); --r: calc(var(--panel-w) * 1.72); --panel-w: clamp(200px, 21vw, 340px); cursor: grab; touch-action: pan-y; }
+[dir="rtl"] .ring { transform: translate(50%, -50%) translateZ(calc(var(--r) * -1)) rotateY(var(--rot, 0deg)); }
+.pn { position: absolute; inset: 0; inline-size: var(--panel-w); transform: rotateY(calc(var(--i) * 36deg)) translateZ(var(--r)); backface-visibility: hidden; }
+.pn figure { margin: 0; }
+.pn svg { display: block; inline-size: 100%; aspect-ratio: 4 / 5; border-radius: var(--r-lg); box-shadow: var(--shadow-2); }
+.pn figcaption { display: flex; justify-content: space-between; margin-block-start: 10px; font-family: var(--f-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: var(--tr-label); color: var(--c-ink-2); }
+[lang="he"] .pn figcaption { font-family: var(--f-body); font-size: 13px; }
+.c { position: absolute; z-index: 2; margin: 0; }
+.c--ts { inset-block-start: var(--hud-inset); inset-inline-start: var(--hud-inset); color: var(--c-ink); }
+.c--te { inset-block-start: var(--hud-inset); inset-inline-end: var(--hud-inset); }
+.c--bs { inset-block-end: var(--hud-inset); inset-inline-start: var(--hud-inset); display: flex; gap: 6px; }
+.c--be { inset-block-end: var(--hud-inset); inset-inline-end: var(--hud-inset); }
+.c a { color: inherit; }
+.tg { font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--c-ink-2); background: transparent; border: 1px solid var(--c-rule); border-radius: var(--r-pill); padding: 8px 14px; min-block-size: 36px; cursor: pointer; }
+.tg[aria-pressed="true"] { background: var(--c-accent); color: var(--c-accent-ink); border-color: var(--c-accent); }
+.tg:hover, .tg.is-hover { color: var(--c-ink); border-color: var(--c-ink-2); }
+.tg.is-focus, .tg:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.h1 { position: absolute; inset-block-start: calc(var(--hud-inset) + 28px); inset-inline-start: var(--hud-inset); font-size: var(--fs-sm); font-weight: 400; color: var(--c-muted); max-inline-size: 44ch; line-height: 1.4; }
+.stmt { padding: var(--section-y) var(--gutter) calc(var(--section-y) * .6); max-inline-size: var(--maxw); margin-inline: auto; }
+.stmt p { font-size: var(--fs-display); font-weight: 600; font-stretch: 112%; line-height: var(--lh-tight); letter-spacing: var(--tr-display); max-inline-size: 14ch; }
+.stmt p span { color: var(--c-muted); }
+[lang="he"] .stmt p { font-size: calc(var(--fs-display) * .85); }
+.idx { max-inline-size: var(--maxw); margin-inline: auto; padding: 0 var(--gutter) var(--section-y); }
+.idx ul { list-style: none; margin: 0; padding: 0; border-block-start: 1px solid var(--c-rule); }
+.idx li { display: grid; grid-template-columns: 6rem 1fr 1fr; gap: var(--sp-5); align-items: baseline; padding-block: var(--sp-5); border-block-end: 1px solid var(--c-rule); }
+.idx .y { font-family: var(--f-mono); font-size: var(--fs-sm); color: var(--c-muted); }
+.idx .t { font-size: var(--fs-xl); font-weight: 500; font-stretch: 108%; letter-spacing: -0.02em; }
+.idx .d { color: var(--c-ink-2); }
+@media (max-width: 760px) { .ring { --r: calc(var(--panel-w) * 1.9); } .idx li { grid-template-columns: 4rem 1fr; } .idx .d { grid-column: 2; } .c--be { display: none; } .h1 { display: none; } }
+</style>
+</head>
+<body>
+<main>
+<section class="stage" aria-labelledby="st-h">
+  <div class="floor" aria-hidden="true"></div>
+  <p class="c c--ts hud"><span data-he="אודה וארן · סטודיו תנועה ותלת־ממד">Oda Varen · motion &amp; 3D studio</span></p>
+  <h1 class="h1" id="st-h" data-he="עבודות נבחרות, 2023–2026. גררו כדי לסובב.">Selected work, 2023–2026. Drag to turn the ring.</h1>
+  <p class="c c--te hud"><a href="#index" data-he="אינדקס (24)">Index (24)</a></p>
+  <div class="c c--bs hud" role="group" aria-label="View" data-he-aria-label="תצוגה"><button class="tg" type="button" aria-pressed="true" data-spec-btn data-he="נבחרות">Featured</button><button class="tg" type="button" aria-pressed="false" data-he="הכול">Full</button></div>
+  <p class="c c--be hud"><a href="#" dir="ltr">hello@odavaren.example</a></p>
+  <ul class="ring" role="list"><li class="pn" style="--i:0"><figure><svg viewBox="0 0 240 240" aria-hidden="true" style="background:oklch(32% 0.03 220)"><circle cx="120" cy="120" r="54" fill="none" stroke="oklch(90% 0.01 250 / .7)" stroke-width="1.5"/><path d="M20 190 H220" stroke="oklch(90% 0.01 250 / .5)"/></svg><figcaption><span data-he="ביתן המים">Tidewater Pavilion</span><bdi class="y">2026</bdi></figcaption></figure></li><li class="pn" style="--i:1"><figure><svg viewBox="0 0 240 240" aria-hidden="true" style="background:oklch(30% 0.05 30)"><path d="M30 180 L120 60 L210 180 Z" fill="none" stroke="oklch(90% 0.01 60 / .7)" stroke-width="1.5"/><path d="M60 180 L120 100 L180 180" fill="none" stroke="oklch(90% 0.01 60 / .4)"/></svg><figcaption><span data-he="רכבת לילה">Night Train</span><bdi class="y">2026</bdi></figcaption></figure></li><li class="pn" style="--i:2"><figure><svg viewBox="0 0 240 240" aria-hidden="true" style="background:oklch(35% 0.02 90)"><g stroke="oklch(92% 0.01 90 / .6)" fill="none"><rect x="40" y="40" width="160" height="150"/><rect x="54" y="50" width="132" height="130"/><rect x="68" y="60" width="104" height="110"/><rect x="82" y="70" width="76" height="90"/><rect x="96" y="80" width="48" height="70"/></g></svg><figcaption><span data-he="ארכיון המלח">Salt Archive</span><bdi class="y">2025</bdi></figcaption></figure></li><li class="pn" style="--i:3"><figure><svg viewBox="0 0 240 240" aria-hidden="true" style="background:oklch(28% 0.04 150)"><g stroke="oklch(92% 0.02 150 / .6)" fill="none"><path d="M20 60 Q120 20 220 60"/><path d="M20 82 Q120 42 220 82"/><path d="M20 104 Q120 64 220 104"/><path d="M20 126 Q120 86 220 126"/><path d="M20 148 Q120 108 220 148"/><path d="M20 170 Q120 130 220 170"/><path d="M20 192 Q120 152 220 192"/></g></svg><figcaption><span data-he="הכבשן הצפוני">North Kiln</span><bdi class="y">2025</bdi></figcaption></figure></li><li class="pn" style="--i:4"><figure><svg viewBox="0 0 240 240" aria-hidden="true" style="background:oklch(33% 0.04 280)"><circle cx="120" cy="120" r="54" fill="none" stroke="oklch(90% 0.01 250 / .7)" stroke-width="1.5"/><path d="M20 190 H220" stroke="oklch(90% 0.01 250 / .5)"/></svg><figcaption><span data-he="מקהלת זכוכית">Glass Choir</span><bdi class="y">2025</bdi></figcaption></figure></li><li class="pn" style="--i:5"><figure><svg viewBox="0 0 240 240" aria-hidden="true" style="background:oklch(26% 0.02 250)"><path d="M30 180 L120 60 L210 180 Z" fill="none" stroke="oklch(90% 0.01 60 / .7)" stroke-width="1.5"/><path d="M60 180 L120 100 L180 180" fill="none" stroke="oklch(90% 0.01 60 / .4)"/></svg><figcaption><span data-he="מסלול נמוך">Low Orbit</span><bdi class="y">2024</bdi></figcaption></figure></li><li class="pn" style="--i:6"><figure><svg viewBox="0 0 240 240" aria-hidden="true" style="background:oklch(34% 0.06 55)"><g stroke="oklch(92% 0.01 90 / .6)" fill="none"><rect x="40" y="40" width="160" height="150"/><rect x="54" y="50" width="132" height="130"/><rect x="68" y="60" width="104" height="110"/><rect x="82" y="70" width="76" height="90"/><rect x="96" y="80" width="48" height="70"/></g></svg><figcaption><span data-he="שדה נחושת">Copper Field</span><bdi class="y">2024</bdi></figcaption></figure></li><li class="pn" style="--i:7"><figure><svg viewBox="0 0 240 240" aria-hidden="true" style="background:oklch(29% 0.02 0)"><g stroke="oklch(92% 0.02 150 / .6)" fill="none"><path d="M20 60 Q120 20 220 60"/><path d="M20 82 Q120 42 220 82"/><path d="M20 104 Q120 64 220 104"/><path d="M20 126 Q120 86 220 126"/><path d="M20 148 Q120 108 220 148"/><path d="M20 170 Q120 130 220 170"/><path d="M20 192 Q120 152 220 192"/></g></svg><figcaption><span data-he="מנוע שקט">Quiet Engine</span><bdi class="y">2024</bdi></figcaption></figure></li><li class="pn" style="--i:8"><figure><svg viewBox="0 0 240 240" aria-hidden="true" style="background:oklch(31% 0.04 200)"><circle cx="120" cy="120" r="54" fill="none" stroke="oklch(90% 0.01 250 / .7)" stroke-width="1.5"/><path d="M20 190 H220" stroke="oklch(90% 0.01 250 / .5)"/></svg><figcaption><span data-he="אורות המעבורת">Ferry Lights</span><bdi class="y">2023</bdi></figcaption></figure></li><li class="pn" style="--i:9"><figure><svg viewBox="0 0 240 240" aria-hidden="true" style="background:oklch(30% 0.03 320)"><path d="M30 180 L120 60 L210 180 Z" fill="none" stroke="oklch(90% 0.01 60 / .7)" stroke-width="1.5"/><path d="M60 180 L120 100 L180 180" fill="none" stroke="oklch(90% 0.01 60 / .4)"/></svg><figcaption><span data-he="ירח נייר">Paper Moon</span><bdi class="y">2023</bdi></figcaption></figure></li></ul>
+</section>
+<section class="stmt"><p data-he-html="אנחנו בונים עולמות קטנים <span>למוזיאונים, לבמות ולמוצרים שעוד לא יצאו.</span>">We build small worlds <span>for museums, stages and products that aren't out yet.</span></p></section>
+<section class="idx" id="index"><ul role="list"><li><bdi class="y">2026</bdi><span class="t" data-he="ביתן המים">Tidewater Pavilion</span><span class="d" data-he="מיצב · זמן אמת">Installation · real-time</span></li><li><bdi class="y">2026</bdi><span class="t" data-he="רכבת לילה">Night Train</span><span class="d" data-he="פתיחה לסרט">Title sequence</span></li><li><bdi class="y">2025</bdi><span class="t" data-he="ארכיון המלח">Salt Archive</span><span class="d" data-he="ארכיון מוזיאון, WebGL">Museum archive, WebGL</span></li><li><bdi class="y">2025</bdi><span class="t" data-he="הכבשן הצפוני">North Kiln</span><span class="d" data-he="סרט השקה">Product launch film</span></li><li><bdi class="y">2025</bdi><span class="t" data-he="מקהלת זכוכית">Glass Choir</span><span class="d" data-he="ויז׳ואלס לבמה">Stage visuals</span></li></ul></section>
+<section class="spec-system" data-spec-system data-extra="--img-floor" data-display="Small worlds" data-display-he="עולמות קטנים"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · void-stage · fictional studio “Oda Varen” (panels are study drawings)</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="../../runtime/core.js"></script>
+<script>
+/* ring: slow idle turn + drag with inertia; rotation direction follows SD.dir(); static under reduced motion */
+(function () {
+  var ring = document.querySelector('.ring'); if (!ring) return;
+  var dir = (window.SD && SD.dir) ? SD.dir() : 1, rot = -8, vel = 0, drag = false, lx = 0, idle = .025;
+  function set() { ring.style.setProperty('--rot', rot + 'deg'); }
+  set();
+  if (window.SD && SD.reduced && SD.reduced()) return;
+  ring.addEventListener('pointerdown', function (e) { drag = true; lx = e.clientX; ring.setPointerCapture(e.pointerId); ring.style.cursor = 'grabbing'; });
+  ring.addEventListener('pointermove', function (e) { if (!drag) return; var dx = e.clientX - lx; lx = e.clientX; vel = dx * .12 * dir; rot += vel; set(); });
+  ring.addEventListener('pointerup', function () { drag = false; ring.style.cursor = ''; });
+  var on = true; new IntersectionObserver(function (en) { on = en[0].isIntersecting; }).observe(ring.parentNode);
+  (function loop() { if (on && !drag) { vel *= .94; rot += vel + idle * dir; set(); } requestAnimationFrame(loop); })();
+  document.querySelectorAll('.tg').forEach(function (b) { b.addEventListener('click', function () { document.querySelectorAll('.tg').forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); }); if (b === document.querySelectorAll('.tg')[1]) document.getElementById('index').scrollIntoView(); }); });
+})();
+</script>
+</body>
+</html>

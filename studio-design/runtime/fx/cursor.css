@@ -1,0 +1,26 @@
+/* studio-design fx · cursor
+   Positions use physical left/top on purpose: they mirror clientX/clientY, which are physical in LTR and RTL alike. */
+.sd-cursor { position: fixed; inset: 0 auto auto 0; z-index: var(--z-cursor, 600); pointer-events: none; opacity: 0; transition: opacity var(--d-med) var(--ease-out); }
+.sd-cursor.is-on { opacity: 1; }
+.sd-cursor.is-field { opacity: 0; }
+/* outer nodes are moved by GSAP (transform); inner .sd-cursor__shape carries visuals + scale */
+.sd-cursor__dot, .sd-cursor__ring { position: fixed; top: 0; left: 0; inline-size: 0; block-size: 0; will-change: transform; }
+.sd-cursor__shape { position: absolute; border-radius: 50%; display: grid; place-items: center; }
+.sd-cursor__dot .sd-cursor__shape { inline-size: 6px; block-size: 6px; inset: -3px auto auto -3px; background: var(--cursor-color, var(--c-ink)); transition: scale var(--d-fast) var(--ease-out); }
+.sd-cursor__ring .sd-cursor__shape { inline-size: 36px; block-size: 36px; inset: -18px auto auto -18px; border: 1px solid color-mix(in oklab, var(--cursor-color, var(--c-ink)) 55%, transparent);
+  transition: scale 480ms var(--ease-out), background-color 300ms var(--ease-out), border-color 300ms; }
+.sd-cursor__label { font: 600 12px/1 var(--f-body); color: var(--c-accent-ink); opacity: 0; transition: opacity 200ms; white-space: nowrap; scale: calc(1 / 2.6); }
+.sd-cursor.is-hot .sd-cursor__ring .sd-cursor__shape { scale: 1.7; background: color-mix(in oklab, var(--cursor-color, var(--c-ink)) 8%, transparent); }
+.sd-cursor.is-hot .sd-cursor__dot .sd-cursor__shape { scale: 0; }
+.sd-cursor.has-label .sd-cursor__ring .sd-cursor__shape { scale: 2.6; background: var(--c-accent); border-color: transparent; }
+.sd-cursor.has-label .sd-cursor__label { opacity: 1; transition-delay: 120ms; }
+.sd-cursor.is-down .sd-cursor__ring .sd-cursor__shape { scale: 0.8; }
+.sd-cursor.is-down.has-label .sd-cursor__ring .sd-cursor__shape { scale: 2.3; }
+.sd-cursor--blend { mix-blend-mode: difference; --cursor-color: oklch(100% 0 0); } /* difference blend needs pure white (mechanism, not a colour choice) */
+/* hide the OS cursor only when opted in, never on form fields */
+.sd-cursor-hide, .sd-cursor-hide * { cursor: none !important; }
+.sd-cursor-hide :is(input, textarea, select, [contenteditable=""], [contenteditable="true"]) { cursor: auto !important; }
+.sd-cursor-hide :is(input[type="text"], input[type="email"], input[type="search"], input[type="tel"], input[type="url"], input[type="password"], input:not([type]), textarea, [contenteditable=""], [contenteditable="true"]) { cursor: text !important; }
+/* image trail */
+.sd-trail { position: absolute; inset: 0; z-index: var(--trail-z, 1); pointer-events: none; overflow: clip; }
+.sd-trail__img { position: absolute; top: 0; left: 0; inline-size: var(--trail-size, 240px); aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--r-sm); will-change: transform, opacity; box-shadow: var(--shadow-2); }

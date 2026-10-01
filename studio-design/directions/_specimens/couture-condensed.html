@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Couture Condensed · specimen</title>
+<meta name="he-title" content="Couture Condensed · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Gothic:wdth@75..100&family=Spline+Sans+Mono:wght@400;500&family=Noto+Sans+Hebrew:wdth,wght@62.5..100,400..900&family=Cousine:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/couture-condensed.md */
+:root {
+  --c-canvas: oklch(98.2% 0.002 30); --c-surface: oklch(95.5% 0.003 30); --c-surface-2: oklch(90% 0.004 30);
+  --c-ink: oklch(12% 0.010 30); --c-ink-2: oklch(28% 0.010 30); --c-muted: oklch(50% 0.008 30);
+  --c-rule: oklch(12% 0.010 30); --c-accent: oklch(52% 0.22 22); --c-accent-ink: oklch(98.2% 0.002 30);
+  --c-focus: oklch(52% 0.22 22);
+  --f-display: "League Gothic", "Noto Sans Hebrew", Impact, sans-serif; --f-body: "Spline Sans Mono", "Cousine", ui-monospace, monospace;
+  --f-mono: "Spline Sans Mono", "Cousine", monospace; --f-outlier: "League Gothic", sans-serif;
+  --fs-xs: 0.75rem; /* ≥12px */ --fs-sm: 0.75rem; --fs-base: 0.9375rem; --fs-lg: 1.0625rem; --fs-xl: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+  --fs-2xl: clamp(3rem, 1.6rem + 5vw, 6rem); --fs-3xl: clamp(4.5rem, 2rem + 9vw, 11rem);
+  --fs-display: clamp(5rem, 0.5rem + 17vw, 20rem);
+  --lh-tight: 0.84; --lh-body: 1.5; --tr-display: 0; --tr-label: -0.01em;
+  --sp-1: 4px; --sp-2: 6px; --sp-3: 10px; --sp-4: 14px; --sp-5: 20px; --sp-6: 28px; --sp-7: 44px; --sp-8: 72px; --sp-9: 112px; --sp-10: 168px;
+  --section-y: clamp(56px, 6vw + 20px, 144px); --gutter: clamp(10px, 1.6vw, 24px); --maxw: 1920px;
+  --r-sm: 0px; --r-md: 0px; --r-lg: 0px; --r-pill: 0px;
+  --ease-out: cubic-bezier(0.87, 0, 0.13, 1); /* snappy expo */ --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.87, 0, 0.13, 1);
+  --d-fast: 120ms; --d-med: 380ms; --d-slow: 900ms;
+  --shadow-1: none; --shadow-2: none;
+}
+.display { text-transform: uppercase; font-variation-settings: "wdth" 75; }
+:root[dir="rtl"] { --f-display: "Noto Sans Hebrew", "League Gothic", sans-serif; --lh-tight: 0.95; }
+:where([dir="rtl"]) .display { font-variation-settings: "wdth" 62.5; font-weight: 800; }
+</style>
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); }
+.ui { font-size: 12px; text-transform: uppercase; letter-spacing: var(--tr-label); }
+[lang="he"] .ui { text-transform: none; font-size: 13px; }
+.corner { position: fixed; z-index: 20; padding: var(--gutter); mix-blend-mode: difference; color: oklch(98% 0 0); display: flex; gap: var(--sp-5); }
+.corner a { text-decoration: none; }
+.tl { inset-block-start: 0; inset-inline-start: 0; } .tr { inset-block-start: 0; inset-inline-end: 0; } .bl { inset-block-end: 0; inset-inline-start: 0; } .br { inset-block-end: 0; inset-inline-end: 0; }
+.corner .wm { font-family: var(--f-display); font-size: 1.9rem; line-height: .8; letter-spacing: .01em; font-variation-settings: "wdth" 75; }
+.corner.br { mix-blend-mode: normal; color: var(--c-ink); } .corner b { color: var(--c-accent); font-weight: 500; }
+.hero { position: relative; block-size: 100dvh; min-block-size: 620px; overflow: clip; }
+.w { position: absolute; inset-inline: 0; text-align: center; font-family: var(--f-display); font-size: max(var(--fs-display), 29vw); line-height: var(--lh-tight); white-space: nowrap; }
+[lang="he"] .w { font-size: max(var(--fs-display), 24vw); }
+.back { inset-block-start: 7%; color: var(--c-ink); z-index: 1; }
+.front { inset-block-end: -3%; z-index: 3; color: var(--c-ink); }
+.model { position: absolute; z-index: 2; inset-block: 5% 0; inset-inline: 0; margin-inline: auto; block-size: 95%; aspect-ratio: 5 / 12; }
+.model svg { inline-size: 100%; block-size: 100%; }
+.model figcaption { position: absolute; inset-block-start: 56%; inset-inline-start: 100%; inline-size: 20ch; margin-inline-start: 14px; color: var(--c-ink-2); font-size: 12px; line-height: 1.4; }
+.model figcaption::before { content: ""; display: block; inline-size: 40px; block-size: 1.5px; background: var(--c-accent); margin-block-end: 8px; }
+.fine { position: absolute; z-index: 4; inset-block-start: 44%; inset-inline-start: var(--gutter); max-inline-size: 26ch; display: grid; gap: var(--sp-4); }
+.btn { display: inline-flex; align-items: center; justify-content: center; block-size: 44px; padding-inline: 22px; background: var(--c-ink); color: var(--c-canvas); text-decoration: none; }
+.btn:hover, .btn.is-hover { background: var(--c-accent); }
+.btn.is-focus { outline: 1.5px solid var(--c-accent); outline-offset: 3px; }
+.link { text-underline-offset: .2em; }
+/* drop grid */
+.drop { padding: var(--section-y) var(--gutter); }
+.drop__head { display: flex; justify-content: space-between; align-items: end; margin-block-end: var(--sp-7); }
+.drop__head h2 { font-family: var(--f-display); font-size: var(--fs-3xl); line-height: var(--lh-tight); }
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-9) var(--sp-4); list-style: none; margin: 0; padding: 0; }
+.flat { aspect-ratio: 3 / 4; display: grid; place-items: center; }
+.flat svg { inline-size: 72%; block-size: 86%; }
+.meta { display: flex; justify-content: space-between; gap: var(--sp-3); margin-block-start: var(--sp-3); }
+.meta s { color: var(--c-muted); }
+.sizes { display: flex; gap: 4px; margin-block-start: var(--sp-3); }
+.sizes span { inline-size: 44px; block-size: 44px; display: grid; place-items: center; background: var(--c-surface); font-size: 12px; }
+.sizes span[aria-pressed="true"] { outline: 1.5px solid var(--c-accent); outline-offset: -1.5px; background: var(--c-canvas); }
+.sizes span[aria-disabled] { color: var(--c-muted); text-decoration: line-through; }
+@media (max-width: 800px) {
+  .model { block-size: 70%; inset-block: 16% auto; } .model figcaption { display: none; }
+  .fine { inset-block-start: auto; inset-block-end: 22%; } .tr a:not(:first-child), .bl span:not(:first-child) { display: none; }
+  .front { inset-block-end: 12%; } .w { font-size: 30vw; } .back { inset-block-start: 12%; }
+  .grid { grid-template-columns: 1fr 1fr; gap: var(--sp-7) var(--sp-3); }
+}
+</style>
+</head>
+<body>
+<nav class="corner tl ui" aria-label="Brand" data-he-aria-label="מותג"><a class="wm display" href="#">Orna</a></nav>
+<nav class="corner tr ui" aria-label="Shop" data-he-aria-label="חנות"><a href="#" data-he="נשים">Women</a><a href="#" data-he="גברים">Men</a><a href="#" data-he="אקססוריז">Objects</a></nav>
+<nav class="corner bl ui" aria-label="Info" data-he-aria-label="מידע"><span data-he="קולקציה 04 · סתיו־חורף 26">Collection 04 · AW26</span><span data-he="תל אביב / פריז">Tel Aviv / Paris</span></nav>
+<nav class="corner br ui" aria-label="Cart" data-he-aria-label="סל"><a href="#"><span data-he="סל">Bag</span> <b>(1)</b></a></nav>
+<main>
+<section class="hero">
+  <h1 class="sr-only" data-he="שריון רך. קולקציה 04 של אורנה.">Soft Armour. Orna collection 04.</h1>
+  <p class="w back display" aria-hidden="true" data-he="שריון רך">Soft Armour</p>
+  <figure class="model" aria-hidden="true"><svg viewBox="0 0 250 600" direction="ltr" preserveAspectRatio="xMidYMax meet">
+    <defs><pattern id="h" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V7" stroke="oklch(98% .002 30 / .16)" stroke-width="2"/></pattern></defs>
+    <g fill="oklch(52% .012 30)"><ellipse cx="128" cy="44" rx="22" ry="27"/><path d="M118 66 H138 L140 86 H116Z"/>
+      <path d="M92 88 C108 80 150 80 166 88 L196 118 L214 300 L206 312 L198 300 L190 170 L186 360 C160 372 96 372 70 360 L68 170 L60 300 L52 312 L44 300 L62 118Z"/>
+      <path d="M92 360 L104 548 L126 548 L128 380 L132 548 L154 548 L166 360Z"/><path d="M100 540 H128 V588 H86 C84 572 92 556 100 540Z M130 540 H158 C164 556 170 572 170 588 H130Z"/></g>
+    <path d="M92 88 C108 80 150 80 166 88 L196 118 L214 300 L206 312 L198 300 L190 170 L186 360 C160 372 96 372 70 360 L68 170 L60 300 L52 312 L44 300 L62 118Z" fill="url(#h)"/>
+    <path d="M129 92 V356" stroke="oklch(52% .22 22)" stroke-width="1.5" stroke-dasharray="4 4"/>
+  </svg><figcaption class="ui" data-he="[גזירה: דוגמנית, גוף מלא, לוק 04 — מעיל צמר דחוס]">[Cut-out: model, full body, look 04, boiled-wool coat]</figcaption></figure>
+  <p class="w front display" aria-hidden="true" data-he="לוק 04">Look 04</p>
+  <div class="fine ui">
+    <p style="text-transform:none" data-he="מעילים מצמר דחוס, תפורים ביד ברחוב לבונטין. 212 יחידות לכל העונה.">Boiled-wool coats, stitched by hand on Levontin Street. 212 pieces for the whole season.</p>
+    <p><a class="btn" href="#" data-spec-btn data-he="לקולקציה">Shop the drop</a></p>
+  </div>
+</section>
+<section class="drop">
+  <div class="drop__head"><h2 class="display" data-he="הדרופ">The drop</h2><span class="ui" data-he="12 פריטים">12 pieces</span></div>
+  <ul class="grid" role="list">
+    <li><div class="flat"><svg viewBox="0 0 200 260" direction="ltr" aria-hidden="true"><path d="M70 10 H130 L170 40 L190 200 L172 206 L160 90 L158 250 H42 L40 90 L28 206 L10 200 L30 40Z M100 14 V250" fill="none" stroke="var(--c-ink)" stroke-width="1.5"/><path d="M70 10 L100 60 L130 10" fill="none" stroke="var(--c-ink)" stroke-width="1.5"/></svg></div><div class="meta ui"><span data-he="מעיל 04">Coat 04</span><span dir="ltr">₪ 2,480</span></div><div class="sizes ui"><span>XS</span><span aria-pressed="true">S</span><span>M</span><span aria-disabled="true">L</span></div></li>
+    <li><div class="flat"><svg viewBox="0 0 200 260" direction="ltr" aria-hidden="true"><path d="M50 10 H150 L160 250 H112 L100 90 L88 250 H40Z M50 30 H150" fill="none" stroke="var(--c-ink)" stroke-width="1.5"/></svg></div><div class="meta ui"><span data-he="מכנסיים 11">Trouser 11</span><span dir="ltr">₪ 890</span></div></li>
+    <li><div class="flat"><svg viewBox="0 0 200 260" direction="ltr" aria-hidden="true"><path d="M60 40 H110 V180 C150 180 180 196 184 222 H40 L46 200 C52 190 58 184 60 170Z M60 70 H110" fill="none" stroke="var(--c-ink)" stroke-width="1.5"/></svg></div><div class="meta ui"><span data-he="מגף 02">Boot 02</span><span dir="ltr"><span style="color:var(--c-accent)">₪ 1,120</span> <s>₪ 1,600</s></span></div></li>
+    <li><div class="flat"><svg viewBox="0 0 200 260" direction="ltr" aria-hidden="true"><path d="M40 110 H160 L150 230 H50Z M72 110 C72 60 128 60 128 110" fill="none" stroke="var(--c-ink)" stroke-width="1.5"/></svg></div><div class="meta ui"><span data-he="תיק 07">Bag 07</span><span dir="ltr">₪ 1,340</span></div></li>
+  </ul>
+</section>
+<section class="spec-system" data-spec-system data-display="SOFT ARMOUR" data-display-he="שריון רך"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · couture-condensed · fictional label “Orna”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script>
+/* signature: layering parallax — back word 0.6, model 1.0, front word 1.3 */
+(function () { if (!window.gsap || !window.ScrollTrigger || SD.reduced()) return;
+  var st = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true };
+  gsap.to('.back', { y: 120, ease: 'none', scrollTrigger: st }); gsap.to('.front', { y: -160, ease: 'none', scrollTrigger: st });
+  gsap.from(['.back', '.front'], { yPercent: 60, clipPath: 'inset(0 0 100% 0)', duration: .9, ease: 'expo.out', stagger: .12 });
+})();
+</script>
+</body>
+</html>

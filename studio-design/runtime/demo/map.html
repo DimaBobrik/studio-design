@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>map · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/map.css">
+<style>
+  :root {
+    --c-canvas: oklch(98% 0.003 240); --c-surface: oklch(95% 0.006 240); --c-surface-2: oklch(90% 0.01 240);
+    --c-ink: oklch(22% 0.03 255); --c-ink-2: oklch(38% 0.03 255); --c-muted: oklch(52% 0.02 255); --c-rule: oklch(88% 0.01 240);
+    --c-accent: oklch(60% 0.2 255); --c-accent-ink: #fff; --c-focus: oklch(55% 0.2 255);
+    --f-display: "IBM Plex Sans", "IBM Plex Sans Hebrew", system-ui, sans-serif; --f-body: "IBM Plex Sans", "IBM Plex Sans Hebrew", system-ui, sans-serif; --f-mono: "IBM Plex Mono", "IBM Plex Sans Hebrew", monospace;
+  }
+  .head { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-6); align-items: end; margin-block-end: var(--sp-6); }
+  .head h2 { font-size: var(--fs-2xl); font-weight: 500; }
+  .head p { color: var(--c-ink-2); }
+  .stats { display: flex; gap: var(--sp-7); margin-block-start: var(--sp-6); font-family: var(--f-mono); font-size: var(--fs-sm); color: var(--c-muted); }
+  .stats b { display: block; font-family: var(--f-display); font-size: var(--fs-xl); color: var(--c-ink); font-weight: 500; }
+  .dark { --c-canvas: oklch(17% 0.03 260); --c-ink: oklch(96% 0.01 250); --c-ink-2: oklch(80% 0.02 250); --c-surface-2: oklch(30% 0.04 260); --c-accent: oklch(75% 0.15 200); background: var(--c-canvas); color: var(--c-ink); }
+  .dark .wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--sp-6); align-items: center; }
+  .dark h2 { font-size: var(--fs-3xl); font-weight: 500; }
+  .dark p { color: var(--c-ink-2); margin-block-start: var(--sp-4); max-inline-size: 40ch; }
+  @media (max-width: 800px) { .head, .dark .wrap { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<section class="section container">
+  <div class="head">
+    <h2 data-he="משלוח מתל אביב לכל מקום, בתוך 72 שעות.">From Tel Aviv to anywhere, inside 72 hours.</h2>
+    <p data-he="שישה מרכזי הפצה, מכס מוסדר מראש ומעקב בזמן אמת עד הדלת.">Six fulfilment hubs, pre-cleared customs and live tracking to the door.</p>
+  </div>
+  <figure class="sd-map" data-fx="map">
+    <ul class="sd-map__routes">
+      <li data-from="32.08,34.78" data-to="51.51,-0.13" data-label-from="Tel Aviv" data-label-to="London" data-he-attr-data-label-from="תל אביב" data-he-attr-data-label-to="לונדון">Tel Aviv to London</li>
+      <li data-from="32.08,34.78" data-to="40.71,-74.0" data-label-to="New York" data-he-attr-data-label-to="ניו יורק">Tel Aviv to New York</li>
+      <li data-from="32.08,34.78" data-to="1.35,103.82" data-label-to="Singapore" data-he-attr-data-label-to="סינגפור">Tel Aviv to Singapore</li>
+      <li data-from="32.08,34.78" data-to="-33.87,151.21" data-label-to="Sydney" data-he-attr-data-label-to="סידני">Tel Aviv to Sydney</li>
+      <li data-from="32.08,34.78" data-to="-23.55,-46.63" data-label-to="São Paulo" data-he-attr-data-label-to="סאו פאולו">Tel Aviv to São Paulo</li>
+      <li data-from="32.08,34.78" data-to="35.68,139.69" data-label-to="Tokyo" data-he-attr-data-label-to="טוקיו">Tel Aviv to Tokyo</li>
+    </ul>
+  </figure>
+  <div class="stats"><div><b>6</b><span data-he="מרכזים">hubs</span></div><div><b>41</b><span data-he="מדינות">countries</span></div><div><b>72h</b><span data-he="זמן אספקה">door to door</span></div></div>
+</section>
+<section class="section dark">
+  <div class="container wrap">
+    <div><h2 data-he="רשת אחת, כל אזורי הזמן.">One network, every time zone.</h2><p data-he="גררו את הגלובוס כדי לראות את הקווים הפעילים.">Drag the globe to follow the active lanes.</p></div>
+    <div class="sd-globe" data-fx="globe" data-dark="1" data-center="31.5,34.9" data-base="oklch(38% 0.05 255)" data-glow="oklch(40% 0.08 240)">
+      <ul class="sd-map__routes">
+        <li data-from="32.08,34.78" data-to="51.51,-0.13">Tel Aviv to London</li>
+        <li data-from="32.08,34.78" data-to="40.71,-74.0">Tel Aviv to New York</li>
+        <li data-from="32.08,34.78" data-to="1.35,103.82">Tel Aviv to Singapore</li>
+        <li data-from="32.08,34.78" data-to="25.2,55.27">Tel Aviv to Dubai</li>
+        <li data-from="32.08,34.78" data-to="-26.2,28.05">Tel Aviv to Johannesburg</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="_demo.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/map.js"></script>
+<script src="../fx/globe.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+/* studio-design fx · scatter — fallback staggered grid; authored scatter when .sd-scatter--placed */
+.sd-scatter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-4); align-items: start; }
+.sd-scatter > [data-scatter-anchor] { grid-column: 1 / -1; }
+.sd-scatter > [data-scatter-item]:nth-child(even of [data-scatter-item]) { margin-block-start: var(--sp-7); }
+@media (min-width: 560px) { .sd-scatter { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.sd-scatter [data-scatter-item] { margin: 0; }
+.sd-scatter [data-scatter-item] img { inline-size: 100%; block-size: auto; display: block; }
+
+.sd-scatter--placed { display: block; position: relative; min-block-size: var(--sc-h, 110svh); isolation: isolate; overflow: clip; }
+.sd-scatter--placed > [data-scatter-anchor] { position: absolute; inset: 0; display: grid; place-content: center; text-align: center;
+  z-index: 1; margin: 0; pointer-events: none; }
+.sd-scatter--placed > [data-scatter-anchor] > * { pointer-events: auto; }
+.sd-scatter--placed > [data-scatter-item] { position: absolute; margin: 0; z-index: 0;
+  inset-inline-start: calc(var(--x, 0) * 1%); inset-block-start: calc(var(--y, 0) * 1%); inline-size: calc(var(--w, 20) * 1%);
+  will-change: transform; }
+.sd-scatter--placed > .sd-scatter__item--near { z-index: 2; }

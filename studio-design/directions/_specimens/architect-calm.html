@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Architect Calm · specimen</title>
+<meta name="he-title" content="Architect Calm · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=Noto+Sans+Hebrew:wght@300..600&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/architect-calm.md */
+:root {
+  --c-canvas: oklch(96.8% 0.004 120); --c-surface: oklch(99% 0.002 120); --c-surface-2: oklch(92.5% 0.006 120);
+  --c-ink: oklch(22% 0.008 120); --c-ink-2: oklch(36% 0.008 120); --c-muted: oklch(52% 0.008 120);
+  --c-rule: oklch(84% 0.006 120); --c-accent: oklch(46% 0.07 200); --c-accent-ink: oklch(99% 0.002 120);
+  --c-focus: oklch(46% 0.09 200);
+  --f-display: "Instrument Sans", "Noto Sans Hebrew", system-ui, sans-serif; --f-body: "Instrument Sans", "Noto Sans Hebrew", system-ui, sans-serif;
+  --f-mono: ui-monospace, Menlo, monospace; --f-outlier: "Instrument Sans", sans-serif; /* wdth 75 for dates/captions */
+  --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-base: 1.0625rem; --fs-lg: 1.25rem; --fs-xl: clamp(1.5rem, 1.3rem + 0.8vw, 1.9rem);
+  --fs-2xl: clamp(2rem, 1.5rem + 1.8vw, 2.8rem); --fs-3xl: clamp(2.5rem, 1.8rem + 2.8vw, 3.8rem);
+  --fs-display: clamp(2.5rem, 1.4rem + 3.8vw, 4.75rem);
+  --lh-tight: 1.08; --lh-body: 1.6; --tr-display: -0.025em; --tr-label: 0;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 40px; --sp-7: 64px; --sp-8: 96px; --sp-9: 144px; --sp-10: 208px;
+  --section-y: clamp(80px, 7vw + 36px, 192px); --gutter: clamp(16px, 2.5vw, 40px); --maxw: 1560px;
+  --r-sm: 2px; --r-md: 0px; --r-lg: 0px; --r-pill: 0px;
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1); --ease-in: cubic-bezier(0.32, 0, 0.67, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --d-fast: 150ms; --d-med: 450ms; --d-slow: 1000ms;
+  --shadow-1: none; --shadow-2: 0 1px 0 var(--c-rule);
+}
+:root[dir="rtl"] { --tr-display: 0; --lh-tight: 1.15; }
+</style>
+<link rel="stylesheet" href="../../runtime/fx/clip-reveal.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); }
+.cap { font-stretch: 75%; font-variation-settings: "wdth" 75; font-size: var(--fs-sm); color: var(--c-muted); }
+[lang="he"] .cap { font-variation-settings: normal; }
+a { text-decoration-color: color-mix(in oklab, currentColor 40%, transparent); }
+a.t { color: var(--c-accent); }
+.nav { display: flex; align-items: center; block-size: 64px; gap: var(--sp-6); font-size: var(--fs-sm); }
+.nav .wm { font-weight: 500; text-decoration: none; margin-inline-end: auto; letter-spacing: -0.01em; }
+.nav ul { display: flex; gap: var(--sp-6); list-style: none; margin: 0; padding: 0; }
+.nav a { text-decoration: none; } .nav a[aria-current] { color: var(--c-accent); }
+.nav .lang { color: var(--c-muted); }
+.lead { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--sp-5); padding-block: var(--sp-7) var(--sp-6); }
+.lead h1 { grid-column: 1 / span 8; font-size: var(--fs-display); font-weight: 400; line-height: var(--lh-tight); letter-spacing: var(--tr-display); }
+.lead p { grid-column: 10 / span 3; align-self: end; color: var(--c-ink-2); font-size: var(--fs-sm); }
+/* staggered collage */
+.collage { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--sp-5); row-gap: var(--sp-7); align-items: start; padding-block-end: var(--section-y); }
+.pin { margin: 0; display: grid; gap: var(--sp-2); }
+.pin .frame { overflow: clip; } .pin .frame:not(.slot) { background: var(--c-surface); }
+.pin svg { display: block; inline-size: 100%; block-size: auto; }
+.pin figcaption { display: flex; gap: var(--sp-3); font-size: var(--fs-sm); color: var(--c-ink-2); }
+.pin figcaption .cap { margin-inline-start: auto; }
+.p1 { grid-column: 1 / span 3; grid-row: 1; margin-block-start: 0; }
+.p2 { grid-column: 5 / span 4; grid-row: 1; margin-block-start: 144px; }
+.p3 { grid-column: 10 / span 3; grid-row: 1; margin-block-start: 64px; }
+.p4 { grid-column: 2 / span 5; grid-row: 2; }
+.p5 { grid-column: 8 / span 5; grid-row: 2; margin-block-start: 96px; }
+.photo { aspect-ratio: 4 / 5; }
+.photo.w { aspect-ratio: 3 / 2; }
+/* index */
+.index { padding-block: var(--section-y); border-block-start: 1px solid var(--c-rule); }
+.index__head { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--sp-5); margin-block-end: var(--sp-6); }
+.index__head h2 { grid-column: 1 / span 5; font-size: var(--fs-2xl); font-weight: 400; }
+.filters { grid-column: 7 / span 6; display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-5); align-self: end; font-size: var(--fs-sm); }
+.filters button { color: var(--c-muted); padding-block: 4px; border-block-end: 1px solid transparent; }
+.filters button[aria-pressed="true"] { color: var(--c-accent); border-color: var(--c-accent); }
+.rows { list-style: none; margin: 0; padding: 0; }
+.rows li { display: grid; grid-template-columns: 4fr 3fr 2fr 1fr; gap: var(--sp-5); padding-block: var(--sp-4); border-block-start: 1px solid var(--c-rule); align-items: baseline; }
+.rows li:hover { color: var(--c-accent); }
+.rows .n { font-size: var(--fs-lg); }
+.submit { display: inline-flex; align-items: center; block-size: 48px; padding-inline: 22px; background: var(--c-ink); color: var(--c-surface); border-radius: var(--r-sm); font-weight: 500; font-size: var(--fs-sm); text-decoration: none; transition: background var(--d-fast); }
+.submit:hover, .submit.is-hover { background: var(--c-accent); }
+.submit.is-focus { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.tlink { color: var(--c-accent); font-size: var(--fs-sm); }
+@media (max-width: 900px) {
+  .nav ul { display: none; }
+  .lead { padding-block: var(--sp-6) var(--sp-6); }
+  .lead h1, .lead p { grid-column: 1 / -1; } .lead p { margin-block-start: var(--sp-5); }
+  .collage { row-gap: var(--sp-5); }
+  .p1 { grid-column: 1 / span 7; grid-row: 1; } .p2 { grid-column: 5 / span 8; grid-row: 2; margin-block-start: 0; } .p3 { grid-column: 1 / span 9; grid-row: 3; margin-block-start: 0; }
+  .p4 { grid-column: 3 / span 10; grid-row: 4; } .p5 { grid-column: 1 / span 12; grid-row: 5; margin-block-start: 0; }
+  .index__head h2, .filters { grid-column: 1 / -1; } .filters { margin-block-start: var(--sp-4); }
+  .rows li { grid-template-columns: 1fr auto; } .rows li > :nth-child(2), .rows li > :nth-child(3) { display: none; }
+}
+</style>
+</head>
+<body>
+<header class="nav container">
+  <a class="wm" href="#">Marrow Tann Architects</a>
+  <ul role="list"><li><a href="#" aria-current="page" data-he="עבודות">Work</a></li><li><a href="#" data-he="הפרקטיקה">Practice</a></li><li><a href="#" data-he="אנשים">People</a></li><li><a href="#" data-he="חדשות">News</a></li><li><a href="#" data-he="צור קשר">Contact</a></li></ul>
+  <a class="lang" href="#" data-he="English">עברית</a>
+</header>
+<main>
+<section class="lead container">
+  <h1 data-he="אנחנו מתכננים ספריות, בתי ספר ומגורים ציבוריים שנועדו להחזיק מאה שנה.">We design libraries, schools and public housing meant to stand for a hundred years.</h1>
+  <p data-he="112 אנשים בשלושה משרדים: רוטרדם, תל אביב וליסבון. תיקייה פתוחה של 40 שנות עבודה.">112 people in three studios: Rotterdam, Tel Aviv and Lisbon. An open archive of 40 years of work.</p>
+</section>
+<section class="collage container" data-fx="clip-reveal" data-direction="up" data-stagger=".18" data-duration="1" data-zoom="1">
+  <figure class="pin p1"><div class="frame photo" data-clip><svg class="elev" data-seed="3" data-kind="library" viewBox="0 0 400 500" direction="ltr" aria-hidden="true"></svg></div><figcaption><span data-he="ספריית הנמל">Harbour Library</span><span class="cap" dir="ltr">Rotterdam · 2019</span></figcaption></figure>
+  <figure class="pin p2"><div class="frame photo slot" data-clip style="--slot-bg: oklch(86% 0.006 120)"><span data-he="[צילום: אולם הקריאה, אור בוקר מעונן, אנשים קטנים בפריים]">[Photo: reading hall, overcast morning, people small in frame]</span></div><figcaption><span data-he="אולם הקריאה">Reading hall</span><span class="cap" dir="ltr">Rotterdam · 2019</span></figcaption></figure>
+  <figure class="pin p3"><div class="frame photo" data-clip><svg class="elev" data-seed="11" data-kind="housing" viewBox="0 0 400 500" direction="ltr" aria-hidden="true"></svg></div><figcaption><span data-he="מגורים ברחוב סלמה">Salame Street Housing</span><span class="cap" dir="ltr">Tel Aviv · 2023</span></figcaption></figure>
+  <figure class="pin p4"><div class="frame photo w" data-clip><svg class="elev" data-seed="7" data-kind="school" viewBox="0 0 600 400" direction="ltr" aria-hidden="true"></svg></div><figcaption><span data-he="בית ספר אלקנטרה">Alcântara School</span><span class="cap" dir="ltr">Lisbon · 2021</span></figcaption></figure>
+  <figure class="pin p5"><div class="frame photo w slot" data-clip style="--slot-bg: oklch(86% 0.006 120)"><span data-he="[צילום: חצר בית הספר, אור צהריים רך]">[Photo: school courtyard, soft midday light]</span></div><figcaption><span data-he="החצר הפנימית">Inner courtyard</span><span class="cap" dir="ltr">Lisbon · 2021</span></figcaption></figure>
+</section>
+
+<section class="index container">
+  <div class="index__head">
+    <h2 data-he="ארכיון הפרויקטים">Project archive</h2>
+    <div class="filters" role="group" aria-label="Typology" data-he-aria-label="טיפולוגיה"><button aria-pressed="true" data-he="הכול · 214">All · 214</button><button aria-pressed="false" data-he="תרבות · 38">Culture · 38</button><button aria-pressed="false" data-he="חינוך · 51">Education · 51</button><button aria-pressed="false" data-he="מגורים · 87">Housing · 87</button><button aria-pressed="false" data-he="תכנון עירוני · 38">Urban plans · 38</button></div>
+  </div>
+  <ul class="rows" role="list">
+    <li><span class="n" data-he="ספריית הנמל">Harbour Library</span><span data-he="תרבות, 11,400 מ״ר">Culture, 11,400 m²</span><span class="cap" dir="ltr">Rotterdam</span><span class="cap" dir="ltr">2019</span></li>
+    <li><span class="n" data-he="מגורים ברחוב סלמה">Salame Street Housing</span><span data-he="מגורים, 146 יחידות">Housing, 146 units</span><span class="cap" dir="ltr">Tel Aviv</span><span class="cap" dir="ltr">2023</span></li>
+    <li><span class="n" data-he="בית ספר אלקנטרה">Alcântara School</span><span data-he="חינוך, 900 תלמידים">Education, 900 pupils</span><span class="cap" dir="ltr">Lisbon</span><span class="cap" dir="ltr">2021</span></li>
+    <li><span class="n" data-he="מרכז קהילתי הדר">Hadar Community Centre</span><span data-he="תרבות, בביצוע">Culture, on site</span><span class="cap" dir="ltr">Haifa</span><span class="cap" dir="ltr">2026</span></li>
+  </ul>
+  <p style="margin-block-start: var(--sp-6); display:flex; gap: var(--sp-5); align-items:center"><a class="submit" href="#" data-spec-btn data-he="שליחת פנייה">Send enquiry</a><a class="tlink" href="#" data-he="כל 214 הפרויקטים">All 214 projects</a></p>
+</section>
+
+<section class="spec-system" data-spec-system data-display="Harbour Library" data-display-he="ספריית הנמל"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · architect-calm · fictional practice “Marrow Tann Architects”</span><a href="index.html">All directions</a></footer>
+
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script>
+/* elevation drawings (the practice's archive drawings) — ink lines on white mats; physical drawings, never mirrored */
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  function rnd(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+  document.querySelectorAll('svg.elev').forEach(function (s) {
+    var vb = s.viewBox.baseVal, W = vb.width, H = vb.height, r = rnd(+s.dataset.seed * 97 + 5), kind = s.dataset.kind;
+    var ink = 'var(--c-ink)', out = '';
+    var g = H - 60, x0 = 40, x1 = W - 40;
+    out += '<path d="M10 ' + g + 'H' + (W - 10) + '" stroke="' + ink + '" stroke-width="1.4"/>';
+    if (kind === 'library') {
+      var top = 90; out += '<rect x="' + x0 + '" y="' + top + '" width="' + (x1 - x0) + '" height="' + (g - top) + '" fill="none" stroke="' + ink + '" stroke-width="1.2"/>';
+      for (var x = x0 + 16; x < x1 - 8; x += 22) out += '<path d="M' + x + ' ' + (top + 14) + 'V' + (g - 70) + '" stroke="' + ink + '" stroke-width=".6"/>';
+      out += '<path d="M' + x0 + ' ' + (g - 70) + 'H' + x1 + '" stroke="' + ink + '" stroke-width="1"/>';
+      out += '<rect x="' + (W / 2 - 50) + '" y="' + (g - 60) + '" width="100" height="60" fill="none" stroke="' + ink + '"/>';
+      out += '<path d="M' + (x0 - 14) + ' ' + top + 'H' + (x1 + 14) + '" stroke="' + ink + '" stroke-width="2"/>';
+    } else if (kind === 'housing') {
+      var floors = 9, fh = (g - 60) / floors;
+      out += '<rect x="' + x0 + '" y="60" width="' + (x1 - x0) + '" height="' + (g - 60) + '" fill="none" stroke="' + ink + '" stroke-width="1.2"/>';
+      for (var f = 0; f < floors; f++) {
+        var y = 60 + f * fh; out += '<path d="M' + x0 + ' ' + y + 'H' + x1 + '" stroke="' + ink + '" stroke-width=".5"/>';
+        for (var c = 0; c < 5; c++) { var wx = x0 + 14 + c * ((x1 - x0 - 28) / 5), ww = (x1 - x0 - 28) / 5 - 14 - (r() > .6 ? 10 : 0);
+          out += '<rect x="' + wx + '" y="' + (y + 8) + '" width="' + ww + '" height="' + (fh - 16) + '" fill="' + (r() > .78 ? 'color-mix(in oklab, var(--c-ink) 12%, transparent)' : 'none') + '" stroke="' + ink + '" stroke-width=".7"/>';
+          if (r() > .55) out += '<path d="M' + (wx - 4) + ' ' + (y + fh - 6) + 'H' + (wx + ww + 4) + '" stroke="' + ink + '" stroke-width="1.2"/>'; }
+      }
+    } else {
+      out += '<path d="M' + x0 + ' ' + g + 'V150 L' + (W * .35) + ' 90 L' + (W * .62) + ' 150 L' + (W * .8) + ' 110 L' + x1 + ' 150 V' + g + '" fill="none" stroke="' + ink + '" stroke-width="1.2"/>';
+      for (var i = 0; i < 12; i++) { var ax = x0 + 20 + i * ((x1 - x0 - 40) / 12); out += '<path d="M' + ax + ' ' + g + 'V' + (g - 70) + 'a' + 10 + ' 10 0 0 1 20 0V' + g + '" fill="none" stroke="' + ink + '" stroke-width=".7"/>'; }
+      out += '<path d="M' + x0 + ' 200H' + x1 + '" stroke="' + ink + '" stroke-width=".5" stroke-dasharray="3 4"/>';
+    }
+    for (var t = 0; t < 7; t++) { var tx = 20 + r() * (W - 40), th = 30 + r() * 30; out += '<path d="M' + tx + ' ' + g + 'V' + (g - th * .5) + '" stroke="' + ink + '" stroke-width=".6"/><circle cx="' + tx + '" cy="' + (g - th * .7) + '" r="' + th * .28 + '" fill="none" stroke="' + ink + '" stroke-width=".5"/>'; }
+    out += '<text x="' + (W - 14) + '" y="' + (H - 18) + '" text-anchor="end" font-family="ui-monospace, monospace" font-size="10" fill="var(--c-muted)">ELEV. ' + (kind === 'housing' ? 'SOUTH' : 'EAST') + ' 1:200</text>';
+    s.innerHTML = out;
+  });
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script src="../../runtime/fx/clip-reveal.js"></script>
+</body>
+</html>

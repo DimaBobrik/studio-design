@@ -1,0 +1,46 @@
+/* studio-design fx · device.css — CSS 3D box product + elevation drawing for fx/device.js. Tokens only; physical 3D axes
+   are intentional (a physical object does not mirror in RTL); layout around it stays logical. */
+.sd-device { position: relative; display: block; margin: 0; inline-size: 100%; container-type: inline-size; }
+.sd-device__stage { position: relative; direction: ltr; inline-size: 100%; aspect-ratio: var(--dv-ratio, 4 / 3); display: grid; place-items: center; perspective: 1800px; }
+.sd-device__box { --s: 56cqi; position: relative; inline-size: calc(var(--dv-w) * var(--s)); block-size: calc(var(--dv-h) * var(--s));
+  transform-style: preserve-3d; transform: rotateX(var(--dv-rx, -12deg)) rotateY(var(--dv-ry, -32deg)); transition: transform 60ms linear; }
+.sd-device__face { position: absolute; top: 0; left: 0; /* physical on purpose: 3D axes do not mirror */ inline-size: 100%; block-size: 100%; overflow: hidden;
+  background: var(--dv-body); border-radius: calc(var(--dv-r) * var(--s) * 0.5); backface-visibility: hidden;
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--dv-body) 70%, oklch(0% 0 0)); }
+.sd-device__face > img, .sd-device__face > svg { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }
+.sd-device__face--front  { transform: translateZ(calc(var(--dv-d) * var(--s) / 2)); }
+.sd-device__face--back   { transform: rotateY(180deg) translateZ(calc(var(--dv-d) * var(--s) / 2)); background: color-mix(in oklab, var(--dv-body) 80%, oklch(0% 0 0)); }
+.sd-device__face--right, .sd-device__face--left { inline-size: calc(var(--dv-d) * var(--s)); left: calc((var(--dv-w) - var(--dv-d)) * var(--s) / 2); }
+.sd-device__face--right  { transform: rotateY(90deg) translateZ(calc(var(--dv-w) * var(--s) / 2)); background: color-mix(in oklab, var(--dv-body) 82%, oklch(0% 0 0)); }
+.sd-device__face--left   { transform: rotateY(-90deg) translateZ(calc(var(--dv-w) * var(--s) / 2)); background: color-mix(in oklab, var(--dv-body) 74%, oklch(0% 0 0)); }
+.sd-device__face--top, .sd-device__face--bottom { block-size: calc(var(--dv-d) * var(--s)); top: calc((var(--dv-h) - var(--dv-d)) * var(--s) / 2); }
+.sd-device__face--top    { transform: rotateX(90deg) translateZ(calc(var(--dv-h) * var(--s) / 2)); background: color-mix(in oklab, var(--dv-body) 88%, oklch(100% 0 0)); }
+.sd-device__face--bottom { transform: rotateX(-90deg) translateZ(calc(var(--dv-h) * var(--s) / 2)); background: color-mix(in oklab, var(--dv-body) 60%, oklch(0% 0 0)); }
+.sd-device__handle-plane { position: absolute; left: 0; right: 0; bottom: 100%; block-size: calc(var(--dv-h) * var(--s) * 0.18); }
+.sd-device__handle-plane svg { display: block; inline-size: 100%; block-size: 100%; overflow: visible; }
+.sd-device__shadow { position: absolute; inline-size: calc(var(--s) * 1.05); block-size: calc(var(--s) * 0.16);
+  top: calc(50% + var(--dv-h) * var(--s) / 2 - var(--s) * 0.05); left: 50%; translate: -50% 0;
+  background: radial-gradient(closest-side, oklch(0% 0 0 / 0.38), transparent); pointer-events: none; }
+/* generated artwork */
+.sd-device__art { overflow: visible; }
+.sd-device__plate { fill: color-mix(in oklab, var(--dv-body) 90%, oklch(0% 0 0)); }
+.sd-device__screen { fill: var(--dv-panel); }
+.sd-device__line { fill: none; stroke: var(--dv-detail); stroke-width: 1.5; vector-effect: non-scaling-stroke; stroke-linecap: round; transition: stroke 160ms var(--ease-out); }
+.sd-device__led { fill: var(--dv-detail); }
+.sd-device__handle { fill: none; stroke: color-mix(in oklab, var(--dv-body) 80%, oklch(0% 0 0)); stroke-width: 10; stroke-linecap: round; }
+.sd-device.has-lit [data-part]:not(.is-lit) .sd-device__line { stroke: color-mix(in oklab, var(--dv-detail) 45%, var(--dv-body)); }
+.sd-device [data-part].is-lit .sd-device__line { stroke-width: 2.5; }
+/* elevation drawing */
+.sd-device__stage.is-elevation { aspect-ratio: auto; perspective: none; }
+.sd-device__elev { inline-size: 100%; block-size: auto; overflow: visible; }
+.sd-device__elev .sd-device__plate { fill: none; stroke: var(--dv-detail); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sd-device__elev .sd-device__screen { fill: none; stroke: var(--dv-detail); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.sd-device__outline { fill: none; stroke: var(--c-ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.sd-device__dim { fill: none; stroke: var(--c-muted); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sd-device__dim-t { fill: var(--c-ink-2); font: 500 14px/1 var(--f-num, var(--f-mono)); font-variant-numeric: tabular-nums; }
+.sd-device[role="slider"] { cursor: grab; touch-action: pan-y; }
+.sd-device[role="slider"]:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 6px; }
+.sd-device.is-dragging { cursor: grabbing; }
+.sd-device.is-dragging .sd-device__box { transition: none; }
+@media (prefers-reduced-motion: reduce) { .sd-device__box { transition: none; } }
+@media (forced-colors: active) { .sd-device__face { border: 1px solid CanvasText; } }

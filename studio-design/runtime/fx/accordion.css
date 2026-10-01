@@ -1,0 +1,29 @@
+/* studio-design · fx/accordion.css — native <details> accordion with smooth height.
+   Modern engines: pure CSS (interpolate-size + ::details-content). Older: accordion.js animates with GSAP/WAAPI. */
+.sd-acc { --acc-pad-y: clamp(18px, 2.2vw, 28px); --acc-icon: 28px; interpolate-size: allow-keywords; border-block-start: 1px solid var(--c-rule); }
+.sd-acc__item { border-block-end: 1px solid var(--c-rule); }
+.sd-acc__item > summary { list-style: none; display: grid; grid-template-columns: 1fr var(--acc-icon); gap: var(--sp-5); align-items: center; padding-block: var(--acc-pad-y); cursor: pointer;
+  font-family: var(--f-display); font-size: var(--fs-lg); line-height: 1.3; letter-spacing: var(--tr-display); color: var(--c-ink); transition: color var(--d-fast); }
+.sd-acc__item > summary::-webkit-details-marker { display: none; }
+.sd-acc__item > summary:hover { color: var(--c-accent); }
+.sd-acc__item > summary:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 4px; border-radius: var(--r-sm); }
+/* plus -> minus/cross icon (two bars) */
+.sd-acc__icon { position: relative; inline-size: var(--acc-icon); block-size: var(--acc-icon); border-radius: 50%; border: 1px solid var(--c-rule); transition: background var(--d-med) var(--ease-out), border-color var(--d-med), transform var(--d-med) var(--ease-out); }
+.sd-acc__icon::before, .sd-acc__icon::after { content: ""; position: absolute; inset: 50% auto auto 50%; inline-size: 11px; block-size: 1.5px; margin: -0.75px 0 0 -5.5px; background: currentColor; transition: transform var(--d-med) var(--ease-out); }
+.sd-acc__icon::after { transform: rotate(90deg); }
+.sd-acc__item[open] > summary .sd-acc__icon { background: var(--c-ink); border-color: var(--c-ink); color: var(--c-canvas); transform: rotate(180deg); }
+.sd-acc__item[open] > summary .sd-acc__icon::after { transform: rotate(0deg); }
+.sd-acc[data-icon="cross"] .sd-acc__item[open] > summary .sd-acc__icon { transform: rotate(45deg); }
+.sd-acc[data-icon="cross"] .sd-acc__item[open] > summary .sd-acc__icon::after { transform: rotate(90deg); }
+
+.sd-acc__body { padding-block-end: var(--acc-pad-y); padding-inline-end: calc(var(--acc-icon) + var(--sp-5)); color: var(--c-ink-2); max-inline-size: 70ch; }
+.sd-acc__body > * + * { margin-block-start: var(--sp-3); }
+
+/* smooth height where supported (Chrome 131+, Safari 18.x w/ ::details-content) */
+.sd-acc__item::details-content { block-size: 0; overflow: clip; opacity: 0;
+  transition: block-size 380ms var(--ease-out), opacity 300ms var(--ease-out), content-visibility 380ms allow-discrete; }
+.sd-acc__item[open]::details-content { block-size: auto; opacity: 1; }
+/* JS fallback marks the group; it animates the body itself */
+.sd-acc.is-js .sd-acc__body { overflow: clip; }
+.sd-acc.is-js .sd-acc__body { padding-block-end: 0; }
+.sd-acc.is-js .sd-acc__body::after { content: ""; display: block; block-size: var(--acc-pad-y); }

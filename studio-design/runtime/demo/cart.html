@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cart · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Work+Sans:wght@400;500;600&family=Noto+Serif+Hebrew:wght@400;600&family=Noto+Sans+Hebrew:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/cart.css">
+<style>
+  :root {
+    --c-canvas: oklch(96.5% 0.012 75); --c-surface: oklch(93% 0.016 75); --c-surface-2: oklch(88% 0.02 75);
+    --c-ink: oklch(24% 0.02 50); --c-ink-2: oklch(38% 0.02 50); --c-muted: oklch(52% 0.02 50); --c-rule: oklch(85% 0.018 75);
+    --c-accent: oklch(55% 0.12 45); --c-accent-ink: #fff; --c-focus: oklch(50% 0.14 45);
+    --f-display: "Fraunces", "Noto Serif Hebrew", Georgia, serif; --f-body: "Work Sans", "Noto Sans Hebrew", system-ui, sans-serif; --r-md: 6px;
+  }
+  .bar { position: sticky; inset-block-start: 0; z-index: var(--z-header); background: color-mix(in oklab, var(--c-canvas) 92%, transparent); backdrop-filter: blur(10px); border-block-end: 1px solid var(--c-rule); }
+  .bar .container { display: flex; align-items: center; justify-content: space-between; block-size: 68px; }
+  .logo { font-family: var(--f-display); font-size: 24px; font-weight: 600; letter-spacing: -0.02em; text-decoration: none; }
+  .bar nav { display: flex; gap: var(--sp-5); font-size: var(--fs-sm); }
+  .bar nav a { text-decoration: none; color: var(--c-ink-2); }
+  .intro { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: var(--sp-5); margin-block-end: var(--sp-6); }
+  .intro h1 { font-size: var(--fs-2xl); font-weight: 400; }
+  .intro p { color: var(--c-muted); font-size: var(--fs-sm); }
+  .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-6) var(--sp-4); }
+  .card { display: grid; gap: var(--sp-3); }
+  .card__img { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--r-md); background: var(--c-surface); }
+  .card__img img { inline-size: 100%; block-size: 100%; object-fit: cover; transition: transform 900ms var(--ease-out); }
+  .card:hover .card__img img { transform: scale(1.04); }
+  .card__add { position: absolute; inset-inline: var(--sp-3); inset-block-end: var(--sp-3); block-size: 46px; border-radius: var(--r-pill); background: var(--c-canvas); color: var(--c-ink); font-weight: 600; font-size: var(--fs-sm); box-shadow: var(--shadow-1);
+    transform: translateY(12px); opacity: 0; transition: transform var(--d-med) var(--ease-out), opacity var(--d-med), background var(--d-fast), color var(--d-fast); }
+  .card:hover .card__add, .card__add:focus-visible { transform: none; opacity: 1; }
+  .card__add:hover { background: var(--c-ink); color: var(--c-canvas); }
+  @media (hover: none) { .card__add { transform: none; opacity: 1; inset-inline: auto var(--sp-2); inset-block-end: var(--sp-2); inline-size: 44px; block-size: 44px; padding: 0; font-size: 0; }
+    .card__add::before { content: "+"; font-size: 22px; font-weight: 400; } }
+  .card h3 { font-family: var(--f-body); font-size: var(--fs-sm); font-weight: 500; letter-spacing: 0; display: flex; justify-content: space-between; gap: var(--sp-3); }
+  .card h3 span { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .card p { font-size: var(--fs-xs); color: var(--c-muted); margin-block-start: -6px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .bar nav { display: none; } }
+  .empty-ico { inline-size: 56px; block-size: 56px; border-radius: 50%; background: var(--c-surface); display: grid; place-items: center; color: var(--c-ink-2); }
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="container">
+    <a class="logo" href="#" data-he="קדר">Kadar</a>
+    <nav aria-label="Shop"><a href="#" data-he="קערות">Bowls</a><a href="#" data-he="כדים">Vases</a><a href="#" data-he="ספלים">Cups</a><a href="#" data-he="הסטודיו">Studio</a></nav>
+    <button class="sd-cart-btn" type="button" data-cart-open aria-controls="cart" aria-label="Open cart" data-he-aria="פתיחת הסל">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="sd-cart-count" data-cart-count aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+
+<main class="section container">
+  <div class="intro">
+    <h1 data-he="עבודת יד, שריפה אחת בכל פעם">Thrown by hand, fired in small batches</h1>
+    <p data-he="משלוח חינם בהזמנה מעל ₪400">Free shipping over ₪400</p>
+  </div>
+  <div class="grid">
+    <article class="card" data-product>
+      <div class="card__img"><img src="https://picsum.photos/seed/bowlclay/600/750" alt="Tidal serving bowl in speckled white glaze" data-he-alt="קערת הגשה טיידל בזיגוג לבן מנוקד" width="600" height="750">
+        <button class="card__add" type="button" data-add-to-cart data-id="tidal-bowl" data-name="Tidal serving bowl" data-he-attr-data-name="קערת הגשה טיידל" data-price="240" data-variant="Speckled white" data-he-attr-data-variant="לבן מנוקד" data-img="https://picsum.photos/seed/bowlclay/300/375" data-he="הוספה לסל">Add to cart</button></div>
+      <h3><a href="#" style="text-decoration:none" data-he="קערת הגשה טיידל">Tidal serving bowl</a><span>₪240</span></h3><p data-he="לבן מנוקד · 28 ס״מ">Speckled white · 28 cm</p>
+    </article>
+    <article class="card" data-product>
+      <div class="card__img"><img src="https://picsum.photos/seed/vaseash/600/750" alt="Ash bud vase, matte charcoal" data-he-alt="כד אפר, פחם מט" width="600" height="750">
+        <button class="card__add" type="button" data-add-to-cart data-id="ash-vase" data-name="Ash bud vase" data-he-attr-data-name="כד אפר" data-price="165" data-variant="Matte charcoal" data-he-attr-data-variant="פחם מט" data-img="https://picsum.photos/seed/vaseash/300/375" data-he="הוספה לסל">Add to cart</button></div>
+      <h3><a href="#" style="text-decoration:none" data-he="כד אפר">Ash bud vase</a><span>₪165</span></h3><p data-he="פחם מט · 18 ס״מ">Matte charcoal · 18 cm</p>
+    </article>
+    <article class="card" data-product>
+      <div class="card__img"><img src="https://picsum.photos/seed/mugstone/600/750" alt="Set of two stoneware cups" data-he-alt="זוג ספלי אבן" width="600" height="750">
+        <button class="card__add" type="button" data-add-to-cart data-id="stone-cups" data-name="Stoneware cups, set of 2" data-he-attr-data-name="זוג ספלי אבן" data-price="120" data-variant="Oat" data-he-attr-data-variant="שיבולת שועל" data-img="https://picsum.photos/seed/mugstone/300/375" data-he="הוספה לסל">Add to cart</button></div>
+      <h3><a href="#" style="text-decoration:none" data-he="זוג ספלי אבן">Stoneware cups, set of 2</a><span>₪120</span></h3><p data-he="שיבולת שועל · 250 מ״ל">Oat · 250 ml</p>
+    </article>
+    <article class="card" data-product>
+      <div class="card__img"><img src="https://picsum.photos/seed/plateline/600/750" alt="Linen-glaze dinner plate" data-he-alt="צלחת ערב בזיגוג פשתן" width="600" height="750">
+        <button class="card__add" type="button" data-add-to-cart data-id="linen-plate" data-name="Linen-glaze dinner plate" data-he-attr-data-name="צלחת ערב פשתן" data-price="95" data-variant="Linen" data-he-attr-data-variant="פשתן" data-img="https://picsum.photos/seed/plateline/300/375" data-he="הוספה לסל">Add to cart</button></div>
+      <h3><a href="#" style="text-decoration:none" data-he="צלחת ערב פשתן">Linen-glaze dinner plate</a><span>₪95</span></h3><p data-he="פשתן · 27 ס״מ">Linen · 27 cm</p>
+    </article>
+  </div>
+</main>
+
+<dialog class="sd-cart" id="cart" data-fx="cart" data-currency="ILS" data-locale="en-IL" data-he-attr-data-locale="he-IL" data-free-shipping="400" aria-labelledby="cart-title"
+  data-he-attr-data-label-away="עוד {amount} למשלוח חינם" data-he-attr-data-label-free="יש לכם משלוח חינם" data-he-attr-data-label-added="{name} נוסף לסל"
+  data-he-attr-data-label-qty="כמות" data-he-attr-data-label-dec="הפחתת כמות" data-he-attr-data-label-inc="הגדלת כמות">
+  <div class="sd-cart__head">
+    <h2 id="cart-title"><span data-he="הסל שלך">Your cart</span> <span data-cart-items-count></span></h2>
+    <button class="sd-cart__x" type="button" data-cart-close aria-label="Close cart" data-he-aria="סגירת הסל"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="sd-cart__ship" data-cart-ship>
+    <p data-cart-ship-text></p>
+    <div class="sd-cart__meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Free shipping progress" data-he-aria="התקדמות למשלוח חינם"><span data-cart-meter></span></div>
+  </div>
+  <ul class="sd-cart__lines" data-cart-lines role="list"></ul>
+  <div class="sd-cart__empty" data-cart-empty>
+    <span class="empty-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span>
+    <p data-he="הסל ריק. הקערות מחכות.">Your cart is empty. The bowls are waiting.</p>
+  </div>
+  <div class="sd-cart__foot">
+    <div class="sd-cart__total"><span><span data-he="סכום ביניים">Subtotal</span><small data-he="משלוח ומע״מ יחושבו בקופה">Shipping and VAT at checkout</small></span><output data-cart-subtotal></output></div>
+    <a class="sd-cart__checkout" href="#checkout" data-cart-checkout data-he="למעבר לקופה">Checkout</a>
+  </div>
+  <p class="sr-only" data-cart-live aria-live="polite"></p>
+  <template data-cart-line>
+    <li class="sd-cart__line">
+      <img data-line-img alt="" width="84" height="105">
+      <div><b data-line-name></b><small data-line-variant></small></div>
+      <span class="sd-cart__price" data-line-price></span>
+      <div class="sd-cart__row">
+        <div class="sd-cart__qty"><button type="button" data-line-dec>−</button><input type="number" inputmode="numeric" min="0" max="99" data-line-qty><button type="button" data-line-inc>+</button></div>
+        <button type="button" class="sd-cart__rm" data-line-remove data-he="הסרה">Remove</button>
+      </div>
+    </li>
+  </template>
+</dialog>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="_demo.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/cart.js"></script>
+</body>
+</html>

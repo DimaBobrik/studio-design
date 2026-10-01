@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>lathe · studio-design runtime demo</title>
+<meta name="he-title" content="lathe · הדגמה">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;700&family=Heebo:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/lathe.css">
+<style>
+  :root {
+    --c-canvas: oklch(18% 0.012 60); --c-surface: oklch(22% 0.012 60); --c-surface-2: oklch(58% 0.05 60);
+    --c-ink: oklch(94% 0.012 80); --c-ink-2: oklch(80% 0.012 80); --c-muted: oklch(68% 0.012 80); --c-rule: oklch(94% 0.012 80 / 0.16);
+    --c-accent: oklch(78% 0.1 75); --c-accent-ink: oklch(18% 0.012 60); --c-focus: oklch(78% 0.1 75);
+    --f-display: "Familjen Grotesk", "Heebo", sans-serif; --f-body: "Familjen Grotesk", "Heebo", sans-serif;
+    /* imagery-only tokens (antipatterns #65 exception): used only inside the renders */
+    --img-glaze-ash: oklch(74% 0.035 170); --img-glaze-pool: oklch(46% 0.07 200); --img-clay: oklch(60% 0.05 55);
+    --img-glass: oklch(88% 0.04 200); --img-amber: oklch(62% 0.13 60); --img-brass: oklch(76% 0.11 80); --img-coral: oklch(70% 0.14 30); --img-wax: oklch(94% 0.02 90);
+  }
+  body { font-family: var(--f-body); }
+  .intro { padding-block: var(--sp-8) var(--sp-6); }
+  .intro h1 { font-size: var(--fs-3xl); font-weight: 700; max-inline-size: 16ch; }
+  .intro p { color: var(--c-ink-2); max-inline-size: 60ch; margin-block-start: var(--sp-4); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: var(--sp-6); padding-block-end: var(--sp-8); }
+  .grid figure { margin: 0; }
+  .grid figcaption { font-size: var(--fs-sm); color: var(--c-muted); margin-block-start: var(--sp-3); }
+  .stage { min-block-size: 100svh; display: grid; grid-template-columns: 1fr minmax(0, 520px) 1fr; align-items: center; background: var(--c-surface); }
+  .stage .sd-lathe { grid-column: 2; inline-size: min(100%, 60svh); justify-self: center; }
+  .stage .cap { grid-column: 3; padding-inline: var(--gutter); color: var(--c-ink-2); }
+  .stage .cap output { display: block; font-variant-numeric: tabular-nums; color: var(--c-accent); font-size: var(--fs-2xl); }
+  .after { min-block-size: 60svh; }
+  @media (max-width: 760px) { .stage { grid-template-columns: 1fr; align-content: center; } .stage .sd-lathe, .stage .cap { grid-column: 1; } .stage .sd-lathe { inline-size: min(86vw, 52svh); } }
+</style>
+</head>
+<body>
+<main>
+  <section class="container intro">
+    <h1 data-he="אובייקט שנבנה בקוד">An object built in code</h1>
+    <p data-he="משטח סיבוב ב-WebGL2: פרופיל אחד, חומר, צבעים מטוקנים. גררו או השתמשו בחיצים כדי לסובב.">A WebGL2 surface of revolution: one profile, one material, colours from tokens. Drag or use the arrow keys to turn it.</p>
+  </section>
+  <section class="container grid" aria-label="Materials">
+    <figure>
+      <div class="sd-lathe" data-fx="lathe" data-preset="vase" data-material="glazed-ceramic" data-colors="--img-glaze-ash,--img-glaze-pool" data-base="--img-clay" data-seed="14" data-tide="0.9" data-dip="0.2" data-drag="true" data-label="Turn the vase" data-he-attr-data-label="סובבו את האגרטל"></div>
+      <figcaption data-he="קרמיקה מזוגגת · vase">Glazed ceramic · vase</figcaption>
+    </figure>
+    <figure>
+      <div class="sd-lathe" data-fx="lathe" data-preset="bowl" data-material="matte-clay" data-colors="--img-clay" data-liner="--img-glaze-ash" data-seed="3" data-drag="true" data-label="Turn the bowl" data-he-attr-data-label="סובבו את הקערה"></div>
+      <figcaption data-he="חמר מט · bowl">Matte clay · bowl</figcaption>
+    </figure>
+    <figure>
+      <div class="sd-lathe" data-fx="lathe" data-preset="bottle" data-material="glass" data-colors="--img-glass" data-base="--img-amber" data-dip="0.45" data-seed="7" data-drag="true" data-label="Turn the bottle" data-he-attr-data-label="סובבו את הבקבוק"></div>
+      <figcaption data-he="זכוכית עם נוזל · bottle">Glass with contents · bottle</figcaption>
+    </figure>
+    <figure>
+      <div class="sd-lathe" data-fx="lathe" data-profile="0.2,0.24,0.25,0.25,0.25,0.25,0.24,0.2,0.1,0.09,0.09,0.12" data-material="metal" data-colors="--img-brass" data-seed="2" data-auto="12" data-drag="true" data-label="Turn the flask" data-he-attr-data-label="סובבו את הבקבוקון"></div>
+      <figcaption data-he="מתכת · פרופיל מותאם, סיבוב אוטומטי">Metal · custom profile, auto-turn</figcaption>
+    </figure>
+    <figure>
+      <div class="sd-lathe" data-fx="lathe" data-preset="mug" data-material="plastic" data-colors="--img-coral" data-liner="--img-wax" data-seed="5" data-drag="true" data-label="Turn the mug" data-he-attr-data-label="סובבו את הספל"></div>
+      <figcaption data-he="פלסטיק · mug">Plastic · mug</figcaption>
+    </figure>
+    <figure>
+      <div class="sd-lathe" data-fx="lathe" data-preset="candle" data-material="glass" data-colors="--img-glass" data-base="--img-wax" data-dip="0.7" data-seed="9" data-drag="true" data-label="Turn the candle" data-he-attr-data-label="סובבו את הנר"></div>
+      <figcaption data-he="נר בכלי זכוכית · candle">Candle in glass · candle</figcaption>
+    </figure>
+  </section>
+  <section class="stage" aria-label="Scroll to turn">
+    <div class="sd-lathe" data-fx="lathe" data-preset="jar" data-material="glazed-ceramic" data-colors="--img-glaze-pool,--img-glaze-ash" data-base="--img-clay" data-seed="21" data-scroll="true" data-length="3" data-degrees="200" data-intro="40"></div>
+    <p class="cap"><span data-he="גללו: הצנצנת מסתובבת 200°">Scroll: the jar turns 200°</span><output aria-live="off">0°</output></p>
+  </section>
+  <section class="after container"><p data-he="סוף ההדגמה.">End of demo.</p></section>
+</main>
+<script src="_demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/lathe.js"></script>
+<script>
+  // page glue: caption follows the scroll turn
+  document.querySelector('.stage .sd-lathe').addEventListener('sd:lathe:turn', function (e) {
+    document.querySelector('.stage output').textContent = Math.round(e.detail.progress * 200) + '°';
+  });
+</script>
+</body>
+</html>

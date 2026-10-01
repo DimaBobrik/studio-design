@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Billboard Type · specimen</title>
+<meta name="he-title" content="Billboard Type · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Public+Sans:wght@400;500;700;900&family=Karantina:wght@400;700&family=Heebo:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/billboard-type.md */
+:root {
+  --c-canvas: oklch(62% 0.22 29); --c-surface: oklch(96% 0.012 60); --c-surface-2: oklch(50% 0.20 29);
+  --c-ink: oklch(10% 0.020 29); --c-ink-2: oklch(14% 0.030 29); --c-muted: oklch(18% 0.050 29); /* AA on the field: 5.1 / 4.9 / 4.7 */
+  --c-rule: oklch(10% 0.020 29); --c-accent: oklch(96% 0.012 60); --c-accent-ink: oklch(10% 0.020 29);
+  --c-focus: oklch(96% 0.012 60);
+  --f-display: "Anton", "Karantina", Impact, sans-serif; --f-body: "Public Sans", "Heebo", system-ui, sans-serif;
+  --f-mono: ui-monospace, Menlo, monospace; --f-outlier: "Anton", sans-serif;
+  --fs-xs: 0.8125rem; --fs-sm: 0.9375rem; --fs-base: 1.0625rem; --fs-lg: clamp(1.4rem, 1.1rem + 1vw, 1.9rem);
+  --fs-xl: clamp(2rem, 1.5rem + 2vw, 3rem); --fs-2xl: clamp(3rem, 2rem + 4.5vw, 6rem); --fs-3xl: clamp(4.5rem, 2rem + 10vw, 12rem);
+  --fs-display: clamp(5.5rem, 0.5rem + 21vw, 24rem); /* meant to crop at the viewport edges */
+  --lh-tight: 1.0; --lh-body: 1.45; --tr-display: -0.01em; --tr-label: 0.02em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 56px; --sp-8: 88px; --sp-9: 136px; --sp-10: 200px;
+  --section-y: clamp(64px, 7vw + 24px, 176px); --gutter: clamp(12px, 2vw, 32px); --maxw: 1680px; /* text blocks only; display ignores it */
+  --r-sm: 0px; --r-md: 0px; --r-lg: 0px; --r-pill: 0px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.85, 0, 0.15, 1);
+  --d-fast: 100ms; --d-med: 260ms; --d-slow: 700ms;
+  --shadow-1: none; --shadow-2: none;
+}
+[data-surface="paper"] { --c-canvas: var(--c-surface); --c-ink: oklch(10% .02 29); --c-accent: oklch(55% .22 29); --c-accent-ink: oklch(96% .012 60); } /* paper on red AA 4.8 */
+:root[dir="rtl"] { --lh-tight: 0.95; --fs-display: clamp(6rem, 1rem + 24vw, 28rem); } /* Karantina is narrow + short: go bigger */
+</style>
+<link rel="stylesheet" href="../../runtime/fx/bg-kit.css">
+<link rel="stylesheet" href="../../runtime/fx/marquee.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-weight: 500; font-size: var(--fs-base); line-height: var(--lh-body); --grain-opacity: .5; }
+[lang="he"] { --f-display: "Karantina", "Anton", sans-serif; }
+[lang="he"] :is(.word, .stmt, .row b) { font-weight: 700; }
+.caps { font-family: var(--f-display); text-transform: uppercase; line-height: var(--lh-tight); letter-spacing: var(--tr-display); }
+.nav { display: flex; align-items: center; gap: var(--sp-6); block-size: 56px; padding-inline: var(--gutter); font-weight: 700; font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: var(--tr-label); position: relative; z-index: 3; }
+.nav .wm { font-family: var(--f-display); font-weight: 400; font-size: 1.6rem; letter-spacing: 0; text-decoration: none; margin-inline-end: auto; }
+.nav ul { display: flex; gap: var(--sp-6); list-style: none; margin: 0; padding: 0; } .nav a { text-decoration: none; }
+.nav .date { font-variant-numeric: tabular-nums; }
+.hero { position: relative; overflow: clip; min-block-size: calc(100dvh - 56px); display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; align-content: space-between; }
+.word { font-size: max(var(--fs-display), 27vw); white-space: nowrap; margin-inline: -0.04em; display: block; margin-block-start: -0.04em; }
+[lang="he"] .word > span + span::before { content: " "; }
+.hero__low { display: grid; grid-template-columns: 1fr auto; gap: var(--sp-6); align-items: end; padding: 0 var(--gutter) var(--sp-6); }
+.stmts { display: grid; gap: 0; }
+.stmt { font-size: var(--fs-2xl); display: block; }
+.poster { inline-size: clamp(160px, 17vw, 250px); aspect-ratio: 1; background: var(--c-surface-2); padding: 12px; display: grid; }
+.poster > div { background: var(--c-ink); color: var(--c-surface); display: grid; align-content: space-between; padding: 12px; font-family: var(--f-display); text-transform: uppercase; line-height: .9; }
+.poster b { font-weight: 400; font-size: 3.4rem; } .poster small { font-family: var(--f-body); font-size: 12px; font-weight: 700; line-height: 1.3; }
+.slab { display: inline-flex; align-items: center; block-size: 60px; padding-inline: 28px; background: var(--c-surface); color: var(--c-ink); font-family: var(--f-display); font-size: 20px; text-transform: uppercase; text-decoration: none; transition: background var(--d-fast), color var(--d-fast); }
+.slab:hover, .slab.is-hover { background: var(--c-ink); color: var(--c-surface); }
+.slab.is-focus { outline: 3px solid var(--c-ink); outline-offset: 3px; }
+.hero__cta { display: flex; gap: var(--sp-5); align-items: center; margin-block-start: var(--sp-5); }
+.hero__cta p { max-inline-size: 30ch; font-size: var(--fs-sm); }
+/* marquee */
+.band { border-block: 2px solid var(--c-ink); padding-block: var(--sp-3); }
+.band li { font-family: var(--f-display); text-transform: uppercase; font-size: var(--fs-xl); line-height: 1; display: flex; align-items: center; gap: var(--sp-6); }
+.band li::after { content: "✶"; font-size: .6em; }
+/* lineup index */
+.idx { padding-block: var(--section-y); }
+.idx h2 { font-size: var(--fs-3xl); padding-inline: var(--gutter); margin-block-end: var(--sp-6); }
+.rows { list-style: none; margin: 0; padding: 0; border-block-end: 2px solid var(--c-ink); }
+.row { display: grid; grid-template-columns: 1fr auto auto; gap: var(--sp-6); align-items: center; padding: var(--sp-3) var(--gutter); border-block-start: 2px solid var(--c-ink); transition: background var(--d-fast); }
+.row b { font-family: var(--f-display); font-weight: 400; text-transform: uppercase; font-size: var(--fs-2xl); line-height: 1; }
+.row span { font-weight: 700; font-size: var(--fs-sm); text-transform: uppercase; }
+.row:hover { background: var(--c-surface-2); }
+@media (max-width: 800px) {
+  .nav ul { display: none; }
+  .hero__low { grid-template-columns: 1fr; } .poster { display: none; }
+  .hero { min-block-size: 0; } .word { font-size: 40vw; line-height: 1; margin-block: 0 .04em; } .word > span { display: block; } .word .rep { display: none; } [lang="he"] .word > span + span::before { content: none; }
+  .hero__cta { flex-direction: column; align-items: flex-start; }
+  .row { grid-template-columns: 1fr auto; } .row span:last-child { display: none; }
+}
+</style>
+</head>
+<body class="bg-grain">
+<header class="nav">
+  <a class="wm" href="#">Heatwave</a>
+  <ul role="list"><li><a href="#" data-he="ליינאפ">Lineup</a></li><li><a href="#" data-he="כרטיסים">Tickets</a></li><li><a href="#" data-he="הנמל">The harbour</a></li></ul>
+  <span class="date" dir="ltr">03–05.07.26</span>
+</header>
+<main>
+<section class="hero">
+  <h1 class="caps"><span class="word"><span data-he="גל">Heat</span><span data-he="חום">wave</span><span class="rep" aria-hidden="true" data-he=" גל חום"> Heatwave</span></span></h1>
+  <div class="hero__low">
+    <div>
+      <p class="stmts caps"><span class="stmt" data-he="שלושה לילות.">Three nights.</span><span class="stmt" data-he="נמל אחד.">One harbour.</span><span class="stmt" data-he="בלי שמות גדולים.">No headliners.</span></p>
+      <div class="hero__cta"><a class="slab" href="#" data-spec-btn data-he="לכרטיסים">Get tickets</a><p data-he="42 להקות בשלוש במות על רציף 9. כל הכרטיסים באותו מחיר.">42 bands on three stages at Pier 9. Every ticket costs the same.</p></div>
+    </div>
+    <div class="poster" aria-hidden="true"><div><b>HW<br>26</b><small data-he="כרזה · הדבקה על קיר">Poster · wheat-paste edition</small></div></div>
+  </div>
+</section>
+<div class="band" data-fx="marquee" data-velocity="true" data-skew="6" data-speed="70" data-fade="false" aria-label="Lineup" data-he-aria-label="ליינאפ">
+  <ul role="list"><li>Salt Choir</li><li>The Ferrymen</li><li>Neon Tides</li><li>Dock Nine</li><li>Mara Voss</li><li>Low Harbour</li><li>Riot Gulls</li></ul>
+</div>
+<section class="idx">
+  <h2 class="caps" data-he="מי מנגן">Who plays</h2>
+  <ul class="rows" role="list">
+    <li class="row"><b data-he="מקהלת מלח">Salt Choir</b><span data-he="שישי">Fri</span><span data-he="במה א׳">Stage A</span></li>
+    <li class="row"><b data-he="אנשי המעבורת">The Ferrymen</b><span data-he="שישי">Fri</span><span data-he="במה ב׳">Stage B</span></li>
+    <li class="row"><b data-he="גאות ניאון">Neon Tides</b><span data-he="שבת">Sat</span><span data-he="במה א׳">Stage A</span></li>
+    <li class="row"><b data-he="רציף תשע">Dock Nine</b><span data-he="ראשון">Sun</span><span data-he="במת החוף">Beach</span></li>
+  </ul>
+</section>
+<section class="spec-system" data-surface="paper" data-spec-system data-display="HEATWAVE" data-display-he="גל חום"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · billboard-type · fictional festival “Heatwave”</span><a href="index.html">All directions</a></footer>
+
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script src="../../runtime/fx/marquee.js"></script>
+<script>
+/* kinetic scale: the hero word shrinks toward the nav wordmark as you scroll (scrub) */
+(function () {
+  if (!window.gsap || !window.ScrollTrigger || SD.reduced()) return;
+  var w = document.querySelector('.word');
+  gsap.set(w, { transformOrigin: SD.dir() === 1 ? '0% 0%' : '100% 0%' });
+  gsap.to(w, { scale: .35, yPercent: -20, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 30%', scrub: true } });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+/* studio-design runtime · core.css
+   Reset + token contract defaults + RTL-safe base + utilities.
+   A direction's tokens.css overrides the :root values below. Modules consume ONLY these tokens. */
+
+/* ---------- Token contract (neutral defaults; always override per project) ---------- */
+:root {
+  --c-canvas: oklch(98.5% 0.004 90);
+  --c-surface: oklch(96% 0.006 90);
+  --c-surface-2: oklch(92% 0.008 90);
+  --c-ink: oklch(20% 0.01 90);
+  --c-ink-2: oklch(35% 0.01 90);
+  --c-muted: oklch(52% 0.01 90);
+  --c-rule: oklch(82% 0.008 90);
+  --c-accent: oklch(58% 0.19 35);
+  --c-accent-ink: oklch(98% 0.01 90);
+  --c-focus: oklch(58% 0.2 35);
+
+  --f-display: "Archivo", system-ui, sans-serif;
+  --f-body: "Archivo", system-ui, sans-serif;
+  --f-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --f-outlier: var(--f-display);
+  --f-num: var(--f-mono);      /* optional: numerals, specs, prices, dimension labels */
+  --f-brand: var(--f-display); /* optional: wordmark / logotype face */
+
+  --fs-xs: clamp(0.75rem, 0.72rem + 0.1vw, 0.8125rem);
+  --fs-sm: clamp(0.875rem, 0.85rem + 0.12vw, 0.9375rem);
+  --fs-base: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --fs-lg: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  --fs-xl: clamp(1.5rem, 1.3rem + 0.9vw, 2.125rem);
+  --fs-2xl: clamp(2rem, 1.6rem + 1.8vw, 3.25rem);
+  --fs-3xl: clamp(2.75rem, 2rem + 3.4vw, 5rem);
+  --fs-display: clamp(3.25rem, 1.8rem + 7vw, 9rem);
+
+  --lh-tight: 0.95;
+  --lh-body: 1.6;
+  --tr-display: -0.03em;
+  --tr-label: 0.08em;
+
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+  --sp-6: 40px; --sp-7: 64px; --sp-8: 96px; --sp-9: 144px; --sp-10: 200px;
+  --section-y: clamp(64px, 6vw + 40px, 160px);
+  --gutter: clamp(16px, 3vw, 40px);
+  --maxw: 1440px;
+
+  /* --r-*: ONE plain length each (0px, 12px, 999px) — modules use them in calc() and clip-path inset(… round …).
+     Special shapes (slash radii, blobs, arches, wobble) live in direction-only extra tokens: --shape-blob, --shape-arch,
+     --shape-wobble-*. --r-pill may be 0px (square pills); true circles in modules use 50% literals. */
+  --r-sm: 4px; --r-md: 12px; --r-lg: 24px; --r-pill: 999px;
+
+  /* --ease-*: always cubic-bezier() (smooth). Stepped/house eases live in extra tokens, e.g. --ease-step: steps(3, end). */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --d-fast: 160ms; --d-med: 320ms; --d-slow: 700ms;
+
+  --shadow-1: 0 1px 2px oklch(20% 0.01 90 / 0.06), 0 4px 12px oklch(20% 0.01 90 / 0.05);
+  --shadow-2: 0 2px 4px oklch(20% 0.01 90 / 0.06), 0 18px 40px -12px oklch(20% 0.01 90 / 0.18);
+
+  /* optional contract tokens: sticky header height (pdp sticky buy box / ATC bar, anchor offsets) and Lenis smoothing */
+  --header-h: 72px;
+  /* optional: text and scrims on photos/video (same in light and dark directions), success/status colour */
+  --c-on-media: oklch(98% 0.005 90);
+  --c-media-bg: oklch(15% 0.015 50);
+  --c-media-scrim: oklch(12% 0.01 60 / 0.72);
+  --c-success: oklch(52% 0.13 150);
+  --lenis-lerp: 0.1;
+
+  --z-base: 1; --z-raised: 10; --z-sticky: 100; --z-header: 200; --z-drawer: 300; --z-modal: 400; --z-toast: 500; --z-cursor: 600;
+  color-scheme: light;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: clip; hanging-punctuation: first last;  scroll-padding-block-start: calc(var(--header-h) + 16px); } /* WCAG 2.4.11: focused/anchored targets never hide under the sticky header */
+body { margin: 0; overflow-x: clip; min-height: 100dvh; background: var(--c-canvas); color: var(--c-ink);
+  font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd, ul, ol { margin: 0; }
+ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
+img, picture, video, canvas, svg { display: block; max-width: 100%; }
+img, video { height: auto; }
+input, button, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: 0; padding: 0; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+h1, h2, h3, h4 { font-family: var(--f-display); line-height: 1.05; letter-spacing: var(--tr-display); text-wrap: balance; overflow-wrap: anywhere; }
+p, li { text-wrap: pretty; }
+:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 3px; border-radius: 2px; }
+::selection { background: var(--c-accent); color: var(--c-accent-ink); }
+[hidden] { display: none !important; }
+
+/* Hebrew / RTL typography defaults: no negative tracking, no faux italics */
+:root:is([lang="he"], [dir="rtl"]) { --tr-display: 0em; --tr-label: 0.02em; } /* 0,2,0: beats a direction's plain :root, loses to its later :root[dir="rtl"] block */
+:where([lang="he"], [dir="rtl"]) :is(em, i) { font-style: normal; font-weight: 600; }
+:where([lang="he"]) { font-synthesis: none; } /* Hebrew faces often ship one weight: never fake bold/italic */
+
+/* ---------- Layout utilities (logical properties only) ---------- */
+.container { inline-size: 100%; max-inline-size: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+.section { padding-block: var(--section-y); position: relative; }
+.stack > * + * { margin-block-start: var(--stack, var(--sp-4)); }
+.cluster { display: flex; flex-wrap: wrap; gap: var(--cluster, var(--sp-3)); align-items: center; }
+.grid-auto { display: grid; gap: var(--sp-5); grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
+.sr-only { position: absolute !important; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.full-bleed { inline-size: 100%; margin-inline: 0; }
+.measure { max-inline-size: 65ch; }
+.tabular { font-variant-numeric: tabular-nums; }
+.flip-x { transform: scaleX(var(--dir, 1)); } /* for arrows/icons that must mirror in RTL */
+[dir="rtl"] { --dir: -1; }
+
+/* Skip link */
+.skip-link { position: absolute; inset-inline-start: var(--sp-4); inset-block-start: -100px; z-index: var(--z-toast);
+  background: var(--c-ink); color: var(--c-canvas); padding: var(--sp-2) var(--sp-4); border-radius: var(--r-sm); }
+.skip-link:focus { inset-block-start: var(--sp-4); }
+
+/* ---------- Motion base ---------- */
+/* Elements that JS will reveal start visible (no FOUC-hidden content if JS fails). Modules set initial states themselves. */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: clip; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; scroll-behavior: auto !important; }
+}
+
+/* Cross-document view transitions (progressive enhancement; WordPress-friendly) */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 420ms; animation-timing-function: var(--ease-in-out); }
+@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+
+/* ---------- Accessibility preferences (basics; directions may extend) ---------- */
+/* Increased contrast: muted text becomes ink-2/ink, rules become solid, controls get a visible edge. */
+@media (prefers-contrast: more) {
+  :root { --c-muted: var(--c-ink-2); --c-rule: var(--c-ink); }
+  :where(button, .btn, [role="button"], input, select, textarea, .card, [data-surface="card"]) { border: 1px solid currentColor; }
+  :where(a) { text-decoration-thickness: 2px; }
+}
+/* Windows High Contrast / forced colours: system colours take over; keep boundaries and focus visible, drop decoration. */
+@media (forced-colors: active) {
+  :where(button, .btn, [role="button"], .card, [data-surface="card"], dialog) { border: 1px solid CanvasText; }
+  :focus-visible { outline: 2px solid Highlight; }
+  :where(.bg-layer, .sd-shader, .sd-spotlight, .sd-spotlight__rim) { display: none; }
+  :where(svg) { forced-color-adjust: auto; }
+}
+/* Text spacing (WCAG 1.4.12) and reflow (1.4.10, 320px): text containers never get fixed heights or clipped overflow;
+   use min-block-size, let buttons/labels grow, and avoid white-space: nowrap on anything longer than a 3-word label. */
+

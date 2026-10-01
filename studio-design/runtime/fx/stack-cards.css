@@ -1,0 +1,4 @@
+/* studio-design fx · stack-cards — works as a pure CSS sticky stack; JS adds scale + shade */
+.sd-stack { display: grid; gap: var(--stack-gap, 6vh); padding-block-end: var(--stack-tail, 10vh); }
+.sd-stack__card { position: sticky; top: calc(var(--stack-top, 12svh) + var(--i, 0) * var(--stack-offset, 18px)); transform-origin: 50% 0%; will-change: transform; isolation: isolate; overflow: clip; }
+.sd-stack__shade { position: absolute; inset: 0; background: var(--stack-shade, var(--c-ink)); opacity: 0; pointer-events: none; z-index: 5; border-radius: inherit; }

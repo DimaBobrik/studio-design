@@ -1,0 +1,14 @@
+/* studio-design fx · hscroll
+   Base (no JS, mobile, reduced motion): a native horizontal scroll-snap row. Pinned mode adds .is-pinned. */
+.sd-hs [data-hscroll-track], [data-fx~="hscroll"] [data-hscroll-track] {
+  display: flex; flex-wrap: nowrap; gap: var(--hs-gap, var(--sp-4));
+  overflow-x: auto; overscroll-behavior-inline: contain; scroll-snap-type: x mandatory;
+  padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); scrollbar-width: thin;
+}
+[data-fx~="hscroll"] [data-hscroll-track] > * { flex: none; scroll-snap-align: start; }
+.sd-hs.is-pinned { min-block-size: 100svh; display: flex; flex-direction: column; justify-content: center; overflow: clip; position: relative; }
+.sd-hs.is-pinned [data-hscroll-track] { overflow: visible; scroll-snap-type: none; will-change: transform; }
+[data-hs-parallax] { will-change: transform; }
+.sd-hs__bar { position: absolute; inset-inline: var(--gutter); inset-block-end: var(--sp-5); block-size: 2px; background: color-mix(in oklab, currentColor 18%, transparent); border-radius: 2px; overflow: clip; }
+.sd-hs__bar > span { display: block; block-size: 100%; background: currentColor; transform: scaleX(0); transform-origin: left center; }
+.sd-hs__bar:dir(rtl) > span { transform-origin: right center; }

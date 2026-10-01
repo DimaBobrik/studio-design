@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Riso Two-Ink · specimen</title>
+<meta name="he-title" content="Riso Two-Ink · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@500;700;900&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Secular+One&family=Frank+Ruhl+Libre:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/riso-two-ink.md */
+:root {
+  --c-canvas: oklch(92.5% 0.008 230); --c-surface: oklch(95.5% 0.006 230); --c-surface-2: oklch(88% 0.012 230);
+  --c-ink: oklch(38% 0.16 268); --c-ink-2: oklch(46% 0.13 268); --c-muted: oklch(51.2% 0.08 268);
+  --c-rule: oklch(38% 0.16 268 / 0.5); --c-accent: oklch(66% 0.25 350); --c-accent-ink: oklch(22% 0.10 268);
+  --c-focus: oklch(60% 0.26 350);
+  --f-display: "Darker Grotesque", "Secular One", system-ui, sans-serif; --f-body: "Newsreader", "Frank Ruhl Libre", Georgia, serif;
+  --f-mono: ui-monospace, Menlo, monospace; --f-outlier: "Darker Grotesque", sans-serif;
+  --fs-xs: 0.8125rem; --fs-sm: 0.9375rem; --fs-base: 1.125rem; --fs-lg: 1.375rem; --fs-xl: clamp(1.75rem, 1.4rem + 1.2vw, 2.4rem);
+  --fs-2xl: clamp(2.6rem, 1.8rem + 3vw, 4.5rem); --fs-3xl: clamp(3.5rem, 2rem + 6vw, 8rem);
+  --fs-display: clamp(4.25rem, 1rem + 12vw, 13rem);
+  --lh-tight: 0.82; --lh-body: 1.55; --tr-display: -0.01em; --tr-label: 0.02em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 72px; --sp-9: 112px; --sp-10: 160px;
+  --section-y: clamp(56px, 5vw + 28px, 136px); --gutter: clamp(16px, 3vw, 40px); --maxw: 1400px;
+  --r-sm: 0px; --r-md: 2px; --r-lg: 4px; --r-pill: 0px;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1); --ease-in: cubic-bezier(0.6, 0, 1, 1); --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+  --ease-step: steps(3, end); /* house ease for CSS transitions; in GSAP use ease: "steps(3)" */
+  --d-fast: 120ms; --d-med: 240ms; --d-slow: 480ms;
+  --shadow-1: 2px 1px 0 var(--c-accent); /* misregistration */ --shadow-2: 5px 4px 0 var(--c-accent);
+}
+:root[dir="rtl"] { --lh-tight: 1.0; --shadow-1: -2px 1px 0 var(--c-accent); --shadow-2: -5px 4px 0 var(--c-accent); }
+</style>
+<link rel="stylesheet" href="../../runtime/fx/bg-kit.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); --grain-opacity: .6; }
+[lang="he"] { --f-display: "Secular One", sans-serif; --f-body: "Frank Ruhl Libre", serif; }
+[lang="he"] :is(h1, h2, .wm, .lab) { font-weight: 400 !important; }
+.lab { font-family: var(--f-display); font-weight: 700; font-size: 15px; letter-spacing: var(--tr-label); }
+.mast { text-align: center; padding-block: var(--sp-5) var(--sp-3); border-block-end: 1.5px solid var(--c-ink); }
+.mast .wm { font-family: var(--f-display); font-weight: 900; font-size: 2.6rem; line-height: .8; text-decoration: none; text-shadow: var(--shadow-1); }
+.mast ul { display: flex; justify-content: center; gap: var(--sp-6); list-style: none; margin: var(--sp-3) 0 0; padding: 0; }
+.mast a { text-decoration: none; }
+.hero { position: relative; display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--sp-5); padding-block: var(--sp-7) var(--sp-8); }
+.over { position: absolute; z-index: 0; inset-block-start: 26%; inset-inline-start: 4%; inline-size: 52%; block-size: 33%; background: var(--c-accent); mix-blend-mode: multiply; rotate: calc(-2deg * var(--dir, 1)); }
+[dir="rtl"] { --dir: -1; }
+.hero h1 { grid-column: 1 / span 8; grid-row: 1; position: relative; z-index: 1; font-family: var(--f-display); font-weight: 900; font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); color: var(--c-ink); text-shadow: 3px 2px 0 color-mix(in oklab, var(--c-accent) 85%, transparent); mix-blend-mode: multiply; }
+[dir="rtl"] .hero h1 { text-shadow: -3px 2px 0 color-mix(in oklab, var(--c-accent) 85%, transparent); }
+.hero .moth { grid-column: 8 / span 5; grid-row: 1 / span 2; position: relative; align-self: start; }
+.moth svg { inline-size: 100%; block-size: auto; }
+.moth .pink { position: absolute; inset: 0; translate: 5px 4px; mix-blend-mode: multiply; }
+.hero .low { grid-column: 1 / span 5; grid-row: 2; display: grid; gap: var(--sp-5); justify-items: start; position: relative; z-index: 1; }
+.hero .low p { font-size: var(--fs-lg); line-height: 1.4; }
+.stamp { position: absolute; z-index: 2; inset-block-start: 8%; inset-inline-end: 38%; rotate: calc(8deg * var(--dir, 1)); border: 2px solid var(--c-ink); padding: 6px 12px; font-family: var(--f-display); font-weight: 700; font-size: 16px; line-height: 1.1; text-align: center; }
+.btn { display: inline-flex; align-items: center; block-size: 48px; padding-inline: 22px; background: var(--c-accent); color: var(--c-accent-ink); border-radius: var(--r-md); font-family: var(--f-display); font-weight: 700; font-size: 1.2rem; text-decoration: none; box-shadow: var(--shadow-1); transition: box-shadow var(--d-med) steps(2); }
+.btn:hover, .btn.is-hover { box-shadow: var(--shadow-2); }
+.btn.is-focus { outline: 2px solid var(--c-ink); outline-offset: 3px; }
+.books { display: grid; grid-template-columns: 3fr 9fr; gap: var(--sp-7); padding-block: var(--sp-7) var(--section-y); border-block-start: 1.5px solid var(--c-ink); }
+.books h2 { font-family: var(--f-display); font-weight: 900; font-size: var(--fs-2xl); line-height: .85; }
+.books ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); list-style: none; margin: 0; padding: 0; }
+.cover { aspect-ratio: 3 / 4; position: relative; background: var(--c-surface); outline: 1.5px solid var(--c-ink); display: grid; place-items: center; overflow: clip; }
+.cover::before { content: ""; position: absolute; inset: 14% 14% 40%; background: var(--c-accent); mix-blend-mode: multiply; }
+.cover b { position: relative; font-family: var(--f-display); font-weight: 900; font-size: 2.2rem; line-height: .8; color: var(--c-ink); text-align: center; mix-blend-mode: multiply; }
+.books li p { margin-block-start: var(--sp-3); }
+@media (max-width: 900px) {
+  .mast ul { flex-wrap: wrap; gap: var(--sp-3) var(--sp-5); }
+  .hero h1, .hero .moth, .hero .low { grid-column: 1 / -1; grid-row: auto; } .hero .moth { max-inline-size: 320px; justify-self: end; } .stamp { display: none; }
+  .over { inline-size: 80%; block-size: 22%; inset-block-start: 8%; }
+  .books { grid-template-columns: 1fr; } .books ul { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body class="bg-grain">
+<header class="mast container"><a class="wm" href="#" data-he="עש נייר">Paper Moth</a><ul class="lab" role="list"><li><a href="#" data-he="ספרים">Books</a></li><li><a href="#" data-he="זינים">Zines</a></li><li><a href="#" data-he="הדפסים">Prints</a></li><li><a href="#" data-he="אירועים">Events</a></li><li><a href="#" data-he="הסדנה">The press</a></li></ul></header>
+<main class="container">
+<section class="hero">
+  <div class="over" aria-hidden="true"></div>
+  <h1 data-he="מדפיסים בשני צבעים.">printed in two inks.</h1>
+  <figure class="moth" aria-label="Halftone moth, two-colour print" data-he-aria-label="עש בהדפס רשת, שני צבעים">
+    <svg viewBox="0 0 400 360" direction="ltr" aria-hidden="true"><defs><pattern id="ht" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="2.3" fill="var(--c-ink)"/></pattern><pattern id="ht2" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.3" fill="var(--c-ink)"/></pattern></defs>
+      <g id="moth"><path d="M200 120 C150 40 40 20 20 90 C8 140 70 180 170 170 C90 200 60 280 110 320 C150 350 190 280 200 220Z" fill="url(#ht)"/><path d="M200 120 C250 40 360 20 380 90 C392 140 330 180 230 170 C310 200 340 280 290 320 C250 350 210 280 200 220Z" fill="url(#ht)"/>
+        <path d="M200 110 C212 110 214 150 214 200 C214 250 206 270 200 270 C194 270 186 250 186 200 C186 150 188 110 200 110Z" fill="var(--c-ink)"/>
+        <circle cx="100" cy="100" r="26" fill="url(#ht2)"/><circle cx="300" cy="100" r="26" fill="url(#ht2)"/>
+        <path d="M196 112 C180 70 160 50 140 44 M204 112 C220 70 240 50 260 44" stroke="var(--c-ink)" stroke-width="3" fill="none"/></g></svg>
+    <svg class="pink" viewBox="0 0 400 360" direction="ltr" aria-hidden="true"><path d="M200 120 C150 40 40 20 20 90 C8 140 70 180 170 170 C90 200 60 280 110 320 C150 350 190 280 200 220Z M200 120 C250 40 360 20 380 90 C392 140 330 180 230 170 C310 200 340 280 290 320 C250 350 210 280 200 220Z" fill="var(--c-accent)" opacity=".85"/></svg>
+  </figure>
+  <p class="stamp" data-he-html="גיליון<br>מס׳ 14">Issue<br>no. 14</p>
+  <div class="low"><p data-he="חנות ספרים ובית דפוס ריזוגרף קטן ביפו. זינים, ספרי שירה והדפסים בכמות של 200 עותקים.">A bookshop and small risograph press in Jaffa. Zines, poetry and prints in runs of 200.</p><a class="btn" href="#" data-spec-btn data-he="לגיליון החדש">Get the new issue</a></div>
+</section>
+<section class="books">
+  <h2 data-he="חדש על המדף">new on the shelf</h2>
+  <ul role="list">
+    <li><div class="cover"><b data-he="ים פנימי">inland sea</b></div><p><span class="lab" data-he="ים פנימי">Inland Sea</span><br><span dir="ltr">₪ 60</span></p></li>
+    <li><div class="cover" style="--rot:2deg"><b data-he="ציפורי לילה">night birds</b></div><p><span class="lab" data-he="ציפורי לילה">Night Birds</span><br><span dir="ltr">₪ 45</span></p></li>
+    <li><div class="cover"><b data-he="מפה ידנית">hand map</b></div><p><span class="lab" data-he="מפה ידנית">Hand Map</span><br><span dir="ltr">₪ 35</span></p></li>
+  </ul>
+</section>
+</main>
+<section class="spec-system" data-spec-system data-display="two inks" data-display-he="שני צבעים"></section>
+<footer class="spec-foot"><span>Specimen · riso-two-ink · fictional press “Paper Moth”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script>document.documentElement.setAttribute('data-smooth', 'off');</script>
+<script src="../../runtime/core.js"></script>
+<script>
+/* signature: the pink drum prints 6px off, then snaps to its 2px offset in 3 steps */
+(function () { if (!window.gsap || SD.reduced()) return;
+  gsap.fromTo('.moth .pink', { x: 14 * SD.dir(), y: 10 }, { x: 5 * SD.dir(), y: 4, duration: .48, ease: 'steps(3)' });
+  gsap.fromTo('.over', { x: 18 * SD.dir() }, { x: 0, duration: .48, ease: 'steps(3)', delay: .1 });
+})();
+</script>
+</body>
+</html>

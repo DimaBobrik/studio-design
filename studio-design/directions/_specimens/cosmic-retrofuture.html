@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Cosmic Retrofuture · specimen</title>
+<meta name="he-title" content="Cosmic Retrofuture · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Sora:wght@300..600&family=VT323&family=Suez+One&family=Rubik:wght@300..500&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/cosmic-retrofuture.md */
+:root {
+  --c-canvas: oklch(18% 0.050 320); --c-surface: oklch(23% 0.055 320); --c-surface-2: oklch(29% 0.060 320);
+  --c-ink: oklch(92% 0.040 80); --c-ink-2: oklch(84% 0.045 75); --c-muted: oklch(70% 0.040 330);
+  --c-rule: oklch(36% 0.060 320); --c-accent: oklch(83% 0.15 85); --c-accent-ink: oklch(18% 0.050 320);
+  --c-focus: oklch(83% 0.15 85);
+  --sunset: linear-gradient(180deg, oklch(83% 0.15 85), oklch(68% 0.19 45)); /* two-stop stripe, used as bands of 4 stripes */
+  --f-display: "Caprasimo", "Suez One", Georgia, serif; --f-body: "Sora", "Rubik", system-ui, sans-serif;
+  --f-mono: "VT323", "Rubik", monospace; --f-outlier: "VT323", monospace;
+  --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-base: 1.0625rem; --fs-lg: 1.25rem; --fs-xl: clamp(1.7rem, 1.4rem + 1.2vw, 2.4rem);
+  --fs-2xl: clamp(2.5rem, 1.7rem + 3vw, 4.25rem); --fs-3xl: clamp(3.2rem, 2rem + 5vw, 6.5rem);
+  --fs-display: clamp(3.5rem, 1.5rem + 6.6vw, 7.75rem);
+  --lh-tight: 1.0; --lh-body: 1.6; --tr-display: -0.01em; --tr-label: 0.02em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 36px; --sp-7: 56px; --sp-8: 88px; --sp-9: 136px; --sp-10: 200px;
+  --section-y: clamp(80px, 7vw + 32px, 184px); --gutter: clamp(18px, 3vw, 48px); --maxw: 1360px;
+  --r-sm: 10px; --r-md: 24px; --r-lg: 40px; /* CRT screen */ --r-pill: 999px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); --ease-in: cubic-bezier(0.64, 0, 0.78, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --d-fast: 160ms; --d-med: 500ms; --d-slow: 1200ms;
+  --shadow-1: 0 0 0 1px var(--c-rule); --shadow-2: 0 0 0 1px var(--c-rule), 0 40px 90px -40px oklch(68% 0.19 45 / 0.35);
+}
+:root[dir="rtl"] { --tr-display: 0; --lh-tight: 1.1; }
+</style>
+<link rel="stylesheet" href="../../runtime/fx/bg-kit.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-weight: 300; font-size: var(--fs-base); line-height: var(--lh-body); }
+[lang="he"] { --f-display: "Suez One", serif; --f-body: "Rubik", sans-serif; }
+.stars { position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image: radial-gradient(1.4px 1.4px at 12% 18%, var(--c-ink) 50%, transparent 51%), radial-gradient(1px 1px at 28% 72%, var(--c-ink-2) 50%, transparent 51%), radial-gradient(2px 2px at 44% 12%, var(--c-ink) 50%, transparent 51%), radial-gradient(1px 1px at 63% 38%, var(--c-ink-2) 50%, transparent 51%), radial-gradient(1.4px 1.4px at 77% 8%, var(--c-ink) 50%, transparent 51%), radial-gradient(1px 1px at 88% 64%, var(--c-ink-2) 50%, transparent 51%), radial-gradient(1px 1px at 6% 88%, var(--c-ink-2) 50%, transparent 51%), radial-gradient(1.6px 1.6px at 55% 90%, var(--c-ink) 50%, transparent 51%), radial-gradient(1px 1px at 36% 44%, var(--c-muted) 50%, transparent 51%), radial-gradient(1px 1px at 94% 28%, var(--c-muted) 50%, transparent 51%);
+  background-size: 480px 420px; opacity: .8; }
+.nav { position: relative; z-index: 3; display: flex; align-items: center; gap: var(--sp-6); block-size: 72px; font-weight: 400; font-size: var(--fs-sm); }
+.nav .wm { font-family: var(--f-display); font-size: 1.6rem; text-decoration: none; display: flex; align-items: center; gap: 10px; margin-inline-end: auto; }
+.mark { inline-size: 22px; display: grid; gap: 2px; } .mark i { display: block; background: var(--sunset); border-radius: 2px; }
+.mark i:nth-child(1) { block-size: 5px; } .mark i:nth-child(2) { block-size: 4px; } .mark i:nth-child(3) { block-size: 3px; } .mark i:nth-child(4) { block-size: 2px; }
+.nav ul { display: flex; gap: var(--sp-6); list-style: none; margin: 0; padding: 0; } .nav a { text-decoration: none; }
+.btn { display: inline-flex; align-items: center; block-size: 52px; padding-inline: 28px; border-radius: var(--r-pill); background: var(--c-accent); color: var(--c-accent-ink); font-weight: 600; text-decoration: none; position: relative; overflow: clip; isolation: isolate; }
+.btn::after { content: ""; position: absolute; inset: auto 0 0; block-size: 100%; z-index: -1; background: linear-gradient(transparent 0 40%, oklch(68% .19 45) 40% 52%, transparent 52% 60%, oklch(74% .18 60) 60% 70%, transparent 70% 76%, oklch(78% .17 70) 76% 84%, transparent 84%); translate: 0 100%; transition: translate var(--d-med) var(--ease-out); }
+.btn:hover::after, .btn.is-hover::after { translate: 0 0; }
+.btn.is-focus { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.btn--ring { background: transparent; color: var(--c-ink); box-shadow: inset 0 0 0 1.5px var(--c-ink); }
+.hero { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--sp-5); align-items: center; min-block-size: calc(100dvh - 72px); padding-block: var(--sp-5) var(--sp-8); }
+.title { grid-column: 1 / span 7; grid-row: 1; position: relative; }
+.stripes { position: absolute; inset-inline: -40px -10%; inset-block-start: 38%; display: grid; gap: 10px; z-index: -1; }
+.stripes i { display: block; background: var(--sunset); border-radius: 2px; }
+.stripes i:nth-child(1) { block-size: 12px; } .stripes i:nth-child(2) { block-size: 9px; } .stripes i:nth-child(3) { block-size: 6px; } .stripes i:nth-child(4) { block-size: 3px; }
+.hero h1 { font-family: var(--f-display); font-weight: 400; font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); text-shadow: 0 4px 0 oklch(83% .15 85 / .9); }
+.hero .low { grid-column: 1 / span 5; grid-row: 2; display: grid; gap: var(--sp-5); justify-items: start; }
+.hero .low p { font-size: var(--fs-lg); color: var(--c-ink-2); line-height: 1.5; }
+.crt { grid-column: 8 / span 5; grid-row: 1 / span 2; background: var(--c-surface-2); border-radius: 48px; padding: 22px 22px 70px; box-shadow: var(--shadow-2); position: relative; }
+.screen { aspect-ratio: 4 / 3; border-radius: var(--r-lg); overflow: clip; position: relative; background: radial-gradient(ellipse at 50% 45%, oklch(34% .08 300), oklch(14% .05 310) 75%); --bg-line: oklch(0% 0 0 / .35); }
+.screen svg { position: absolute; inset: 12% 8%; inline-size: 84%; block-size: 76%; }
+.screen .ch { position: absolute; inset-block-start: 14px; inset-inline-start: 20px; font-family: var(--f-mono); font-size: 28px; color: var(--c-accent); line-height: 1; z-index: 2; }
+.screen .tc { position: absolute; inset-block-end: 12px; inset-inline-end: 20px; font-family: var(--f-mono); font-size: 22px; color: var(--c-ink-2); z-index: 2; }
+.crt .knobs { position: absolute; inset-block-end: 16px; inset-inline: 30px; display: flex; align-items: center; gap: 16px; }
+.knob { inline-size: 40px; block-size: 40px; border-radius: 50%; background: var(--c-accent); position: relative; box-shadow: inset 0 -4px 0 oklch(68% .19 45); }
+.knob::after { content: ""; position: absolute; inset-block-start: 5px; inset-inline-start: calc(50% - 1.5px); inline-size: 3px; block-size: 12px; border-radius: 2px; background: var(--c-accent-ink); rotate: 40deg; transform-origin: 50% 15px; }
+.crt .knobs span { font-family: var(--f-mono); font-size: 20px; color: var(--c-muted); }
+.crt .knobs .dots { margin-inline-start: auto; display: flex; gap: 6px; } .dots i { inline-size: 8px; block-size: 8px; border-radius: 50%; background: var(--c-rule); } .dots i.on { background: var(--c-accent); }
+.orbit { position: relative; z-index: 1; padding-block: var(--sp-8) var(--section-y); display: grid; grid-template-columns: 5fr 7fr; gap: var(--sp-7); align-items: center; }
+.orbit h2 { font-family: var(--f-display); font-weight: 400; font-size: var(--fs-2xl); line-height: 1.02; }
+.orbit p { color: var(--c-ink-2); margin-block-start: var(--sp-5); }
+.orbit svg { inline-size: 100%; }
+@media (max-width: 900px) {
+  .nav ul { display: none; }
+  .title, .hero .low, .crt { grid-column: 1 / -1; grid-row: auto; } .crt { margin-block: var(--sp-5); padding-block-end: 64px; }
+  .orbit { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div style="position: relative">
+<div class="stars" aria-hidden="true"></div>
+<header class="nav container"><a class="wm" href="#"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Orbiter</a><ul role="list"><li><a href="#" data-he="סינתיסייזרים">Synths</a></li><li><a href="#" data-he="ערוצים">Channels</a></li><li><a href="#" data-he="משווקים">Dealers</a></li></ul><a href="#" data-he="סל (1)">Cart (1)</a></header>
+<main class="container">
+<section class="hero">
+  <div class="title"><div class="stripes" aria-hidden="true"><i></i><i></i><i></i><i></i></div><h1 data-he="צלילים מהמסלול הרחוק.">Sounds from the far orbit.</h1></div>
+  <div class="low"><p data-he="Nova-74 הוא סינתיסייזר אנלוגי עם ארבעה מתנדים, נבנה ביד בבאר שבע. כוונו את הערוץ כדי לשמוע אותו.">Nova-74 is a four-oscillator analogue synthesizer, built by hand in Be’er Sheva. Tune the channel to hear it.</p>
+    <div style="display:flex; gap: var(--sp-3)"><a class="btn" href="#" data-spec-btn data-he="להזמנה · ₪ 6,900">Order · ₪ 6,900</a><a class="btn btn--ring" href="#" data-he="לערוצים">Tune in</a></div></div>
+  <div class="crt">
+    <div class="screen bg-scanlines" style="--bg-mask: linear-gradient(#000 0 0); --bg-size: 3px">
+      <span class="ch" dir="ltr">CH 03</span><span class="tc" dir="ltr">00:14:22</span>
+      <svg viewBox="0 0 400 240" direction="ltr" aria-label="Nova-74 synthesizer, top view" role="img">
+        <rect x="10" y="40" width="380" height="150" rx="14" fill="oklch(92% .04 80)"/>
+        <rect x="10" y="40" width="380" height="36" rx="14" fill="oklch(30% .06 320)"/>
+        <text x="28" y="64" font-family="Caprasimo, serif" font-size="18" fill="oklch(83% .15 85)">Nova-74</text>
+        <g fill="oklch(30% .06 320)"><circle cx="220" cy="58" r="9"/><circle cx="250" cy="58" r="9"/><circle cx="280" cy="58" r="9"/><circle cx="310" cy="58" r="9"/><circle cx="340" cy="58" r="9"/></g>
+        <g fill="oklch(83% .15 85)"><circle cx="220" cy="58" r="3"/><circle cx="250" cy="58" r="3"/><circle cx="280" cy="58" r="3"/><circle cx="310" cy="58" r="3"/><circle cx="340" cy="58" r="3"/></g>
+        <g id="keys"></g>
+        <path d="M30 222 H370" stroke="oklch(68% .19 45)" stroke-width="3"/><path d="M60 232 H340" stroke="oklch(83% .15 85)" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="knobs"><span class="knob" role="slider" aria-label="Channel" aria-valuenow="3" aria-valuemin="1" aria-valuemax="5" tabindex="0" data-he-aria-label="ערוץ"></span><span dir="ltr">TUNE</span><span class="dots" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i></span></div>
+  </div>
+</section>
+<section class="orbit">
+  <div><h2 data-he="ארבעה מתנדים, מסלול אחד.">Four oscillators, one orbit.</h2><p data-he="כל טבעת היא שלב בשרשרת הצליל, מהמתנד ועד הפילטר.">Each ring is a stage in the signal chain, from oscillator to filter.</p></div>
+  <svg viewBox="0 0 600 360" direction="ltr" aria-label="Signal chain as orbit rings" role="img"><g fill="none" stroke="var(--c-rule)"><ellipse cx="300" cy="180" rx="280" ry="150"/><ellipse cx="300" cy="180" rx="200" ry="106"/><ellipse cx="300" cy="180" rx="120" ry="64"/></g><circle cx="300" cy="180" r="30" fill="var(--c-accent)"/>
+    <g font-family="Sora, Rubik, sans-serif" font-size="14" fill="var(--c-ink)"><circle cx="580" cy="180" r="7" fill="var(--c-ink)"/><text x="560" y="210" text-anchor="end">4 × VCO</text><circle cx="130" cy="110" r="7" fill="var(--c-ink)"/><text x="146" y="104">24 dB ladder</text><circle cx="360" cy="236" r="7" fill="var(--c-ink)"/><text x="376" y="258">spring reverb</text></g></svg>
+</section>
+</main>
+</div>
+<section class="spec-system" data-spec-system data-extra="--sunset" data-display="far orbit" data-display-he="המסלול הרחוק"></section>
+<footer class="spec-foot"><span>Specimen · cosmic-retrofuture · fictional maker “Orbiter”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script>
+(function () { var g = document.getElementById('keys'), o = '';
+  for (var i = 0; i < 22; i++) o += '<rect x="' + (24 + i * 16) + '" y="96" width="14" height="84" rx="2" fill="oklch(98% .02 80)" stroke="oklch(70% .04 80)"/>';
+  [1, 2, 4, 5, 6, 8, 9, 11, 12, 13, 15, 16, 18, 19, 20].forEach(function (k) { o += '<rect x="' + (24 + k * 16 - 5) + '" y="96" width="10" height="50" rx="2" fill="oklch(26% .05 320)"/>'; });
+  g.innerHTML = o; })();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script>
+/* channel switch: noise burst + number roll (knob / keys) */
+(function () { if (!window.gsap || SD.reduced()) return;
+  var ch = document.querySelector('.screen .ch'), sc = document.querySelector('.screen svg'), n = 3;
+  function tune() { n = n % 5 + 1; gsap.fromTo(sc, { opacity: .2, filter: 'contrast(3) blur(1px)' }, { opacity: 1, filter: 'none', duration: .2, ease: 'steps(4)' }); ch.textContent = 'CH 0' + n; }
+  document.querySelector('.knob').addEventListener('click', tune);
+  document.querySelector('.knob').addEventListener('keydown', function (e) { if (e.key === 'ArrowRight' || e.key === 'ArrowUp') tune(); });
+})();
+</script>
+</body>
+</html>

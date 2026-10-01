@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>magnetic · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Assistant:wght@300..800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<style>
+  /* Direction: soft wellness clinic, clay + sage */
+  :root {
+    --c-canvas: oklch(95% 0.02 60); --c-surface: oklch(92% 0.03 55); --c-surface-2: oklch(86% 0.05 50);
+    --c-ink: oklch(27% 0.03 40); --c-ink-2: oklch(40% 0.03 40); --c-muted: oklch(55% 0.03 45); --c-rule: oklch(83% 0.03 50);
+    --c-accent: oklch(55% 0.12 38); --c-accent-ink: oklch(97% 0.015 60); --c-focus: oklch(45% 0.1 150);
+    --f-display: "DM Serif Display", "Assistant", Georgia, serif; --f-body: "DM Sans", "Assistant", system-ui, sans-serif;
+  }
+  .wrap { min-block-size: 100svh; display: grid; grid-template-rows: auto 1fr auto; }
+  header.top { display: flex; justify-content: space-between; align-items: center; padding-block: var(--sp-5); }
+  header.top b { font-family: var(--f-display); font-size: var(--fs-xl); font-weight: 400; }
+  .icons { display: flex; gap: var(--sp-2); }
+  .icon { inline-size: 48px; block-size: 48px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--c-rule); color: var(--c-ink); background: color-mix(in oklab, var(--c-canvas) 60%, transparent); }
+  .icon svg { inline-size: 18px; block-size: 18px; }
+  .cta { display: grid; gap: var(--sp-7); align-content: center; padding-block: var(--sp-8); }
+  @media (min-width: 900px) { .cta { grid-template-columns: 1.3fr 1fr; align-items: center; } }
+  .cta h1 { font-size: var(--fs-display); font-weight: 400; line-height: 0.98; letter-spacing: -0.02em; }
+  .cta h1 em { color: var(--c-accent); }
+  .cta p { color: var(--c-ink-2); font-size: var(--fs-lg); max-inline-size: 36ch; margin-block-start: var(--sp-5); }
+  .round { justify-self: center; inline-size: clamp(180px, 22vw, 260px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; text-align: center;
+    background: var(--c-accent); color: var(--c-accent-ink); text-decoration: none; font-weight: 500; font-size: var(--fs-lg); box-shadow: 0 30px 60px -20px color-mix(in oklab, var(--c-accent) 60%, transparent); }
+  .round span { display: block; max-inline-size: 9ch; line-height: 1.15; }
+  .links { display: flex; flex-wrap: wrap; gap: var(--sp-3); padding-block: var(--sp-6); border-block-start: 1px solid var(--c-rule); }
+  .pill { display: inline-flex; padding: 12px 20px; border-radius: var(--r-pill); border: 1px solid var(--c-ink); color: var(--c-ink); text-decoration: none; font-weight: 500; }
+  .pill span { display: inline-block; }
+</style>
+</head>
+<body>
+<div class="container wrap">
+  <header class="top">
+    <b data-he="מרפאת שקד">Shaked Clinic</b>
+    <nav class="icons" aria-label="Social" data-he-aria-label="רשתות" data-fx="magnetic" data-strength="0.4" data-radius="30">
+      <a class="icon" href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor"/></svg></a>
+      <a class="icon" href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></a>
+      <a class="icon" href="#" aria-label="Email" data-he-aria-label="אימייל"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 6.5 12 13l8.5-6.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    </nav>
+  </header>
+  <section class="cta">
+    <div>
+      <h1 data-he-html="פיזיותרפיה <em>שמתחילה בהקשבה</em>">Physiotherapy that <em>starts by listening</em></h1>
+      <p data-he="פגישה ראשונה של 60 דקות, בלי המתנה, בקליניקה ברחובות או בבית שלכם.">A first 60-minute session with no waiting list, at the Rehovot clinic or at your home.</p>
+    </div>
+    <a class="round" href="#" data-fx="magnetic" data-strength="0.3" data-label="0.8" data-radius="90"><span data-magnetic-label data-he="קביעת תור">Book a session</span></a>
+  </section>
+  <nav class="links" aria-label="Treatments" data-he-aria-label="טיפולים" data-fx="magnetic" data-strength="0.25" data-radius="24">
+    <a class="pill" href="#"><span data-he="כאבי גב">Back pain</span></a>
+    <a class="pill" href="#"><span data-he="שיקום אחרי ניתוח">Post-surgery rehab</span></a>
+    <a class="pill" href="#"><span data-he="פציעות ספורט">Sports injuries</span></a>
+    <a class="pill" href="#"><span data-he="רצפת אגן">Pelvic floor</span></a>
+  </nav>
+</div>
+<script src="_demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/magnetic.js"></script>
+</body>
+</html>

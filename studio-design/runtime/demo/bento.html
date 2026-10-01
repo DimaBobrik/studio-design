@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bento · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=Heebo:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/bento.css">
+<style>
+  :root {
+    --c-canvas: oklch(15% 0.008 250); --c-surface: oklch(19.5% 0.01 250); --c-surface-2: oklch(24% 0.012 250);
+    --c-ink: oklch(96% 0.005 250); --c-ink-2: oklch(80% 0.01 250); --c-muted: oklch(64% 0.012 250); --c-rule: oklch(29% 0.012 250);
+    --c-accent: oklch(88% 0.19 128); --c-accent-ink: oklch(18% 0.02 128); --c-focus: oklch(88% 0.19 128);
+    --f-display: "Space Grotesk", "Heebo", system-ui, sans-serif; --f-body: "Inter", "Heebo", system-ui, sans-serif; --f-mono: "JetBrains Mono", "Heebo", ui-monospace, monospace;
+    --r-lg: 22px; color-scheme: dark;
+  }
+  .head { display: grid; gap: var(--sp-4); margin-block-end: var(--sp-7); grid-template-columns: 1.3fr 1fr; align-items: end; }
+  .head h2 { font-size: var(--fs-3xl); font-weight: 500; }
+  .head p { color: var(--c-ink-2); max-inline-size: 40ch; justify-self: end; }
+  .eyebrow { font-family: var(--f-mono); font-size: var(--fs-xs); color: var(--c-accent); letter-spacing: var(--tr-label); text-transform: uppercase; }
+  @media (max-width: 800px) { .head { grid-template-columns: 1fr; } .head p { justify-self: start; } }
+  /* mini visuals */
+  .cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-block-start: auto; }
+  .cal span { aspect-ratio: 1; border-radius: 8px; background: var(--c-surface-2); font: 500 11px/1 var(--f-mono); color: var(--c-muted); display: grid; place-items: center; }
+  .cal span.b { background: color-mix(in oklab, var(--c-accent) 22%, var(--c-surface-2)); color: var(--c-ink); }
+  .cal span.a { background: var(--c-accent); color: var(--c-accent-ink); }
+  .stat { font-family: var(--f-display); font-size: clamp(3.5rem, 6vw, 5.5rem); line-height: .9; letter-spacing: -0.04em; margin-block-start: auto; }
+  .stat small { font-size: .35em; color: var(--c-accent); letter-spacing: 0; vertical-align: top; }
+  .notes { display: grid; gap: 10px; margin-block-start: var(--sp-3); }
+  .note { display: grid; grid-template-columns: 32px 1fr auto; gap: 10px; align-items: center; background: var(--c-surface-2); border-radius: 14px; padding: 10px 12px; font-size: var(--fs-xs); }
+  .note i { inline-size: 32px; block-size: 32px; border-radius: 10px; background: color-mix(in oklab, var(--c-accent) 25%, transparent); display: grid; place-items: center; font-style: normal; color: var(--c-accent); font-weight: 600; }
+  .note b { display: block; font-weight: 500; color: var(--c-ink); font-size: var(--fs-sm); }
+  .note time { color: var(--c-muted); font-family: var(--f-mono); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-block-start: auto; }
+  .chips span { border: 1px solid var(--c-rule); border-radius: var(--r-pill); padding: 6px 12px; font-size: var(--fs-xs); color: var(--c-ink-2); }
+  .bars { display: flex; align-items: end; gap: 6px; block-size: 90px; margin-block-start: auto; }
+  .bars span { flex: 1; border-radius: 6px 6px 2px 2px; background: var(--c-surface-2); block-size: var(--h); }
+  .bars span:nth-last-child(-n+3) { background: var(--c-accent); }
+  .ico { inline-size: 40px; block-size: 40px; border-radius: 12px; border: 1px solid var(--c-rule); display: grid; place-items: center; color: var(--c-accent); }
+</style>
+</head>
+<body>
+<main class="section">
+  <div class="container">
+    <header class="head">
+      <div class="stack">
+        <p class="eyebrow" data-he="למה הלדן">Why Halden</p>
+        <h2 data-he="כל מה שהקליניקה צריכה, בלוח אחד שקט.">Everything a clinic runs on, in one quiet board.</h2>
+      </div>
+      <p data-he="פחות ביטולים, פחות טלפונים, יותר זמן עם מטופלים. הלדן מחבר תורים, תזכורות ותשלומים בלי להוסיף עוד מסך.">Fewer cancellations, fewer phone calls, more time with patients. Halden joins bookings, reminders and payments without adding another screen.</p>
+    </header>
+
+    <div class="sd-bento" data-fx="bento" data-layout="auto">
+      <article class="sd-bento__tile" data-size="large">
+        <p class="sd-bento__kicker" data-he="יומן">Calendar</p>
+        <h3 class="sd-bento__title" data-he="כל התורים, צוות אחד, תצוגה אחת">Every appointment, every practitioner, one view</h3>
+        <p class="sd-bento__text" data-he="גרירה לשינוי מועד, חסימת זמנים וחדרים משותפים. הכול מתעדכן אצל כל הצוות תוך שנייה.">Drag to reschedule, block rooms, share chairs. Changes reach the whole team in under a second.</p>
+        <div class="cal" aria-hidden="true">
+          <span>1</span><span>2</span><span class="b">3</span><span>4</span><span class="b">5</span><span>6</span><span>7</span>
+          <span class="b">8</span><span>9</span><span class="a">10</span><span class="b">11</span><span>12</span><span>13</span><span>14</span>
+          <span>15</span><span class="b">16</span><span>17</span><span class="b">18</span><span class="b">19</span><span>20</span><span>21</span>
+        </div>
+      </article>
+      <article class="sd-bento__tile">
+        <p class="sd-bento__kicker" data-he="אי-הגעה">No-shows</p>
+        <p class="stat" dir="ltr">−38<small>%</small></p>
+        <p class="sd-bento__text" data-he="ממוצע אצל 212 קליניקות בשנה הראשונה">Average across 212 clinics in their first year</p>
+      </article>
+      <a class="sd-bento__tile sd-bento__tile--media" data-size="tall" href="#stories">
+        <div class="sd-bento__media"><img src="https://picsum.photos/seed/clinicroom/700/1000" alt="" width="700" height="1000"></div>
+        <p class="sd-bento__kicker" data-he="סיפורי לקוחות">Customer stories</p>
+        <h3 class="sd-bento__title" data-he="איך מרפאת שיניים ביפו חסכה 11 שעות בשבוע">How a dental practice in Jaffa got back 11 hours a week</h3>
+      </a>
+      <article class="sd-bento__tile" data-size="tall">
+        <p class="sd-bento__kicker" data-he="תזכורות">Reminders</p>
+        <h3 class="sd-bento__title" data-he="וואטסאפ, SMS או מייל — לפי מה שהמטופל עונה">WhatsApp, SMS or email, whichever they answer</h3>
+        <div class="notes" aria-hidden="true">
+          <div class="note"><i>W</i><div><b data-he="נועה אישרה">Noa confirmed</b><span data-he="ניקוי שיניים · חמישי">Cleaning · Thursday</span></div><time>09:12</time></div>
+          <div class="note"><i>S</i><div><b data-he="דניאל שינה מועד">Daniel moved</b><span data-he="ביקורת · ראשון">Check-up · Sunday</span></div><time>10:40</time></div>
+          <div class="note"><i>@</i><div><b data-he="קבלה נשלחה">Receipt sent</b><span data-he="₪ 420 · אשראי">₪420 · card</span></div><time>11:05</time></div>
+        </div>
+      </article>
+      <article class="sd-bento__tile" data-size="wide">
+        <p class="sd-bento__kicker" data-he="הכנסות">Revenue</p>
+        <h3 class="sd-bento__title" data-he="תשלום מקדמה בעת ההזמנה">Deposits taken at booking</h3>
+        <div class="bars" aria-hidden="true"><span style="--h:30%"></span><span style="--h:42%"></span><span style="--h:38%"></span><span style="--h:51%"></span><span style="--h:48%"></span><span style="--h:60%"></span><span style="--h:58%"></span><span style="--h:72%"></span><span style="--h:86%"></span><span style="--h:100%"></span></div>
+      </article>
+      <article class="sd-bento__tile">
+        <span class="ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <h3 class="sd-bento__title sd-bento__push" data-he="מאובטח ברמה רפואית">Medical-grade privacy</h3>
+        <p class="sd-bento__text" data-he="הצפנה מלאה, שרתים באירופה, עמידה ב-GDPR">Encrypted end to end, EU hosting, GDPR-aligned</p>
+      </article>
+      <article class="sd-bento__tile" data-size="wide">
+        <p class="sd-bento__kicker" data-he="חיבורים">Integrations</p>
+        <h3 class="sd-bento__title" data-he="מתחבר למה שכבר עובד אצלכם">Plugs into what already works</h3>
+        <div class="chips"><span>Google Calendar</span><span>Outlook</span><span>WhatsApp Business</span><span>Stripe</span><span>PayPal</span><span>Zapier</span></div>
+      </article>
+      <article class="sd-bento__tile" data-size="wide">
+        <span class="ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 12h10M4 18h16"/></svg></span>
+        <h3 class="sd-bento__title sd-bento__push" data-he="עברית מהיסוד">Hebrew from the ground up</h3>
+        <p class="sd-bento__text" data-he="ממשק, הודעות וחשבוניות בימין-לשמאל">Interface, messages and invoices, right to left</p>
+      </article>
+    </div>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="_demo.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/bento.js"></script>
+</body>
+</html>

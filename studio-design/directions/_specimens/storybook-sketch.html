@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Storybook Sketch · specimen</title>
+<meta name="he-title" content="Storybook Sketch · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Fredoka:wght@400;500;600&family=Playpen+Sans+Hebrew:wght@400..800&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/storybook-sketch.md */
+:root {
+  --c-canvas: oklch(97.5% 0.010 230); --c-surface: oklch(99% 0.005 230); --c-surface-2: oklch(93% 0.025 230);
+  --c-ink: oklch(28% 0.012 260); --c-ink-2: oklch(38% 0.012 260); --c-muted: oklch(52% 0.012 260);
+  --c-rule: oklch(80% 0.05 235); /* feint lines */ --c-accent: oklch(66% 0.19 32); --c-accent-ink: oklch(22% 0.012 260);
+  --c-focus: oklch(55% 0.16 255);
+  --c-teal: oklch(70% 0.11 185); --c-pear: oklch(87% 0.15 110); --c-margin: oklch(68% 0.16 20); /* margin line */
+  --f-display: "Caveat Brush", "Playpen Sans Hebrew", cursive; --f-body: "Fredoka", system-ui, sans-serif;
+  --f-mono: ui-monospace, Menlo, monospace; --f-outlier: "Caveat Brush", cursive;
+  --fs-xs: 0.8125rem; --fs-sm: 0.9375rem; --fs-base: 1.125rem; --fs-lg: 1.375rem; --fs-xl: clamp(1.75rem, 1.4rem + 1.2vw, 2.4rem);
+  --fs-2xl: clamp(2.5rem, 1.7rem + 3vw, 4.25rem); --fs-3xl: clamp(3.2rem, 2rem + 5vw, 6.5rem);
+  --fs-display: clamp(3.5rem, 1.5rem + 7vw, 8rem);
+  --lh-tight: 1.0; --lh-body: 1.6; --tr-display: 0; --tr-label: 0.01em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 80px; --sp-9: 120px; --sp-10: 168px;
+  --section-y: clamp(64px, 6vw + 32px, 152px); --gutter: clamp(16px, 3vw, 44px); --maxw: 1240px;
+  --r-sm: 12px; --r-md: 24px; --r-lg: 48px; --r-pill: 999px;   /* contract radii stay plain lengths (modules calc/inset them) */
+  /* extra shape tokens (direction-only; apply them in project CSS, never feed them to --r-*): */
+  --shape-wobble-sm: 255px 12px 225px 12px / 12px 225px 12px 255px; /* hand-cut wobble: buttons, tags */
+  --shape-wobble-md: 18px 28px 22px 32px / 30px 18px 26px 20px;     /* cards */
+  --shape-wobble-lg: 40px 56px 44px 60px / 58px 40px 52px 44px;     /* photo frames, panels */
+  --ease-out: cubic-bezier(0.34, 1.56, 0.64, 1); /* spring: CTA + character only */ --ease-in: cubic-bezier(0.5, 0, 0.75, 0); --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+  --d-fast: 160ms; --d-med: 380ms; --d-slow: 800ms;
+  --shadow-1: 3px 4px 0 var(--c-ink); --shadow-2: 6px 7px 0 var(--c-ink);
+}
+body { background-image: repeating-linear-gradient(to bottom, transparent 0 31px, var(--c-rule) 31px 32px); } /* feint ruling; hide on dense sections */
+:root[dir="rtl"] { --shadow-1: -3px 4px 0 var(--c-ink); --shadow-2: -6px 7px 0 var(--c-ink); }
+</style>
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); }
+[lang="he"] { --f-display: "Playpen Sans Hebrew", cursive; }
+[lang="he"] :is(h1, .note, .wm) { font-weight: 700; }
+.page { max-inline-size: var(--maxw); margin-inline: auto; border-inline-start: 2px solid var(--c-margin); margin-inline-start: max(64px, (100vw - var(--maxw)) / 2); padding-inline: var(--sp-7) var(--gutter); }
+.nav { margin: 18px auto 0; inline-size: min(900px, calc(100% - 32px)); display: flex; align-items: center; gap: var(--sp-5); block-size: 60px; padding-inline: 22px 8px; background: var(--c-surface); border: 2px solid var(--c-ink); border-radius: var(--shape-wobble-md); box-shadow: var(--shadow-1); font-weight: 500; }
+.nav .wm { font-family: var(--f-display); font-size: 1.8rem; text-decoration: none; margin-inline-end: auto; line-height: 1; }
+.nav a { text-decoration: none; }
+.btn { display: inline-flex; align-items: center; block-size: 54px; padding-inline: 28px; background: var(--c-accent); color: var(--c-accent-ink); border: 2px solid var(--c-ink); border-radius: var(--shape-wobble-sm); box-shadow: var(--shadow-1); font-weight: 600; text-decoration: none; transition: box-shadow var(--d-med) var(--ease-out), rotate var(--d-med) var(--ease-out); }
+.btn:hover, .btn.is-hover { box-shadow: var(--shadow-2); rotate: -1deg; }
+.btn.is-focus { outline: 3px dashed var(--c-focus); outline-offset: 4px; }
+.nav .btn { block-size: 44px; padding-inline: 20px; }
+.hero { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--sp-5); padding-block: var(--sp-8) var(--sp-7); align-items: center; position: relative; }
+.hero h1 { grid-column: 1 / span 7; font-family: var(--f-display); font-weight: 400; font-size: var(--fs-display); line-height: var(--lh-tight); }
+.hero .lede { grid-column: 1 / span 6; font-size: var(--fs-lg); line-height: 1.5; }
+.hero .cta { grid-column: 1 / span 6; display: flex; gap: var(--sp-4); align-items: center; }
+.polaroid { grid-column: 8 / span 5; grid-row: 1 / span 3; background: var(--c-surface); border: 2px solid var(--c-ink); border-radius: var(--shape-wobble-lg); padding: 16px 16px 60px; rotate: calc(3deg * var(--dir, 1)); box-shadow: var(--shadow-2); position: relative; }
+[dir="rtl"] { --dir: -1; }
+.polaroid .slot { aspect-ratio: 4 / 3; border-radius: 26px 34px 28px 38px; --slot-bg: var(--c-pear); }
+.polaroid figcaption { position: absolute; inset-block-end: 14px; inset-inline-start: 22px; font-family: var(--f-display); font-size: 1.6rem; }
+.pip { position: absolute; inline-size: 150px; inset-block-end: -80px; inset-inline-start: -120px; }
+[dir="rtl"] .pip svg { transform: scaleX(-1); }
+.note { position: absolute; font-family: var(--f-display); font-size: 1.7rem; line-height: 1.05; color: var(--c-ink-2); inset-block-start: 2%; inset-inline-end: 4%; rotate: calc(-4deg * var(--dir, 1)); max-inline-size: 12ch; display: flex; gap: 6px; align-items: flex-end; }
+.note svg { inline-size: 70px; flex: none; }
+[dir="rtl"] .note svg { transform: scaleX(-1); }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); padding-block: var(--sp-7) var(--section-y); }
+.card { border: 2px solid var(--c-ink); border-radius: var(--shape-wobble-md); box-shadow: var(--shadow-1); padding: var(--sp-6); display: grid; gap: var(--sp-3); }
+.card:nth-child(2) { margin-block-start: var(--sp-7); rotate: calc(-1.5deg * var(--dir, 1)); }
+.card h3 { font-weight: 600; font-size: var(--fs-xl); line-height: 1.05; }
+.card .t { font-weight: 500; font-size: var(--fs-sm); }
+@media (max-width: 900px) {
+  .nav > a:not(.wm):not(.btn) { display: none; }
+  .page { margin-inline-start: 24px; padding-inline: var(--sp-5) var(--gutter); }
+  .hero h1, .hero .lede, .hero .cta, .polaroid { grid-column: 1 / -1; grid-row: auto; } .polaroid { margin-block-start: var(--sp-6); } .pip { inline-size: 90px; inset-inline-start: auto; inset-inline-end: -10px; inset-block-end: -30px; } .note { display: none; }
+  .cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header class="nav"><a class="wm" href="#" data-he="בלוט וינשוף">Acorn &amp; Owl</a><a href="#" data-he="הגן">Our garden</a><a href="#" data-he="יום אצלנו">A day here</a><a href="#" data-he="להורים">Parents</a><a class="btn" href="#" data-he="לתאם ביקור">Come visit</a></header>
+<main class="page">
+<section class="hero">
+  <h1 data-he="כאן לומדים בידיים.">Here we learn with our hands.</h1>
+  <p class="lede" data-he="גן ילדים קטן בחיפה לגילאי 3–6: 24 ילדים, שלוש גננות, גינת ירק אחת ובוץ בכמויות.">A small kindergarten in Haifa for ages 3 to 6: 24 children, three teachers, one vegetable garden and plenty of mud.</p>
+  <div class="cta"><a class="btn" href="#" data-spec-btn data-he="לתאם ביקור">Book a visit</a><a href="#" data-he="לוח היום שלנו">See our day</a></div>
+  <figure class="polaroid"><div class="slot"><span data-he="[צילום: ידיים של ילדים שותלות עגבניות בגינה, אור בוקר, באישור הורים]">[Photo: children's hands planting tomatoes, morning light, with consent]</span></div><figcaption data-he="הגינה, אפריל">The garden, April</figcaption>
+    <div class="pip" aria-hidden="true"><svg viewBox="0 0 150 150" id="pip"><g stroke="var(--c-ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M40 130 C20 120 18 70 40 52 C60 36 96 36 112 54 C132 76 128 122 108 132 C90 140 58 140 40 130Z" fill="var(--c-teal)"/>
+      <path d="M52 50 L46 30 L64 44 M100 44 L108 28 L112 50" fill="var(--c-teal)"/>
+      <circle cx="62" cy="78" r="13" fill="var(--c-surface)"/><circle cx="96" cy="78" r="13" fill="var(--c-surface)"/><circle class="eye" cx="64" cy="80" r="5" fill="var(--c-ink)"/><circle class="eye" cx="98" cy="80" r="5" fill="var(--c-ink)"/>
+      <path d="M74 92 L80 100 L86 92Z" fill="var(--c-accent)"/>
+      <path d="M118 90 C132 76 138 60 134 46" fill="none"/><path d="M128 44 L134 38 L140 46" fill="none"/>
+      <path d="M58 116 C70 122 88 122 100 116" fill="none" stroke-dasharray="4 6"/></g></svg></div></figure>
+  <p class="note" aria-hidden="true"><span data-he="זה פיפ. הוא גר כאן.">that's Pip. he lives here.</span><svg viewBox="0 0 70 40"><path d="M4 8 C20 30 44 34 62 22 M52 14 L64 22 L54 32" fill="none" stroke="var(--c-ink-2)" stroke-width="2.5" stroke-linecap="round"/></svg></p>
+</section>
+<section class="cards">
+  <article class="card" style="background: var(--c-teal)"><span class="t" dir="ltr">08:00</span><h3 data-he="מעגל בוקר">Morning circle</h3><p data-he="שירים, מזג האוויר ומה מבשלים היום.">Songs, the weather and what we cook today.</p></article>
+  <article class="card" style="background: var(--c-pear)"><span class="t" dir="ltr">10:30</span><h3 data-he="בגינה">In the garden</h3><p data-he="משקים, שותלים וסופרים תולעים.">Watering, planting and counting worms.</p></article>
+  <article class="card" style="background: var(--c-surface)"><span class="t" dir="ltr">13:00</span><h3 data-he="סיפור ומנוחה">Story and rest</h3><p data-he="ספר אחד, בקול, כל יום.">One book, read aloud, every day.</p></article>
+</section>
+</main>
+<section class="spec-system" data-spec-system data-extra="--c-teal,--c-pear,--c-margin" data-display="learn with our hands" data-display-he="לומדים בידיים"></section>
+<footer class="spec-foot"><span>Specimen · storybook-sketch · fictional kindergarten “Acorn &amp; Owl”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script>
+/* line boil on Pip (3 frames at 6fps, stepped) + a blink */
+(function () { if (!window.gsap || SD.reduced()) return;
+  gsap.to('#pip g', { rotate: 1.2, x: .6, duration: .5, ease: 'steps(3)', repeat: -1, yoyo: true, transformOrigin: '50% 90%' });
+  gsap.to('.eye', { scaleY: .1, transformOrigin: '50% 50%', duration: .08, repeat: -1, repeatDelay: 3, yoyo: true });
+})();
+</script>
+</body>
+</html>

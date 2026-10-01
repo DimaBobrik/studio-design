@@ -1,0 +1,90 @@
+/* studio-design · fx/bento.css — bento grid layout + spotlight / border-glow hover
+   Markup: <div class="sd-bento" data-fx="bento" data-layout="feature"> <article class="sd-bento__tile" data-size="wide">…</article> … </div>
+   Tile sizes (data-size): (none)=1x1 · wide=2x1 · tall=1x2 · large=2x2 · hero=3x2 · full=all columns
+   Layouts (data-layout on grid): auto (dense flow, sizes from tiles) · feature (tile 1 = 2x2) · mosaic (preset rhythm, ignores data-size) · rail (first tile tall sidebar) */
+.sd-bento {
+  --bento-cols: 4;
+  --bento-row: minmax(clamp(160px, 16vw, 230px), auto);
+  --bento-gap: var(--sp-4);
+  --bento-radius: var(--r-lg);
+  --bento-spot: color-mix(in oklab, var(--c-accent) 18%, transparent);
+  --bento-glow: color-mix(in oklab, var(--c-accent) 85%, var(--c-ink));
+  --bento-spot-size: 420px;
+  display: grid;
+  grid-template-columns: repeat(var(--bento-cols), minmax(0, 1fr));
+  grid-auto-rows: var(--bento-row);
+  grid-auto-flow: row dense;
+  gap: var(--bento-gap);
+}
+.sd-bento__tile {
+  --mx: -999px; --my: -999px;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  min-inline-size: 0;
+  padding: clamp(var(--sp-4), 2vw, var(--sp-6));
+  border-radius: var(--bento-radius);
+  background: var(--c-surface);
+  border: 1px solid var(--c-rule);
+  overflow: hidden;
+  color: var(--c-ink);
+  text-decoration: none;
+  transition: border-color var(--d-med) var(--ease-out), transform var(--d-med) var(--ease-out);
+}
+.sd-bento__tile[data-size="wide"]  { grid-column: span 2; }
+.sd-bento__tile[data-size="tall"]  { grid-row: span 2; }
+.sd-bento__tile[data-size="large"] { grid-column: span 2; grid-row: span 2; }
+.sd-bento__tile[data-size="hero"]  { grid-column: span 3; grid-row: span 2; }
+.sd-bento__tile[data-size="full"]  { grid-column: 1 / -1; }
+
+.sd-bento[data-layout="feature"] > .sd-bento__tile:first-child { grid-column: span 2; grid-row: span 2; }
+.sd-bento[data-layout="rail"] > .sd-bento__tile:first-child { grid-row: span 3; }
+/* mosaic: preset rhythm for 7-tile sets, repeats every 7 */
+.sd-bento[data-layout="mosaic"] > .sd-bento__tile { grid-column: auto; grid-row: auto; }
+.sd-bento[data-layout="mosaic"] > .sd-bento__tile:nth-child(7n+1) { grid-column: span 2; grid-row: span 2; }
+.sd-bento[data-layout="mosaic"] > .sd-bento__tile:nth-child(7n+4) { grid-row: span 2; }
+.sd-bento[data-layout="mosaic"] > .sd-bento__tile:nth-child(7n+6) { grid-column: span 2; }
+
+/* media tile: image fills, copy sits on a scrim */
+.sd-bento__media { position: absolute; inset: 0; z-index: -1; }
+.sd-bento__media img, .sd-bento__media video { inline-size: 100%; block-size: 100%; object-fit: cover; transition: transform 900ms var(--ease-out); }
+.sd-bento__tile:hover .sd-bento__media img, .sd-bento__tile:focus-visible .sd-bento__media img { transform: scale(1.04); }
+.sd-bento__tile--media { color: var(--c-on-media); justify-content: flex-end; }
+.sd-bento__tile--media::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, var(--c-media-scrim), transparent 60%); pointer-events: none; }
+
+/* spotlight (surface) + border glow (ring). Both driven by --mx/--my (px, tile-local) from bento.js on pointer:fine */
+.sd-bento__tile::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; border-radius: inherit;
+  background: radial-gradient(var(--bento-spot-size) circle at var(--mx) var(--my), var(--bento-spot), transparent 60%);
+  opacity: 0; transition: opacity var(--d-med) var(--ease-out);
+}
+.sd-bento__glow {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit; padding: 1px;
+  background: radial-gradient(calc(var(--bento-spot-size) * 0.6) circle at var(--mx) var(--my), var(--bento-glow), transparent 55%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0; transition: opacity var(--d-med) var(--ease-out);
+}
+.sd-bento.is-pointer .sd-bento__glow { opacity: 1; }
+.sd-bento__tile:hover::before { opacity: 1; }
+.sd-bento__tile:is(a, button):focus-visible { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.sd-bento__tile:is(a):hover { border-color: color-mix(in oklab, var(--c-accent) 40%, var(--c-rule)); }
+
+/* typographic helpers inside tiles */
+.sd-bento__kicker { font-size: var(--fs-xs); color: var(--c-muted); font-family: var(--f-mono, var(--f-body)); }
+.sd-bento__tile--media .sd-bento__kicker { color: var(--c-on-media); }
+.sd-bento__title { font-family: var(--f-display); font-size: var(--fs-lg); line-height: 1.15; letter-spacing: var(--tr-display); text-wrap: balance; }
+.sd-bento__tile[data-size="large"] .sd-bento__title, .sd-bento[data-layout="feature"] > .sd-bento__tile:first-child .sd-bento__title { font-size: var(--fs-xl); }
+.sd-bento__text { color: var(--c-ink-2); font-size: var(--fs-sm); max-inline-size: 44ch; }
+.sd-bento__tile--media .sd-bento__text { color: var(--c-on-media); }
+.sd-bento__push { margin-block-start: auto; }
+
+@media (max-width: 1024px) { .sd-bento { --bento-cols: 2; } .sd-bento__tile[data-size="hero"] { grid-column: span 2; } .sd-bento[data-layout="rail"] > .sd-bento__tile:first-child { grid-row: span 2; } }
+@media (max-width: 600px) {
+  .sd-bento { --bento-cols: 1; --bento-row: minmax(180px, auto); }
+  .sd-bento > .sd-bento__tile[class] { grid-column: auto; grid-row: auto; }
+  .sd-bento > .sd-bento__tile[data-size="tall"], .sd-bento > .sd-bento__tile[data-size="large"], .sd-bento[data-layout="feature"] > .sd-bento__tile:first-child, .sd-bento[data-layout="mosaic"] > .sd-bento__tile:nth-child(7n+1) { min-block-size: 320px; }
+}
+@media (hover: none) { .sd-bento__glow, .sd-bento__tile::before { display: none; } }

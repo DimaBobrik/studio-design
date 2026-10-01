@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bg-kit · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Rubik:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/bg-kit.css">
+<style>
+  /* Direction: product/dev-tool neutral, cobalt accent */
+  :root {
+    --c-canvas: oklch(98% 0.003 260); --c-surface: oklch(96% 0.005 260); --c-surface-2: oklch(86% 0.06 250);
+    --c-ink: oklch(19% 0.02 265); --c-ink-2: oklch(38% 0.02 265); --c-muted: oklch(55% 0.015 265); --c-rule: oklch(90% 0.006 260);
+    --c-accent: oklch(58% 0.2 262); --c-accent-ink: oklch(98% 0.01 260); --c-focus: oklch(58% 0.2 262);
+    --f-display: "Geist", "Rubik", system-ui, sans-serif; --f-body: "Geist", "Rubik", system-ui, sans-serif; --f-mono: "Geist Mono", ui-monospace, monospace;
+  }
+  .dark { --c-canvas: oklch(17% 0.02 265); --c-surface: oklch(21% 0.02 265); --c-surface-2: oklch(45% 0.12 250);
+    --c-ink: oklch(96% 0.005 260); --c-ink-2: oklch(80% 0.01 260); --c-muted: oklch(65% 0.015 260); --c-rule: oklch(30% 0.02 265);
+    --c-accent: oklch(66% 0.19 262); background: var(--c-canvas); color: var(--c-ink); color-scheme: dark; }
+  .hero { min-block-size: 78vh; display: grid; place-items: center; text-align: center; padding-block: var(--sp-9); background-color: var(--c-canvas); }
+  .hero h1 { font-size: var(--fs-3xl); font-weight: 560; letter-spacing: -0.04em; max-inline-size: 16ch; margin-inline: auto; }
+  .hero p { color: var(--c-ink-2); font-size: var(--fs-lg); max-inline-size: 44ch; margin: var(--sp-5) auto 0; }
+  .eyebrow { font: 500 var(--fs-xs)/1 var(--f-mono); color: var(--c-accent); letter-spacing: 0.04em; }
+  .tiles { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); padding-block: var(--sp-8); }
+  .tile { min-block-size: 260px; border-radius: var(--r-lg); border: 1px solid var(--c-rule); background-color: var(--c-surface); display: grid; align-content: end; padding: var(--sp-5); }
+  .tile.dark { border-color: var(--c-rule); }
+  .tile code { font: 500 var(--fs-sm)/1.2 var(--f-mono); }
+  .tile p { font-size: var(--fs-sm); color: var(--c-muted); margin-block-start: var(--sp-1); }
+  .section-title { display: flex; justify-content: space-between; align-items: end; gap: var(--sp-5); padding-block-start: var(--sp-8); }
+  .section-title h2 { font-size: var(--fs-2xl); font-weight: 560; letter-spacing: -0.03em; }
+  .cards { display: grid; gap: var(--sp-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); padding-block: var(--sp-6) var(--sp-9); }
+  .card { border-radius: var(--r-lg); padding: var(--sp-6) var(--sp-5); background: var(--c-surface); border: 1px solid var(--c-rule); min-block-size: 220px; display: grid; align-content: space-between; gap: var(--sp-5); }
+  .card h3 { font-size: var(--fs-lg); font-weight: 560; letter-spacing: -0.02em; }
+  .card p { color: var(--c-muted); font-size: var(--fs-sm); }
+  .card .k { font: 500 var(--fs-xs)/1 var(--f-mono); color: var(--c-accent); }
+</style>
+</head>
+<body>
+<main>
+  <section class="hero bg-host">
+    <div class="bg-layer bg-aurora-lite" style="--aurora-3: color-mix(in oklab, var(--c-accent) 25%, transparent)"></div>
+    <div class="bg-layer bg-grid" style="--bg-size: 56px"></div>
+    <div class="bg-layer bg-grain" style="--grain-opacity: .35"></div>
+    <div class="container">
+      <p class="eyebrow" data-he="bg-aurora-lite + bg-grid + bg-grain">bg-aurora-lite + bg-grid + bg-grain</p>
+      <h1 data-he="רקעים שעולים אפס קילובייט">Backgrounds that cost zero kilobytes</h1>
+      <p data-he="כל שכבה היא CSS טהור מהטוקנים. אפשר לערום כמה שרוצים בלי JavaScript.">Every layer is plain CSS built from tokens. Stack as many as you like without JavaScript.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="tiles">
+      <div class="tile bg-glow"><code dir="ltr">.bg-glow</code><p data-he="זוהר רדיאלי מהטוקנים">Radial glow from tokens</p></div>
+      <div class="tile bg-glow bg-glow--corner"><code dir="ltr">.bg-glow--corner</code><p data-he="פינה לוגית, מתהפכת ב-RTL">Logical corner, flips in RTL</p></div>
+      <div class="tile bg-grid"><code dir="ltr">.bg-grid</code><p data-he="רשת קווים עם מסכה">Masked line grid</p></div>
+      <div class="tile bg-dots"><code dir="ltr">.bg-dots</code><p data-he="מטריצת נקודות">Dot lattice</p></div>
+      <div class="tile bg-topo"><code dir="ltr">.bg-topo</code><p data-he="קווי גובה טופוגרפיים">Topographic contours</p></div>
+      <div class="tile bg-halftone" style="--bg-opacity: .16"><code dir="ltr">.bg-halftone</code><p data-he="רסטר הדפסה">Print halftone screen</p></div>
+      <div class="tile bg-scanlines"><code dir="ltr">.bg-scanlines</code><p data-he="קווי סריקה">Scanlines</p></div>
+      <div class="tile bg-grain" style="background-image: linear-gradient(135deg, var(--c-surface-2), var(--c-accent))"><code dir="ltr" style="color:var(--c-accent-ink)">.bg-grain</code><p style="color:var(--c-accent-ink)" data-he="גרעין על גרדיאנט">Grain over a gradient</p></div>
+      <div class="tile dark bg-aurora-lite"><code dir="ltr">.bg-aurora-lite</code><p data-he="בריכות צבע נעות, transform בלבד">Drifting pools, transform only</p></div>
+      <div class="tile dark bg-conic-sheen"><code dir="ltr">.bg-conic-sheen</code><p data-he="קרן מסתובבת">Rotating conic beam</p></div>
+      <div class="tile dark bg-grid bg-mask-bottom" style="--bg-size: 28px"><code dir="ltr">.bg-grid.bg-mask-bottom</code><p data-he="רשת צפופה, דעיכה למעלה">Dense grid, fades upward</p></div>
+      <div class="tile dark bg-halftone is-dark" style="--bg-opacity: .2"><code dir="ltr">.bg-halftone.is-dark</code><p data-he="רסטר בהיר על כהה">Light halftone on dark</p></div>
+    </div>
+  </div>
+
+  <section class="dark">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-he="bg-spotlight עם מסגרת מוארת">bg-spotlight with a lit rim</h2>
+        <p class="eyebrow">data-fx="bg-kit"</p>
+      </div>
+      <div class="cards" data-fx="bg-kit" data-reach="140">
+        <article class="card bg-spotlight bg-spotlight--rim"><span class="k">01</span><div><h3 data-he="תצוגה מקדימה לכל ענף">Preview every branch</h3><p data-he="כל pull request מקבל כתובת משלו תוך פחות מדקה.">Each pull request gets its own URL in under a minute.</p></div></article>
+        <article class="card bg-spotlight bg-spotlight--rim"><span class="k">02</span><div><h3 data-he="לוגים שאפשר לקרוא">Logs you can read</h3><p data-he="חיפוש מלא, סינון לפי בקשה, ושמירה של 30 יום.">Full-text search, per-request filters and 30-day retention.</p></div></article>
+        <article class="card bg-spotlight bg-spotlight--rim"><span class="k">03</span><div><h3 data-he="חזרה אחורה בלחיצה">One-click rollback</h3><p data-he="כל פריסה נשמרת, וחזרה לגרסה קודמת לוקחת שניות.">Every deploy is kept, and going back takes seconds.</p></div></article>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="_demo.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/bg-kit.js"></script>
+</body>
+</html>

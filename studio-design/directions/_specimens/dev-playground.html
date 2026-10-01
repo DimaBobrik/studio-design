@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Dev Playground · specimen</title>
+<meta name="he-title" content="Dev Playground · דוגמית">
+<!-- Fontshare faces loaded from the Fontshare CSS API (not redistributed here; self-host them in your own project, see runtime/README.md §10) -->
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,800,900&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Heebo:wght@400;800;900&family=Cousine:wght@400&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/dev-playground.md */
+:root {
+  --c-canvas: oklch(19% 0.010 60); --c-surface: oklch(24% 0.012 60); --c-surface-2: oklch(30% 0.014 60);
+  --c-ink: oklch(93% 0.030 90); --c-ink-2: oklch(82% 0.030 85); --c-muted: oklch(66% 0.020 70);
+  --c-rule: oklch(34% 0.014 60); --c-accent: oklch(75% 0.16 55); --c-accent-ink: oklch(19% 0.010 60);
+  --c-focus: oklch(80% 0.10 300);
+  --c-lilac: oklch(80% 0.10 300); --c-sky: oklch(80% 0.10 230); --c-candy: oklch(78% 0.14 350); /* shapes only */
+  --f-display: "Cabinet Grotesk", "Epilogue", "Heebo", system-ui, sans-serif; --f-body: "Figtree", "Heebo", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", "Cousine", ui-monospace, monospace; --f-outlier: "JetBrains Mono", monospace;
+  --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-base: 1.0625rem; --fs-lg: 1.3125rem; --fs-xl: clamp(1.7rem, 1.4rem + 1.2vw, 2.4rem);
+  --fs-2xl: clamp(2.6rem, 1.7rem + 3.4vw, 4.75rem); --fs-3xl: clamp(3.6rem, 2rem + 7vw, 9rem);
+  --fs-display: clamp(4.5rem, 0.8rem + 13vw, 14rem);
+  --lh-tight: 0.86; --lh-body: 1.55; --tr-display: -0.045em; --tr-label: 0.01em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 52px; --sp-8: 84px; --sp-9: 128px; --sp-10: 184px;
+  --section-y: clamp(72px, 7vw + 28px, 176px); --gutter: clamp(16px, 3vw, 44px); --maxw: 1440px;
+  --r-sm: 10px; --r-md: 20px; --r-lg: 32px; --r-pill: 999px;
+  --ease-out: cubic-bezier(0.34, 1.3, 0.64, 1); --ease-in: cubic-bezier(0.55, 0, 1, 0.45); --ease-in-out: cubic-bezier(0.68, -0.2, 0.32, 1.2);
+  --d-fast: 150ms; --d-med: 420ms; --d-slow: 900ms;
+  --shadow-1: 0 0 0 1px var(--c-rule); --shadow-2: 0 30px 60px -30px oklch(8% 0.01 60 / 0.9);
+}
+:root[dir="rtl"] { --lh-tight: 0.98; --tr-display: -0.01em; }
+</style>
+<link rel="stylesheet" href="../../runtime/fx/bg-kit.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); }
+[lang="he"] { --f-display: "Heebo", sans-serif; }
+.nav { position: absolute; z-index: 10; inset-block-start: 18px; inset-inline: 0; margin-inline: auto; inline-size: min(980px, calc(100% - 32px)); block-size: 56px; display: flex; align-items: center; gap: var(--sp-6); padding-inline: 22px 8px; border-radius: var(--r-pill); background: var(--c-surface); }
+.nav .wm { font-family: var(--f-display); font-weight: 800; font-size: 1.35rem; letter-spacing: -0.04em; text-decoration: none; }
+.nav ul { display: flex; gap: var(--sp-5); list-style: none; margin: 0 auto; padding: 0; font-size: var(--fs-sm); color: var(--c-ink-2); } .nav a { text-decoration: none; }
+.btn { display: inline-flex; align-items: center; block-size: 50px; padding-inline: 26px; border-radius: var(--r-pill); background: var(--c-accent); color: var(--c-accent-ink); font-weight: 600; text-decoration: none; transition: scale var(--d-med) var(--ease-out); }
+.btn:hover, .btn.is-hover { scale: 1.06 .94; }
+.btn.is-focus { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.btn--ring { background: transparent; color: var(--c-ink); box-shadow: inset 0 0 0 1.5px var(--c-ink); }
+.nav .btn { block-size: 42px; }
+.hero { position: relative; min-block-size: 100dvh; overflow: clip; display: grid; align-content: center; padding-block: 120px 60px; --grain-opacity: .3; }
+.word { font-family: var(--f-display); font-weight: 800; font-size: max(var(--fs-display), 19vw); line-height: var(--lh-tight); letter-spacing: var(--tr-display); text-align: center; white-space: nowrap; position: relative; z-index: 2; }
+.word span { display: inline-block; transform-origin: 50% 90%; }
+.word .alt { font-weight: 500; }
+.hero__low { position: relative; z-index: 3; display: grid; justify-items: center; gap: var(--sp-5); margin-block-start: var(--sp-6); text-align: center; }
+.hero__low p { max-inline-size: 40ch; font-size: var(--fs-lg); color: var(--c-ink-2); line-height: 1.4; }
+.hero__low .ctas { display: flex; gap: var(--sp-3); }
+.hero__low code { font-family: var(--f-mono); font-size: var(--fs-sm); color: var(--c-muted); }
+.shape { position: absolute; z-index: 1; cursor: grab; }
+.s-pill { inline-size: 210px; block-size: 84px; border-radius: 999px; background: var(--c-accent); inset-block-start: 20%; inset-inline-start: 6%; rotate: -18deg; z-index: 3; }
+.s-star { inline-size: 170px; inset-block-start: 14%; inset-inline-end: 9%; rotate: 12deg; z-index: 3; }
+.s-torus { inline-size: 150px; aspect-ratio: 1; border-radius: 50%; border: 38px solid var(--c-sky); inset-block-end: 16%; inset-inline-start: 12%; }
+.s-squig { inline-size: 220px; inset-block-end: 12%; inset-inline-end: 10%; z-index: 3; }
+.s-dot { inline-size: 56px; aspect-ratio: 1; border-radius: 50%; background: var(--c-lilac); inset-block-start: 22%; inset-inline-start: 38%; z-index: 3; }
+.pair { padding-block: var(--section-y); display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--sp-4); }
+.pair h2 { grid-column: 1 / -1; font-family: var(--f-display); font-weight: 800; font-size: var(--fs-2xl); line-height: .9; letter-spacing: -0.04em; margin-block-end: var(--sp-6); }
+pre { margin: 0; background: var(--c-surface); border-radius: var(--r-md); padding: var(--sp-6); font-family: var(--f-mono); font-size: 14px; line-height: 1.6; color: var(--c-ink-2); overflow-x: auto; }
+pre .k { color: var(--c-lilac); } pre .s { color: var(--c-accent); } pre .n { color: var(--c-sky); } pre .c { color: var(--c-muted); }
+.demo { border-radius: var(--r-md); box-shadow: var(--shadow-1); display: grid; place-items: center; position: relative; min-block-size: 280px; --bg-line: color-mix(in oklab, var(--c-ink) 6%, transparent); --bg-size: 24px; --bg-mask: linear-gradient(#000 0 0); }
+.demo .ball { inline-size: 72px; aspect-ratio: 1; border-radius: 50%; background: var(--c-candy); }
+.tiles { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); margin-block-start: var(--sp-6); }
+.tiles a { border-radius: var(--r-lg); padding: var(--sp-5); min-block-size: 150px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: var(--c-accent-ink); font-weight: 600; }
+.tiles b { font-family: var(--f-display); font-weight: 800; font-size: var(--fs-xl); letter-spacing: -0.03em; line-height: 1; }
+@media (max-width: 900px) {
+  .nav ul { display: none; } .nav { justify-content: space-between; }
+  .word { font-size: 25vw; } .s-pill { inline-size: 120px; block-size: 48px; } .s-star { inline-size: 90px; } .s-torus { inline-size: 80px; border-width: 20px; } .s-squig { inline-size: 120px; } .s-dot { display: none; }
+  .hero__low .ctas { flex-direction: column; } .pair { grid-template-columns: 1fr; } .tiles { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<header class="nav"><a class="wm" href="#">wobble</a><ul role="list"><li><a href="#" data-he="תיעוד">Docs</a></li><li><a href="#" data-he="דוגמאות">Showcase</a></li><li><a href="#" data-he="תוספים">Plugins</a></li><li><a href="#" data-he="מחירים">Pricing</a></li><li><a href="#">GitHub</a></li></ul><a class="btn" href="#" data-he="להתחיל">Get started</a></header>
+<main>
+<section class="hero bg-grain">
+  <h1 class="word" dir="ltr" aria-label="wobble"><span>w</span><span>o</span><span class="alt">b</span><span>b</span><span>l</span><span>e</span></h1>
+  <div class="shape s-pill" aria-hidden="true"></div>
+  <svg class="shape s-star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L61 36 L95 38 L68 58 L78 92 L50 72 L22 92 L32 58 L5 38 L39 36Z" fill="var(--c-lilac)" stroke-linejoin="round"/></svg>
+  <div class="shape s-torus" aria-hidden="true"></div>
+  <svg class="shape s-squig" viewBox="0 0 220 60" aria-hidden="true"><path d="M10 40 C30 0 50 0 70 30 S110 60 130 30 S170 0 190 30 S215 45 212 40" fill="none" stroke="var(--c-candy)" stroke-width="18" stroke-linecap="round"/></svg>
+  <div class="shape s-dot" aria-hidden="true"></div>
+  <div class="hero__low">
+    <p data-he="ספריית אנימציה קטנה עם פיזיקה של צעצוע. כל צורה בעמוד הזה אפשר לגרור ולזרוק.">A tiny animation library with toy-box physics. Every shape on this page can be dragged and flung.</p>
+    <div class="ctas"><a class="btn" href="#" data-spec-btn data-he="להתחיל">Get started</a><a class="btn btn--ring" href="#" data-spec-btn data-he="תיעוד">Read the docs</a></div>
+    <code dir="ltr">npm i wobble · 9.4 kB gzip</code>
+  </div>
+</section>
+<section class="pair container">
+  <h2 data-he="הקוד משמאל, התוצאה מימין.">The code on one side, the result on the other.</h2>
+  <pre dir="ltr"><span class="c">// this exact snippet runs in the tile →</span>
+<span class="k">gsap</span>.to(<span class="s">".ball"</span>, {
+  y: <span class="n">-90</span>,
+  ease: <span class="s">"elastic.out(1, 0.3)"</span>,
+  duration: <span class="n">1.4</span>,
+  repeat: <span class="n">-1</span>,
+  repeatDelay: <span class="n">.4</span>
+});</pre>
+  <div class="demo bg-dots"><div class="ball"></div></div>
+  <div class="tiles">
+    <a href="#" style="background:var(--c-accent)"><b data-he="קפיצות">Springs</b><span data-he="12 דוגמאות">12 demos</span></a>
+    <a href="#" style="background:var(--c-lilac)"><b data-he="גרירה">Drag</b><span data-he="8 דוגמאות">8 demos</span></a>
+    <a href="#" style="background:var(--c-sky)"><b data-he="טקסט">Text</b><span data-he="15 דוגמאות">15 demos</span></a>
+    <a href="#" style="background:var(--c-candy)"><b data-he="גלילה">Scroll</b><span data-he="9 דוגמאות">9 demos</span></a>
+  </div>
+</section>
+<section class="spec-system" data-spec-system data-extra="--c-lilac,--c-sky,--c-candy" data-display="wobble" data-display-he="מתנדנד"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · dev-playground (guarded) · fictional library “wobble”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Draggable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/InertiaPlugin.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script>
+(function () {
+  var rot = [-6, 4, -3, 7, -5, 3];
+  document.querySelectorAll('.word span').forEach(function (s, i) { s.style.rotate = rot[i] + 'deg'; if (i === 2) s.style.translate = '0 -.06em'; });
+  if (!window.gsap || SD.reduced()) return;
+  gsap.to('.ball', { y: -90, ease: 'elastic.out(1, 0.3)', duration: 1.4, repeat: -1, repeatDelay: .4 });
+  gsap.from('.word span', { yPercent: 60, rotate: function (i) { return (i % 2 ? 30 : -30); }, opacity: 0, duration: .9, ease: 'back.out(2.2)', stagger: .05 });
+  document.querySelectorAll('.word span').forEach(function (s) {
+    s.addEventListener('pointerenter', function () { gsap.fromTo(s, { scaleY: 1.25, scaleX: .85 }, { scaleY: 1, scaleX: 1, duration: .8, ease: 'elastic.out(1, .3)' }); });
+  });
+  if (window.Draggable) Draggable.create('.shape', { type: 'x,y', bounds: '.hero', inertia: !!window.InertiaPlugin });
+})();
+</script>
+</body>
+</html>

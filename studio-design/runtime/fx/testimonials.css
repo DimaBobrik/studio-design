@@ -1,0 +1,62 @@
+/* studio-design · fx/testimonials.css — 3-row capsule testimonial marquee + quote <dialog>
+   Without JS the source list renders as a readable grid of quotes (no content lost). */
+.sd-testi { --testi-cap-h: 72px; --testi-gap: var(--sp-5); --testi-fade: min(160px, 12vw); --testi-hatch: var(--c-ink); position: relative; }
+
+/* no-JS / reduced-data fallback: plain grid of quotes */
+.sd-testi__list { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); padding: 0; list-style: none; }
+.sd-testi__item { display: grid; grid-template-columns: 48px 1fr; gap: var(--sp-2) var(--sp-3); align-items: center; padding: var(--sp-5); border: 1px solid var(--c-rule); border-radius: var(--r-md); background: var(--c-surface); }
+.sd-testi__item img { inline-size: 48px; block-size: 48px; border-radius: 50%; object-fit: cover; }
+.sd-testi__item blockquote { grid-column: 1 / -1; margin: 0; }
+.sd-testi.is-ready .sd-testi__list { display: none; }
+
+/* band: hatch + edge fades (mask, so it works on any background) */
+.sd-testi__band { position: relative; display: grid; gap: var(--sp-6); padding-block: var(--sp-7); overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--testi-fade), #000 calc(100% - var(--testi-fade)), transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 var(--testi-fade), #000 calc(100% - var(--testi-fade)), transparent); }
+.sd-testi__band::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.1;
+  background: repeating-linear-gradient(315deg, var(--testi-hatch) 0 1px, transparent 0 50%) 0 0 / 10px 10px;
+  border-block: 1px solid var(--testi-hatch); }
+.sd-testi__row { display: flex; inline-size: max-content; will-change: transform; }
+.sd-testi__group { display: flex; gap: var(--testi-gap); padding-inline-end: var(--testi-gap); list-style: none; margin: 0; padding-block: 0; padding-inline-start: 0; }
+
+/* capsule */
+.sd-testi__cap { display: inline-flex; align-items: center; gap: var(--sp-4); block-size: var(--testi-cap-h); padding-block: var(--sp-2); padding-inline: var(--sp-2) var(--sp-6);
+  border-radius: var(--r-pill); background: var(--c-canvas); border: 1px solid var(--c-rule); box-shadow: var(--shadow-1); text-align: start; white-space: nowrap;
+  transition: transform var(--d-fast) var(--ease-out), border-color var(--d-fast), box-shadow var(--d-med) var(--ease-out); }
+.sd-testi__cap img { inline-size: calc(var(--testi-cap-h) - 16px); block-size: calc(var(--testi-cap-h) - 16px); border-radius: 50%; object-fit: cover; object-position: top; border: 1px solid var(--c-ink); transition: border-color var(--d-fast); flex: none; }
+.sd-testi__cap b { display: block; font-size: var(--fs-sm); font-weight: 650; line-height: 1.2; color: var(--c-ink); }
+.sd-testi__cap small { display: block; font-size: var(--fs-xs); color: var(--c-muted); line-height: 1.3; }
+.sd-testi__cap:hover, .sd-testi__cap:focus-visible { transform: scale(1.05); border-color: var(--c-accent); border-style: dashed; box-shadow: var(--shadow-2); }
+.sd-testi__cap:hover img, .sd-testi__cap:focus-visible img { border-color: var(--c-accent); }
+.sd-testi__cap:active { transform: scale(0.96); }
+
+/* pause control (WCAG 2.2.2) */
+.sd-testi__pause { position: relative; z-index: 2; margin-block-start: var(--sp-4); margin-inline: auto var(--gutter); inline-size: max-content; display: flex; align-items: center; gap: var(--sp-2);
+  padding: 6px 12px; border-radius: var(--r-pill); background: var(--c-canvas); border: 1px solid var(--c-rule); font-size: var(--fs-xs); color: var(--c-ink-2); }
+.sd-testi__pause svg { inline-size: 12px; block-size: 12px; }
+
+/* reduced motion: rows become native horizontal scrollers */
+.sd-testi.is-static .sd-testi__band { mask-image: none; -webkit-mask-image: none; }
+.sd-testi.is-static .sd-testi__row { inline-size: auto; justify-content: safe center; overflow-x: auto; scroll-snap-type: x proximity; padding-inline: var(--gutter); padding-block: var(--sp-2); }
+.sd-testi.is-static .sd-testi__cap { scroll-snap-align: start; }
+
+/* dialog — entry/exit purely in CSS (@starting-style + allow-discrete) */
+.sd-testi__dialog { inline-size: min(560px, calc(100vw - 32px)); max-block-size: calc(100dvh - 32px); padding: clamp(var(--sp-6), 5vw, var(--sp-7)); border: 2px solid var(--c-accent); border-radius: var(--r-lg);
+  background: var(--c-ink); color: var(--c-canvas); box-shadow: var(--shadow-2); text-align: center;
+  opacity: 0; transform: translateY(20px) scale(0.9);
+  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), overlay 200ms allow-discrete, display 200ms allow-discrete; }
+.sd-testi__dialog[open] { opacity: 1; transform: none; }
+@starting-style { .sd-testi__dialog[open] { opacity: 0; transform: translateY(20px) scale(0.9); } }
+.sd-testi__dialog::backdrop { background: oklch(15% 0.01 90 / 0.35); backdrop-filter: blur(10px); opacity: 0; transition: opacity 200ms, overlay 200ms allow-discrete, display 200ms allow-discrete; }
+.sd-testi__dialog[open]::backdrop { opacity: 1; }
+@starting-style { .sd-testi__dialog[open]::backdrop { opacity: 0; } }
+.sd-testi__dialog blockquote { margin: 0 0 var(--sp-6); font-family: var(--f-display); font-size: var(--fs-xl); line-height: 1.3; letter-spacing: var(--tr-display); text-wrap: balance; }
+.sd-testi__who { display: inline-flex; align-items: center; gap: var(--sp-3); text-align: start; }
+.sd-testi__who img { inline-size: 52px; block-size: 52px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid var(--c-accent); }
+.sd-testi__who b { display: block; }
+.sd-testi__who small { display: block; color: color-mix(in oklab, var(--c-canvas) 65%, var(--c-ink)); font-size: var(--fs-sm); }
+.sd-testi__close { position: absolute; inset-block-start: var(--sp-3); inset-inline-end: var(--sp-3); inline-size: 40px; block-size: 40px; border-radius: 50%; display: grid; place-items: center; color: color-mix(in oklab, var(--c-canvas) 60%, var(--c-ink)); transition: color var(--d-fast), background var(--d-fast); }
+.sd-testi__close:hover { color: var(--c-canvas); background: color-mix(in oklab, var(--c-canvas) 12%, transparent); }
+html:has(.sd-testi__dialog[open]) { overflow: hidden; }
+
+@media (max-width: 600px) { .sd-testi { --testi-cap-h: 60px; --testi-gap: var(--sp-4); } .sd-testi__band { gap: var(--sp-5); padding-block: var(--sp-6); } }

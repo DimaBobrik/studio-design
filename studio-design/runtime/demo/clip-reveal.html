@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>clip-reveal · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..700&family=Heebo:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/clip-reveal.css">
+<style>
+  /* Direction: quiet architecture studio, cool stone */
+  :root {
+    --c-canvas: oklch(95.5% 0.006 240); --c-surface: oklch(92% 0.008 240); --c-surface-2: oklch(87% 0.01 240);
+    --c-ink: oklch(21% 0.012 250); --c-ink-2: oklch(38% 0.012 250); --c-muted: oklch(55% 0.012 250); --c-rule: oklch(82% 0.01 240);
+    --c-accent: oklch(52% 0.07 145); --c-accent-ink: oklch(97% 0.005 240); --c-focus: oklch(52% 0.07 145);
+    --f-display: "Manrope", "Heebo", system-ui, sans-serif; --f-body: "Manrope", "Heebo", system-ui, sans-serif;
+    --tr-display: -0.045em;
+  }
+  .top { display: flex; justify-content: space-between; align-items: baseline; padding-block: var(--sp-5); font-size: var(--fs-sm); }
+  .top b { font-weight: 700; letter-spacing: -0.02em; font-size: var(--fs-base); }
+  .intro { display: grid; gap: var(--sp-5); padding-block: var(--sp-8) var(--sp-6); }
+  @media (min-width: 900px) { .intro { grid-template-columns: 7fr 4fr; align-items: end; } }
+  .intro h1 { font-size: var(--fs-3xl); font-weight: 500; line-height: 1; }
+  .intro p { color: var(--c-ink-2); max-inline-size: 36ch; }
+  .hero-img { aspect-ratio: 16 / 8; border-radius: var(--r-sm); }
+  @media (max-width: 700px) { .hero-img { aspect-ratio: 4 / 5; } }
+  .meta { display: flex; justify-content: space-between; font-size: var(--fs-xs); color: var(--c-muted); padding-block: var(--sp-3); letter-spacing: var(--tr-label); text-transform: uppercase; }
+  .pair { display: grid; gap: var(--sp-5); padding-block: var(--section-y); }
+  @media (min-width: 900px) { .pair { grid-template-columns: 5fr 1fr 6fr; align-items: end; } .pair > :last-child { grid-column: 3; } }
+  .pair figure .img { aspect-ratio: 4 / 5; }
+  .pair figure:last-child .img { aspect-ratio: 5 / 4; }
+  figcaption { display: flex; justify-content: space-between; gap: var(--sp-4); padding-block-start: var(--sp-3); font-size: var(--fs-sm); color: var(--c-ink-2); }
+  figcaption span:last-child { color: var(--c-muted); }
+  .band { padding-block: var(--sp-7); border-block: 1px solid var(--c-rule); display: grid; gap: var(--sp-5); }
+  @media (min-width: 900px) { .band { grid-template-columns: 4fr 8fr; } }
+  .band h2 { font-size: var(--fs-2xl); font-weight: 500; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); padding-block: var(--sp-7) var(--section-y); }
+  .trio figure { aspect-ratio: 3 / 4; border-radius: var(--r-sm); }
+  .center-img { aspect-ratio: 21 / 9; margin-block-end: var(--section-y); border-radius: var(--r-sm); }
+</style>
+</head>
+<body>
+<main class="container">
+  <nav class="top"><b data-he="אולפן גבעה">Studio Givah</b><span data-he="אדריכלות · פנים · נוף">Architecture · Interiors · Landscape</span></nav>
+  <section class="intro">
+    <h1 data-he="בתים שמקשיבים לאור של המקום">Houses that listen to the light of the site</h1>
+    <p data-he="אנחנו מתכננים מבני מגורים בגליל ובשפלה, עם חומרים מקומיים ומעט מאוד פעולות מיותרות.">We design homes in the Galilee and the Shephelah with local materials and very few unnecessary gestures.</p>
+  </section>
+  <figure data-fx="clip-reveal" data-direction="up" data-parallax="7" class="hero-img">
+    <img src="https://picsum.photos/seed/concretehouse/1800/900" alt="Concrete house with a deep overhang at dusk" data-he-alt="בית בטון עם גג בולט בשעת בין ערביים" width="1800" height="900">
+  </figure>
+  <div class="meta"><span data-he="בית בכרם, 2025">House in the vineyard, 2025</span><span data-he="240 מ״ר">240 m²</span></div>
+
+  <section class="pair">
+    <figure>
+      <div class="img" data-fx="clip-reveal" data-direction="inline-start"><img src="https://picsum.photos/seed/stairwell/900/1125" alt="Stone stairwell lit from above" data-he-alt="חדר מדרגות מאבן מואר מלמעלה" width="900" height="1125"></div>
+      <figcaption><span data-he="חדר מדרגות, בית בשפלה">Stairwell, Shephelah house</span><span>01</span></figcaption>
+    </figure>
+    <figure>
+      <div class="img" data-fx="clip-reveal" data-direction="inline-end" data-delay="0.15"><img src="https://picsum.photos/seed/courtyard/1250/1000" alt="Courtyard with an olive tree" data-he-alt="חצר פנימית עם עץ זית" width="1250" height="1000"></div>
+      <figcaption><span data-he="חצר פנימית, בית בגליל">Courtyard, Galilee house</span><span>02</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="band">
+    <h2 data-he="חומרים">Materials</h2>
+    <p style="color:var(--c-ink-2);max-inline-size:52ch" data-he="אבן גיר מקומית, בטון חשוף בתבנית עץ, ואלון לא מטופל. כל חומר נבחר כך שיזדקן יפה בלי תחזוקה.">Local limestone, board-formed concrete and untreated oak. Every material is chosen to age well without maintenance.</p>
+  </section>
+  <div class="trio" data-fx="clip-reveal" data-direction="down" data-stagger="0.14" data-zoom="1.35">
+    <figure data-clip><img src="https://picsum.photos/seed/limestone/700/933" alt="Limestone texture" data-he-alt="מרקם אבן גיר" width="700" height="933"></figure>
+    <figure data-clip><img src="https://picsum.photos/seed/boardconcrete/700/933" alt="Board-formed concrete wall" data-he-alt="קיר בטון בתבנית עץ" width="700" height="933"></figure>
+    <figure data-clip><img src="https://picsum.photos/seed/oakgrain/700/933" alt="Oak grain" data-he-alt="סיבי עץ אלון" width="700" height="933"></figure>
+  </div>
+  <figure class="center-img" data-fx="clip-reveal" data-direction="center" data-duration="1.6">
+    <img src="https://picsum.photos/seed/horizonfield/2000/860" alt="Field at the edge of the site" data-he-alt="שדה בקצה המגרש" width="2000" height="860">
+  </figure>
+</main>
+<script src="_demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/clip-reveal.js"></script>
+</body>
+</html>

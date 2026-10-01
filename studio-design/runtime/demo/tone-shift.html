@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tone-shift · studio-design demo</title>
+<meta name="he-title" content="tone-shift · הדגמה">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Heebo:wght@400;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/tone-shift.css">
+<style>
+  /* Direction: architecture-museum story, colour chapters (orange / ink / blue / paper) with giant cropped words */
+  :root {
+    --c-canvas: oklch(96% 0.01 80); --c-surface: oklch(91% 0.02 80); --c-surface-2: oklch(86% 0.03 80);
+    --c-ink: oklch(17% 0.015 60); --c-ink-2: oklch(30% 0.015 60); --c-muted: oklch(45% 0.015 60); --c-rule: oklch(80% 0.02 80);
+    --c-accent: oklch(76% 0.16 62); --c-accent-ink: oklch(17% 0.015 60); --c-focus: oklch(55% 0.18 255);
+    --f-display: "Archivo", "Heebo", system-ui, sans-serif; --f-body: "Archivo", "Heebo", system-ui, sans-serif;
+    --c-sky: oklch(68% 0.14 250);
+  }
+  [data-tone="sky"] { --tone-bg: var(--c-sky); --tone-ink: var(--c-ink); }
+  header.top { position: fixed; inset-block-start: 0; inset-inline: 0; z-index: var(--z-header); display: flex; justify-content: space-between; padding: var(--sp-4) var(--gutter); font-weight: 600; color: var(--c-ink); }
+  html[data-tone-active="ink"] header.top { color: var(--c-canvas); }
+  main > section { min-block-size: 110svh; display: grid; align-content: center; gap: var(--sp-6); padding: var(--section-y) var(--gutter); overflow: clip; }
+  .word { font-family: var(--f-display); font-stretch: 62%; font-weight: 900; font-size: clamp(6rem, 26vw, 26rem); line-height: 0.82; letter-spacing: -0.02em; text-transform: uppercase; margin-inline-start: -0.04em; }
+  :lang(he) .word { font-stretch: 100%; letter-spacing: 0; line-height: 0.95; text-transform: none; font-size: clamp(5rem, 20vw, 20rem); }
+  p.lede { font-size: var(--fs-lg); max-inline-size: 38ch; }
+</style>
+</head>
+<body>
+<header class="top"><span data-he="מוזיאון הדגם">Model Museum</span><span data-he="תערוכה">Exhibition</span></header>
+<main data-fx="tone-shift" data-line="0.55" data-blend="0.3" data-root="true">
+  <section data-tone="accent">
+    <h1 class="word" data-he="דגמים">Models</h1>
+    <p class="lede" data-he="מאות דגמי עבודה מקרטון, עץ ונייר: כך נולד כל בניין לפני שהיה לו שרטוט.">Hundreds of working models in card, wood and paper: how every building began before it had a drawing.</p>
+  </section>
+  <section data-tone="ink">
+    <h2 class="word" data-he="מפרשים">Sails</h2>
+    <p class="lede muted" data-he="הגגות המתעקלים התחילו כנייר מקופל ביד, ואז נמדדו במחשב שפותח לתעופה.">The curving roofs started as paper folded by hand, then were measured with software built for aircraft.</p>
+  </section>
+  <section data-tone="sky">
+    <h2 class="word" data-he="אור">Light</h2>
+    <p class="lede" data-he="פתחי הגג מכוונים לשמש החורפית. התערוכה פתוחה עד סוף השנה.">The roof openings face the winter sun. The exhibition runs until the end of the year.</p>
+  </section>
+  <section data-tone="canvas">
+    <h2 class="word" data-he="בואו">Visit</h2>
+    <p class="lede" data-he="פתוח מדי יום מ-10:00 עד 18:00. כניסה חופשית בימי חמישי.">Open daily 10:00 to 18:00. Free entry on Thursdays.</p>
+  </section>
+</main>
+<script src="_demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/tone-shift.js"></script>
+</body>
+</html>

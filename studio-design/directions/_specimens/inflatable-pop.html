@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Inflatable Pop · specimen</title>
+<meta name="he-title" content="Inflatable Pop · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Rubik:wght@400..900&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/inflatable-pop.md */
+:root {
+  --c-canvas: oklch(94% 0.035 240); --c-surface: oklch(99% 0.005 240); --c-surface-2: oklch(86% 0.006 240);
+  --c-ink: oklch(16% 0.020 265); --c-ink-2: oklch(30% 0.020 265); --c-muted: oklch(46% 0.020 265);
+  --c-rule: oklch(16% 0.020 265); --c-accent: oklch(64% 0.23 35); --c-accent-ink: oklch(16% 0.020 265);
+  --c-focus: oklch(52% 0.22 280);
+  /* sticker set (use as a set, max 3 per viewport) */
+  --st-blue: oklch(70% 0.15 250); --st-mint: oklch(81% 0.14 160); --st-lav: oklch(88% 0.07 310);
+  --st-ember: oklch(64% 0.23 35); --st-sun: oklch(89% 0.17 95); --st-violet: oklch(52% 0.22 280);
+  --f-display: "Bricolage Grotesque", "Rubik", system-ui, sans-serif; --f-body: "Bricolage Grotesque", "Rubik", system-ui, sans-serif;
+  --f-mono: ui-monospace, Menlo, monospace; --f-outlier: "Bricolage Grotesque", sans-serif;
+  --fs-xs: 0.8125rem; --fs-sm: 0.9375rem; --fs-base: 1.0625rem; --fs-lg: 1.375rem; --fs-xl: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+  --fs-2xl: clamp(2.5rem, 1.6rem + 3.4vw, 4.75rem); --fs-3xl: clamp(3.5rem, 1.8rem + 7vw, 9rem);
+  --fs-display: clamp(4rem, 0.5rem + 13vw, 14rem);
+  --lh-tight: 0.8; --lh-body: 1.5; --tr-display: -0.02em; /* was -0.04em: at wdth 75 stems collided ("mi" merged) in the 2026-09 specimen audit */ --tr-label: 0.03em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 80px; --sp-9: 120px; --sp-10: 176px;
+  --section-y: clamp(64px, 6vw + 32px, 160px); --gutter: clamp(16px, 3vw, 44px); --maxw: 1480px;
+  --r-sm: 12px; --r-md: 28px; --r-lg: 40px; --r-pill: 999px;
+  --ease-out: cubic-bezier(0.34, 1.4, 0.64, 1); /* soft overshoot: stickers only */ --ease-in: cubic-bezier(0.5, 0, 0.75, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --d-fast: 160ms; --d-med: 380ms; --d-slow: 800ms;
+  --shadow-1: none; --shadow-2: none;
+}
+.display { font-variation-settings: "wdth" 75, "opsz" 96; font-weight: 800; }
+:root[dir="rtl"] { --lh-tight: 0.95; --tr-display: -0.01em; --fs-display: clamp(3.5rem, 0.5rem + 11vw, 12rem); }
+</style>
+<link rel="stylesheet" href="../../runtime/fx/marquee.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); font-variation-settings: "opsz" 14; }
+[lang="he"] { --f-display: "Rubik", sans-serif; --f-body: "Rubik", sans-serif; }
+[lang="he"] .display { font-weight: 900; font-variation-settings: normal; }
+.nav { position: absolute; z-index: 10; inset-block-start: 18px; inset-inline: 0; margin-inline: auto; inline-size: min(760px, calc(100% - 32px)); block-size: 56px; display: flex; align-items: center; gap: var(--sp-5); padding-inline: 22px 6px; border-radius: var(--r-pill); background: var(--c-surface); box-shadow: 0 0 0 1px var(--c-ink); font-weight: 600; font-size: var(--fs-sm); }
+.nav .wm { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.04em; text-decoration: none; margin-inline-end: auto; }
+.nav a { text-decoration: none; }
+.btn { display: inline-flex; align-items: center; block-size: 52px; padding-inline: 28px; border-radius: var(--r-pill); background: var(--c-ink); color: var(--c-surface); font-weight: 700; text-decoration: none; transition: scale var(--d-med) var(--ease-out); }
+.btn:hover, .btn.is-hover { scale: 1.06 .94; }
+.btn.is-focus { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.btn--w { background: var(--c-surface); color: var(--c-ink); box-shadow: inset 0 0 0 1px var(--c-ink); }
+.nav .btn { block-size: 44px; }
+.hero { position: relative; min-block-size: 100dvh; display: grid; align-content: center; justify-items: center; padding-block: 110px 40px; overflow: clip; }
+.hero h1 { font-family: var(--f-display); font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); text-align: center; position: relative; z-index: 1; }
+[lang="he"] .hero h1 { font-size: calc(var(--fs-display) * 1.05); }
+.hero h1 span { display: block; }
+.st { position: absolute; z-index: 2; }
+.st svg { inline-size: 100%; block-size: 100%; overflow: visible; }
+.st-burst { inline-size: 210px; inset-block-start: 16%; inset-inline-end: 12%; rotate: 10deg; }
+.st-pill { inline-size: 250px; block-size: 90px; inset-block-start: 55%; inset-inline-start: 17%; rotate: -9deg; border-radius: 999px; background: var(--st-mint); box-shadow: 0 0 0 1px var(--c-ink); display: grid; place-items: center; font-weight: 800; font-size: 1.6rem; letter-spacing: -0.02em; }
+.st-circle { inline-size: 170px; inset-block-end: 12%; inset-inline-end: 18%; rotate: -8deg; }
+.st-blob { inline-size: 120px; inset-block-start: 22%; inset-inline-start: 14%; rotate: 12deg; }
+.hero__low { position: relative; z-index: 3; display: grid; justify-items: center; gap: var(--sp-5); margin-block-start: var(--sp-7); text-align: center; }
+.hero__low p { font-size: var(--fs-lg); max-inline-size: 30ch; line-height: 1.3; }
+.band { background: var(--c-ink); color: var(--c-surface); padding-block: var(--sp-4); }
+.band li { font-family: var(--f-display); font-variation-settings: "wdth" 75, "opsz" 96; font-weight: 800; font-size: var(--fs-2xl); line-height: 1; letter-spacing: -0.03em; }
+.band li:nth-child(3n+1) { color: var(--st-sun); } .band li:nth-child(3n+2) { color: var(--st-mint); } .band li:nth-child(3n) { color: var(--st-lav); }
+.tiles { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: var(--sp-4); padding-block: var(--section-y); }
+.tile { border-radius: var(--r-md); box-shadow: 0 0 0 1px var(--c-ink); padding: var(--sp-6); min-block-size: 300px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+.tile h3 { font-family: var(--f-display); font-variation-settings: "wdth" 85, "opsz" 96; font-weight: 800; font-size: var(--fs-xl); line-height: .9; letter-spacing: -0.03em; }
+.tile .price { align-self: flex-end; background: var(--c-surface); border-radius: 999px; box-shadow: 0 0 0 1px var(--c-ink); padding: 6px 16px; font-weight: 700; }
+.tile svg { position: absolute; inset-block-start: 22%; inset-inline-end: 12%; inline-size: 40%; }
+.pill { display: inline-block; border-radius: 999px; padding: 4px 12px; font-weight: 700; font-size: 13px; letter-spacing: var(--tr-label); box-shadow: 0 0 0 1px var(--c-ink); background: var(--c-surface); align-self: flex-start; }
+@media (max-width: 900px) {
+  .nav a:not(.wm):not(.btn) { display: none; }
+  .hero h1 { font-size: 23vw; } .st-burst { inline-size: 110px; inset-block-start: 14%; } .st-pill { inline-size: 150px; block-size: 56px; font-size: 1rem; inset-block-start: 46%; } .st-circle { inline-size: 100px; inset-block-end: 22%; } .st-blob { inline-size: 70px; }
+  .tiles { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header class="nav"><a class="wm" href="#">chompy</a><a href="#" data-he="טעמים">Flavours</a><a href="#" data-he="מה בפנים">What's inside</a><a class="btn" href="#" data-he="לקנות">Shop</a></header>
+<main>
+<section class="hero">
+  <h1 class="display"><span data-he="ויטמינים">vitamins</span><span data-he="שבא לך ללעוס">you’ll chew</span></h1>
+  <div class="st st-burst" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M50 2 L58 22 L78 10 L74 32 L96 32 L80 48 L98 62 L76 66 L84 88 L62 78 L50 98 L40 78 L18 88 L24 66 L2 62 L20 48 L4 32 L26 32 L22 10 L42 22Z" fill="var(--st-sun)" stroke="var(--c-ink)" stroke-width="1"/><text x="50" y="56" text-anchor="middle" font-family="Bricolage Grotesque, Rubik, sans-serif" font-weight="800" font-size="15" fill="var(--c-ink)" data-he="0 סוכר">0 sugar</text></svg></div>
+  <div class="st st-pill" aria-hidden="true" data-he="עם זינק">+ zinc</div>
+  <div class="st st-circle" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><path id="cp" d="M50 50 m-38 0 a38 38 0 1 1 76 0 a38 38 0 1 1 -76 0"/></defs><circle cx="50" cy="50" r="48" fill="var(--st-lav)" stroke="var(--c-ink)" stroke-width="1"/><text font-family="Bricolage Grotesque, Rubik, sans-serif" font-weight="700" font-size="10" letter-spacing="1.5" fill="var(--c-ink)"><textPath href="#cp">VEGAN · GELATIN FREE · VEGAN · GELATIN FREE ·</textPath></text><circle cx="50" cy="50" r="18" fill="var(--c-surface)" stroke="var(--c-ink)"/></svg></div>
+  <div class="st st-blob" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M30 8 C60 -4 96 16 92 48 C88 82 58 98 32 90 C6 82 -2 52 8 30 C12 20 20 12 30 8Z" fill="var(--st-mint)" stroke="var(--c-ink)"/></svg></div>
+  <div class="hero__low">
+    <p data-he="גומי ויטמינים טבעוני בשישה טעמים. בלי סוכר, בלי ג׳לטין, עם הרבה יותר מדי כיף.">Vegan vitamin gummies in six flavours. No sugar, no gelatin, far too much fun.</p>
+    <div style="display:flex; gap: var(--sp-3)"><a class="btn" href="#" data-spec-btn data-he="לבחור טעם">Pick a flavour</a><a class="btn btn--w" href="#" data-spec-btn data-he="מה בפנים">What's inside</a></div>
+  </div>
+</section>
+<div class="band" data-fx="marquee" data-speed="80" data-fade="false" aria-label="Flavours" data-he-aria-label="טעמים"><ul role="list"><li>mango</li><li>sour cherry</li><li>yuzu</li><li>blueberry</li><li>watermelon</li><li>lime</li></ul></div>
+<section class="tiles container">
+  <article class="tile" style="background: var(--st-sun)"><span class="pill" data-he="רב-מכירות">Bestseller</span><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M20 30 C20 14 80 14 80 30 V82 C80 94 20 94 20 82Z" fill="var(--c-surface)" stroke="var(--c-ink)"/><rect x="18" y="20" width="64" height="16" rx="6" fill="var(--st-violet)" stroke="var(--c-ink)"/></svg><h3 data-he="מולטי יומי">Daily multi</h3><span class="price" dir="ltr">₪ 89</span></article>
+  <article class="tile" style="background: var(--st-mint)"><span class="pill" data-he="חדש">New</span><h3 data-he="שינה טובה">Sleepy time</h3><span class="price" dir="ltr">₪ 79</span></article>
+  <article class="tile" style="background: var(--st-lav)"><span class="pill" data-he="לילדים">For kids</span><h3 data-he="גדלים">Grow up</h3><span class="price" dir="ltr">₪ 69</span></article>
+</section>
+<section class="spec-system" data-spec-system data-extra="--st-blue,--st-mint,--st-lav,--st-ember,--st-sun,--st-violet" data-display="chew on this" data-display-he="ללעוס"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · inflatable-pop · fictional brand “chompy”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script src="../../runtime/fx/marquee.js"></script>
+<script>
+(function () { if (!window.gsap || !window.ScrollTrigger || SD.reduced()) return;
+  document.querySelectorAll('.st').forEach(function (s, i) {
+    gsap.from(s, { scale: 0, rotate: '+=' + (i % 2 ? 40 : -40), duration: .7, ease: 'back.out(2.4)', delay: .15 + i * .08 });
+    gsap.to(s, { yPercent: [-20, 30, -10, 24][i], ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>device · studio-design runtime demo</title>
+<meta name="he-title" content="device · הדגמה">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;700&family=Martian+Mono:wght@400&family=Heebo:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/device.css">
+<style>
+  :root {
+    --c-canvas: oklch(96% 0.006 250); --c-surface: oklch(99% 0.004 250); --c-surface-2: oklch(90% 0.006 250);
+    --c-ink: oklch(20% 0.012 260); --c-ink-2: oklch(34% 0.012 260); --c-muted: oklch(50% 0.01 260); --c-rule: oklch(20% 0.012 260 / 0.14);
+    --c-accent: oklch(55% 0.19 38); --c-accent-ink: oklch(99% 0.003 250); --c-focus: oklch(55% 0.19 38);
+    --f-display: "Schibsted Grotesk", "Heebo", sans-serif; --f-body: "Schibsted Grotesk", "Heebo", sans-serif; --f-mono: "Martian Mono", monospace;
+    --f-num: var(--f-mono);
+    --img-shell: oklch(30% 0.01 260); --img-shell-light: oklch(84% 0.01 250); --img-orange: oklch(66% 0.19 42);
+  }
+  body { font-family: var(--f-body); }
+  .intro { padding-block: var(--sp-8) var(--sp-6); }
+  .intro h1 { font-size: var(--fs-3xl); font-weight: 700; max-inline-size: 16ch; }
+  .intro p { color: var(--c-ink-2); max-inline-size: 60ch; margin-block-start: var(--sp-4); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: var(--sp-6); padding-block-end: var(--sp-8); }
+  figcaption { font-size: var(--fs-sm); color: var(--c-muted); margin-block-start: var(--sp-3); }
+  .inspect { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--sp-7); align-items: start; padding-block: var(--sp-8); }
+  .inspect .sd-device { position: sticky; top: calc(var(--header-h) - 40px); }
+  .inspect ol { display: grid; gap: 40vh; padding-block: 20vh 40vh; list-style: none; margin: 0; padding-inline: 0; }
+  .inspect li { max-inline-size: 38ch; }
+  .inspect li b { display: block; font-size: var(--fs-xl); }
+  .elev { padding-block: var(--sp-8); max-inline-size: 900px; }
+  @media (max-width: 760px) { .inspect { grid-template-columns: 1fr; } .inspect .sd-device { position: static; } .inspect ol { gap: var(--sp-6); padding-block: 0; } }
+</style>
+</head>
+<body>
+<main>
+  <section class="container intro">
+    <h1 data-he="מוצר קופסתי שנבנה בקוד">A box product built in code</h1>
+    <p data-he="קופסה בתלת-ממד ב-CSS: פרופורציות אמיתיות, חזית עם פרטים, גרירה או חיצים לסיבוב, ושרטוט חזית עם קווי מידה.">A CSS 3D box: real proportions, a detailed front, drag or arrow keys to turn it, and a front elevation with dimension lines.</p>
+  </section>
+  <section class="container grid" aria-label="Views">
+    <figure class="sd-device" data-fx="device" data-size="340,250,290" data-details="screen,sockets,ports,grille,power,handle,feet" data-body="--img-shell" data-panel="--c-ink" data-detail="--img-orange" data-drag="true" data-label="Turn the power station" data-he-attr-data-label="סובבו את תחנת הכוח">
+      <figcaption data-he="תחנת כוח · three-quarter · גרירה">Power station · three-quarter · drag</figcaption>
+    </figure>
+    <figure class="sd-device" data-fx="device" data-size="220,300,220" data-details="grille,knob,led" data-body="--img-shell-light" data-detail="--c-ink" data-view="iso" data-auto="14">
+      <figcaption data-he="רמקול · iso · סיבוב אוטומטי">Speaker · iso · auto-turn</figcaption>
+    </figure>
+    <figure class="sd-device" data-fx="device" data-size="300,60,200" data-details="led,ports" data-body="--c-surface" data-detail="--c-accent" data-view="perspective" data-scroll="true" data-degrees="120">
+      <figcaption data-he="נתב · perspective · מסתובב עם הגלילה">Router · perspective · turns with scroll</figcaption>
+    </figure>
+  </section>
+  <section class="container inspect" aria-label="Inspect the parts">
+    <figure class="sd-device" id="insp" data-fx="device" data-size="340,250,290" data-details="screen,sockets,ports,grille,power,handle" data-body="--img-shell" data-detail="--img-orange" data-view="front" data-part="screen">
+      <figcaption data-he="החלק שהטקסט מדבר עליו נדלק">The part the text talks about lights up</figcaption>
+    </figure>
+    <ol role="list">
+      <li data-part-item="screen"><b data-he="מסך">Screen</b><span data-he="אחוז טעינה וזמן שנותר.">Charge level and time left.</span></li>
+      <li data-part-item="sockets"><b data-he="שקעים">Sockets</b><span data-he="שני שקעים ביתיים.">Two household sockets.</span></li>
+      <li data-part-item="ports"><b data-he="יציאות USB">USB ports</b><span data-he="ארבע יציאות לטעינה.">Four charging ports.</span></li>
+      <li data-part-item="grille"><b data-he="אוורור">Vents</b><span data-he="קירור שקט.">Quiet cooling.</span></li>
+      <li data-part-item="power"><b data-he="הפעלה">Power</b><span data-he="לחיצה אחת.">One press.</span></li>
+    </ol>
+  </section>
+  <section class="container elev" aria-label="Dimensions">
+    <figure class="sd-device" data-fx="device" data-view="elevation" data-size="340,250,290" data-dims="34 cm,25 cm,29 cm" data-details="screen,sockets,ports,grille,power,handle" data-detail="--c-accent">
+      <figcaption data-he="מידות: 34 × 25 × 29 ס״מ">Dimensions: 34 × 25 × 29 cm (front and side elevation)</figcaption>
+    </figure>
+  </section>
+</main>
+<script src="_demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/device.js"></script>
+<script>
+  // page glue: light the part the text block in view talks about
+  (function () {
+    var dev = document.getElementById('insp'); if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting && dev.sdDevice) dev.sdDevice.highlight(e.target.getAttribute('data-part-item')); }); }, { rootMargin: '-45% 0px -45% 0px' });
+    document.querySelectorAll('[data-part-item]').forEach(function (li) { io.observe(li); });
+  })();
+</script>
+</body>
+</html>

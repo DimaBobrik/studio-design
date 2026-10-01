@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Estate Didone · specimen</title>
+<meta name="he-title" content="Estate Didone · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Pinyon+Script&family=Jost:wght@300;400;500&family=Bona+Nova:wght@400;700&family=Assistant:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/estate-didone.md */
+:root {
+  --c-canvas: oklch(30% 0.09 18); --c-surface: oklch(35% 0.10 18); --c-surface-2: oklch(94% 0.018 75);
+  --c-ink: oklch(93% 0.025 80); --c-ink-2: oklch(85% 0.030 75); --c-muted: oklch(74% 0.040 40);
+  --c-rule: oklch(82% 0.08 85 / 0.45); --c-accent: oklch(82% 0.08 85); --c-accent-ink: oklch(30% 0.09 18);
+  --c-focus: oklch(86% 0.09 85);
+  --f-display: "Prata", "Bona Nova", Didot, serif; --f-body: "Jost", "Assistant", system-ui, sans-serif;
+  --f-mono: ui-monospace, Menlo, monospace; --f-outlier: "Pinyon Script", "Bona Nova", cursive;
+  --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-base: 1rem; --fs-lg: 1.1875rem; --fs-xl: clamp(1.6rem, 1.3rem + 1vw, 2.2rem);
+  --fs-2xl: clamp(2.3rem, 1.6rem + 2.6vw, 3.8rem); --fs-3xl: clamp(3rem, 1.8rem + 4.6vw, 6rem);
+  --fs-display: clamp(3rem, 1.2rem + 6vw, 7.25rem);
+  --lh-tight: 1.0; --lh-body: 1.7; --tr-display: 0.04em; --tr-label: 0.18em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 28px; --sp-6: 40px; --sp-7: 64px; --sp-8: 104px; --sp-9: 160px; --sp-10: 232px;
+  --section-y: clamp(96px, 9vw + 36px, 232px); --gutter: clamp(20px, 4.5vw, 80px); --maxw: 1400px;
+  --r-sm: 0px; --r-md: 0px; --r-lg: 0px; --r-pill: 999px;
+  --shape-arch: 999px 999px 0 0; /* extra token: arch mask for images (`border-radius: var(--shape-arch)`); never assign it to --r-* */
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1); --ease-in: cubic-bezier(0.5, 0, 0.75, 0); --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --d-fast: 220ms; --d-med: 650ms; --d-slow: 1500ms;
+  --shadow-1: none; --shadow-2: 0 50px 100px -50px oklch(12% 0.05 18 / 0.8);
+}
+[data-surface="cream"] { --c-canvas: var(--c-surface-2); --c-ink: oklch(30% .09 18); --c-ink-2: oklch(40% .08 18); --c-muted: oklch(52% .05 30); --c-rule: oklch(30% .09 18 / .25); --c-accent: oklch(30% .09 18); --c-accent-ink: var(--c-surface-2); }
+:root[dir="rtl"] { --tr-display: 0; --tr-label: 0.04em; --lh-tight: 1.1; }
+</style>
+<link rel="stylesheet" href="../../runtime/fx/bg-kit.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-weight: 300; font-size: var(--fs-base); line-height: var(--lh-body); }
+[lang="he"] { --f-display: "Bona Nova", serif; --f-body: "Assistant", sans-serif; }
+.lab { font-weight: 500; font-size: 12px; letter-spacing: var(--tr-label); text-transform: uppercase; }
+[lang="he"] .lab { text-transform: none; font-size: 13px; }
+.nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; block-size: 80px; border-block-end: 1px solid var(--c-rule); }
+.nav ul { display: flex; gap: var(--sp-6); list-style: none; margin: 0; padding: 0; } .nav ul:last-child { justify-content: flex-end; }
+.nav a { text-decoration: none; }
+.nav .wm { font-family: var(--f-display); font-size: 1.35rem; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; }
+.hero { position: relative; display: grid; justify-items: center; text-align: center; padding-block: var(--sp-6) 0; min-block-size: calc(100dvh - 80px); grid-template-rows: auto 1fr; }
+.title { position: relative; z-index: 2; }
+.title h1 { font-family: var(--f-display); font-weight: 400; font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); text-transform: uppercase; }
+.script { position: absolute; inset-inline: 0; inset-block-end: -0.52em; font-family: var(--f-outlier); font-size: calc(var(--fs-display) * 1.15); color: var(--c-accent); line-height: 1; pointer-events: none; }
+[lang="he"] .script { font-family: "Bona Nova", serif; font-weight: 700; font-size: calc(var(--fs-display) * .55); inset-block-end: -1.1em; }
+.stage { position: relative; inline-size: 100%; display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: var(--sp-6); margin-block-start: var(--sp-7); }
+.arch { position: relative; inline-size: clamp(260px, 30vw, 440px); aspect-ratio: 3 / 4; border-radius: var(--shape-arch); overflow: clip; margin-block-end: -1px; }
+.arch svg { inline-size: 100%; block-size: 100%; display: block; }
+.arch::after { content: ""; position: absolute; inset: 12px; border: 1px solid var(--c-rule); border-block-end: 0; border-radius: var(--shape-arch); pointer-events: none; }
+.side { align-self: center; display: grid; gap: var(--sp-4); max-inline-size: 30ch; text-align: start; }
+.side:last-child { justify-self: end; text-align: end; }
+.side p:not(.lab) { color: var(--c-ink-2); }
+.btn { display: inline-flex; align-items: center; justify-content: center; block-size: 52px; padding-inline: 30px; border: 1px solid var(--c-accent); color: var(--c-ink); position: relative; overflow: clip; isolation: isolate; text-decoration: none; transition: color var(--d-med) var(--ease-out); }
+.btn::before { content: ""; position: absolute; inset: 0; background: var(--c-accent); z-index: -1; clip-path: inset(100% 0 0 0); transition: clip-path var(--d-med) var(--ease-out); }
+.btn:hover, .btn.is-hover { color: var(--c-accent-ink); } .btn:hover::before, .btn.is-hover::before { clip-path: inset(0); }
+.btn.is-focus { outline: 1px solid var(--c-focus); outline-offset: 4px; }
+.btn--fill { background: var(--c-accent); color: var(--c-accent-ink); }
+.units { padding-block: var(--section-y); }
+.units__in { padding: var(--sp-7) var(--sp-7) var(--sp-6); position: relative; }
+.units__in::before { content: ""; position: absolute; inset: 12px; border: 1px solid var(--c-rule); pointer-events: none; }
+.units h2 { font-family: var(--f-display); font-weight: 400; font-size: var(--fs-2xl); line-height: 1.05; margin-block-end: var(--sp-6); text-align: center; }
+.rows { list-style: none; margin: 0; padding: 0; }
+.rows li { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: var(--sp-5); padding-block: var(--sp-4); border-block-start: 1px solid var(--c-rule); align-items: baseline; }
+.rows li:first-child { border: 0; color: var(--c-muted); }
+.rows .n { font-family: var(--f-display); font-size: 1.35rem; }
+.tag { justify-self: start; border: 1px solid currentColor; padding: 2px 10px; font-size: 12px; }
+@media (max-width: 900px) {
+  .nav { grid-template-columns: 1fr auto; } .nav ul:first-child { display: none; } .nav ul:last-child li:not(:last-child) { display: none; }
+  .stage { grid-template-columns: 1fr; justify-items: center; } .side { order: 2; text-align: center; justify-items: center; } .side:last-child { display: none; }
+  .arch { inline-size: 76vw; }
+  .rows li { grid-template-columns: 2fr 1fr 1fr; } .rows li > :nth-child(3), .rows li > :nth-child(4) { display: none; }
+  .units__in { padding: var(--sp-6) var(--sp-5); }
+}
+</style>
+</head>
+<body class="bg-grain" style="--grain-opacity:.3">
+<header class="nav container lab">
+  <ul role="list"><li><a href="#" data-he="הדירות">Residences</a></li><li><a href="#" data-he="המיקום">Location</a></li></ul>
+  <a class="wm" href="#">Aurelia</a>
+  <ul role="list"><li><a href="#" data-he="גלריה">Gallery</a></li><li><a href="#" data-he="צור קשר">Contact</a></li></ul>
+</header>
+<main>
+<section class="hero container">
+  <div class="title">
+    <h1 data-he="דירות פרטיות">Private Residences</h1>
+    <span class="script" aria-hidden="true" data-he="אורליה">Aurelia</span>
+  </div>
+  <div class="stage">
+    <div class="side"><p class="lab" data-he="רחוב המלך ג׳ורג׳ 14, ירושלים">14 King George St, Jerusalem</p><p data-he="עשרים ושתיים דירות בבניין אבן משנת 1934, משוחזר קיר אחר קיר.">Twenty-two residences in a 1934 stone building, restored wall by wall.</p></div>
+    <figure class="arch" aria-label="Render: the stairwell at golden hour" data-he-aria-label="הדמיה: חדר המדרגות בשעת זהב">
+      <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" direction="ltr" aria-hidden="true">
+        <defs><linearGradient id="gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="oklch(78% .09 70)"/><stop offset=".55" stop-color="oklch(62% .12 45)"/><stop offset="1" stop-color="oklch(38% .09 30)"/></linearGradient>
+          <linearGradient id="beam" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="oklch(95% .06 85 / .7)"/><stop offset="1" stop-color="oklch(95% .06 85 / 0)"/></linearGradient></defs>
+        <rect width="300" height="400" fill="url(#gl)"/>
+        <path d="M60 400 V150 A90 90 0 0 1 240 150 V400" fill="oklch(30% .07 30 / .35)"/>
+        <path d="M84 400 V160 A66 66 0 0 1 216 160 V400Z" fill="oklch(88% .07 80)"/>
+        <path d="M84 250 H216 M150 94 V400" stroke="oklch(34% .06 30)" stroke-width="3"/>
+        <path d="M84 250 L300 400 L300 320 L216 190Z" fill="url(#beam)" opacity=".6"/>
+        <g fill="oklch(34% .07 28)"><path d="M0 330 L120 330 L120 342 L0 342Z M0 354 L100 354 L100 366 L0 366Z M0 378 L80 378 L80 390 L0 390Z"/></g>
+        <path d="M0 318 L140 318" stroke="oklch(30% .06 28)" stroke-width="3"/>
+        <circle cx="236" cy="96" r="10" fill="oklch(94% .05 85)"/><path d="M236 40 V86" stroke="oklch(30% .06 28)" stroke-width="1.5"/>
+      </svg>
+    </figure>
+    <div class="side"><p class="lab" data-he="מסירה: אביב 2027">Handover: spring 2027</p><p><a class="btn btn--fill" href="#" data-spec-btn data-he="לתיאום סיור פרטי">Book a private viewing</a></p></div>
+  </div>
+</section>
+<section class="units container">
+  <div class="units__in" data-surface="cream" style="background: var(--c-canvas); color: var(--c-ink)">
+    <h2 data-he="דירות פנויות">Available residences</h2>
+    <ul class="rows" role="list">
+      <li class="lab"><span data-he="דירה">Residence</span><span data-he="חדרים">Rooms</span><span data-he="שטח">Area</span><span data-he="קומה">Floor</span><span data-he="סטטוס">Status</span></li>
+      <li><span class="n" data-he="המרפסת">The Loggia</span><span>4</span><span dir="ltr">148 m²</span><span>2</span><span class="tag" data-he="פנויה">Available</span></li>
+      <li><span class="n" data-he="החצר">The Courtyard</span><span>3</span><span dir="ltr">112 m²</span><span>0</span><span class="tag" data-he="שמורה">Reserved</span></li>
+      <li><span class="n" data-he="המגדל">The Tower</span><span>5</span><span dir="ltr">206 m²</span><span>6</span><span class="tag" data-he="פנויה">Available</span></li>
+    </ul>
+  </div>
+</section>
+<section class="spec-system" data-spec-system data-display="PRIVATE RESIDENCES" data-display-he="דירות פרטיות"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · estate-didone · fictional project “Aurelia”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script>
+(function () { if (!window.gsap || SD.reduced()) return;
+  gsap.from('.arch', { clipPath: 'inset(100% 0 0 0)', duration: 1.5, ease: 'expo.inOut' });
+  gsap.from('.script', { clipPath: SD.dir() === 1 ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)', duration: 1.4, ease: 'power2.inOut', delay: .5 });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+/* studio-design · directions/_specimens/_spec.css — shared styles for the specimen "system strip" only.
+   Everything reads the direction's tokens, so the strip speaks each direction's voice. Not runtime; never ship it. */
+.spec-system { padding-block: var(--sp-8) var(--sp-9); border-block-start: 1px solid var(--c-rule); background: var(--c-canvas); color: var(--c-ink); position: relative; z-index: 1; }
+.spec-sys { display: grid; gap: var(--sp-7); }
+.spec-sys__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--sp-4); }
+.spec-sys__title { font-size: var(--fs-2xl); line-height: var(--lh-tight); }
+.spec-sys__note { font-size: var(--fs-sm); color: var(--c-muted); max-inline-size: 48ch; }
+.spec-sys__pal { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--sp-2); }
+.spec-chip { display: grid; gap: 2px; font-size: var(--fs-xs); line-height: 1.35; }
+.spec-chip__sw { display: block; block-size: 56px; border: 1px solid color-mix(in oklab, var(--c-ink) 18%, transparent); border-radius: var(--r-sm); margin-block-end: var(--sp-2); }
+.spec-chip__name { font-family: var(--f-mono, ui-monospace), ui-monospace, monospace; font-size: var(--fs-xs); color: var(--c-ink); }
+.spec-chip__val, .spec-chip__cr { color: var(--c-muted); font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; }
+.spec-chip__cr { color: var(--c-ink-2); }
+.spec-sys__type { display: grid; gap: var(--sp-5); }
+.spec-tline { display: grid; grid-template-columns: minmax(180px, 16rem) 1fr; gap: var(--sp-5); align-items: baseline; border-block-start: 1px solid var(--c-rule); padding-block-start: var(--sp-3); }
+.spec-tline__meta { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--c-muted); }
+.spec-tline__sample { line-height: var(--lh-tight); overflow-wrap: anywhere; }
+.spec-t--display { letter-spacing: var(--tr-display); white-space: nowrap; overflow: clip; text-overflow: clip; }
+.spec-t--h2 { letter-spacing: var(--tr-display); }
+.spec-t--body { line-height: var(--lh-body); max-inline-size: 60ch; }
+.spec-sys__row { display: flex; flex-wrap: wrap; gap: var(--sp-7); align-items: flex-start; }
+.spec-sys__rad, .spec-sys__btns { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--sp-5); }
+.spec-sys__rad li, .spec-sys__btns li { display: grid; gap: var(--sp-2); justify-items: start; }
+.spec-sys__rad code, .spec-sys__btns code { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; color: var(--c-muted); }
+.spec-rad { display: block; inline-size: 72px; block-size: 72px; background: var(--c-surface-2); border: 1px solid var(--c-rule); }
+.is-disabled { opacity: .45; pointer-events: none; }
+.spec-foot { padding: var(--sp-5) var(--gutter); font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--c-muted); display: flex; flex-wrap: wrap; gap: var(--sp-4); justify-content: space-between; background: var(--c-canvas); border-block-start: 1px solid var(--c-rule); }
+.spec-foot a { color: var(--c-ink-2); }
+/* labelled image slot (SKILL.md imagery rule 4) */
+.slot { position: relative; display: grid; place-items: end start; padding: var(--sp-3); overflow: clip;
+  background: repeating-linear-gradient(135deg, color-mix(in oklab, var(--slot-ink, var(--c-ink)) 9%, transparent) 0 1px, transparent 1px 9px), var(--slot-bg, var(--c-surface-2));
+  color: var(--slot-ink, var(--c-ink-2)); font: 500 11.5px/1.35 ui-monospace, Menlo, monospace; }
+.slot > span { max-inline-size: 30ch; background: color-mix(in oklab, var(--slot-bg, var(--c-surface-2)) 80%, transparent); padding: 2px 6px; }
+@media (max-width: 700px) { .spec-tline { grid-template-columns: 1fr; gap: var(--sp-2); } }

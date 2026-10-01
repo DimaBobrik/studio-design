@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Desktop Y2K · specimen</title>
+<meta name="he-title" content="Desktop Y2K · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Space+Mono:wght@400;700&family=Rubik+Pixels&family=Rubik:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/desktop-y2k.md */
+:root {
+  --c-canvas: oklch(86% 0.075 350); --c-surface: oklch(98% 0.004 300); --c-surface-2: oklch(90% 0.006 280);
+  --c-ink: oklch(16% 0.010 300); --c-ink-2: oklch(30% 0.010 300); --c-muted: oklch(45% 0.010 300);
+  --c-rule: oklch(16% 0.010 300); --c-accent: oklch(50% 0.21 262); --c-accent-ink: oklch(98% 0.004 300);
+  --c-focus: oklch(50% 0.21 262);
+  --f-display: "Pixelify Sans", "Rubik Pixels", monospace; --f-body: "Space Mono", "Rubik", ui-monospace, monospace;
+  --f-mono: "Space Mono", "Rubik", monospace; --f-outlier: "Pixelify Sans", monospace;
+  --fs-xs: 0.75rem; --fs-sm: 0.8125rem; --fs-base: 0.9375rem; --fs-lg: 1.125rem; --fs-xl: 1.5rem;
+  --fs-2xl: 2rem; --fs-3xl: clamp(2.5rem, 1.5rem + 3vw, 4rem); --fs-display: clamp(3rem, 1rem + 6vw, 6rem); /* snap to 16px multiples at desktop */
+  --lh-tight: 1.0; --lh-body: 1.55; --tr-display: 0; --tr-label: 0;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-7: 32px; --sp-8: 48px; --sp-9: 72px; --sp-10: 112px;
+  --section-y: clamp(40px, 4vw + 16px, 96px); --gutter: clamp(12px, 2vw, 24px); --maxw: 1440px;
+  --r-sm: 0px; --r-md: 0px; --r-lg: 6px; /* dock icons only */ --r-pill: 0px;
+  --ease-out: cubic-bezier(0.2, 0.9, 0.3, 1); --ease-in: cubic-bezier(0.5, 0, 1, 0.5); --ease-in-out: cubic-bezier(0.6, 0, 0.4, 1);
+  --d-fast: 80ms; --d-med: 180ms; --d-slow: 360ms;
+  --shadow-1: 2px 2px 0 var(--c-ink); --shadow-2: 4px 4px 0 var(--c-ink);
+  --titlebar: repeating-linear-gradient(to bottom, var(--c-ink) 0 1px, transparent 1px 3px); /* pinstripes in title bars */
+}
+.pixel { image-rendering: pixelated; font-smooth: never; -webkit-font-smoothing: none; }
+:root[dir="rtl"] { --shadow-1: -2px 2px 0 var(--c-ink); --shadow-2: -4px 4px 0 var(--c-ink); }
+</style>
+<link rel="stylesheet" href="../../runtime/fx/bg-kit.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+html { scroll-behavior: auto; }
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); }
+[lang="he"] { --f-display: "Rubik Pixels", monospace; --f-body: "Rubik", sans-serif; }
+.menubar { position: sticky; inset-block-start: 0; z-index: 50; block-size: 28px; display: flex; align-items: center; gap: var(--sp-6); padding-inline: var(--sp-4); background: var(--c-surface); border-block-end: 1px solid var(--c-ink); font-size: 13px; }
+.menubar b { font-family: var(--f-display); font-size: 16px; font-weight: 600; }
+.menubar span[aria-current] { background: var(--c-accent); color: var(--c-accent-ink); padding-inline: 6px; }
+.menubar .clock { margin-inline-start: auto; font-variant-numeric: tabular-nums; }
+.desk { position: relative; min-block-size: calc(100dvh - 28px); --bg-line: color-mix(in oklab, var(--c-ink) 12%, transparent); --bg-size: 8px; --bg-mask: linear-gradient(#000 0 0); overflow: clip; }
+.win { position: absolute; background: var(--c-surface); border: 1px solid var(--c-ink); box-shadow: var(--shadow-2); display: flex; flex-direction: column; }
+.win.is-top { z-index: 5; }
+.bar { block-size: 24px; display: flex; align-items: center; gap: 8px; padding-inline: 6px; background: var(--c-surface-2); border-block-end: 1px solid var(--c-ink); cursor: grab; user-select: none; }
+.bar::after { content: ""; flex: 1; block-size: 11px; background: var(--titlebar); order: 2; }
+.bar .t { order: 3; font-family: var(--f-display); font-size: 14px; padding-inline: 4px; }
+.bar::before { content: ""; order: 4; inline-size: 30px; block-size: 11px; background: var(--titlebar); }
+.bar button { inline-size: 13px; block-size: 13px; border: 1px solid var(--c-ink); background: var(--c-surface); order: 1; }
+.bar button + button { order: 5; }
+.win.is-top .bar { background: var(--c-surface); }
+.body { padding: var(--sp-5); }
+.w-hello { inset-block-start: 7%; inset-inline-start: 5%; inline-size: min(640px, 48vw); }
+.w-hello h1 { font-family: var(--f-display); font-weight: 600; font-size: var(--fs-display); line-height: var(--lh-tight); }
+.w-hello p { margin-block: var(--sp-5); max-inline-size: 44ch; }
+.w-player { inset-block-start: 16%; inset-inline-end: 7%; inline-size: 380px; }
+.cover { aspect-ratio: 1; border: 1px solid var(--c-ink); }
+.cover svg { inline-size: 100%; block-size: 100%; shape-rendering: crispEdges; }
+.track { display: flex; justify-content: space-between; margin-block: var(--sp-4) var(--sp-2); font-weight: 700; }
+.prog { block-size: 12px; border: 1px solid var(--c-ink); background: repeating-linear-gradient(90deg, var(--c-accent) 0 6px, transparent 6px 8px) 0 0 / 62% 100% no-repeat; }
+.ctrl { display: flex; gap: var(--sp-2); margin-block-start: var(--sp-4); }
+.w-shop { inset-block-start: 58%; inset-inline-start: 38%; inline-size: 330px; }
+.w-shop .body { display: grid; grid-template-columns: 96px 1fr; gap: var(--sp-4); align-items: center; }
+.btn { display: inline-flex; align-items: center; gap: 6px; block-size: 32px; padding-inline: 14px; background: var(--c-surface-2); border: 1px solid var(--c-ink); box-shadow: var(--shadow-1); font-family: var(--f-body); font-weight: 700; font-size: 13px; text-decoration: none; color: var(--c-ink); }
+.btn--pri { background: var(--c-accent); color: var(--c-accent-ink); }
+.btn:active, .btn.is-hover { box-shadow: none; translate: 2px 2px; }
+[dir="rtl"] .btn.is-hover { translate: -2px 2px; }
+.btn.is-focus { outline: 2px dotted var(--c-ink); outline-offset: 2px; }
+.dock { position: absolute; inset-block-end: 18px; inset-inline: 0; margin-inline: auto; inline-size: fit-content; display: flex; gap: 10px; padding: 8px 10px; background: var(--c-surface-2); border: 1px solid var(--c-ink); box-shadow: var(--shadow-2); z-index: 10; }
+.dock a { display: grid; justify-items: center; gap: 2px; font-size: 11px; text-decoration: none; }
+.dock svg { inline-size: 48px; block-size: 48px; shape-rendering: crispEdges; border-radius: var(--r-lg); background: var(--c-surface); border: 1px solid var(--c-ink); }
+.dock a[aria-current] span { background: var(--c-accent); color: var(--c-accent-ink); padding-inline: 4px; }
+.icons { position: absolute; inset-block-start: 8%; inset-inline-end: 1.5%; display: grid; gap: 22px; }
+.icons a { display: grid; justify-items: center; gap: 4px; font-size: 12px; text-decoration: none; inline-size: 84px; text-align: center; }
+.icons svg { inline-size: 40px; block-size: 40px; shape-rendering: crispEdges; }
+.icons span { background: var(--c-surface); padding-inline: 4px; border: 1px solid transparent; }
+.list { padding: var(--section-y) var(--gutter); }
+.list .win { position: relative; max-inline-size: 860px; margin-inline: auto; }
+.rows { list-style: none; margin: 0; padding: 0; }
+.rows li { display: grid; grid-template-columns: 24px 1fr auto auto; gap: var(--sp-4); align-items: center; padding: 6px var(--sp-3); }
+.rows li[aria-selected="true"] { background: var(--c-accent); color: var(--c-accent-ink); }
+@media (max-width: 1023px) {
+  .desk { min-block-size: 0; padding: var(--sp-4) var(--sp-3) 110px; display: grid; gap: var(--sp-5); }
+  .win { position: relative; inset: auto !important; inline-size: auto !important; }
+  .icons, .menubar .m { display: none; }
+  .dock { position: fixed; inset-block-end: 0; inline-size: 100%; justify-content: space-around; border-inline: 0; box-shadow: none; }
+  .w-shop { order: 3; }
+}
+</style>
+</head>
+<body>
+<div class="menubar" role="menubar"><b>Static FM</b><span class="m" aria-current="true" data-he="רדיו">Radio</span><span class="m" data-he="לוח שידורים">Schedule</span><span class="m" data-he="חנות">Shop</span><span class="m" data-he="אודות">About</span><span class="clock" dir="ltr">Wed 21:04</span></div>
+<main>
+<section class="desk bg-dots">
+  <div class="icons" aria-label="Desktop" data-he-aria-label="שולחן העבודה">
+    <a href="#"><svg class="px" data-px="cd" viewBox="0 0 8 8" aria-hidden="true"></svg><span data-he="ארכיון.mix">archive.mix</span></a>
+    <a href="#"><svg class="px" data-px="note" viewBox="0 0 8 8" aria-hidden="true"></svg><span data-he="בקשות.txt">requests.txt</span></a>
+    <a href="#"><svg class="px" data-px="trash" viewBox="0 0 8 8" aria-hidden="true"></svg><span data-he="פח">Trash</span></a>
+  </div>
+  <article class="win w-hello is-top" data-window>
+    <div class="bar"><button aria-label="Close" data-he-aria-label="סגירה"></button><span class="t" data-he="ברוכים_הבאים.txt">welcome.txt</span><button aria-label="Zoom" data-he-aria-label="הגדלה"></button></div>
+    <div class="body">
+      <h1 data-he="מכוונים לרעש הלבן">Tune in to the static</h1>
+      <p data-he="רדיו אינטרנט עצמאי מחיפה: 18 שעות של מוזיקה מוזרה ביום, בלי אלגוריתם, עם בני אדם אמיתיים מאחורי המיקסר.">Independent web radio from Haifa: 18 hours of odd music a day, no algorithm, real people behind the mixer.</p>
+      <div class="ctrl"><a class="btn btn--pri" href="#" data-spec-btn data-he="▶ האזנה בשידור חי">▶ Listen live</a><a class="btn" href="#" data-spec-btn data-he="לוח שידורים">Schedule</a></div>
+    </div>
+  </article>
+  <article class="win w-player" data-window>
+    <div class="bar"><button aria-label="Close" data-he-aria-label="סגירה"></button><span class="t" data-he="מתנגן_עכשיו.exe">now_playing.exe</span><button aria-label="Zoom" data-he-aria-label="הגדלה"></button></div>
+    <div class="body">
+      <div class="cover"><svg id="cover" viewBox="0 0 16 16" aria-label="Pixel cover: Night Bus Tapes" role="img"></svg></div>
+      <div class="track"><span>Night Bus Tapes</span><span dir="ltr">03:12</span></div>
+      <div class="prog" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" aria-label="Track progress" data-he-aria-label="התקדמות הרצועה"></div>
+      <div class="ctrl"><button class="btn" aria-label="Previous" data-he-aria-label="הקודם">⏮</button><button class="btn btn--pri" aria-label="Pause" data-he-aria-label="השהיה">❚❚</button><button class="btn" aria-label="Next" data-he-aria-label="הבא">⏭</button></div>
+    </div>
+  </article>
+  <article class="win w-shop" data-window>
+    <div class="bar"><button aria-label="Close" data-he-aria-label="סגירה"></button><span class="t" data-he="חנות.exe">shop.exe</span><button aria-label="Zoom" data-he-aria-label="הגדלה"></button></div>
+    <div class="body"><svg class="px" data-px="tape" viewBox="0 0 12 8" style="inline-size:96px;block-size:64px;shape-rendering:crispEdges" aria-hidden="true"></svg>
+      <div><b data-he="קלטת · מיקס 12">Tape · Mix 12</b><p dir="ltr" style="margin-block:4px 10px">₪ 48</p><a class="btn btn--pri" href="#" data-he="הוספה">Add</a></div></div>
+  </article>
+  <nav class="dock" aria-label="Dock" data-he-aria-label="מעגן">
+    <a href="#" aria-current="page"><svg class="px" data-px="radio" viewBox="0 0 8 8" aria-hidden="true"></svg><span data-he="רדיו">Radio</span></a>
+    <a href="#"><svg class="px" data-px="cal" viewBox="0 0 8 8" aria-hidden="true"></svg><span data-he="לוח">Schedule</span></a>
+    <a href="#"><svg class="px" data-px="bag" viewBox="0 0 8 8" aria-hidden="true"></svg><span data-he="חנות">Shop</span></a>
+    <a href="#"><svg class="px" data-px="heart" viewBox="0 0 8 8" aria-hidden="true"></svg><span data-he="תרומה">Donate</span></a>
+  </nav>
+</section>
+<section class="list">
+  <article class="win"><div class="bar"><button aria-label="Close" data-he-aria-label="סגירה"></button><span class="t" data-he="לוח_שידורים — היום">schedule — today</span><button aria-label="Zoom" data-he-aria-label="הגדלה"></button></div>
+    <ul class="rows" role="listbox" aria-label="Today" data-he-aria-label="היום">
+      <li role="option"><svg class="px" data-px="note" viewBox="0 0 8 8" aria-hidden="true"></svg><span data-he="בוקר של קסטות">Cassette Morning</span><span data-he="עם דנה">with Dana</span><span dir="ltr">08:00</span></li>
+      <li role="option"><svg class="px" data-px="note" viewBox="0 0 8 8" aria-hidden="true"></svg><span data-he="תחנה אחרונה">Last Stop</span><span data-he="עם רועי">with Roy</span><span dir="ltr">14:00</span></li>
+      <li role="option" aria-selected="true"><svg class="px" data-px="note" viewBox="0 0 8 8" aria-hidden="true"></svg><span data-he="קלטות האוטובוס הלילי">Night Bus Tapes</span><span data-he="עם מאיה">with Maya</span><span dir="ltr">21:00</span></li>
+    </ul></article>
+</section>
+<section class="spec-system" data-spec-system data-display="Static FM" data-display-he="רעש לבן"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · desktop-y2k · fictional station “Static FM”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script>
+/* pixel icons from 8×8 bitmaps (# = ink, o = highlight blue, + = pink) */
+(function () {
+  var B = {
+    cd: ['..####..', '.#oooo#.', '#oo##oo#', '#o#..#o#', '#o#..#o#', '#oo##oo#', '.#oooo#.', '..####..'],
+    note: ['...####.', '...#..#.', '...#..#.', '...#..#.', '.###.##.', '####.##.', '.##.....', '........'],
+    trash: ['.######.', '########', '.#.#.#..', '.#.#.#..', '.#.#.#..', '.#.#.#..', '.######.', '........'],
+    radio: ['......#.', '.....#..', '########', '#oo#+++#', '#oo#+++#', '#oo#+++#', '########', '.#....#.'],
+    cal: ['.#...#..', '########', '#......#', '#.oo.#.#', '#.oo...#', '#..#.#.#', '#......#', '########'],
+    bag: ['..####..', '..#..#..', '########', '#+++++##', '#+++++##', '#+++++##', '#+++++##', '########'],
+    heart: ['........', '.##..##.', '#++##++#', '#++++++#', '.#++++#.', '..#++#..', '...##...', '........'],
+    tape: ['############', '#++++++++++#', '#+########+#', '#+#oo##oo#+#', '#+########+#', '#++++++++++#', '#..######..#', '############']
+  };
+  var C = { '#': 'var(--c-ink)', o: 'var(--c-accent)', '+': 'var(--c-canvas)' };
+  document.querySelectorAll('svg.px').forEach(function (s) {
+    var m = B[s.dataset.px], o = ''; m.forEach(function (r, y) { r.split('').forEach(function (c, x) { if (C[c]) o += '<rect x="' + x + '" y="' + y + '" width="1.02" height="1.02" fill="' + C[c] + '"/>'; }); });
+    s.innerHTML = o;
+  });
+  /* 16-colour dithered cover: a night bus under a moon */
+  var cv = document.getElementById('cover'), o = '';
+  for (var y = 0; y < 16; y++) for (var x = 0; x < 16; x++) {
+    var sky = y < 10, d = (x + y) % 2 === 0, col;
+    if (sky) col = (y < 4 || (y < 7 && d)) ? 'oklch(30% .12 280)' : 'oklch(55% .16 330)';
+    else col = y < 11 ? 'oklch(20% .02 300)' : (d ? 'oklch(28% .03 300)' : 'oklch(20% .02 300)');
+    if ((x - 11) * (x - 11) + (y - 3) * (y - 3) < 5) col = 'oklch(94% .06 95)';
+    if (y >= 8 && y <= 10 && x >= 2 && x <= 12) col = y === 8 ? 'oklch(50% .21 262)' : ((x % 3 === 0) ? 'oklch(90% .12 95)' : 'oklch(50% .21 262)');
+    if (y === 11 && (x === 4 || x === 10)) col = 'oklch(16% .01 300)';
+    o += '<rect x="' + x + '" y="' + y + '" width="1.02" height="1.02" fill="' + col + '"/>';
+  }
+  cv.innerHTML = o;
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Draggable.min.js"></script>
+<script>document.documentElement.setAttribute('data-smooth', 'off');</script>
+<script src="../../runtime/core.js"></script>
+<script>
+/* real windows: draggable by the title bar (≥1024px), click raises; stepped open from the dock */
+(function () {
+  var wins = document.querySelectorAll('.desk [data-window]');
+  wins.forEach(function (w) { w.addEventListener('pointerdown', function () { wins.forEach(function (x) { x.classList.remove('is-top'); }); w.classList.add('is-top'); }); });
+  if (!window.gsap || !window.Draggable || !matchMedia('(min-width: 1024px)').matches) return;
+  wins.forEach(function (w) { Draggable.create(w, { trigger: w.querySelector('.bar'), bounds: '.desk', inertia: false }); });
+  if (!SD.reduced()) gsap.from(wins, { scale: .2, opacity: 0, transformOrigin: '50% 100%', duration: .18, ease: 'steps(4)', stagger: .12 });
+})();
+</script>
+</body>
+</html>

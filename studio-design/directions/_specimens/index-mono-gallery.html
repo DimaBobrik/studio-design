@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Index Mono Gallery · specimen</title>
+<meta name="he-title" content="Index Mono Gallery · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Hebrew:wght@400;500&family=Cousine:wght@400;700&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/index-mono-gallery.md */
+:root {
+  --c-canvas: oklch(84% 0.005 80); --c-surface: oklch(88.5% 0.004 80); --c-surface-2: oklch(79% 0.006 80); /* true mid band (2026-09 specimen audit: 94.5% read as architect-calm white) */
+  --c-ink: oklch(17% 0.005 80); --c-ink-2: oklch(29% 0.005 80); --c-muted: oklch(41% 0.005 80);
+  --c-rule: oklch(17% 0.005 80 / 0.18); --c-accent: oklch(42% 0.16 255); --c-accent-ink: oklch(97% 0.003 80);
+  --c-focus: oklch(42% 0.16 255);
+  --f-display: "IBM Plex Sans Condensed", "IBM Plex Sans Hebrew", system-ui, sans-serif; --f-body: "IBM Plex Mono", "Cousine", ui-monospace, monospace;
+  --f-mono: "IBM Plex Mono", "Cousine", monospace; --f-outlier: "IBM Plex Sans Condensed", sans-serif;
+  --fs-xs: 0.75rem; --fs-sm: 0.8125rem; --fs-base: 0.9375rem; --fs-lg: 1.0625rem; --fs-xl: 1.375rem; /* labels ≥12px, mono body 15px (antipatterns #22) */
+  --fs-2xl: clamp(1.75rem, 1.4rem + 1.2vw, 2.4rem); --fs-3xl: clamp(2.2rem, 1.6rem + 2.4vw, 3.4rem);
+  --fs-display: clamp(2.4rem, 1.5rem + 3.2vw, 4.25rem); /* small on purpose */
+  --lh-tight: 1.0; --lh-body: 1.55; --tr-display: -0.015em; --tr-label: 0;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 56px; --sp-8: 96px; --sp-9: 160px; --sp-10: 240px;
+  --section-y: clamp(64px, 6vw + 24px, 160px); --gutter: clamp(12px, 1.6vw, 24px); --maxw: 1800px;
+  --r-sm: 0px; --r-md: 0px; --r-lg: 0px; --r-pill: 0px;
+  --ease-out: cubic-bezier(0.4, 0, 0, 1); --ease-in: cubic-bezier(0.6, 0, 1, 1); --ease-in-out: cubic-bezier(0.6, 0, 0.2, 1);
+  --d-fast: 100ms; --d-med: 300ms; --d-slow: 700ms;
+  --shadow-1: none; --shadow-2: none;
+}
+:root[dir="rtl"] { --tr-display: 0; --fs-base: 1rem; } /* Cousine Hebrew needs +1px */
+</style>
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); }
+.nav { display: flex; align-items: center; gap: var(--sp-6); block-size: 48px; font-size: 13px; }
+.nav .wm { margin-inline-end: auto; text-decoration: none; font-weight: 500; }
+.nav a { text-decoration: none; } .nav a[aria-current] { color: var(--c-accent); text-decoration: underline; text-underline-offset: .3em; }
+.nav .n { color: var(--c-accent); }
+.head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--sp-5); padding-block: var(--sp-6) var(--sp-5); border-block-end: 1px solid var(--c-rule); }
+.head h1 { font-family: var(--f-display); font-weight: 500; font-size: var(--fs-2xl); line-height: var(--lh-tight); letter-spacing: var(--tr-display); }
+.filters { display: flex; gap: var(--sp-5); font-size: 13px; flex-wrap: wrap; }
+.filters button { color: var(--c-ink-2); padding: 0; }
+.filters button[aria-pressed="true"] { color: var(--c-accent); text-decoration: underline; text-underline-offset: .3em; }
+.filters .v { color: var(--c-muted); margin-inline-start: var(--sp-5); }
+.filters .v b { color: var(--c-ink); font-weight: 500; }
+.wall { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); row-gap: var(--sp-7); align-items: start; padding-block: var(--sp-6) var(--section-y); list-style: none; margin: 0; }
+.obj { display: grid; gap: var(--sp-2); }
+.obj svg { inline-size: 100%; block-size: auto; }
+.obj .m { display: flex; gap: var(--sp-3); font-size: 12px; }
+.obj .m b { font-weight: 500; }
+.obj .m .p { margin-inline-start: auto; color: var(--c-ink-2); }
+.obj .d { font-size: 12px; color: var(--c-muted); }
+.o1 { grid-column: 1 / span 3; } .o2 { grid-column: 5 / span 2; margin-block-start: 120px; } .o3 { grid-column: 7 / span 3; margin-block-start: 48px; }
+.o4 { grid-column: 11 / span 2; margin-block-start: 200px; } .o5 { grid-column: 2 / span 2; margin-block-start: 0; } .o6 { grid-column: 5 / span 4; margin-block-start: 48px; }
+.btn { display: inline-flex; align-items: center; block-size: 44px; padding-inline: 18px; background: var(--c-ink); color: var(--c-surface); text-decoration: none; font-size: 15px; }
+.btn:hover, .btn.is-hover { background: var(--c-accent); }
+.btn.is-focus { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.tbtn { text-decoration: underline; text-underline-offset: .3em; font-size: 15px; }
+.index { padding-block: var(--sp-7) var(--section-y); }
+.index table { inline-size: 100%; border-collapse: collapse; font-size: 13px; }
+.index th { text-align: start; font-weight: 400; color: var(--c-muted); padding-block: var(--sp-2); }
+.index td { padding-block: var(--sp-3); border-block-start: 1px solid var(--c-rule); }
+@media (max-width: 900px) {
+  .nav a:not(.wm):not(:last-child) { display: none; }
+  .wall { row-gap: var(--sp-6); }
+  .o1 { grid-column: 1 / span 7; } .o2 { grid-column: 9 / span 4; margin-block-start: 80px; } .o3 { grid-column: 2 / span 8; margin-block-start: 0; }
+  .o4 { grid-column: 1 / span 5; margin-block-start: 0; } .o5 { grid-column: 7 / span 5; margin-block-start: 60px; } .o6 { grid-column: 1 / span 10; margin-block-start: 0; }
+  .index th:nth-child(3), .index td:nth-child(3), .index th:nth-child(4), .index td:nth-child(4) { display: none; }
+}
+</style>
+</head>
+<body>
+<header class="nav container"><a class="wm" href="#">Holm Editions</a><a href="#" aria-current="page" data-he="אוסף">Collection</a><a href="#" data-he="אינדקס">Index</a><a href="#" data-he="אודות">About</a><a href="#"><span data-he="סל">Cart</span> <span class="n" dir="ltr">02</span></a></header>
+<main class="container">
+  <div class="head">
+    <h1 data-he="אוסף, 1952–1988">Collection, 1952–1988</h1>
+    <div class="filters" role="group" aria-label="Filter" data-he-aria-label="סינון"><button aria-pressed="true" data-he="הכול 046">All 046</button><button aria-pressed="false" data-he="ישיבה 014">Seating 014</button><button aria-pressed="false" data-he="תאורה 009">Light 009</button><button aria-pressed="false" data-he="כלים 017">Vessels 017</button><span class="v"><b data-he="קיר">Wall</b> / <span data-he="רשימה">List</span></span></div>
+  </div>
+  <ul class="wall" role="list">
+    <li class="obj o1"><svg viewBox="0 0 300 380" direction="ltr" aria-label="Lounge chair, side elevation" role="img"><path d="M60 330 L96 220 H240 L262 330" fill="none" stroke="var(--c-ink)" stroke-width="3"/><path d="M80 226 C80 206 96 200 116 200 H246 C256 200 262 208 262 218 V232 H84Z" fill="oklch(46% .03 60)"/><path d="M92 204 L60 70 C58 58 66 50 78 52 L104 58 C112 60 116 66 118 74 L140 200Z" fill="oklch(46% .03 60)"/><path d="M40 336 H290" stroke="var(--c-rule)" stroke-width="2"/></svg><div class="m"><b dir="ltr">014</b><span data-he="כורסת טרקלין">Lounge chair</span><span class="p" dir="ltr">₪ 18,400</span></div><p class="d" dir="ltr">Teak, wool · 72 × 78 × 84 cm · 1961</p></li>
+    <li class="obj o2"><svg viewBox="0 0 200 400" direction="ltr" aria-label="Floor lamp" role="img"><path d="M100 60 V380 M70 380 H130" stroke="var(--c-ink)" stroke-width="3"/><path d="M52 60 L78 14 H122 L148 60Z" fill="oklch(90% .03 90)" stroke="var(--c-ink)" stroke-width="2"/><path d="M40 386 H160" stroke="var(--c-rule)" stroke-width="2"/></svg><div class="m"><b dir="ltr">022</b><span data-he="מנורת רצפה">Floor lamp</span><span class="p" data-he="בפנייה">Enquire</span></div><p class="d" dir="ltr">Brass, linen · Ø 34 × 162 cm · 1958</p></li>
+    <li class="obj o3"><svg viewBox="0 0 300 300" direction="ltr" aria-label="Side table" role="img"><ellipse cx="150" cy="96" rx="120" ry="18" fill="oklch(28% .01 60)"/><path d="M150 110 V250 M110 262 L150 250 L190 262" stroke="var(--c-ink)" stroke-width="3" fill="none"/><path d="M20 266 H280" stroke="var(--c-rule)" stroke-width="2"/></svg><div class="m"><b dir="ltr">031</b><span data-he="שולחן צד">Side table</span><span class="p" dir="ltr">₪ 6,200</span></div><p class="d" dir="ltr">Smoked oak · Ø 60 × 52 cm · 1967</p></li>
+    <li class="obj o4"><svg viewBox="0 0 200 300" direction="ltr" aria-label="Stoneware vase" role="img"><path d="M78 260 C40 240 38 180 60 140 C74 116 84 100 84 70 V40 H116 V70 C116 100 126 116 140 140 C162 180 160 240 122 260Z" fill="oklch(62% .06 55)"/><path d="M84 40 H116" stroke="oklch(40% .05 50)" stroke-width="4"/><path d="M30 262 H170" stroke="var(--c-rule)" stroke-width="2"/></svg><div class="m"><b dir="ltr">040</b><span data-he="אגרטל חרס">Stoneware vase</span><span class="p" dir="ltr">₪ 2,900</span></div><p class="d" dir="ltr">Iron glaze · Ø 22 × 38 cm · 1972</p></li>
+    <li class="obj o5"><svg viewBox="0 0 200 260" direction="ltr" aria-label="Stool" role="img"><rect x="36" y="80" width="128" height="16" fill="oklch(70% .02 80)" stroke="var(--c-ink)" stroke-width="2"/><path d="M52 96 L40 230 M148 96 L160 230 M60 170 H140" stroke="var(--c-ink)" stroke-width="3"/><path d="M20 234 H180" stroke="var(--c-rule)" stroke-width="2"/></svg><div class="m"><b dir="ltr">009</b><span data-he="שרפרף">Stool</span><span class="p" dir="ltr">₪ 3,100</span></div><p class="d" dir="ltr">Ash · 40 × 40 × 46 cm · 1953</p></li>
+    <li class="obj o6"><svg viewBox="0 0 400 220" direction="ltr" aria-label="Wall shelf" role="img"><path d="M20 60 H380 M20 140 H380" stroke="oklch(46% .03 60)" stroke-width="10"/><path d="M60 40 V160 M340 40 V160" stroke="var(--c-ink)" stroke-width="3"/><rect x="110" y="104" width="30" height="31" fill="oklch(30% .01 60)"/><rect x="146" y="92" width="16" height="43" fill="oklch(80% .02 80)"/><circle cx="270" cy="38" r="16" fill="oklch(62% .06 55)"/></svg><div class="m"><b dir="ltr">027</b><span data-he="מדף קיר">Wall shelf</span><span class="p" dir="ltr">₪ 4,700</span></div><p class="d" dir="ltr">Walnut, steel · 180 × 28 × 60 cm · 1964</p></li>
+  </ul>
+  <section class="index">
+    <table><thead><tr><th>№</th><th data-he="פריט">Object</th><th data-he="מעצב">Designer</th><th data-he="שנה">Year</th><th data-he="מצב">Status</th></tr></thead>
+      <tbody><tr><td dir="ltr">009</td><td data-he="שרפרף">Stool</td><td>[TODO: confirm]</td><td dir="ltr">1953</td><td data-he="זמין">Available</td></tr><tr><td dir="ltr">014</td><td data-he="כורסת טרקלין">Lounge chair</td><td>[TODO: confirm]</td><td dir="ltr">1961</td><td data-he="זמין">Available</td></tr></tbody></table>
+    <p style="margin-block-start: var(--sp-6); display: flex; gap: var(--sp-5); align-items: center"><a class="btn" href="#" data-spec-btn data-he="הוספה לסל">Add to cart</a><a class="tbtn" href="#" data-he="בירור">Enquire</a></p>
+  </section>
+</main>
+<section class="spec-system" data-spec-system data-display="Collection, 1952–1988" data-display-he="אוסף, 1952–1988"></section>
+<footer class="spec-foot"><span>Specimen · index-mono-gallery · fictional dealer “Holm Editions”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="../../runtime/core.js"></script>
+</body>
+</html>

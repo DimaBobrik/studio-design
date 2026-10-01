@@ -1,0 +1,23 @@
+/* studio-design fx · text-fx */
+/* rotate */
+.sd-rotate { display: inline-grid; vertical-align: bottom; max-inline-size: 100%; }
+.sd-rotate__stack { display: inline-grid; max-inline-size: 100%; overflow: clip; padding-block: 0.08em; margin-block: -0.08em; perspective: 600px; }
+.sd-rotate__word { grid-area: 1 / 1; white-space: nowrap; max-inline-size: 100%; overflow-wrap: anywhere; text-align: start; transform-origin: 50% 50% -0.4em; }
+@media (max-width: 480px) { .sd-rotate__word { white-space: normal; } } /* reflow at 320px: long words/phrases wrap instead of widening the line */
+/* roll (hover label roll) */
+.sd-roll-text { display: inline-grid; overflow: clip; vertical-align: top; padding-block: 0.06em; margin-block: -0.06em; }
+.sd-roll-text__line { grid-area: 1 / 1; white-space: nowrap; transition: transform 520ms var(--ease-out); }
+.sd-roll-text__line.is-b { transform: translateY(110%); }
+.sd-roll-text__ch { display: inline-block; white-space: pre; transition: transform 520ms var(--ease-out); transition-delay: calc(var(--i, 0) * 16ms); }
+.sd-roll-text__line:has(.sd-roll-text__ch) { transform: none; transition: none; }
+.sd-roll-text__line.is-b .sd-roll-text__ch { transform: translateY(110%); }
+:is(.sd-roll-host:hover, .sd-roll-host:focus-visible) .sd-roll-text__line:not(:has(.sd-roll-text__ch)) { transform: translateY(-110%); }
+:is(.sd-roll-host:hover, .sd-roll-host:focus-visible) .sd-roll-text__line.is-b:not(:has(.sd-roll-text__ch)) { transform: translateY(0); }
+:is(.sd-roll-host:hover, .sd-roll-host:focus-visible) .sd-roll-text__ch { transform: translateY(-110%); }
+:is(.sd-roll-host:hover, .sd-roll-host:focus-visible) .is-b .sd-roll-text__ch { transform: translateY(0); }
+@media (hover: none) { .sd-roll-text__line, .sd-roll-text__ch { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .sd-roll-text__line.is-b { display: none; }
+  :is(.sd-roll-host:hover, .sd-roll-host:focus-visible) .sd-roll-text__line, :is(.sd-roll-host:hover, .sd-roll-host:focus-visible) .sd-roll-text__ch { transform: none !important; }
+  .sd-roll-host:hover .sd-roll-text { text-decoration: underline; text-underline-offset: 0.2em; }
+}

@@ -1,0 +1,5 @@
+/* studio-design fx · clip-reveal (optional helper CSS) */
+.sd-clip { overflow: clip; position: relative; }
+.sd-clip > img, .sd-clip > picture > img, .sd-clip > video, .sd-clip [data-clip-inner] {
+  display: block; inline-size: 100%; block-size: 100%; object-fit: cover; transform-origin: 50% 50%; will-change: transform;
+}

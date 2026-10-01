@@ -1,0 +1,158 @@
+/* studio-design fx · bg-kit.css — zero-cost background utilities (tokens only, logical/RTL-safe)
+   Put a class on a section, or stack several on dedicated layer children:
+     <section class="bg-glow">                                   (one treatment)
+     <section class="bg-host">                                   (stacked treatments)
+       <div class="bg-layer bg-aurora-lite"></div><div class="bg-layer bg-grid"></div><div class="bg-layer bg-grain"></div>
+       …content…
+     </section>
+   Slots on ONE element: element background = .bg-glow ; ::before = one of grid|dots|topo|halftone|scanlines|aurora-lite|conic-sheen ;
+   ::after = .bg-grain. Use .bg-layer children to combine two ::before treatments.
+   Knobs (custom properties, set on the element or any ancestor):
+     --bg-line   line/dot color            default color-mix(ink 10%)
+     --bg-size   grid/dot pitch            48px (grid) / 22px (dots)
+     --bg-mask   mask for patterns         radial fade; helpers .bg-mask-none|top|bottom|start|end|edges
+     --bg-opacity layer opacity            1
+     --grain-opacity  .bg-grain strength   0.5 (light) — try 0.35 on dark
+     --glow-1 / --glow-2 glow colors       accent 36% / surface-2 60%
+     --aurora-1..3 colors, --aurora-speed  accent / surface-2 / ink-2, 26s
+     --sheen-color, --sheen-speed          accent 55%, 16s
+     --spot-color, --spot-size (bg-spotlight, JS: data-fx="bg-kit")
+   Reduced motion: animated layers (aurora-lite, conic-sheen) stop. Touch: .bg-spotlight stays static (JS pointer:fine only). */
+
+:where(.bg-grid, .bg-dots, .bg-topo, .bg-halftone, .bg-scanlines, .bg-aurora-lite, .bg-conic-sheen, .bg-grain, .bg-glow, .bg-spotlight, .bg-host) {
+  position: relative; isolation: isolate;
+}
+.bg-layer { position: absolute !important; inset: 0; z-index: -1; pointer-events: none; overflow: clip; border-radius: inherit; }
+:where(.bg-grid, .bg-dots, .bg-topo, .bg-halftone, .bg-scanlines, .bg-aurora-lite, .bg-conic-sheen)::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; border-radius: inherit;
+  opacity: var(--bg-opacity, 1);
+  -webkit-mask-image: var(--bg-mask, radial-gradient(ellipse 75% 70% at 50% 45%, #000 35%, transparent 78%));
+          mask-image: var(--bg-mask, radial-gradient(ellipse 75% 70% at 50% 45%, #000 35%, transparent 78%));
+}
+:where(.bg-grid, .bg-dots, .bg-topo, .bg-halftone, .bg-scanlines, .bg-aurora-lite, .bg-conic-sheen, .bg-spotlight, .bg-host) { overflow: clip; }
+
+/* mask helpers (logical) */
+.bg-mask-none   { --bg-mask: linear-gradient(#000 0 0); }
+.bg-mask-top    { --bg-mask: linear-gradient(to bottom, #000 0%, transparent 85%); }
+.bg-mask-bottom { --bg-mask: linear-gradient(to top, #000 0%, transparent 85%); }
+.bg-mask-edges  { --bg-mask: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent); }
+.bg-mask-start  { --bg-mask: linear-gradient(to right, #000 0%, transparent 75%); }
+.bg-mask-end    { --bg-mask: linear-gradient(to left, #000 0%, transparent 75%); }
+[dir="rtl"] .bg-mask-start, .bg-mask-start[dir="rtl"] { --bg-mask: linear-gradient(to left, #000 0%, transparent 75%); }
+[dir="rtl"] .bg-mask-end, .bg-mask-end[dir="rtl"]     { --bg-mask: linear-gradient(to right, #000 0%, transparent 75%); }
+
+/* A-02 masked line grid */
+.bg-grid::before {
+  background-image:
+    linear-gradient(to right, var(--bg-line, color-mix(in oklab, var(--c-ink) 10%, transparent)) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bg-line, color-mix(in oklab, var(--c-ink) 10%, transparent)) 1px, transparent 1px);
+  background-size: var(--bg-size, 48px) var(--bg-size, 48px);
+  background-position: 50% 0;
+}
+/* A-03 dot lattice */
+.bg-dots::before {
+  background-image: radial-gradient(circle at center, var(--bg-line, color-mix(in oklab, var(--c-ink) 22%, transparent)) 0 1.1px, transparent 1.6px);
+  background-size: var(--bg-size, 22px) var(--bg-size, 22px);
+  background-position: 50% 0;
+}
+/* A-40 static topographic contours (SVG feTurbulence -> blur -> discrete bands -> Laplacian edges), recolored through mask */
+.bg-topo::before {
+  background: var(--bg-line, color-mix(in oklab, var(--c-ink) 18%, transparent));
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 1000' preserveAspectRatio='xMidYMid slice'%3E%3Cfilter id='t' filterUnits='userSpaceOnUse' x='-80' y='-80' width='1760' height='1160'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0028' numOctaves='1' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.3 0 0 0 -0.15'/%3E%3CfeGaussianBlur stdDeviation='5'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1'/%3E%3C/feComponentTransfer%3E%3CfeConvolveMatrix order='3' kernelMatrix='-1 -1 -1 -1 8 -1 -1 -1 -1' preserveAlpha='false'/%3E%3C/filter%3E%3Crect x='-80' y='-80' width='1760' height='1160' filter='url(%23t)'/%3E%3C/svg%3E"), var(--bg-mask, radial-gradient(ellipse 80% 75% at 50% 45%, #000 40%, transparent 80%));
+          mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 1000' preserveAspectRatio='xMidYMid slice'%3E%3Cfilter id='t' filterUnits='userSpaceOnUse' x='-80' y='-80' width='1760' height='1160'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0028' numOctaves='1' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.3 0 0 0 -0.15'/%3E%3CfeGaussianBlur stdDeviation='5'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1'/%3E%3C/feComponentTransfer%3E%3CfeConvolveMatrix order='3' kernelMatrix='-1 -1 -1 -1 8 -1 -1 -1 -1' preserveAlpha='false'/%3E%3C/filter%3E%3Crect x='-80' y='-80' width='1760' height='1160' filter='url(%23t)'/%3E%3C/svg%3E"), var(--bg-mask, radial-gradient(ellipse 80% 75% at 50% 45%, #000 40%, transparent 80%));
+  -webkit-mask-size: cover, 100% 100%; mask-size: cover, 100% 100%;
+  -webkit-mask-position: center; mask-position: center;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-composite: source-in; mask-composite: intersect;
+}
+/* A-34 CSS halftone: soft dot screen x gradient, thresholded by contrast(); multiply keeps only the ink dots */
+.bg-halftone::before {
+  --ht: var(--bg-size, 10px);
+  background:
+    radial-gradient(closest-side, #000 0%, #fff 100%) 0 0 / var(--ht) var(--ht),
+    radial-gradient(farthest-corner at var(--ht-x, 85%) var(--ht-y, 10%), #000 0%, #fff 100%);
+  background-blend-mode: screen;
+  filter: contrast(22);
+  mix-blend-mode: multiply;
+  opacity: var(--bg-opacity, 0.14);
+  inset: -2px;
+}
+[dir="rtl"] .bg-halftone::before, .bg-halftone[dir="rtl"]::before { --ht-x: 15%; }
+.bg-halftone.is-dark::before { filter: contrast(22) invert(1); mix-blend-mode: screen; opacity: var(--bg-opacity, 0.12); }
+/* scanlines */
+.bg-scanlines::before {
+  background-image: repeating-linear-gradient(to bottom, var(--bg-line, color-mix(in oklab, var(--c-ink) 12%, transparent)) 0 1px, transparent 1px var(--bg-size, 4px));
+  --bg-mask: linear-gradient(to bottom, #000, #000 60%, transparent);
+}
+/* A-01 radial glow (element background; keeps background-color) */
+.bg-glow {
+  background-image:
+    radial-gradient(70% 60% at 50% -8%, var(--glow-1, color-mix(in oklab, var(--c-accent) 36%, transparent)), transparent 70%),
+    radial-gradient(40% 45% at 92% 8%, var(--glow-2, color-mix(in oklab, var(--c-surface-2) 60%, transparent)), transparent 70%);
+}
+.bg-glow--bottom { background-image:
+    radial-gradient(75% 65% at 50% 110%, var(--glow-1, color-mix(in oklab, var(--c-accent) 36%, transparent)), transparent 70%),
+    radial-gradient(40% 45% at 8% 95%, var(--glow-2, color-mix(in oklab, var(--c-surface-2) 60%, transparent)), transparent 70%); }
+.bg-glow--corner { background-image:
+    radial-gradient(60% 70% at 0% 0%, var(--glow-1, color-mix(in oklab, var(--c-accent) 36%, transparent)), transparent 70%),
+    radial-gradient(45% 55% at 100% 100%, var(--glow-2, color-mix(in oklab, var(--c-surface-2) 60%, transparent)), transparent 70%); }
+[dir="rtl"] .bg-glow--corner, .bg-glow--corner[dir="rtl"] { background-image:
+    radial-gradient(60% 70% at 100% 0%, var(--glow-1, color-mix(in oklab, var(--c-accent) 36%, transparent)), transparent 70%),
+    radial-gradient(45% 55% at 0% 100%, var(--glow-2, color-mix(in oklab, var(--c-surface-2) 60%, transparent)), transparent 70%); }
+[dir="rtl"] .bg-glow:not(.bg-glow--bottom):not(.bg-glow--corner), .bg-glow[dir="rtl"]:not(.bg-glow--bottom):not(.bg-glow--corner) { background-image:
+    radial-gradient(70% 60% at 50% -8%, var(--glow-1, color-mix(in oklab, var(--c-accent) 36%, transparent)), transparent 70%),
+    radial-gradient(40% 45% at 8% 8%, var(--glow-2, color-mix(in oklab, var(--c-surface-2) 60%, transparent)), transparent 70%); }
+/* A-08 aurora-lite: soft pools on an oversized layer, moved by transform only (compositor), no blur filter */
+.bg-aurora-lite::before {
+  inset: -25%;
+  --bg-mask: none;
+  background:
+    radial-gradient(35% 30% at 30% 35%, var(--aurora-1, color-mix(in oklab, var(--c-accent) 55%, transparent)), transparent 70%),
+    radial-gradient(30% 35% at 70% 30%, var(--aurora-2, color-mix(in oklab, var(--c-surface-2) 80%, transparent)), transparent 70%),
+    radial-gradient(40% 30% at 55% 70%, var(--aurora-3, color-mix(in oklab, var(--c-ink-2) 30%, transparent)), transparent 70%);
+  animation: sd-aurora var(--aurora-speed, 26s) var(--ease-in-out) infinite alternate;
+  will-change: transform;
+}
+@keyframes sd-aurora {
+  0%   { transform: translate3d(-4%, -2%, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate3d(3%, 3%, 0) rotate(8deg) scale(1.08); }
+  100% { transform: translate3d(-2%, 4%, 0) rotate(-6deg) scale(1.02); }
+}
+/* A-09 conic sheen: slowly rotating beam (transform only) */
+.bg-conic-sheen::before {
+  inset: auto; inline-size: 160vmax; block-size: 160vmax; inset-block-start: 50%; inset-inline-start: 50%;
+  margin-block-start: -80vmax; margin-inline-start: -80vmax;
+  background: conic-gradient(from 0deg, transparent 0deg, var(--sheen-color, color-mix(in oklab, var(--c-accent) 55%, transparent)) 40deg, transparent 95deg, transparent 180deg, var(--sheen-color-2, color-mix(in oklab, var(--c-surface-2) 45%, transparent)) 230deg, transparent 290deg);
+  --bg-mask: radial-gradient(closest-side, #000 20%, transparent 70%);
+  animation: sd-sheen var(--sheen-speed, 16s) linear infinite;
+  will-change: transform;
+}
+@keyframes sd-sheen { to { transform: rotate(1turn); } }
+/* A-06 grain overlay (above content, never catches pointer) */
+.bg-grain::after {
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+  mix-blend-mode: overlay;
+  opacity: var(--grain-opacity, 0.5);
+}
+.bg-layer.bg-grain { z-index: 2; }
+/* C-16 spotlight layer (inserted by JS bg-kit) */
+.sd-spotlight {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none; border-radius: inherit;
+  background: radial-gradient(var(--spot-size, 520px) circle at var(--sx, 50%) var(--sy, 50%), var(--spot-color, color-mix(in oklab, var(--c-accent) 22%, transparent)), transparent 62%);
+  opacity: 0; transition: opacity var(--d-med) var(--ease-out);
+}
+.sd-spotlight.is-on { opacity: 1; }
+.sd-spotlight__rim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none; border-radius: inherit; padding: 1px;
+  background: radial-gradient(calc(var(--spot-size, 520px) * 0.6) circle at var(--sx, 50%) var(--sy, 50%), var(--spot-rim, color-mix(in oklab, var(--c-accent) 85%, transparent)), transparent 60%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0; transition: opacity var(--d-med) var(--ease-out);
+}
+.sd-spotlight__rim.is-on { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-aurora-lite::before, .bg-conic-sheen::before { animation: none; }
+}

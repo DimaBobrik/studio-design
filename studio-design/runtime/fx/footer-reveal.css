@@ -1,0 +1,8 @@
+/* studio-design fx · footer-reveal */
+.sd-footer--curtain { position: sticky; bottom: 0; z-index: 0; }
+.sd-footer-cover { position: relative; z-index: 1; background: var(--cover-bg, var(--c-canvas));
+  border-end-start-radius: var(--cover-radius, 0); border-end-end-radius: var(--cover-radius, 0);
+  box-shadow: var(--cover-shadow, 0 30px 60px -30px oklch(0% 0 0 / 0.35)); }
+.sd-fit { display: block; white-space: nowrap; line-height: 0.86; overflow: clip; padding-block: 0.06em 0.02em; text-align: center; }
+.sd-fit--crop { block-size: calc(0.92em * (1 - var(--fit-crop, 0))); }
+.sd-fit__ch, .sd-fit__w { display: inline-block; will-change: transform; }

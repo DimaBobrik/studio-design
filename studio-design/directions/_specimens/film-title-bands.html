@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Film Title Bands · specimen</title>
+<meta name="he-title" content="Film Title Bands · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Heebo:wght@300..800&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/film-title-bands.md */
+:root {
+  --c-canvas: oklch(9% 0.010 250); --c-surface: oklch(14% 0.010 250); --c-surface-2: oklch(20% 0.010 250);
+  --c-ink: oklch(96% 0.005 250); --c-ink-2: oklch(84% 0.006 250); --c-muted: oklch(66% 0.008 250);
+  --c-rule: oklch(32% 0.010 250); --c-accent: oklch(96% 0.005 250); --c-accent-ink: oklch(9% 0.010 250);
+  --c-focus: oklch(80% 0.12 230);
+  --f-display: "Barlow Condensed", "Heebo", system-ui, sans-serif; --f-body: "Barlow", "Heebo", system-ui, sans-serif;
+  --f-mono: ui-monospace, Menlo, monospace; --f-outlier: "Barlow Condensed", sans-serif;
+  --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-base: 1rem; --fs-lg: 1.1875rem; --fs-xl: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  --fs-2xl: clamp(2.25rem, 1.5rem + 2.8vw, 3.75rem); --fs-3xl: clamp(3rem, 1.6rem + 5vw, 6rem);
+  --fs-display: clamp(3rem, 1rem + 6.8vw, 7.5rem);
+  --lh-tight: 0.95; --lh-body: 1.6; --tr-display: 0.02em; --tr-label: 0.14em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 40px; --sp-7: 64px; --sp-8: 96px; --sp-9: 144px; --sp-10: 216px;
+  --section-y: 0px; /* bands are full-viewport; inner padding uses --sp-8 */ --gutter: clamp(20px, 4vw, 72px); --maxw: 1600px;
+  --r-sm: 0px; --r-md: 0px; --r-lg: 0px; --r-pill: 999px;
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1); --ease-in: cubic-bezier(0.55, 0, 1, 0.45); --ease-in-out: cubic-bezier(0.87, 0, 0.13, 1);
+  --d-fast: 180ms; --d-med: 600ms; --d-slow: 1400ms;
+  --shadow-1: none; --shadow-2: none;
+}
+:root[dir="rtl"] { --tr-display: 0; --tr-label: 0.02em; --f-display: "Heebo", "Barlow Condensed", sans-serif; }
+</style>
+<link rel="stylesheet" href="../../runtime/fx/bg-kit.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); }
+.lab { font-weight: 500; font-size: 12px; letter-spacing: var(--tr-label); text-transform: uppercase; }
+[lang="he"] .lab { text-transform: none; font-size: 13px; }
+.nav { position: absolute; z-index: 10; inset-inline: 0; inset-block-start: 0; block-size: 72px; display: flex; align-items: center; gap: var(--sp-6); padding-inline: var(--gutter); }
+.nav .wm { font-family: var(--f-display); font-weight: 700; font-size: 1.5rem; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; margin-inline-end: auto; }
+.nav ul { display: flex; gap: var(--sp-6); list-style: none; margin: 0; padding: 0; } .nav a { text-decoration: none; }
+.band { position: relative; min-block-size: 100svh; overflow: clip; isolation: isolate; --grain-opacity: .35; }
+.band .shot { position: absolute; inset: 0; z-index: -2; }
+.band .shot svg { inline-size: 100%; block-size: 100%; }
+.letterbox { position: absolute; inset-inline: 0; block-size: 7vh; background: var(--c-canvas); z-index: 1; }
+.lb-t { inset-block-start: 0; } .lb-b { inset-block-end: 0; }
+.band__copy { position: absolute; z-index: 2; inset-inline-start: 7%; inset-block-end: calc(7vh + 11%); display: grid; gap: var(--sp-5); justify-items: start; }
+.band h1, .band h2 { font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); max-inline-size: 12ch; }
+[lang="he"] .band h1, [lang="he"] .band h2 { font-size: calc(var(--fs-display) * 1.08); font-weight: 700; }
+.ghost { display: inline-flex; align-items: center; gap: 10px; block-size: 44px; padding-inline: 24px; border-radius: var(--r-pill); box-shadow: inset 0 0 0 1px var(--c-ink); color: var(--c-ink); text-decoration: none; font-weight: 500; font-size: 13px; letter-spacing: var(--tr-label); text-transform: uppercase; transition: background var(--d-med) var(--ease-out), color var(--d-med) var(--ease-out); }
+[lang="he"] .ghost { text-transform: none; }
+.ghost:hover, .ghost.is-hover { background: var(--c-ink); color: var(--c-accent-ink); }
+.ghost.is-focus { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.rail { position: absolute; z-index: 2; inset-inline: 0; inset-block-end: 7vh; display: grid; grid-template-columns: repeat(4, 1fr); padding-inline: 7%; }
+.rail div { padding: var(--sp-3) var(--sp-4); border-inline-start: 1px solid color-mix(in oklab, var(--c-ink) 22%, transparent); display: flex; gap: var(--sp-3); align-items: baseline; font-weight: 500; }
+.rail b { font-family: var(--f-display); font-weight: 600; font-size: 1.5rem; letter-spacing: .02em; }
+.rail span { color: var(--c-ink-2); font-size: 13px; }
+.inter { padding: var(--sp-9) var(--gutter); display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-8); max-inline-size: var(--maxw); margin-inline: auto; }
+.inter h2 { font-family: var(--f-display); font-weight: 500; text-transform: uppercase; font-size: var(--fs-2xl); line-height: 1; letter-spacing: .02em; }
+.inter p { color: var(--c-ink-2); max-inline-size: 52ch; }
+@media (max-width: 800px) {
+  .nav ul { display: none; }
+  .band__copy { inset-inline: 7%; inset-block-end: calc(7vh + 150px); }
+  .rail { grid-template-columns: 1fr 1fr; } .inter { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header class="nav lab"><a class="wm" href="#">Halcyon</a><ul role="list"><li><a href="#" data-he="משלחות">Expeditions</a></li><li><a href="#" data-he="הספינה">The ship</a></li><li><a href="#" data-he="יומן">Journal</a></li></ul><a class="ghost" href="#" data-he="תפריט">Menu</a></header>
+<main>
+<section class="band bg-grain">
+  <div class="shot" aria-hidden="true" style="filter: saturate(.3) brightness(.82) contrast(1.08)"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" direction="ltr">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="oklch(24% .04 245)"/><stop offset=".5" stop-color="oklch(52% .05 230)"/><stop offset=".72" stop-color="oklch(80% .05 70)"/><stop offset="1" stop-color="oklch(70% .05 220)"/></linearGradient>
+      <linearGradient id="ice" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="oklch(86% .03 230)"/><stop offset="1" stop-color="oklch(40% .04 240)"/></linearGradient>
+      <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="oklch(38% .04 240)"/><stop offset="1" stop-color="oklch(12% .02 250)"/></linearGradient>
+      <radialGradient id="sun" cx=".68" cy=".62" r=".3"><stop offset="0" stop-color="oklch(96% .06 80 / .9)"/><stop offset="1" stop-color="oklch(96% .06 80 / 0)"/></radialGradient>
+      <radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="oklch(9% .01 250 / 0)"/><stop offset="1" stop-color="oklch(9% .01 250 / .7)"/></radialGradient>
+      <filter id="blur"><feGaussianBlur stdDeviation="2"/></filter>
+    </defs>
+    <rect width="1600" height="900" fill="url(#sky)"/><rect width="1600" height="900" fill="url(#sun)"/>
+    <path d="M0 560 L140 470 L230 510 L380 380 L470 450 L560 400 L700 500 L820 430 L960 520 L1100 440 L1210 505 L1360 420 L1480 480 L1600 440 V640 H0Z" fill="oklch(58% .04 235)" opacity=".75" filter="url(#blur)"/>
+    <path d="M0 610 L180 540 L300 580 L420 500 L520 560 L700 520 L860 590 L1000 530 L1180 600 L1320 540 L1600 590 V660 H0Z" fill="url(#ice)"/>
+    <path d="M0 640 H1600 V900 H0Z" fill="url(#sea)"/>
+    <path d="M0 640 H1600" stroke="oklch(92% .04 80 / .6)" stroke-width="2"/>
+    <g fill="oklch(90% .03 80 / .35)"><rect x="980" y="652" width="260" height="2"/><rect x="1020" y="664" width="180" height="2"/><rect x="1060" y="678" width="110" height="2"/></g>
+    <g fill="oklch(10% .01 250)" transform="translate(560 0) scale(.7) translate(260 270)"><path d="M612 628 L760 628 L748 646 L624 646Z"/><rect x="668" y="606" width="40" height="22"/><rect x="682" y="590" width="6" height="16"/></g>
+    <rect width="1600" height="900" fill="url(#vig)"/>
+  </svg></div>
+  <div class="letterbox lb-t"></div><div class="letterbox lb-b"></div>
+  <div class="band__copy"><h1 data-he="תשעים יום על הקרח">Ninety days on the ice</h1><a class="ghost" href="#" data-spec-btn data-he="למסלול המשלחת">See the route</a></div>
+  <div class="rail lab">
+    <div><b dir="ltr">78°N</b><span data-he="נקודה צפונית">northernmost point</span></div>
+    <div><b dir="ltr">12</b><span data-he="נוסעים בכל הפלגה">guests per voyage</span></div>
+    <div><b dir="ltr">06.2027</b><span data-he="הפלגה הבאה">next departure</span></div>
+    <div><b dir="ltr">1,840 nm</b><span data-he="מרחק">distance</span></div>
+  </div>
+</section>
+<section class="inter">
+  <h2 data-he="ספינה אחת, שנים-עשר נוסעים, בלי תוכנית גיבוי שנראית טוב בתמונות.">One ship, twelve guests, no backup plan that looks good on Instagram.</h2>
+  <p data-he="Halcyon מפעילה ספינת מחקר משוחזרת בין שפיצברגן לגרינלנד. כל הפלגה מתוכננת עם מדעני קרח, וכל נוסע משתתף במדידות.">Halcyon runs a restored research vessel between Svalbard and Greenland. Every voyage is planned with ice scientists, and every guest takes part in the measurements.</p>
+</section>
+<section class="spec-system" data-spec-system data-display="NINETY DAYS" data-display-he="תשעים יום"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · film-title-bands · fictional operator “Halcyon”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script>
+(function () { if (!window.gsap || SD.reduced()) return;
+  gsap.from('.lb-t', { scaleY: 7, transformOrigin: '50% 0%', duration: 1.4, ease: 'expo.inOut' });
+  gsap.from('.lb-b', { scaleY: 7, transformOrigin: '50% 100%', duration: 1.4, ease: 'expo.inOut' });
+  gsap.from('.band .shot', { scale: 1.06, duration: 2.4, ease: 'expo.out' });
+})();
+</script>
+</body>
+</html>

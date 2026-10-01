@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Atmospheric Sky · specimen</title>
+<meta name="he-title" content="Atmospheric Sky · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=Heebo:wght@300..900&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/atmospheric-sky.md */
+:root {
+  --c-canvas: oklch(24% 0.09 258); --c-surface: oklch(30% 0.09 255); --c-surface-2: oklch(97% 0.008 240);
+  --c-ink: oklch(97% 0.008 240); --c-ink-2: oklch(88% 0.020 240); --c-muted: oklch(78% 0.040 240);
+  --c-rule: oklch(97% 0.008 240 / 0.22); --c-accent: oklch(85% 0.10 62); --c-accent-ink: oklch(24% 0.09 258);
+  --c-focus: oklch(85% 0.10 62);
+  --sky: linear-gradient(180deg, oklch(24% 0.09 258) 0%, oklch(38% 0.11 250) 55%, oklch(66% 0.09 230) 85%, oklch(84% 0.06 70) 100%); /* hero sky, one per page */
+  --f-display: "Host Grotesk", "Heebo", system-ui, sans-serif; --f-body: "Host Grotesk", "Heebo", system-ui, sans-serif;
+  --f-mono: ui-monospace, Menlo, monospace; --f-outlier: "Host Grotesk", sans-serif;
+  --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-base: 1.0625rem; --fs-lg: 1.25rem; --fs-xl: clamp(1.6rem, 1.3rem + 1vw, 2.2rem);
+  --fs-2xl: clamp(2.5rem, 1.6rem + 3.4vw, 4.4rem); --fs-3xl: clamp(3.4rem, 2rem + 6vw, 8rem);
+  --fs-display: clamp(3.5rem, 0.8rem + 9.4vw, 10.5rem);
+  --lh-tight: 0.92; --lh-body: 1.6; --tr-display: -0.03em; --tr-label: 0.04em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 36px; --sp-7: 56px; --sp-8: 96px; --sp-9: 144px; --sp-10: 216px;
+  --section-y: clamp(88px, 8vw + 36px, 200px); --gutter: clamp(18px, 3.5vw, 56px); --maxw: 1480px;
+  --r-sm: 8px; --r-md: 16px; --r-lg: 28px; --r-pill: 999px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.83, 0, 0.17, 1);
+  --d-fast: 180ms; --d-med: 600ms; --d-slow: 1400ms;
+  --shadow-1: 0 10px 30px -12px oklch(15% 0.08 258 / 0.5); --shadow-2: 0 40px 80px -30px oklch(12% 0.08 258 / 0.7);
+}
+[data-surface="sheet"] { --c-canvas: var(--c-surface-2); --c-ink: oklch(22% .06 258); --c-ink-2: oklch(34% .05 258); --c-muted: oklch(48% .04 258); --c-rule: oklch(22% .06 258 / .14); --c-accent: oklch(45% .15 258); --c-accent-ink: var(--c-surface-2); }
+:root[dir="rtl"] { --tr-display: 0; --lh-tight: 1.0; }
+</style>
+<link rel="stylesheet" href="../../runtime/fx/bg-kit.css">
+<link rel="stylesheet" href="../../runtime/fx/map.css">
+<link rel="stylesheet" href="../../runtime/fx/counter.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); }
+.nav { position: absolute; inset-inline: 0; inset-block-start: 0; z-index: 10; display: flex; align-items: center; gap: var(--sp-6); block-size: 80px; font-size: var(--fs-sm); font-weight: 500; }
+.nav .wm { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; text-decoration: none; margin-inline-end: auto; text-transform: uppercase; }
+.nav ul { display: flex; gap: var(--sp-6); list-style: none; margin: 0; padding: 0; } .nav a { text-decoration: none; }
+.btn { display: inline-flex; align-items: center; gap: 14px; block-size: 52px; padding-inline: 26px 8px; border-radius: var(--r-pill); background: var(--c-accent); color: var(--c-accent-ink); font-weight: 600; text-decoration: none; font-size: var(--fs-sm); }
+.btn i { display: grid; place-items: center; inline-size: 38px; block-size: 38px; border-radius: 50%; background: var(--c-accent-ink); color: var(--c-accent); font-style: normal; overflow: clip; }
+.btn i b { transition: transform var(--d-med) var(--ease-out); display: block; }
+.btn:hover i b, .btn.is-hover i b { transform: translateX(calc(4px * var(--dir, 1))); }
+.btn.is-focus { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+[dir="rtl"] { --dir: -1; }
+.nav .btn { block-size: 44px; padding-inline: 20px; }
+/* sky */
+.sky { position: relative; min-block-size: 100dvh; background: var(--sky); overflow: clip; isolation: isolate; --grain-opacity: .35; }
+.cloud { position: absolute; z-index: -1; border-radius: 50%; filter: blur(40px); background: radial-gradient(closest-side, oklch(96% .02 240 / .55), transparent); pointer-events: none; }
+.c1 { inline-size: 70vw; block-size: 22vh; inset-block-start: 58%; inset-inline-start: -10vw; }
+.c2 { inline-size: 55vw; block-size: 16vh; inset-block-start: 72%; inset-inline-end: -8vw; background: radial-gradient(closest-side, oklch(90% .05 60 / .5), transparent); }
+.c3 { inline-size: 40vw; block-size: 10vh; inset-block-start: 30%; inset-inline-end: 5vw; opacity: .35; }
+.caps { position: absolute; inset-inline: 0; inset-block-start: 118px; font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); color: var(--c-ink); white-space: nowrap; z-index: 2; pointer-events: none; }
+.caps span { display: block; }
+.caps .l1 { padding-inline-start: 4vw; } .caps .l2 { padding-inline-start: 22vw; } .caps .l3 { padding-inline-start: 9vw; }
+[lang="he"] .caps { font-size: calc(var(--fs-display) * 1.05); }
+.win { position: absolute; z-index: 1; margin: 0; border-radius: var(--r-md); overflow: clip; box-shadow: var(--shadow-2); aspect-ratio: 4 / 5; }
+.win .slot { block-size: 100%; --slot-bg: oklch(52% .08 245); --slot-ink: oklch(95% .01 240); }
+.win .slot { padding: 8px; } .win svg { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; }
+.win .slot span { font-size: 10px; background: oklch(19% .06 258 / .7); color: oklch(95% .01 240); }
+.win .slot span { position: relative; z-index: 1; }
+.w1 { inline-size: 200px; inset-block-start: 48%; inset-inline-end: 9vw; }
+.w2 { inline-size: 150px; inset-block-start: 14%; inset-inline-end: 18vw; }
+.w3 { inline-size: 240px; inset-block-start: 62%; inset-inline-start: 43vw; }
+.w4 { inline-size: 130px; inset-block-start: 31%; inset-inline-start: 3vw; }
+.sky__foot { position: absolute; inset-inline: 0; inset-block-end: 0; z-index: 3; display: flex; align-items: flex-end; justify-content: space-between; gap: var(--sp-6); padding-block-end: var(--sp-7); }
+.sky__foot p { max-inline-size: 34ch; color: var(--c-accent-ink); font-size: var(--fs-lg); line-height: 1.4; font-weight: 500; }
+.sky__foot .meta { font-size: var(--fs-sm); color: var(--c-accent-ink); letter-spacing: var(--tr-label); font-weight: 500; }
+/* sheet */
+.sheet { position: relative; z-index: 4; margin-block-start: -28px; border-start-start-radius: var(--r-lg); border-start-end-radius: var(--r-lg); background: var(--c-canvas); color: var(--c-ink); padding-block: var(--sp-8) var(--section-y); }
+.sheet h2 { font-weight: 700; font-size: var(--fs-2xl); line-height: 1; letter-spacing: -0.03em; max-inline-size: 16ch; }
+.sheet .lede { color: var(--c-ink-2); max-inline-size: 46ch; margin-block-start: var(--sp-5); }
+.sheet__top { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-7); align-items: end; }
+.nums { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); margin-block: var(--sp-8) var(--sp-7); }
+.nums div { background: color-mix(in oklab, var(--c-ink) 5%, var(--c-canvas)); border-radius: var(--r-lg); padding: var(--sp-6) var(--sp-5) var(--sp-5); display: grid; gap: var(--sp-2); }
+.nums b { font-weight: 800; font-size: var(--fs-3xl); line-height: .9; letter-spacing: -0.04em; }
+.nums span { color: var(--c-muted); font-size: var(--fs-sm); }
+.sd-map { --map-dot: color-mix(in oklab, var(--c-ink) 22%, transparent); --map-accent: var(--c-accent); }
+.sheet .btn { background: var(--c-ink); color: var(--c-canvas); } .sheet .btn i { background: var(--c-canvas); color: var(--c-ink); }
+@media (max-width: 900px) {
+  .nav ul { display: none; }
+  .caps { inset-block-start: 110px; } .caps .l2 { padding-inline-start: 10vw; } .caps .l3 { padding-inline-start: 4vw; }
+  .w1 { inline-size: 120px; inset-block-start: 52%; } .w2 { display: none; } .w3 { inline-size: 150px; inset-block-start: 44%; inset-inline-start: 8vw; } .w4 { display: none; }
+  .sky__foot { flex-direction: column; align-items: flex-start; }
+  .sheet__top { grid-template-columns: 1fr; } .nums { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<header class="nav container">
+  <a class="wm" href="#">Northvale</a>
+  <ul role="list"><li><a href="#" data-he="שירותים">Services</a></li><li><a href="#" data-he="צי">Fleet</a></li><li><a href="#" data-he="רשת">Network</a></li><li><a href="#" data-he="קריירה">Careers</a></li><li><a href="#" data-he="חברה">Company</a></li></ul>
+  <a class="btn" href="#" data-he="הצעת מחיר">Get a quote</a>
+</header>
+<main>
+<section class="sky bg-grain">
+  <div class="cloud c1" aria-hidden="true"></div><div class="cloud c2" aria-hidden="true"></div><div class="cloud c3" aria-hidden="true"></div>
+  <h1 class="caps" aria-label="Freight that flies overnight" data-he-aria-label="מטען שטס בלילה"><span class="l1" data-fly="1" data-he="מטען">Freight</span><span class="l2" data-fly="-1" data-he="שטס">that flies</span><span class="l3" data-fly="1" data-he="בלילה">overnight</span></h1>
+  <figure class="win w1"><div class="slot" style="--slot-bg: none; background: linear-gradient(180deg, oklch(45% .1 250), oklch(78% .08 60))"><svg viewBox="0 0 200 250" aria-hidden="true"><path d="M-10 190 C40 176 120 170 210 172 L210 196 C120 200 40 204 -10 206Z" fill="oklch(19% 0.06 258)"/><path d="M150 176 L186 108 L204 108 L196 176Z" fill="oklch(19% 0.06 258)"/><path d="M60 190 L20 232 L46 232 L100 192Z" fill="oklch(19% 0.06 258)"/><circle cx="12" cy="194" r="3" fill="oklch(85% 0.1 62)"/></svg><span data-he="[צילום: דלת החרטום של מטוס מטען פתוחה עם שחר]">[Photo: 747F nose door open at dawn]</span></div></figure>
+  <figure class="win w2"><div class="slot" style="--slot-bg: none; background: linear-gradient(180deg, oklch(62% .08 235), oklch(86% .06 70))"><svg viewBox="0 0 150 188" aria-hidden="true"><path d="M20 188 V60 H34 V188Z M0 60 H150 V68 H0Z" fill="oklch(19% 0.06 258)"/><path d="M34 70 L20 84 M20 70 L34 84 M34 100 L20 114 M20 100 L34 114 M34 130 L20 144 M20 130 L34 144" stroke="oklch(19% 0.06 258)" stroke-width="2"/><path d="M118 68 V110" stroke="oklch(19% 0.06 258)" stroke-width="1.5"/><rect x="108" y="110" width="22" height="14" fill="oklch(19% 0.06 258)"/></svg><span data-he="[צילום: עגורן מכולות בנמל]">[Photo: container crane, port]</span></div></figure>
+  <figure class="win w3"><div class="slot" style="--slot-bg: none; background: linear-gradient(180deg, oklch(30% .09 258), oklch(58% .1 30))"><svg viewBox="0 0 240 300" aria-hidden="true"><path d="M0 300 L104 170 L136 170 L240 300Z" fill="oklch(24% 0.05 258)"/><g fill="oklch(90% 0.09 70)"><circle cx="102.9" cy="173.6" r="1.1"/><circle cx="99.6" cy="178.4" r="1.4"/><circle cx="94.1" cy="186.4" r="1.6"/><circle cx="86.4" cy="197.6" r="1.9"/><circle cx="76.5" cy="212.0" r="2.2"/><circle cx="64.4" cy="229.6" r="2.5"/><circle cx="50.1" cy="250.4" r="2.8"/><circle cx="33.6" cy="274.4" r="3.0"/><circle cx="14.9" cy="301.6" r="3.3"/><circle cx="-6.0" cy="332.0" r="3.6"/><circle cx="137.1" cy="173.6" r="1.1"/><circle cx="140.4" cy="178.4" r="1.4"/><circle cx="145.9" cy="186.4" r="1.6"/><circle cx="153.6" cy="197.6" r="1.9"/><circle cx="163.5" cy="212.0" r="2.2"/><circle cx="175.6" cy="229.6" r="2.5"/><circle cx="189.9" cy="250.4" r="2.8"/><circle cx="206.4" cy="274.4" r="3.0"/><circle cx="225.1" cy="301.6" r="3.3"/><circle cx="246.0" cy="332.0" r="3.6"/></g><path d="M120 176 V300" stroke="oklch(92% 0.02 240)" stroke-width="1.5" stroke-dasharray="6 8"/></svg><span data-he="[צילום: מסלול המראה בדמדומים, אורות נחיתה]">[Photo: runway at dusk, landing lights]</span></div></figure>
+  <figure class="win w4"><div class="slot" style="--slot-bg: none; background: linear-gradient(180deg, oklch(70% .07 230), oklch(90% .04 80))"><svg viewBox="0 0 130 162" aria-hidden="true"><path d="M-6 120 C30 112 90 110 136 112 L136 126 C90 128 30 132 -6 134Z" fill="oklch(19% 0.06 258)"/><path d="M40 122 L70 150 L84 150 L64 122Z" fill="oklch(19% 0.06 258)"/></svg><span data-he="[צילום: מטוס מטען בגישה לנחיתה]">[Photo: freighter on approach]</span></div></figure>
+  <div class="sky__foot container">
+    <p data-he="Northvale מטיסה מטען דחוף בין 38 שדות תעופה, עם מכס מוסדר לפני הנחיתה.">Northvale flies urgent freight between 38 airports, with customs cleared before touchdown.</p>
+    <a class="btn" href="#" data-spec-btn><span data-he="בדיקת מסלול">Check a route</span><i aria-hidden="true"><b class="flip-x">→</b></i></a>
+  </div>
+</section>
+<section class="sheet" data-surface="sheet">
+  <div class="container">
+    <div class="sheet__top">
+      <h2 data-he="רשת אחת, בכל אזור זמן.">One network, every time zone.</h2>
+      <p class="lede" data-he="שמונה מטוסי מטען רחבי-גוף, 38 שדות ומוקד שליטה שעובד 24 שעות מאמסטרדם.">Eight wide-body freighters, 38 airports and a control desk that runs around the clock from Amsterdam.</p>
+    </div>
+    <div class="nums">
+      <div><b data-fx="counter" data-to="38">38</b><span data-he="שדות תעופה">airports served</span></div>
+      <div><b data-fx="counter" data-to="8">8</b><span data-he="מטוסי מטען">freighters</span></div>
+      <div><b data-fx="counter" data-to="1240" data-suffix=" t">1,240 t</b><span data-he="מטען בשבוע">cargo per week</span></div>
+      <div><b dir="ltr">&lt;18 h</b><span data-he="דלת לדלת באירופה">door to door in Europe</span></div>
+    </div>
+    <figure class="sd-map" data-fx="map" data-labels="true">
+      <ul class="sd-map__routes">
+        <li data-from="52.31,4.76" data-to="40.64,-73.78" data-label-from="Amsterdam" data-label-to="New York" data-he-attr-data-label-from="אמסטרדם" data-he-attr-data-label-to="ניו יורק">Amsterdam to New York</li>
+        <li data-from="52.31,4.76" data-to="25.25,55.36" data-label-to="Dubai" data-he-attr-data-label-to="דובאי">Amsterdam to Dubai</li>
+        <li data-from="52.31,4.76" data-to="32.01,34.88" data-label-to="Tel Aviv" data-he-attr-data-label-to="תל אביב">Amsterdam to Tel Aviv</li>
+        <li data-from="52.31,4.76" data-to="1.36,103.99" data-label-to="Singapore" data-he-attr-data-label-to="סינגפור">Amsterdam to Singapore</li>
+        <li data-from="52.31,4.76" data-to="-23.43,-46.47" data-label-to="São Paulo" data-he-attr-data-label-to="סאו פאולו">Amsterdam to São Paulo</li>
+      </ul>
+    </figure>
+  </div>
+</section>
+<section class="spec-system" data-spec-system data-display="OVERNIGHT" data-display-he="בלילה"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · atmospheric-sky · fictional carrier “Northvale”</span><a href="index.html">All directions</a></footer>
+
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script src="../../runtime/fx/counter.js"></script>
+<script src="../../runtime/fx/map.js"></script>
+<script>
+/* flying capitals: lines travel ±15vw in opposite directions with scroll; window cards parallax at their own depth */
+(function () {
+  if (!window.gsap || !window.ScrollTrigger || SD.reduced()) return;
+  var d = SD.dir();
+  document.querySelectorAll('[data-fly]').forEach(function (l) {
+    gsap.to(l, { x: function () { return +l.dataset.fly * d * innerWidth * .15; }, ease: 'none', scrollTrigger: { trigger: '.sky', start: 'top top', end: 'bottom top', scrub: .5 } });
+  });
+  [['.w1', -120], ['.w2', -60], ['.w3', -200], ['.w4', -40], ['.c1', -60], ['.c2', -110]].forEach(function (p) {
+    gsap.to(p[0], { y: p[1], ease: 'none', scrollTrigger: { trigger: '.sky', start: 'top top', end: 'bottom top', scrub: true } });
+  });
+})();
+</script>
+</body>
+</html>

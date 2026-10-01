@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Industrial Catalogue · specimen</title>
+<meta name="he-title" content="Industrial Catalogue · דוגמית">
+<!-- Fontshare faces loaded from the Fontshare CSS API (not redistributed here; self-host them in your own project, see runtime/README.md §10) -->
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@200,300,400,500&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@200..500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&family=Assistant:wght@200..800&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/industrial-catalogue.md */
+:root {
+  --c-canvas: oklch(96.6% 0.003 160); --c-surface: oklch(99% 0.002 160); --c-surface-2: oklch(93% 0.004 160);
+  --c-ink: oklch(19% 0.006 160); --c-ink-2: oklch(38% 0.006 160); --c-muted: oklch(53.8% 0.005 160);
+  --c-rule: oklch(88% 0.004 160); --c-accent: oklch(79% 0.165 72); --c-accent-ink: oklch(19% 0.006 160);
+  --c-focus: oklch(62% 0.17 60);
+  --f-display: "Switzer", "Public Sans", "Assistant", system-ui, sans-serif; --f-body: "Switzer", "Public Sans", "Assistant", system-ui, sans-serif;
+  --f-mono: "Azeret Mono", "Assistant", ui-monospace, monospace; --f-outlier: "Azeret Mono", monospace;
+  --fs-xs: 0.75rem; /* ≥12px */ --fs-sm: 0.8125rem; --fs-base: 0.9375rem; --fs-lg: 1.125rem; --fs-xl: 1.5rem;
+  --fs-2xl: clamp(1.9rem, 1.5rem + 1.6vw, 2.75rem); --fs-3xl: clamp(2.5rem, 1.6rem + 3.2vw, 4.25rem);
+  --fs-display: clamp(2.75rem, 1.4rem + 5vw, 5.75rem);
+  --lh-tight: 1.0; --lh-body: 1.5; --tr-display: -0.03em; --tr-label: 0.02em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-7: 32px; --sp-8: 48px; --sp-9: 72px; --sp-10: 112px;
+  --section-y: clamp(48px, 4vw + 24px, 104px); --gutter: clamp(16px, 2vw, 28px); --maxw: 1680px; /* cell gaps are 1px via grid gap, not --gutter */
+  --r-sm: 0px; --r-md: 0px; --r-lg: 0px; --r-pill: 0px; /* square "pills"; modules that need a true circle (cursor, swatches, avatars, close/toggle buttons) use 50% literals */
+  --ease-out: cubic-bezier(0.25, 0, 0, 1); --ease-in: cubic-bezier(0.5, 0, 1, 1); --ease-in-out: cubic-bezier(0.5, 0, 0.5, 1);
+  --d-fast: 80ms; --d-med: 160ms; --d-slow: 280ms;
+  --shadow-1: none; --shadow-2: 0 0 0 1px var(--c-rule);
+}
+:root[dir="rtl"] { --f-display: "Assistant", "Switzer", "Public Sans", sans-serif; --tr-display: 0; }
+/* dark band for one spec section: [data-band="dark"]{--c-canvas:oklch(15% .02 295);--c-ink:oklch(94% .004 295);--c-rule:oklch(28% .02 295)} */
+</style>
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); background: var(--c-rule); }
+.mono { font-family: var(--f-mono); font-size: 12px; }
+.cells { display: grid; gap: 1px; background: var(--c-rule); }
+.cells > * { background: var(--c-surface); }
+.tiles { grid-template-columns: 2fr repeat(7, 1fr) 1.2fr; }
+.tiles > a, .tiles > div { min-block-size: 96px; display: grid; place-content: center; justify-items: center; gap: 8px; text-decoration: none; font-size: 12px; }
+.tiles svg { inline-size: 30px; block-size: 30px; fill: none; stroke: var(--c-ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.tiles .wm { justify-items: start; padding-inline: var(--gutter); font-weight: 500; font-size: 1.05rem; letter-spacing: -0.02em; }
+.tiles a[aria-current] { box-shadow: inset 0 -2px 0 var(--c-ink); }
+.tiles .cart b { font-family: var(--f-mono); font-weight: 600; }
+.tiles .cart b::before { content: ""; display: inline-block; inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--c-accent); margin-inline-end: 6px; vertical-align: middle; }
+.hero { grid-template-columns: repeat(12, 1fr); }
+.hero .shot { grid-column: span 8; grid-row: span 4; min-block-size: calc(100dvh - 97px); display: grid; place-items: center; position: relative; background: var(--c-surface-2); }
+.hero .shot svg { inline-size: min(86%, 760px); }
+.hero .shot .mono { position: absolute; inset-block-start: var(--sp-4); inset-inline-start: var(--sp-4); color: var(--c-muted); }
+.hero .info { grid-column: span 4; padding: var(--sp-6); display: grid; align-content: start; gap: var(--sp-3); }
+.hero h1 { font-family: var(--f-display); font-weight: 200; font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); }
+[lang="he"] .hero h1 { font-size: calc(var(--fs-display) * 1.1); }
+.hero .price { font-family: var(--f-mono); font-size: 1.5rem; }
+.stock { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.stock::before { content: ""; inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--c-accent); }
+.spec { display: grid; grid-template-columns: auto 1fr; gap: 6px var(--sp-5); margin: 0; }
+.spec dt { color: var(--c-muted); } .spec dd { margin: 0; }
+.buy { padding: 0 !important; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--c-rule) !important; }
+.btn { display: grid; place-items: center; min-block-size: 56px; background: var(--c-ink); color: var(--c-surface); text-decoration: none; font-weight: 400; }
+.btn:hover, .btn.is-hover { background: var(--c-ink-2); }
+.btn.is-focus { outline: 2px solid var(--c-focus); outline-offset: -4px; }
+.btn--ol { background: var(--c-surface); color: var(--c-ink); box-shadow: inset 0 0 0 1px var(--c-ink); }
+.grid4 { grid-template-columns: repeat(4, 1fr); margin-block-start: 1px; }
+.p .img { aspect-ratio: 1; background: var(--c-surface-2); display: grid; place-items: center; }
+.p .img svg { inline-size: 64%; }
+.p .strip { display: flex; justify-content: space-between; align-items: center; block-size: 40px; padding-inline: var(--sp-4); border-block-start: 1px solid var(--c-rule); font-size: 13px; font-weight: 500; }
+.p .strip .mono { font-weight: 400; }
+@media (max-width: 900px) {
+  .tiles { grid-template-columns: repeat(4, 1fr); } .tiles .wm { grid-column: 1 / -1; min-block-size: 56px; } .tiles > :nth-child(n+6):not(.cart) { display: none; }
+  .hero .shot, .hero .info { grid-column: 1 / -1; grid-row: auto; } .hero .shot { min-block-size: 360px; }
+  .grid4 { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<nav class="cells tiles" aria-label="Categories" data-he-aria-label="קטגוריות">
+  <div class="wm">Tonal Works</div>
+  <a href="#" aria-current="page"><svg viewBox="0 0 32 32"><rect x="8" y="3" width="16" height="26"/><circle cx="16" cy="19" r="5"/><circle cx="16" cy="9" r="2.5"/></svg><span data-he="רמקולים">Speakers</span></a>
+  <a href="#"><svg viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="18"/><circle cx="14" cy="16" r="6"/><path d="M24 11 L20 20"/></svg><span data-he="פטיפונים">Turntables</span></a>
+  <a href="#"><svg viewBox="0 0 32 32"><rect x="3" y="11" width="26" height="10"/><circle cx="9" cy="16" r="2"/><path d="M15 16 H26"/></svg><span data-he="מגברים">Amplifiers</span></a>
+  <a href="#"><svg viewBox="0 0 32 32"><path d="M6 18 A10 10 0 0 1 26 18"/><rect x="4" y="18" width="5" height="9"/><rect x="23" y="18" width="5" height="9"/></svg><span data-he="אוזניות">Headphones</span></a>
+  <a href="#"><svg viewBox="0 0 32 32"><path d="M4 16 H10 M22 16 H28"/><rect x="10" y="12" width="12" height="8"/></svg><span data-he="כבלים">Cables</span></a>
+  <a href="#"><svg viewBox="0 0 32 32"><path d="M16 4 V28 M4 16 H28"/><circle cx="16" cy="16" r="9"/></svg><span data-he="חלקים">Parts</span></a>
+  <a href="#"><svg viewBox="0 0 32 32"><path d="M6 26 L26 6 M18 6 H26 V14"/></svg><span data-he="שירות">Service</span></a>
+  <a class="cart" href="#"><svg viewBox="0 0 32 32"><path d="M5 9 H27 L25 26 H7 Z M11 9 V6 H21 V9"/></svg><span><span data-he="סל">Cart</span> <b dir="ltr">02</b></span></a>
+</nav>
+<main>
+<section class="cells hero">
+  <div class="shot"><span class="mono" dir="ltr">TW-A2 · 3/4 VIEW</span>
+    <svg viewBox="0 0 640 360" direction="ltr" aria-label="Integrated amplifier A2, three-quarter view" role="img">
+      <defs><linearGradient id="top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="oklch(99% .002 160)"/><stop offset="1" stop-color="oklch(92% .004 160)"/></linearGradient><linearGradient id="face" x1="0" x2="1"><stop offset="0" stop-color="oklch(95% .003 160)"/><stop offset="1" stop-color="oklch(86% .004 160)"/></linearGradient></defs>
+      <path d="M40 150 L180 90 L620 90 L500 150Z" fill="url(#top)" stroke="oklch(80% .004 160)"/>
+      <path d="M40 150 H500 V290 H40Z" fill="url(#face)" stroke="oklch(78% .004 160)"/>
+      <path d="M500 150 L620 90 V230 L500 290Z" fill="oklch(84% .004 160)" stroke="oklch(78% .004 160)"/>
+      <rect x="70" y="190" width="150" height="46" rx="3" fill="oklch(22% .006 160)"/><text x="84" y="220" font-family="Azeret Mono, monospace" font-size="18" fill="var(--c-accent)">-24.5 dB</text>
+      <rect x="250" y="206" width="110" height="10" fill="oklch(76% .004 160)"/><rect x="250" y="224" width="70" height="10" fill="oklch(80% .004 160)"/>
+      <circle cx="430" cy="218" r="40" fill="oklch(90% .003 160)" stroke="oklch(70% .004 160)"/><circle cx="430" cy="218" r="30" fill="oklch(96% .002 160)"/><path d="M430 190 V206" stroke="oklch(30% .006 160)" stroke-width="3"/>
+      <circle cx="80" cy="170" r="4" fill="var(--c-accent)"/>
+      <rect x="60" y="290" width="40" height="10" fill="oklch(66% .004 160)"/><rect x="440" y="290" width="40" height="10" fill="oklch(66% .004 160)"/>
+    </svg></div>
+  <div class="info"><p class="mono" dir="ltr">TW-A2-ALU</p><h1 data-he="מגבר משולב A2">Integrated amplifier A2</h1><p style="color:var(--c-ink-2)" data-he="מגבר Class A/B, 2×60 וואט. מארז אלומיניום, בקרת עוצמה דיגיטלית.">Class A/B, 2 × 60 W. Aluminium case, stepped digital volume.</p></div>
+  <div class="info"><p class="price" dir="ltr">₪ 4,250</p><p class="stock" data-he="במלאי · נשלח תוך 48 שעות">In stock · ships in 48 h</p></div>
+  <div class="info"><dl class="spec mono"><dt data-he="תגובה">Response</dt><dd dir="ltr">10 Hz – 80 kHz −3 dB</dd><dt data-he="הספק">Power</dt><dd dir="ltr">2 × 60 W / 8 Ω</dd><dt data-he="מידות">Size</dt><dd dir="ltr">430 × 90 × 320 mm</dd><dt data-he="משקל">Weight</dt><dd dir="ltr">8.1 kg</dd></dl></div>
+  <div class="info buy"><a class="btn" href="#" data-spec-btn data-he="הוספה לסל">Add to cart</a><a class="btn btn--ol" href="#" data-spec-btn data-he="השוואה">Compare</a></div>
+</section>
+<section class="cells grid4">
+  <article class="p"><div class="img"><svg viewBox="0 0 200 200" aria-hidden="true"><rect x="20" y="60" width="160" height="80" fill="oklch(97% .002 160)" stroke="oklch(80% .004 160)"/><circle cx="60" cy="100" r="14" fill="oklch(26% .006 160)"/><rect x="96" y="94" width="68" height="12" fill="oklch(86% .004 160)"/></svg></div><div class="strip"><span data-he="מגבר A1">Amplifier A1</span><span class="mono" dir="ltr">₪ 2,150</span></div></article>
+  <article class="p"><div class="img"><svg viewBox="0 0 200 200" aria-hidden="true"><rect x="20" y="50" width="160" height="100" fill="oklch(97% .002 160)" stroke="oklch(80% .004 160)"/><circle cx="92" cy="100" r="40" fill="oklch(24% .006 160)"/><circle cx="92" cy="100" r="6" fill="oklch(80% .004 160)"/><path d="M160 64 L130 110" stroke="oklch(40% .006 160)" stroke-width="3"/></svg></div><div class="strip"><span data-he="פטיפון T3">Turntable T3</span><span class="mono" dir="ltr">₪ 4,900</span></div></article>
+  <article class="p"><div class="img"><svg viewBox="0 0 200 200" aria-hidden="true"><path d="M50 110 A50 50 0 0 1 150 110" fill="none" stroke="oklch(26% .006 160)" stroke-width="8"/><rect x="38" y="104" width="26" height="46" rx="6" fill="oklch(26% .006 160)"/><rect x="136" y="104" width="26" height="46" rx="6" fill="oklch(26% .006 160)"/></svg></div><div class="strip"><span data-he="אוזניות H1">Headphones H1</span><span class="mono" dir="ltr">₪ 1,290</span></div></article>
+  <article class="p"><div class="img"><svg viewBox="0 0 200 200" aria-hidden="true"><rect x="60" y="30" width="80" height="140" fill="oklch(97% .002 160)" stroke="oklch(80% .004 160)"/><circle cx="100" cy="120" r="30" fill="oklch(26% .006 160)"/><circle cx="100" cy="64" r="12" fill="oklch(26% .006 160)"/></svg></div><div class="strip"><span data-he="רמקול מדף S1">Bookshelf S1</span><span class="mono" dir="ltr">₪ 1,980</span></div></article>
+</section>
+<section class="spec-system" data-spec-system data-display="Integrated amplifier" data-display-he="מגבר משולב"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · industrial-catalogue · fictional maker “Tonal Works”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="../../runtime/core.js"></script>
+</body>
+</html>

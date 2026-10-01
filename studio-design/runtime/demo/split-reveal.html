@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>split-reveal · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Frank+Ruhl+Libre:wght@300..700&family=Hanken+Grotesk:wght@400..600&family=Heebo:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<style>
+  /* Direction: warm editorial / literary */
+  :root {
+    --c-canvas: oklch(96.5% 0.012 80); --c-surface: oklch(93.5% 0.016 78); --c-surface-2: oklch(89% 0.02 76);
+    --c-ink: oklch(22% 0.02 50); --c-ink-2: oklch(36% 0.02 50); --c-muted: oklch(52% 0.02 55); --c-rule: oklch(80% 0.02 70);
+    --c-accent: oklch(57% 0.18 35); --c-accent-ink: oklch(97% 0.01 80); --c-focus: oklch(57% 0.18 35);
+    --f-display: "Fraunces", "Frank Ruhl Libre", Georgia, serif; --f-body: "Hanken Grotesk", "Heebo", system-ui, sans-serif;
+    --lh-tight: 0.98;
+  }
+  .kicker { font-size: var(--fs-xs); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--c-muted); display: flex; gap: var(--sp-3); align-items: center; }
+  .kicker::before { content: ""; inline-size: 36px; block-size: 1px; background: currentColor; }
+  .hero { min-block-size: 92vh; display: grid; align-content: end; padding-block: var(--sp-9) var(--sp-8); border-block-end: 1px solid var(--c-rule); }
+  .hero h1 { font-size: var(--fs-display); font-weight: 340; line-height: var(--lh-tight); max-inline-size: 14ch; margin-block: var(--sp-5) var(--sp-6); font-variation-settings: "opsz" 144; }
+  .hero h1 em { font-style: italic; color: var(--c-accent); font-weight: 300; }
+  :lang(he) .hero h1 em { font-style: normal; font-weight: 500; }
+  .hero-foot { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: var(--sp-5); color: var(--c-ink-2); max-inline-size: 900px; }
+  .split-2 { display: grid; grid-template-columns: 1fr; gap: var(--sp-6); }
+  @media (min-width: 900px) { .split-2 { grid-template-columns: 5fr 7fr; } }
+  .h2 { font-size: var(--fs-3xl); font-weight: 360; line-height: 1.02; }
+  .lede { font-size: var(--fs-lg); color: var(--c-ink-2); line-height: 1.5; max-inline-size: 34ch; }
+  .chars { font-family: var(--f-body); font-weight: 600; font-size: var(--fs-2xl); letter-spacing: -0.02em; text-transform: uppercase; }
+  blockquote { font-family: var(--f-display); font-size: var(--fs-2xl); font-weight: 320; line-height: 1.15; max-inline-size: 22ch; }
+  cite { display: block; margin-block-start: var(--sp-5); font-style: normal; font-size: var(--fs-sm); color: var(--c-muted); }
+  .rule { border-block-start: 1px solid var(--c-rule); }
+  .num { font-family: var(--f-display); font-size: var(--fs-xl); color: var(--c-accent); }
+  .spacer { block-size: 30vh; }
+</style>
+</head>
+<body>
+<main>
+  <header class="container hero">
+    <p class="kicker" data-he="מחברת עבודה · גיליון 07">Field notes · Issue 07</p>
+    <h1 data-fx="split-reveal" data-type="lines" data-variant="slide" data-he-html="חנויות שקטות יותר <em>מוכרות</em> יותר, ולאורך זמן">Calmer storefronts <em>sell</em> more, for longer</h1>
+    <div class="hero-foot">
+      <p data-he="שלוש שנים של בדיקות על חנויות בוטיק לימדו אותנו שהיררכיה ברורה מנצחת כל אנימציה.">Three years of testing boutique shops taught us that a clear hierarchy outperforms any animation.</p>
+      <p data-he="המאמר הזה מסכם מה השארנו, מה מחקנו, ואיפה תנועה עדיין מרוויחה את מקומה.">This essay sums up what we kept, what we cut, and where motion still earns its place.</p>
+    </div>
+  </header>
+
+  <section class="section container split-2">
+    <p class="num">01</p>
+    <div class="stack" style="--stack: var(--sp-5)">
+      <h2 class="h2" data-fx="split-reveal" data-type="words" data-variant="blur" data-he="מילים שמגיעות בזמן, לא לפני">Words that arrive on time, never early</h2>
+      <p class="lede" data-he="כותרת שנחשפת מילה אחר מילה מאטה את הקורא בדיוק בנקודה שבה אנחנו רוצים שיקרא.">A heading that resolves word by word slows the reader down exactly where we want them to read.</p>
+    </div>
+  </section>
+
+  <section class="section container split-2 rule">
+    <p class="num">02</p>
+    <div class="stack" style="--stack: var(--sp-5)">
+      <p class="chars" data-fx="split-reveal" data-type="chars" data-he="כל אות בזמן שלה">Every letter on its own beat</p>
+      <p class="lede" data-he="פיצול לאותיות שמור לטקסט לטיני קצר. בעברית המודול עובר אוטומטית למילים כדי לא לשבור ניקוד.">Character splits are reserved for short Latin text. In Hebrew the module falls back to words so niqqud never breaks.</p>
+    </div>
+  </section>
+
+  <section class="section container split-2 rule">
+    <p class="num">03</p>
+    <figure>
+      <blockquote data-fx="split-reveal" data-type="lines" data-variant="fade" data-scrub="true" data-he="האתר הכי טוב שבנינו השנה היה גם השקט ביותר. הלקוחות פשוט מצאו את מה שחיפשו.">The best site we shipped this year was also the quietest. Customers simply found what they came for.</blockquote>
+      <cite data-he="מתוך סיכום הפרויקט, סטודיו לעיצוב דיגיטלי, תל אביב">From the project retrospective, digital studio, Tel Aviv</cite>
+    </figure>
+  </section>
+  <div class="spacer"></div>
+  <section class="section container rule" aria-label="Scroll-lit">
+    <p class="lit" data-fx="split-reveal" data-variant="colour" data-scrub="true" data-start="top 85%" data-he="טקסט שמואר עם הגלילה: המילים עוברות מצבע רצפה שעדיין עומד בניגודיות אל הדיו המלא, בלי שקיפות." style="font-size: var(--fs-2xl); max-inline-size: 28ch; line-height: 1.2">Scroll-lit text: words move from a colour floor that still passes contrast to full ink, never by opacity.</p>
+  </section>
+</main>
+<script src="_demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/split-reveal.js"></script>
+</body>
+</html>

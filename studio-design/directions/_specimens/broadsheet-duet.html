@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Broadsheet Duet · specimen</title>
+<meta name="he-title" content="Broadsheet Duet · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..900&family=Literata:opsz,wght@7..72,400;7..72,600&family=Libre+Franklin:wght@400;600;800&family=Frank+Ruhl+Libre:wght@400..900&family=David+Libre:wght@400;500;700&family=Heebo:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/broadsheet-duet.md */
+:root {
+  --c-canvas: oklch(99% 0.002 240); --c-surface: oklch(97% 0.003 240); --c-surface-2: oklch(93.5% 0.004 240);
+  --c-ink: oklch(14% 0.006 250); --c-ink-2: oklch(30% 0.006 250); --c-muted: oklch(50% 0.006 250);
+  --c-rule: oklch(14% 0.006 250); --c-accent: oklch(52% 0.15 245); --c-accent-ink: oklch(99% 0.002 240);
+  --c-focus: oklch(52% 0.15 245);
+  --f-display: "Bodoni Moda", "Frank Ruhl Libre", Didot, serif; --f-body: "Literata", "David Libre", Georgia, serif;
+  --f-mono: ui-monospace, Menlo, monospace; --f-outlier: "Libre Franklin", "Heebo", system-ui, sans-serif; /* labels, bylines */
+  --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-base: 1.125rem; --fs-lg: 1.3125rem; --fs-xl: clamp(1.6rem, 1.3rem + 1vw, 2.1rem);
+  --fs-2xl: clamp(2.2rem, 1.6rem + 2.2vw, 3.3rem); --fs-3xl: clamp(3rem, 1.8rem + 4.4vw, 5.5rem);
+  --fs-display: clamp(3.25rem, 1.4rem + 6.4vw, 7.5rem);
+  --lh-tight: 1.02; --lh-body: 1.62; --tr-display: -0.012em; --tr-label: 0.02em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px; --sp-10: 144px;
+  --section-y: clamp(48px, 4vw + 24px, 112px); --gutter: clamp(16px, 2.4vw, 36px); --maxw: 1360px;
+  --r-sm: 0px; --r-md: 0px; --r-lg: 0px; --r-pill: 0px; /* square "pills"; modules that need a true circle (cursor, swatches, avatars, close/toggle buttons) use 50% literals */
+  --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1); --ease-in: cubic-bezier(0.42, 0, 1, 1); --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+  --d-fast: 120ms; --d-med: 200ms; --d-slow: 360ms;
+  --shadow-1: none; --shadow-2: none;
+}
+:root[dir="rtl"] { --tr-display: 0; --lh-tight: 1.1; }
+</style>
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); }
+[lang="he"] { --f-display: "Frank Ruhl Libre", serif; --f-body: "David Libre", serif; --f-outlier: "Heebo", sans-serif; }
+.lab { font-family: var(--f-outlier); font-weight: 600; font-size: 13px; letter-spacing: var(--tr-label); }
+.muted { color: var(--c-muted); }
+a { color: var(--c-accent); text-decoration-thickness: 1px; text-underline-offset: .18em; transition: text-decoration-thickness var(--d-fast); }
+a:hover { text-decoration-thickness: 2px; }
+.top { display: flex; justify-content: space-between; align-items: center; padding-block: var(--sp-3); }
+.top a { color: var(--c-ink); text-decoration: none; }
+.mast { text-align: center; font-family: var(--f-display); font-weight: 900; font-size: var(--fs-3xl); line-height: .95; font-variation-settings: "opsz" 96; letter-spacing: -0.02em; padding-block: var(--sp-2) var(--sp-4); border-block-end: 3px solid var(--c-rule); }
+.sections { display: flex; justify-content: center; gap: var(--sp-6); padding-block: var(--sp-3); list-style: none; margin: 0; border-block-end: 1px solid var(--c-rule); }
+.sections a { color: var(--c-ink); text-decoration: none; } .sections a[aria-current] { color: var(--c-accent); }
+.grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--sp-6); padding-block: var(--sp-7) var(--section-y); }
+.lead { grid-column: 1 / span 8; }
+.lead h1 { font-family: var(--f-display); font-weight: 700; font-variation-settings: "opsz" 96; font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); text-wrap: balance; }
+.deck { font-size: var(--fs-lg); line-height: 1.45; margin-block: var(--sp-5) var(--sp-4); max-inline-size: 44ch; color: var(--c-ink-2); }
+.byline { display: flex; gap: var(--sp-4); }
+.lead figure { margin-block-start: var(--sp-6); }
+.slot.photo { aspect-ratio: 3 / 2; }
+figcaption { margin-block-start: var(--sp-2); }
+.body { columns: 2; column-gap: var(--sp-6); margin-block-start: var(--sp-6); }
+.body p + p { margin-block-start: var(--sp-3); }
+.drop::first-letter { font-family: var(--f-display); font-weight: 700; font-variation-settings: "opsz" 96; float: inline-start; font-size: 5.1em; line-height: .8; margin-inline-end: .08em; margin-block-start: .06em; }
+[lang="he"] .drop::first-letter { all: unset; }
+.side { grid-column: 9 / span 4; display: grid; gap: var(--sp-8); align-content: start; }
+.side h2 { font-family: var(--f-display); font-weight: 700; font-size: var(--fs-xl); line-height: 1.08; font-variation-settings: "opsz" 48; }
+.side p { font-size: 1rem; margin-block: var(--sp-3); color: var(--c-ink-2); }
+.chart { margin-block-start: var(--sp-4); }
+.chart svg { inline-size: 100%; block-size: auto; }
+.pull { border-block-start: 3px solid var(--c-rule); padding-block-start: var(--sp-4); font-family: var(--f-display); font-weight: 400; font-size: var(--fs-2xl); line-height: 1.12; font-variation-settings: "opsz" 72; }
+.row3 { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); margin-block-start: var(--sp-9); }
+.row3 h3 { font-family: var(--f-display); font-weight: 700; font-size: 1.5rem; line-height: 1.12; margin-block: var(--sp-2); }
+.btn { display: inline-flex; align-items: center; block-size: 44px; padding-inline: 20px; background: var(--c-ink); color: var(--c-canvas); font-family: var(--f-outlier); font-weight: 600; font-size: 15px; text-decoration: none; border-radius: var(--r-sm); }
+.btn:hover, .btn.is-hover { background: var(--c-accent); color: var(--c-accent-ink); text-decoration: none; }
+.btn.is-focus { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.subs { background: var(--c-surface-2); padding: var(--sp-5); display: grid; gap: var(--sp-3); }
+.subs b { font-family: var(--f-display); font-weight: 700; font-size: var(--fs-2xl); line-height: 1; }
+@media (max-width: 900px) {
+  .sections { justify-content: flex-start; overflow-x: auto; gap: var(--sp-5); white-space: nowrap; }
+  .lead, .side, .row3 { grid-column: 1 / -1; } .side { margin-block-start: var(--sp-8); } .body { columns: 1; } .row3 { grid-template-columns: 1fr; }
+  .top .lab:last-child { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="top lab"><time datetime="2026-09-30" data-he="יום רביעי, 30 בספטמבר 2026 · גיליון 1,418">Wednesday, 30 September 2026 · Issue 1,418</time><span><a href="#" data-he="כניסה">Sign in</a> · <a href="#" data-he="מינוי">Subscribe</a></span></div>
+  <p class="mast" role="banner" data-he="המרידיאן">The Meridian</p>
+  <ul class="sections lab" role="list"><li><a href="#" aria-current="page" data-he="עיר">City</a></li><li><a href="#" data-he="כלכלה">Economy</a></li><li><a href="#" data-he="משפט">Law</a></li><li><a href="#" data-he="מדע">Science</a></li><li><a href="#" data-he="ספרים">Books</a></li><li><a href="#" data-he="דעות">Opinion</a></li></ul>
+</div>
+<main class="container">
+  <div class="grid">
+    <article class="lead">
+      <h1 data-he="הנמל נסגר בשקט. העיר עדיין מחפשת את ההסבר.">The port closed quietly. The city is still looking for an explanation.</h1>
+      <p class="deck" data-he="שש מאות משרות, שלוש ועדות ומסמך אחד שאיש לא פרסם. תחקיר של שמונה חודשים.">Six hundred jobs, three committees and one document nobody published. An eight-month investigation.</p>
+      <p class="byline lab"><span data-he="מאת נועה ברקן ואיליה מרקוב">By Noa Barkan and Ilya Markov</span><span class="muted" data-he="18 דקות קריאה">18 min read</span></p>
+      <figure><div class="slot photo"><span data-he="[צילום: המנופים הדוממים ברציף 4, בוקר ערפילי, צילום עיתונאי אמיתי עם קרדיט]">[Photo: the idle cranes at Berth 4, foggy morning; real reportage with credit]</span></div><figcaption class="lab muted" data-he="רציף 4, אוגוסט. צילום: [להשלמה]">Berth 4, August. Photograph: [TODO: credit]</figcaption></figure>
+      <div class="body"><p class="drop" data-he="בבוקר שבו נסגר הנמל לא הייתה הודעה לעיתונות. הסדרנים הגיעו למשמרת של חמש ומצאו את השער נעול, ועל הגדר דף אחד מודפס בגופן של משרד ממשלתי.">On the morning the port closed there was no press release. The dockers arrived for the five o’clock shift and found the gate locked, with a single printed page taped to the fence.</p><p data-he="הדף הפנה לאתר שלא נטען. בשבועות שאחרי, שלוש ועדות ביקשו לראות את ההחלטה המלאה. אף אחת מהן לא קיבלה אותה.">The page pointed to a website that did not load. In the weeks that followed, three committees asked to see the full decision. <a href="#">None of them received it.</a></p></div>
+    </article>
+    <aside class="side">
+      <article><p class="lab muted" data-he="כלכלה">Economy</p><h2 data-he="שכר הדירה ברובע הנמל עלה פי שניים בעשור">Rents in the port district doubled in a decade</h2>
+        <figure class="chart"><svg viewBox="0 0 320 150" direction="ltr" role="img" aria-label="Median rent 2016 to 2026, rising from 100 to 204 index points"><g font-family="Libre Franklin, Heebo, sans-serif" font-size="10" fill="var(--c-muted)"><text x="0" y="146">2016</text><text x="290" y="146">2026</text></g><path d="M0 132H320" stroke="var(--c-ink)"/><g fill="var(--c-surface-2)"><rect x="4" y="96" width="22" height="36"/><rect x="36" y="92" width="22" height="40"/><rect x="68" y="88" width="22" height="44"/><rect x="100" y="84" width="22" height="48"/><rect x="132" y="80" width="22" height="52"/><rect x="164" y="70" width="22" height="62"/><rect x="196" y="58" width="22" height="74"/><rect x="228" y="44" width="22" height="88"/><rect x="260" y="30" width="22" height="102"/></g><rect x="292" y="18" width="22" height="114" fill="var(--c-accent)"/></svg><figcaption class="lab muted" data-he="מדד שכר דירה חציוני, 2016 = 100. מקור: [להשלמה]">Median rent index, 2016 = 100. Source: [TODO: confirm]</figcaption></figure>
+        <p class="byline lab"><span data-he="מאת דן אלמוג">By Dan Almog</span></p></article>
+      <article><p class="lab muted" data-he="משפט">Law</p><h2 data-he="השופטת שכתבה פסק דין בן 400 עמודים על מכולה אחת">The judge who wrote 400 pages about one container</h2><p data-he="ראיון על סבלנות, על ראיות, ועל מה שנשאר מחוץ לפרוטוקול.">An interview about patience, evidence and what stays off the record.</p><p class="byline lab"><span data-he="מאת רות שגיא">By Ruth Sagi</span></p></article>
+      <blockquote class="pull" data-he="״אף אחד לא החליט לסגור את הנמל. זו בדיוק הבעיה.״">“Nobody decided to close the port. That is exactly the problem.”</blockquote>
+    </aside>
+    <div class="row3">
+      <article><p class="lab muted" data-he="מדע">Science</p><h3 data-he="מה שהמצולות לימדו אותנו על חורף">What the seabed taught us about winter</h3><p class="lab" data-he="מאת יעל כהן">By Yael Cohen</p></article>
+      <article><p class="lab muted" data-he="ספרים">Books</p><h3 data-he="חמישה רומנים על ערים שמתרוקנות">Five novels about cities that empty out</h3><p class="lab" data-he="מאת עומר לוי">By Omer Levi</p></article>
+      <article class="subs"><p class="lab" data-he="מינוי שנתי">Annual subscription</p><b dir="ltr">₪ 390</b><p style="font-size:1rem" data-he="עיתון מודפס בכל יום רביעי והארכיון המלא מאז 1961.">The printed paper every Wednesday and the full archive since 1961.</p><a class="btn" href="#" data-spec-btn data-he="להצטרפות">Subscribe</a></article>
+    </div>
+  </div>
+</main>
+<section class="spec-system" data-spec-system data-display="The Meridian" data-display-he="המרידיאן"></section>
+<footer class="spec-foot"><span>Specimen · broadsheet-duet (guarded) · fictional weekly “The Meridian”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="../../runtime/core.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+/* studio-design · fx/scrub-video.css — pinned scroll-scrubbed video / frame-sequence hero
+   Layer order (z): media 0 · brand text 1 · cutout image 2 (sits ABOVE the brand so the foreground occludes it) · scrim/title 3 · UI 4 */
+.sd-scrub { --scrub-bg: var(--c-media-bg); --scrub-ink: var(--c-on-media); position: relative; background: var(--scrub-bg); color: var(--scrub-ink); }
+.sd-scrub__stage { position: relative; block-size: 100vh; block-size: 100svh; overflow: hidden; isolation: isolate; }
+.sd-scrub__media, .sd-scrub__cutout { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: var(--scrub-focus, 50% 50%); }
+.sd-scrub__media { z-index: 0; }
+video.sd-scrub__media { opacity: 0; transition: opacity 600ms var(--ease-out); }
+.sd-scrub.is-loaded video.sd-scrub__media { opacity: 1; }
+.sd-scrub__cutout { z-index: 2; opacity: 0; pointer-events: none; }
+.sd-scrub__brand { position: absolute; inset: 0; z-index: 1; display: grid; place-items: var(--scrub-brand-place, center); padding: 0 6% var(--scrub-brand-lift, 16vh); text-align: center; pointer-events: none; opacity: 0; }
+.sd-scrub__brand > * { font-family: var(--f-display); font-weight: 800; font-size: clamp(3.5rem, 15vw, 15rem); line-height: 0.95; letter-spacing: var(--tr-display); text-shadow: 0 8px 60px oklch(10% 0.02 30 / 0.45); white-space: nowrap; }
+.sd-scrub__scrim { position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background: linear-gradient(180deg, oklch(12% 0.03 30 / 0.4), transparent 30%, transparent 65%, oklch(12% 0.03 30 / 0.55)); }
+.sd-scrub__title { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding-inline: 6%; text-align: center; pointer-events: none; }
+.sd-scrub__title > * { font-size: clamp(1.75rem, 5.4vw, 4.5rem); line-height: 1.1; text-shadow: 0 4px 30px oklch(10% 0.02 30 / 0.5); max-inline-size: 18ch; }
+.sd-scrub__hint { position: absolute; inset-inline: 0; inset-block-end: clamp(20px, 6vh, 48px); z-index: 4; display: flex; flex-direction: column; align-items: center; gap: var(--sp-2);
+  font-size: var(--fs-xs); transition: opacity 400ms var(--ease-out); pointer-events: none; }
+.sd-scrub__hint::after { content: ""; inline-size: 1px; block-size: 36px; background: linear-gradient(currentColor, transparent); animation: sd-scrub-hint 1.8s var(--ease-in-out) infinite; transform-origin: top; }
+@keyframes sd-scrub-hint { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+.sd-scrub.is-scrolled .sd-scrub__hint { opacity: 0; }
+.sd-scrub__progress { position: absolute; inset-inline: 0; inset-block-end: 0; z-index: 4; block-size: 3px; background: color-mix(in oklab, var(--scrub-ink) 14%, transparent); }
+.sd-scrub__progress > span { display: block; block-size: 100%; background: var(--c-accent); transform: scaleX(0); transform-origin: left center; }
+[dir="rtl"] .sd-scrub__progress > span { transform-origin: right center; }
+canvas.sd-scrub__media { display: block; }
+.sd-scrub.is-static .sd-scrub__hint { display: none; }
+@media (max-width: 640px) { .sd-scrub__brand { --scrub-brand-lift: 20vh; } .sd-scrub__brand > * { font-size: clamp(3rem, 19vw, 7rem); white-space: normal; } }

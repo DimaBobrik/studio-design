@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>footer-reveal · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Heebo:wght@300..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/footer-reveal.css">
+<style>
+  /* Direction: confident agency, bone + oxblood footer */
+  :root {
+    --c-canvas: oklch(96% 0.01 85); --c-surface: oklch(93% 0.012 85); --c-surface-2: oklch(88% 0.015 85);
+    --c-ink: oklch(20% 0.01 40); --c-ink-2: oklch(35% 0.01 40); --c-muted: oklch(52% 0.01 40); --c-rule: oklch(84% 0.012 85);
+    --c-accent: oklch(45% 0.14 25); --c-accent-ink: oklch(95% 0.02 85); --c-focus: oklch(45% 0.14 25);
+    --f-display: "Archivo", "Heebo", system-ui, sans-serif; --f-body: "Archivo", "Heebo", system-ui, sans-serif;
+  }
+  main { --cover-radius: clamp(20px, 3vw, 44px); }
+  .hero { min-block-size: 90vh; display: grid; align-content: end; padding-block: var(--sp-9) var(--sp-7); }
+  .hero h1 { font-size: var(--fs-display); font-weight: 800; font-variation-settings: "wdth" 110; letter-spacing: -0.05em; line-height: 0.88; max-inline-size: 12ch; }
+  :lang(he) .hero h1 { letter-spacing: -0.01em; }
+  .work { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); padding-block-end: var(--sp-9); }
+  .work figure { display: grid; gap: var(--sp-3); }
+  .work img { aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--r-md); inline-size: 100%; }
+  .work figcaption { display: flex; justify-content: space-between; font-size: var(--fs-sm); color: var(--c-ink-2); }
+  footer { background: var(--c-accent); color: var(--c-accent-ink); padding-block: var(--sp-8) var(--sp-4); }
+  .f-inner { display: grid; gap: var(--sp-7); }
+  .f-top { display: grid; gap: var(--sp-6); }
+  @media (min-width: 900px) { .f-top { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+  .f-top h2 { font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.03em; line-height: 1; max-inline-size: 14ch; }
+  .f-top h2 a { color: inherit; }
+  .f-col h3 { font-size: var(--fs-xs); letter-spacing: var(--tr-label); text-transform: uppercase; font-weight: 600; margin-block-end: var(--sp-3); }
+  .f-col ul { display: grid; gap: var(--sp-2); }
+  .f-col a { color: inherit; text-decoration: none; }
+  .f-col a:hover { text-decoration: underline; }
+  .wordmark { font-weight: 900; font-variation-settings: "wdth" 125; letter-spacing: -0.04em; text-transform: uppercase; }
+  :lang(he) .wordmark { letter-spacing: -0.02em; }
+  .legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--sp-3); font-size: var(--fs-xs); border-block-start: 1px solid color-mix(in oklab, currentColor 25%, transparent); padding-block-start: var(--sp-4); }
+</style>
+</head>
+<body>
+<main class="container">
+  <section class="hero"><h1 data-he="עבודה שמרגישה כמו שלכם">Work that feels like yours</h1></section>
+  <section class="work">
+    <figure><img src="https://picsum.photos/seed/ceramicstudio/900/675" alt="Ceramics studio website on a laptop" data-he-alt="אתר של סטודיו לקרמיקה על מחשב נייד" width="900" height="675"><figcaption><span data-he="סטודיו תמר, חנות">Tamar Studio, store</span><span>2026</span></figcaption></figure>
+    <figure><img src="https://picsum.photos/seed/bakerybrand/900/675" alt="Bakery packaging" data-he-alt="אריזות למאפייה" width="900" height="675"><figcaption><span data-he="מאפיית כסם, מיתוג">Kesem Bakery, identity</span><span>2025</span></figcaption></figure>
+  </section>
+</main>
+<footer data-fx="footer-reveal" data-parallax="30">
+  <div class="container f-inner" data-footer-inner>
+    <div class="f-top">
+      <h2><a href="#" data-he="יש לכם פרויקט? נשמח לשמוע.">Have a project? We would love to hear about it.</a></h2>
+      <div class="f-col"><h3 data-he="סטודיו">Studio</h3><ul role="list"><li><a href="#" data-he="עבודות">Work</a></li><li><a href="#" data-he="שירותים">Services</a></li><li><a href="#" data-he="אודות">About</a></li></ul></div>
+      <div class="f-col"><h3 data-he="קשר">Contact</h3><ul role="list"><li><a href="#">hello@example.com</a></li><li><a href="#" dir="ltr">+972 3 000 0000</a></li><li data-he="שדרות ירושלים 12, יפו">12 Jerusalem Blvd, Jaffa</li></ul></div>
+      <div class="f-col"><h3 data-he="רשתות">Follow</h3><ul role="list"><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Behance</a></li></ul></div>
+    </div>
+    <div class="wordmark" data-fit-text aria-hidden="true" data-he="גבעה סטודיו">Givah Studio</div>
+    <div class="legal"><span data-he="© 2026 גבעה סטודיו בע״מ">© 2026 Givah Studio Ltd.</span><span><a href="#" style="color:inherit" data-he="הצהרת נגישות">Accessibility statement</a> · <a href="#" style="color:inherit" data-he="פרטיות">Privacy</a></span></div>
+  </div>
+</footer>
+<script src="_demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/footer-reveal.js"></script>
+</body>
+</html>

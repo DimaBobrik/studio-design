@@ -1,0 +1,70 @@
+/* studio-design · fx/nav.css — header patterns:
+   (a) .sd-nav  hide-on-scroll-down / show-on-up, solid background after the hero (data-variant="bar" | "pill")
+   (b) .sd-menu full-screen overlay menu in a <dialog> (staggered masked links)
+   (c) .sd-mega mega-menu panels (hover intent on fine pointers, click on touch/keyboard) */
+.sd-nav { --nav-h: 72px; --nav-bg: var(--c-canvas); --nav-ink: var(--c-ink); position: fixed; inset-block-start: 0; inset-inline: 0; z-index: var(--z-header);
+  color: var(--nav-ink-top, var(--nav-ink)); transition: transform 520ms var(--ease-out), color var(--d-med); }
+.sd-nav__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-5); block-size: var(--nav-h); padding-inline: var(--gutter); max-inline-size: var(--maxw); margin-inline: auto; position: relative; }
+.sd-nav__inner::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--nav-bg); box-shadow: 0 1px 0 var(--c-rule); opacity: 0; transition: opacity var(--d-med) var(--ease-out); }
+.sd-nav.is-scrolled { color: var(--nav-ink); }
+.sd-nav.is-scrolled .sd-nav__inner::before { opacity: 1; }
+.sd-nav.is-hidden { transform: translateY(calc(-100% - 24px)); }
+.sd-nav[data-variant="bar"] .sd-nav__inner { max-inline-size: none; }
+/* pill: floats with a gap, rounded, blurred glass once scrolled */
+.sd-nav[data-variant="pill"] { inset-block-start: var(--sp-3); padding-inline: var(--gutter); }
+.sd-nav[data-variant="pill"] .sd-nav__inner { --nav-h: 60px; max-inline-size: min(1100px, 100%); padding-inline: var(--sp-3) var(--sp-3); padding-inline-start: var(--sp-5); border-radius: var(--r-pill); }
+.sd-nav[data-variant="pill"] .sd-nav__inner::before { border-radius: inherit; background: color-mix(in oklab, var(--nav-bg) 78%, transparent); backdrop-filter: blur(14px) saturate(150%); box-shadow: var(--shadow-2), inset 0 0 0 1px color-mix(in oklab, var(--c-ink) 8%, transparent); }
+@supports not (backdrop-filter: blur(1px)) { .sd-nav[data-variant="pill"] .sd-nav__inner::before { background: var(--nav-bg); } }
+.sd-nav__links { display: flex; align-items: center; gap: var(--sp-1); list-style: none; margin: 0; padding: 0; }
+.sd-nav__links > li > a, .sd-nav__links > li > button { display: inline-flex; align-items: center; gap: 6px; block-size: 40px; padding-inline: var(--sp-3); border-radius: var(--r-pill); font-size: var(--fs-sm); font-weight: 500; text-decoration: none; color: inherit; transition: background var(--d-fast); }
+.sd-nav__links > li > a:hover, .sd-nav__links > li > button:hover, .sd-nav__links > li > button[aria-expanded="true"] { background: color-mix(in oklab, currentColor 10%, transparent); }
+.sd-nav__brand { font-family: var(--f-display); font-weight: 700; font-size: 20px; letter-spacing: var(--tr-display); text-decoration: none; color: inherit; }
+.sd-nav__end { display: flex; align-items: center; gap: var(--sp-2); }
+
+/* menu toggle (hamburger ⇄ cross) */
+.sd-menu-btn { display: inline-flex; align-items: center; gap: var(--sp-3); block-size: 44px; padding-inline: var(--sp-4); border-radius: var(--r-pill); background: var(--c-ink); color: var(--c-canvas); font-size: var(--fs-sm); font-weight: 500; }
+.sd-menu-btn i { position: relative; inline-size: 16px; block-size: 10px; }
+.sd-menu-btn i::before, .sd-menu-btn i::after { content: ""; position: absolute; inset-inline: 0; block-size: 1.5px; background: currentColor; border-radius: 2px; transition: transform var(--d-med) var(--ease-out); }
+.sd-menu-btn i::before { inset-block-start: 0; } .sd-menu-btn i::after { inset-block-start: 8.5px; }
+.sd-menu-btn[aria-expanded="true"] i::before { transform: translateY(4.25px) rotate(45deg); }
+.sd-menu-btn[aria-expanded="true"] i::after { transform: translateY(-4.25px) rotate(-45deg); }
+
+/* (b) full-screen overlay menu */
+.sd-menu { position: fixed; inset: 0; inline-size: 100vw; block-size: 100dvh; max-inline-size: none; max-block-size: none; margin: 0; padding: 0; border: 0; background: transparent; color: var(--c-canvas); overflow: hidden; }
+.sd-menu::backdrop { background: transparent; }
+.sd-menu__layer { position: absolute; inset: 0; background: var(--c-accent); transform-origin: top; }
+.sd-menu__layer + .sd-menu__layer { background: var(--c-ink); }
+.sd-menu__body { position: relative; block-size: 100%; display: grid; grid-template-rows: auto 1fr auto; padding: var(--sp-4) var(--gutter) var(--sp-6); max-inline-size: var(--maxw); margin-inline: auto; overflow-y: auto; }
+.sd-menu__top { display: flex; justify-content: space-between; align-items: center; block-size: 56px; }
+.sd-menu__close { background: var(--c-canvas); color: var(--c-ink); }
+.sd-menu__list { list-style: none; margin: 0; padding: var(--sp-6) 0; align-self: center; display: grid; gap: 0.1em; }
+.sd-menu__link { display: flex; align-items: baseline; gap: var(--sp-4); font-family: var(--f-display); font-size: clamp(2.6rem, 8vw, 7.5rem); line-height: 1.02; letter-spacing: var(--tr-display); text-decoration: none; color: inherit; overflow: hidden; padding-block-end: 0.06em; }
+.sd-menu__link small { font-family: var(--f-mono, var(--f-body)); font-size: var(--fs-xs); letter-spacing: 0; color: var(--menu-meta, currentColor); }
+.sd-menu__link > span { display: inline-block; transition: transform 500ms var(--ease-out), color var(--d-fast); }
+.sd-menu__link:hover > span, .sd-menu__link:focus-visible > span { transform: translateX(calc(0.25em * var(--dir, 1))); color: var(--c-accent); }
+.sd-menu__meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-4); font-size: var(--fs-sm); color: var(--menu-meta, currentColor); }
+.sd-menu__meta a { color: inherit; }
+html:has(.sd-menu[open]) { overflow: hidden; }
+
+/* (c) mega menu */
+.sd-mega { position: static; }
+.sd-mega > button svg { transition: transform var(--d-med) var(--ease-out); }
+.sd-mega > button[aria-expanded="true"] svg { transform: rotate(180deg); }
+.sd-mega__panel { position: absolute; inset-inline: var(--gutter); inset-block-start: calc(100% + 8px); z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr) 1.3fr; gap: var(--sp-6);
+  padding: var(--sp-6); border-radius: var(--r-lg); background: var(--c-canvas); color: var(--c-ink); box-shadow: var(--shadow-2), 0 0 0 1px var(--c-rule);
+  visibility: hidden; opacity: 0; clip-path: inset(0 0 100% 0 round var(--r-lg)); transform: translateY(-6px);
+  transition: clip-path 420ms var(--ease-out), opacity 200ms, transform 420ms var(--ease-out), visibility 0s linear 420ms; }
+.sd-mega.is-open .sd-mega__panel { visibility: visible; opacity: 1; clip-path: inset(0 0 0 0 round var(--r-lg)); transform: none; transition-delay: 0s; }
+.sd-mega__panel h3 { font-family: var(--f-body); font-size: var(--fs-sm); font-weight: 600; color: var(--c-ink-2); margin-block-end: var(--sp-3); }
+.sd-mega__panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
+.sd-mega__panel a { text-decoration: none; color: inherit; font-size: var(--fs-sm); }
+.sd-mega__panel a:hover { color: var(--c-accent); }
+.sd-mega__panel > * { opacity: 0; transform: translateY(8px); transition: opacity 300ms, transform 400ms var(--ease-out); }
+.sd-mega.is-open .sd-mega__panel > * { opacity: 1; transform: none; }
+.sd-mega.is-open .sd-mega__panel > :nth-child(2) { transition-delay: 40ms; } .sd-mega.is-open .sd-mega__panel > :nth-child(3) { transition-delay: 80ms; } .sd-mega.is-open .sd-mega__panel > :nth-child(4) { transition-delay: 120ms; }
+.sd-mega__panel .sd-mega__feature { color: var(--c-on-media); font-size: var(--fs-base); }
+.sd-mega__feature { position: relative; isolation: isolate; border-radius: var(--r-md); overflow: hidden; min-block-size: 220px; color: var(--c-on-media); display: flex; align-items: flex-end; padding: var(--sp-4); }
+.sd-mega__feature img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; z-index: -1; }
+.sd-mega__feature::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, var(--c-media-scrim), transparent 60%); }
+
+@media (max-width: 900px) { .sd-nav__links { display: none; } }

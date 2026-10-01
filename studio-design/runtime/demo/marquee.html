@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>marquee · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Heebo:wght@300..900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/marquee.css">
+<style>
+  /* Direction: loud grotesk, signal yellow, hard black */
+  :root {
+    --c-canvas: oklch(92% 0.17 102); --c-surface: oklch(96% 0.08 102); --c-surface-2: oklch(88% 0.15 100);
+    --c-ink: oklch(16% 0.01 100); --c-ink-2: oklch(30% 0.02 100); --c-muted: oklch(40% 0.03 100); --c-rule: oklch(16% 0.01 100);
+    --c-accent: oklch(16% 0.01 100); --c-accent-ink: oklch(92% 0.17 102); --c-focus: oklch(45% 0.25 290);
+    --f-display: "Archivo", "Heebo", system-ui, sans-serif; --f-body: "Archivo", "Heebo", system-ui, sans-serif;
+  }
+  body { font-variation-settings: "wdth" 100; }
+  .ann { background: var(--c-ink); color: var(--c-canvas); font-size: var(--fs-sm); font-weight: 500; padding-block: 10px; }
+  .ann li { display: inline-flex; align-items: center; gap: var(--sp-5); }
+  .ann li::after { content: ""; inline-size: 5px; block-size: 5px; border-radius: 50%; background: currentColor; opacity: .6; }
+  .ann .sd-marquee__toggle { inset-block: 50% auto; translate: 0 -50%; block-size: 22px; inline-size: 22px; color: var(--c-ink); }
+  .hero { padding-block: var(--sp-8) var(--sp-6); }
+  .hero p.k { font-weight: 600; letter-spacing: var(--tr-label); text-transform: uppercase; font-size: var(--fs-xs); }
+  .hero h1 { font-size: var(--fs-3xl); font-weight: 800; font-variation-settings: "wdth" 75; line-height: .92; letter-spacing: -0.02em; max-inline-size: 14ch; margin-block-start: var(--sp-4); text-transform: uppercase; }
+  :lang(he) .hero h1 { font-weight: 800; }
+  .big { border-block: 2px solid var(--c-ink); padding-block: var(--sp-4); }
+  .big li { display: inline-flex; align-items: center; gap: var(--sp-6); font-size: clamp(3.5rem, 2rem + 8vw, 10rem); font-weight: 900; font-variation-settings: "wdth" 62; text-transform: uppercase; line-height: .9; letter-spacing: -0.01em; }
+  .big li em { font-family: "Instrument Serif", "Heebo", serif; font-weight: 400; font-style: italic; text-transform: none; font-variation-settings: normal; letter-spacing: -0.02em; }
+  :lang(he) .big li em { font-style: normal; font-weight: 300; }
+  .big li svg { inline-size: .5em; block-size: .5em; flex: none; }
+  .label { display: flex; justify-content: space-between; align-items: baseline; padding-block: var(--sp-7) var(--sp-4); font-size: var(--fs-sm); font-weight: 600; text-transform: uppercase; letter-spacing: var(--tr-label); }
+  .logos { --marquee-gap: clamp(40px, 6vw, 96px); padding-block: var(--sp-5); }
+  .logos li { font-size: var(--fs-xl); white-space: nowrap; display: flex; align-items: center; min-block-size: 56px; }
+  .l1 { font-weight: 800; font-variation-settings: "wdth" 125; letter-spacing: -0.03em; }
+  .l2 { font-family: "Instrument Serif", serif; font-style: italic; font-size: 1.25em !important; }
+  .l3 { font-weight: 300; letter-spacing: .12em; text-transform: uppercase; font-size: var(--fs-lg) !important; }
+  .l4 { font-weight: 900; font-variation-settings: "wdth" 62; text-transform: uppercase; }
+  .l5 { font-weight: 500; }
+  .quotes { --marquee-gap: var(--sp-4); padding-block: var(--sp-3) var(--sp-9); }
+  .q { background: var(--c-surface); border: 2px solid var(--c-ink); border-radius: var(--r-lg); padding: var(--sp-5); inline-size: clamp(260px, 30vw, 420px); display: grid; gap: var(--sp-5); align-content: space-between; box-shadow: 6px 6px 0 var(--c-ink); margin-block-end: 8px; }
+  .q.wide { inline-size: clamp(300px, 40vw, 560px); }
+  .q p { font-size: var(--fs-lg); line-height: 1.3; font-weight: 500; }
+  .q footer { font-size: var(--fs-sm); color: var(--c-muted); display: flex; gap: var(--sp-3); align-items: center; }
+  .q img { inline-size: 36px; block-size: 36px; border-radius: 50%; object-fit: cover; }
+</style>
+</head>
+<body>
+<div class="ann" data-fx="marquee" data-speed="40" data-fade="false" aria-label="Store announcements" data-he-aria-label="הודעות החנות">
+  <ul role="list">
+    <li data-he="משלוח חינם בהזמנה מעל 300 ₪">Free delivery on orders over ₪300</li>
+    <li data-he="החזרה עד 30 יום">30-day returns</li>
+    <li data-he="איסוף עצמי מהסטודיו ביפו">Pick up from the Jaffa studio</li>
+    <li data-he="אריזת מתנה ללא עלות">Gift wrapping at no cost</li>
+  </ul>
+</div>
+<main>
+  <header class="container hero">
+    <p class="k" data-he="סטודיו לעיצוב ומיתוג · יפו">Design &amp; branding studio · Jaffa</p>
+    <h1 data-he="אנחנו עושים סימני מסחר רועשים">We make loud brand marks</h1>
+  </header>
+
+  <section class="big" data-fx="marquee" data-speed="70" data-velocity="true" data-skew="6" data-fade="false" aria-label="Services" data-he-aria-label="שירותים">
+    <ul role="list">
+      <li><span data-he="מיתוג">Branding</span><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0l2.6 7.4L20 10l-7.4 2.6L10 20l-2.6-7.4L0 10l7.4-2.6z"/></svg></li>
+      <li><em data-he="אריזות">Packaging</em><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0l2.6 7.4L20 10l-7.4 2.6L10 20l-2.6-7.4L0 10l7.4-2.6z"/></svg></li>
+      <li><span data-he="אתרים">Websites</span><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0l2.6 7.4L20 10l-7.4 2.6L10 20l-2.6-7.4L0 10l7.4-2.6z"/></svg></li>
+      <li><em data-he="שילוט">Signage</em><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0l2.6 7.4L20 10l-7.4 2.6L10 20l-2.6-7.4L0 10l7.4-2.6z"/></svg></li>
+    </ul>
+  </section>
+
+  <div class="container label"><span data-he="עבדנו עם">Worked with</span><span dir="ltr">2019–2026</span></div>
+  <div class="logos" data-fx="marquee" data-speed="45" aria-label="Clients" data-he-aria-label="לקוחות">
+    <ul role="list">
+      <li class="l1">Halden&amp;Co</li><li class="l2">Mirra Studio</li><li class="l3">Oren Architects</li><li class="l4">Vela Coffee</li><li class="l5">Tamar Ceramics</li><li class="l1">Kesem</li><li class="l3">Lumen Labs</li>
+    </ul>
+  </div>
+
+  <div class="container label"><span data-he="מה לקוחות אומרים (אפשר לגרור)">What clients say (drag me)</span><span>04</span></div>
+  <div class="quotes" data-fx="marquee" data-speed="28" data-direction="reverse" data-draggable="true" aria-label="Client testimonials" data-he-aria-label="המלצות לקוחות">
+    <ul role="list">
+      <li class="q"><p data-he="השלט החדש הכפיל את מספר האנשים שעוצרים מול החלון.">The new sign doubled the number of people who stop at our window.</p><footer><img src="https://picsum.photos/seed/avatar1/80/80" alt="" width="36" height="36"><span data-he="נועה, בית קפה בפלורנטין">Noa, café owner in Florentin</span></footer></li>
+      <li class="q wide"><p data-he="הם הבינו את המותג שלנו טוב יותר מאיתנו, ובשלושה שבועות בלבד.">They understood our brand better than we did, and in only three weeks.</p><footer><img src="https://picsum.photos/seed/avatar2/80/80" alt="" width="36" height="36"><span data-he="איתי, קרמיקה בעבודת יד">Itai, handmade ceramics</span></footer></li>
+      <li class="q"><p data-he="האריזה החדשה היא הסיבה שנכנסנו לשלוש רשתות.">The new packaging is why three retail chains picked us up.</p><footer><img src="https://picsum.photos/seed/avatar3/80/80" alt="" width="36" height="36"><span data-he="מאיה, מאפייה משפחתית">Maya, family bakery</span></footer></li>
+      <li class="q wide"><p data-he="תהליך מסודר, תקציב שנשמר, ואתר שהצוות שלנו יודע לעדכן לבד.">A clear process, a budget that held, and a site our team can update on its own.</p><footer><img src="https://picsum.photos/seed/avatar4/80/80" alt="" width="36" height="36"><span data-he="דניאל, משרד אדריכלים">Daniel, architecture office</span></footer></li>
+    </ul>
+  </div>
+</main>
+<script src="_demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/marquee.js"></script>
+</body>
+</html>

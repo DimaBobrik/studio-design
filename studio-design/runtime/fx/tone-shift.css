@@ -1,0 +1,15 @@
+/* studio-design fx · tone-shift — static tones (no JS / reduced motion) + live crossfade stage */
+[data-tone] { --tone-bg: var(--c-canvas); --tone-ink: var(--c-ink); background-color: var(--tone-bg); color: var(--tone-ink); }
+[data-tone="surface"] { --tone-bg: var(--c-surface); --tone-ink: var(--c-ink); }
+[data-tone="ink"] { --tone-bg: var(--c-ink); --tone-ink: var(--c-canvas); }
+[data-tone="accent"] { --tone-bg: var(--c-accent); --tone-ink: var(--c-accent-ink); }
+[data-tone="media"] { --tone-bg: var(--c-media-bg); --tone-ink: var(--c-on-media); }
+/* muted copy inside a tone follows the tone's ink, never a fixed grey (antipatterns #8) */
+[data-tone] :where(.muted) { color: color-mix(in oklab, var(--tone-ink) 72%, var(--tone-bg)); }
+
+.sd-tone { position: relative; isolation: isolate; }
+.sd-tone--live > [data-tone] { background-color: transparent; }
+/* clip-path on the stage clips its position:fixed layers to the host box (layers never leak above/below the host) */
+.sd-tone__stage { position: absolute; inset: 0; z-index: -1; clip-path: inset(0); pointer-events: none; }
+.sd-tone__layer { position: fixed; inset: 0; will-change: opacity; }
+@media (forced-colors: active) { .sd-tone__stage { display: none; } .sd-tone--live > [data-tone] { background-color: Canvas; color: CanvasText; } }

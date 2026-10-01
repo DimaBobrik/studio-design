@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Neo-Brutal Exhibit · specimen</title>
+<meta name="he-title" content="Neo-Brutal Exhibit · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500..700&family=Rubik:wght@400..800&family=Heebo:wght@800;900&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/neo-brutal-exhibit.md */
+:root {
+  --c-canvas: oklch(41% 0.12 152); --c-surface: oklch(98% 0.010 150); --c-surface-2: oklch(38% 0.22 265);
+  --c-ink: oklch(97% 0.012 150); /* text directly on the green field */
+  --c-ink-2: oklch(90% 0.030 150); --c-muted: oklch(82% 0.050 150);
+  --c-rule: oklch(15% 0.020 150); --c-accent: oklch(68% 0.25 355); --c-accent-ink: oklch(15% 0.020 150);
+  --c-focus: oklch(90% 0.18 100);
+  --f-display: "Oswald", "Heebo", Impact, sans-serif; --f-body: "Rubik", system-ui, sans-serif;
+  --f-mono: ui-monospace, Menlo, monospace; --f-outlier: "Oswald", sans-serif;
+  --fs-xs: 0.8125rem; --fs-sm: 0.9375rem; --fs-base: 1.0625rem; --fs-lg: 1.3rem; --fs-xl: clamp(1.7rem, 1.4rem + 1.2vw, 2.4rem);
+  --fs-2xl: clamp(2.4rem, 1.6rem + 3vw, 4.25rem); --fs-3xl: clamp(3.25rem, 2rem + 5vw, 7rem);
+  --fs-display: clamp(3.5rem, 1rem + 8vw, 8.5rem);
+  --lh-tight: 1.0; --lh-body: 1.5; --tr-display: 0; --tr-label: 0.04em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 72px; --sp-9: 104px; --sp-10: 152px;
+  --section-y: clamp(56px, 5vw + 28px, 128px); --gutter: clamp(16px, 3vw, 40px); --maxw: 1360px;
+  --r-sm: 0px; --r-md: 0px; --r-lg: 0px; --r-pill: 0px; /* square "pills"; modules that need a true circle (cursor, swatches, avatars, close/toggle buttons) use 50% literals */
+  --ease-out: cubic-bezier(0.3, 1.5, 0.6, 1); --ease-in: cubic-bezier(0.5, 0, 0.75, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --d-fast: 120ms; --d-med: 220ms; --d-slow: 500ms;
+  --shadow-1: 6px 6px 0 oklch(15% 0.02 150); --shadow-2: 10px 10px 0 oklch(15% 0.02 150);
+}
+/* placards invert the local ink */
+[data-surface="card"], .card { --c-ink: oklch(15% 0.02 150); --c-ink-2: oklch(30% 0.02 150); --c-muted: oklch(42% 0.02 150);
+  background: var(--c-surface); border: 3px solid var(--c-rule); box-shadow: var(--shadow-1); }
+:root[dir="rtl"] { --shadow-1: -6px 6px 0 oklch(15% .02 150); --shadow-2: -10px 10px 0 oklch(15% .02 150); }
+</style>
+<link rel="stylesheet" href="../../runtime/fx/bg-kit.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); }
+[lang="he"] { --f-display: "Heebo", sans-serif; }
+.card { color: var(--c-ink); transition: translate var(--d-fast) var(--ease-out), box-shadow var(--d-fast) var(--ease-out); }
+.card:hover, .card.is-hover { translate: -4px -4px; box-shadow: var(--shadow-2); }
+[dir="rtl"] .card:hover { translate: 4px -4px; }
+.nav { margin: 16px var(--gutter) 0; display: flex; align-items: center; gap: var(--sp-6); block-size: 64px; padding-inline: 20px 10px; font-weight: 600; }
+.nav .wm { font-family: var(--f-display); font-weight: 700; font-size: 1.6rem; text-transform: uppercase; text-decoration: none; margin-inline-end: auto; }
+[lang="he"] .nav .wm { font-weight: 900; }
+.nav a { text-decoration: none; }
+.slab { display: inline-flex; align-items: center; block-size: 56px; padding-inline: 26px; background: var(--c-accent); color: var(--c-accent-ink); border: 3px solid var(--c-rule); box-shadow: var(--shadow-1); transform: skewX(calc(-8deg * var(--dir, 1))); text-decoration: none; font-family: var(--f-display); font-weight: 600; font-size: 1.2rem; text-transform: uppercase; transition: translate var(--d-fast) var(--ease-out), box-shadow var(--d-fast) var(--ease-out); }
+[dir="rtl"] { --dir: -1; }
+.slab > span { display: inline-block; transform: skewX(calc(8deg * var(--dir, 1))); }
+[lang="he"] .slab { font-family: var(--f-body); font-weight: 700; }
+.slab:hover, .slab.is-hover { translate: -3px -3px; box-shadow: var(--shadow-2); }
+.slab:active { translate: 4px 4px; box-shadow: 2px 2px 0 var(--c-rule); }
+.slab.is-focus { outline: 3px solid var(--c-focus); outline-offset: 4px; }
+.nav .slab { block-size: 44px; font-size: 1rem; }
+.hero { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--sp-5); padding-block: var(--sp-8) var(--sp-8); align-items: end; }
+.hero h1 { grid-column: 1 / span 9; grid-row: 1; font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); color: var(--c-ink); }
+[lang="he"] .hero h1 { font-weight: 900; }
+.offer { grid-column: 9 / span 4; grid-row: 1; position: relative; align-self: start; margin-block-start: var(--sp-8); }
+.offer .card { rotate: calc(-3deg * var(--dir, 1)); padding: var(--sp-6); display: grid; gap: var(--sp-4); position: relative; z-index: 1; }
+.offer .plinth { position: absolute; inset: 36px -26px -30px 30px; background: var(--c-surface-2); border: 3px solid var(--c-rule); }
+.offer .plinth.p2 { inset: -24px 40px 60% -34px; background: var(--c-accent); }
+.offer h2 { font-family: var(--f-display); font-weight: 600; text-transform: uppercase; font-size: var(--fs-xl); line-height: 1; }
+[lang="he"] .offer h2 { font-weight: 900; }
+.tag { display: inline-block; background: var(--c-accent); border: 2px solid var(--c-rule); padding: 2px 10px; font-weight: 700; font-size: 13px; letter-spacing: var(--tr-label); text-transform: uppercase; justify-self: start; }
+.levels { grid-column: 1 / span 7; grid-row: 2; display: grid; gap: var(--sp-3); }
+.levels p { color: var(--c-ink-2); font-weight: 600; }
+.bar { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+.bar span { block-size: 22px; border: 3px solid var(--c-rule); background: var(--c-surface); }
+.bar span.on { background: var(--c-focus); }
+.grid { display: grid; grid-template-columns: 5fr 7fr; gap: var(--sp-7); padding-block: var(--sp-6) var(--section-y); align-items: start; }
+.grid .card { padding: var(--sp-6); display: grid; gap: var(--sp-3); }
+.grid .card:nth-child(2) { margin-block-start: var(--sp-7); }
+.grid h3 { font-family: var(--f-display); font-weight: 600; text-transform: uppercase; font-size: var(--fs-xl); line-height: 1; }
+.pic { aspect-ratio: 16 / 9; border: 3px solid var(--c-rule); background: oklch(85% .12 95); display: grid; place-items: center; }
+.pic svg { inline-size: 60%; }
+@media (max-width: 900px) {
+  .nav > a:not(.wm):not(.slab) { display: none; }
+  .hero h1, .offer, .levels { grid-column: 1 / -1; grid-row: auto; } .offer { margin-block: var(--sp-6); } .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header class="nav card"><a class="wm" href="#" data-he="ניצוץ">Spark Hall</a><a href="#" data-he="תערוכות">Exhibits</a><a href="#" data-he="סדנאות">Workshops</a><a href="#" data-he="בתי ספר">Schools</a><a href="#" data-he="ביקור">Visit</a><a class="slab" href="#"><span data-he="כרטיסים">Tickets</span></a></header>
+<main class="container">
+<section class="hero">
+  <h1 data-he="לגעת בכל דבר. במיוחד בכפתורים.">Touch everything. Especially the buttons.</h1>
+  <div class="offer"><div class="plinth" aria-hidden="true"></div><div class="plinth p2" aria-hidden="true"></div>
+    <div class="card"><span class="tag" data-he="חדש באולם 3">New in Hall 3</span><h2 data-he="מכונת הברקים">The lightning machine</h2><p data-he="מחולל ואן דה גראף בגובה שלושה מטרים. הדגמה כל שעה עגולה.">A three-metre Van de Graaff generator. Live demo every hour on the hour.</p><a class="slab" href="#" data-spec-btn><span data-he="להזמין כרטיס">Book a ticket</span></a></div></div>
+  <div class="levels"><p data-he="מסלול החוקר/ת: 4 מתוך 6 תחנות">Explorer route: 4 of 6 stations</p><div class="bar" role="img" aria-label="4 of 6 stations complete" data-he-aria-label="4 מתוך 6 תחנות הושלמו"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span></div></div>
+</section>
+<section class="grid">
+  <article class="card"><h3 data-he="סדנת רובוטיקה">Robot workshop</h3><p data-he="גילאי 9–13, שבת 10:00. בונים זרוע רובוטית ולוקחים אותה הביתה.">Ages 9–13, Saturday 10:00. Build a robot arm and take it home.</p><span class="tag" data-he="₪ 85">₪ 85</span></article>
+  <article class="card"><div class="pic"><svg viewBox="0 0 200 110" aria-hidden="true"><path d="M100 10 L80 60 H102 L86 100 L130 44 H106 L122 10Z" fill="var(--c-accent)" stroke="oklch(15% .02 150)" stroke-width="4" stroke-linejoin="round"/></svg></div><h3 data-he="לילה במוזיאון">A night at the hall</h3><p data-he="לינה בין התערוכות, פנסים וניסויים בחושך.">Sleep over between the exhibits, with torches and experiments in the dark.</p></article>
+</section>
+</main>
+<section class="spec-system" data-spec-system data-display="TOUCH EVERYTHING" data-display-he="לגעת בכל דבר"></section>
+<footer class="spec-foot"><span>Specimen · neo-brutal-exhibit · fictional museum “Spark Hall”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="../../runtime/core.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Organic Colour Block · specimen</title>
+<meta name="he-title" content="Organic Colour Block · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Rethink+Sans:wght@400..800&family=Frank+Ruhl+Libre:wght@500..900&family=Rubik:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/organic-colour-block.md */
+:root {
+  --c-canvas: oklch(96% 0.020 300); --c-surface: oklch(98.5% 0.008 300); --c-surface-2: oklch(90% 0.045 300);
+  --c-ink: oklch(23% 0.045 290); --c-ink-2: oklch(34% 0.045 290); --c-muted: oklch(48% 0.035 290);
+  --c-rule: oklch(23% 0.045 290 / 0.18); --c-accent: oklch(64% 0.21 35); --c-accent-ink: oklch(23% 0.045 290);
+  --c-focus: oklch(50% 0.2 35);
+  --blk-chartreuse: oklch(88% 0.16 118); --blk-butter: oklch(93% 0.08 95); --blk-vermilion: oklch(63% 0.21 35); --blk-lavender: oklch(83% 0.07 300);
+  --f-display: "Young Serif", "Frank Ruhl Libre", Georgia, serif; --f-body: "Rethink Sans", "Rubik", system-ui, sans-serif;
+  --f-mono: ui-monospace, Menlo, monospace; --f-outlier: "Young Serif", serif;
+  --fs-xs: 0.8125rem; --fs-sm: 0.9375rem; --fs-base: 1.0625rem; --fs-lg: 1.3125rem; --fs-xl: clamp(1.7rem, 1.4rem + 1.2vw, 2.4rem);
+  --fs-2xl: clamp(2.5rem, 1.7rem + 3vw, 4.2rem); --fs-3xl: clamp(3.2rem, 2rem + 5vw, 6.5rem);
+  --fs-display: clamp(3.25rem, 1.3rem + 6.4vw, 7.5rem);
+  --lh-tight: 1.0; --lh-body: 1.6; --tr-display: -0.02em; --tr-label: 0.01em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 36px; --sp-7: 56px; --sp-8: 88px; --sp-9: 132px; --sp-10: 196px;
+  --section-y: clamp(72px, 7vw + 32px, 184px); --gutter: clamp(16px, 3vw, 48px); --maxw: 1400px;
+  --r-sm: 14px; --r-md: 40px; --r-lg: 64px; --r-pill: 999px;
+  --shape-blob: 64% 36% 58% 42% / 44% 56% 44% 56%; /* extra token: blob mask for photos; never assign it to --r-* */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); --ease-in: cubic-bezier(0.64, 0, 0.78, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --d-fast: 180ms; --d-med: 520ms; --d-slow: 1200ms;
+  --shadow-1: none; --shadow-2: none;
+}
+:root[dir="rtl"] { --tr-display: 0; --lh-tight: 1.1; }
+</style>
+<link rel="stylesheet" href="../../runtime/fx/bg-kit.css">
+<link rel="stylesheet" href="../../runtime/fx/marquee.css">
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); --grain-opacity: .4; }
+[lang="he"] { --f-display: "Frank Ruhl Libre", serif; --f-body: "Rubik", sans-serif; }
+[lang="he"] :is(h1, h2, .wm) { font-weight: 800; }
+.nav { position: absolute; z-index: 10; inset-block-start: 18px; inset-inline: 0; margin-inline: auto; inline-size: min(900px, calc(100% - 32px)); block-size: 56px; display: flex; align-items: center; gap: var(--sp-5); padding-inline: 24px 6px; border-radius: var(--r-pill); background: var(--c-surface); font-weight: 500; font-size: var(--fs-sm); }
+.nav .wm { font-family: var(--f-display); font-size: 1.3rem; text-decoration: none; margin-inline-end: auto; }
+.nav a { text-decoration: none; }
+.btn { display: inline-flex; align-items: center; block-size: 52px; padding-inline: 28px; border-radius: var(--r-pill); background: var(--c-accent); color: var(--c-accent-ink); font-weight: 600; text-decoration: none; transition: border-radius var(--d-med) var(--ease-out); }
+.btn:hover, .btn.is-hover { border-radius: 40% 60% 55% 45% / 60% 40% 60% 40%; }
+.btn.is-focus { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.btn--ring { background: transparent; box-shadow: inset 0 0 0 1.5px var(--c-ink); color: var(--c-ink); }
+.nav .btn { block-size: 44px; }
+.hero { position: relative; min-block-size: 88dvh; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--sp-5); align-items: center; padding-block: 120px 0; z-index: 2; }
+.hero h1 { grid-column: 1 / span 7; grid-row: 1; font-family: var(--f-display); font-weight: 400; font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); position: relative; z-index: 2; }
+.hero .low { grid-column: 1 / span 5; grid-row: 2; display: grid; gap: var(--sp-5); justify-items: start; margin-block-start: var(--sp-6); }
+.hero .low p { font-size: var(--fs-lg); color: var(--c-ink-2); line-height: 1.45; }
+.blob { grid-column: 7 / span 6; grid-row: 1 / span 2; justify-self: end; inline-size: min(100%, 620px); aspect-ratio: 1; border-radius: var(--shape-blob); overflow: clip; margin-block-end: -180px; position: relative; z-index: 1; }
+.blob svg { inline-size: 100%; block-size: 100%; }
+.chapter { position: relative; background: var(--blk-chartreuse); padding-block: 240px var(--section-y); margin-block-start: -60px; }
+.chapter::before { content: ""; position: absolute; inset-inline: 0; inset-block-start: -119px; block-size: 120px; background: var(--blk-chartreuse); clip-path: url(#wave); }
+.chapter svg.defs { position: absolute; inline-size: 0; block-size: 0; }
+.chapter h2 { font-family: var(--f-display); font-weight: 400; font-size: var(--fs-2xl); line-height: 1.02; max-inline-size: 14ch; }
+.services { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); margin-block-start: var(--sp-7); align-items: center; }
+.services article { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-4); align-items: center; }
+.services .b { inline-size: 110px; aspect-ratio: 1; border-radius: var(--shape-blob); }
+.services h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.5rem; line-height: 1.1; }
+.services p { font-size: var(--fs-sm); color: var(--c-ink-2); }
+.band { background: var(--blk-butter); padding-block: var(--sp-4); }
+.band li { font-family: var(--f-display); font-size: var(--fs-xl); display: flex; align-items: center; gap: var(--sp-6); }
+.band li::after { content: "●"; font-size: .4em; color: var(--blk-vermilion); }
+@media (max-width: 900px) {
+  .nav > a:not(.wm):not(.btn) { display: none; }
+  .hero h1, .hero .low, .blob { grid-column: 1 / -1; grid-row: auto; } .blob { margin-block: var(--sp-6) -100px; inline-size: 88%; }
+  .services { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body class="bg-grain">
+<header class="nav"><a class="wm" href="#" data-he="יום שדה">Field Day</a><a href="#" data-he="החווה">The farm</a><a href="#" data-he="קופסאות ירק">Veg boxes</a><a href="#" data-he="קהילה">Community</a><a class="btn" href="#" data-he="צרו קשר">Get in touch</a></header>
+<main>
+<section class="hero container">
+  <h1 data-he="אדמה טובה עושה שכנים טובים.">Good soil makes good neighbours.</h1>
+  <div class="low"><p data-he="חווה קהילתית בעמק יזרעאל: 40 דונם, 300 משפחות שותפות וקופסת ירק בכל יום חמישי.">A community farm in the Jezreel Valley: 40 dunams, 300 member families and a veg box every Thursday.</p>
+    <div style="display:flex; gap: var(--sp-3); flex-wrap: wrap"><a class="btn" href="#" data-spec-btn data-he="להצטרף לחווה">Join the farm</a><a class="btn btn--ring" href="#" data-spec-btn data-he="לבקר">Visit us</a></div></div>
+  <figure class="blob" aria-label="Paper-cut study: fields at sunset" data-he-aria-label="עבודת נייר: שדות בשקיעה">
+    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" direction="ltr" aria-hidden="true">
+      <rect width="400" height="400" fill="var(--blk-lavender)"/>
+      <circle cx="270" cy="150" r="70" fill="var(--blk-vermilion)"/>
+      <path d="M0 210 C80 180 160 220 240 196 S360 170 400 190 V400 H0Z" fill="var(--blk-chartreuse)"/>
+      <path d="M0 262 C90 238 170 280 260 252 S360 236 400 250 V400 H0Z" fill="var(--blk-butter)"/>
+      <path d="M0 312 C100 292 200 330 300 300 S380 290 400 296 V400 H0Z" fill="oklch(70% .15 130)"/>
+      <g stroke="var(--c-ink)" stroke-width="3" fill="none" stroke-linecap="round"><path d="M40 340 C60 330 80 350 100 340"/><path d="M150 360 C170 350 190 370 210 360"/><path d="M270 346 C290 336 310 356 330 346"/></g>
+    </svg>
+  </figure>
+</section>
+<section class="chapter">
+  <svg class="defs" aria-hidden="true"><clipPath id="wave" clipPathUnits="objectBoundingBox"><path d="M0 0.6 C0.15 0.1 0.3 0.1 0.45 0.5 S0.75 1 0.9 0.45 L1 0.3 V1.01 H0Z"/></clipPath></svg>
+  <div class="container">
+    <h2 data-he="שלוש דרכים להיות חלק מהחווה.">Three ways to be part of the farm.</h2>
+    <div class="services">
+      <article><span class="b" style="background: var(--blk-butter)"></span><div><h3 data-he="קופסת ירק">A veg box</h3><p data-he="12 סוגי ירקות בעונה, כל שבוע.">Twelve seasonal vegetables, every week.</p></div></article>
+      <article><span class="b" style="background: var(--blk-lavender); border-radius: 42% 58% 36% 64% / 58% 40% 60% 42%"></span><div><h3 data-he="יום עבודה">A work day</h3><p data-he="שישי בבוקר, בגינה עם כולם.">Friday mornings, in the beds with everyone.</p></div></article>
+      <article><span class="b" style="background: var(--c-surface); border-radius: 55% 45% 62% 38% / 42% 58% 42% 58%"></span><div><h3 data-he="חלקה משלכם">A plot of your own</h3><p data-he="4 מ״ר, מים וזרעים כלולים.">4 m², water and seeds included.</p></div></article>
+    </div>
+  </div>
+</section>
+<div class="band" data-fx="marquee" data-speed="45" data-fade="false" aria-label="This week" data-he-aria-label="השבוע"><ul role="list"><li data-he="עגבניות שרי">Cherry tomatoes</li><li data-he="במיה">Okra</li><li data-he="דלעת ערמונים">Chestnut squash</li><li data-he="בזיליקום">Basil</li><li data-he="מלפפונים">Cucumbers</li></ul></div>
+<section class="spec-system" data-spec-system data-extra="--blk-chartreuse,--blk-butter,--blk-vermilion,--blk-lavender" data-display="Good soil" data-display-he="אדמה טובה"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · organic-colour-block · fictional farm “Field Day”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script src="../../runtime/fx/marquee.js"></script>
+<script>
+(function () { if (!window.gsap || !window.ScrollTrigger || SD.reduced()) return;
+  gsap.to('.blob', { borderRadius: '38% 62% 44% 56% / 60% 38% 62% 40%', ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+})();
+</script>
+</body>
+</html>

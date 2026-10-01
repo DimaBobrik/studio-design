@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Kikar Heavy · specimen</title>
+<meta name="he-title" content="Kikar Heavy · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wdth,wght@100..125,400..900&family=Noto+Sans+Hebrew:wght@400;900&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<link rel="stylesheet" href="../../runtime/fx/tone-shift.css">
+<link rel="stylesheet" href="../../runtime/fx/accordion.css">
+<style>
+/* tokens.css — verbatim from directions/kikar-heavy.md */
+:root {
+  --c-canvas: oklch(92.6% 0.006 250); --c-surface: oklch(96.6% 0.004 250); --c-surface-2: oklch(88% 0.008 250); /* #e4e7ea sheet, #f2f4f6 plate, #d4d8dd */
+  --c-ink: oklch(25% 0.008 250); --c-ink-2: oklch(36% 0.008 250); --c-muted: oklch(47.5% 0.008 250);    /* charcoal #1f2225 */
+  --c-rule: oklch(25% 0.008 250 / 0.16); --c-accent: oklch(69% 0.235 345); --c-accent-ink: oklch(20% 0.012 345); /* field magenta #f84bbc */
+  --c-focus: oklch(25% 0.008 250);
+  --f-display: "Hubot Sans", "Noto Sans Hebrew", system-ui, sans-serif; --f-body: "Hubot Sans", "Noto Sans Hebrew", system-ui, sans-serif;
+  --f-mono: ui-monospace, Menlo, monospace; /* not used for UI: numbers use --f-body tabular-nums */
+  --fs-xs: 0.8125rem; --fs-sm: 0.9375rem; --fs-base: 1.0625rem; --fs-lg: clamp(1.15rem, 1rem + 0.45vw, 1.375rem);
+  --fs-xl: clamp(1.6rem, 1.2rem + 1.2vw, 2.75rem); /* 44px service rows */
+  --fs-2xl: clamp(2.25rem, 1.4rem + 2.8vw, 4.25rem); --fs-3xl: clamp(2.75rem, 1rem + 5.6vw, 6.25rem); /* 100px closing statement */
+  --fs-display: clamp(3rem, 0.5rem + 9.6vw, 9.75rem); /* 48 → 146px at 1440 → 156px; wide Latin, so smaller than the Hebrew */
+  --lh-tight: 0.86; --lh-body: 1.55; --tr-display: -0.025em; --tr-label: 0;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 80px; --sp-9: 128px; --sp-10: 190px;
+  --section-y: clamp(80px, 8vw + 24px, 176px); --gutter: clamp(16px, 2.2vw, 40px); --maxw: 1780px;
+  --r-sm: 10px; --r-md: 24px; --r-lg: 40px; --r-pill: 999px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); --ease-in: cubic-bezier(0.64, 0, 0.78, 0); --ease-in-out: cubic-bezier(0.83, 0, 0.17, 1);
+  --d-fast: 140ms; --d-med: 320ms; --d-slow: 800ms;
+  --shadow-1: none; --shadow-2: none;
+  /* direction extras */
+  --stmt-w: 13ch;   /* statement measure when lines are not hand-broken (hand-break 2-3 short lines with <span> + nowrap); the end of the hero holds the object */
+  --obj-w: clamp(280px, 38vw, 640px);
+  --img-ink-side: oklch(19% 0.008 250); --img-paper-side: oklch(84% 0.008 250); --img-field-side: oklch(56% 0.22 345); --img-field-top: oklch(78% 0.17 345); /* object shading only */
+}
+:root[dir="rtl"] {
+  --fs-display: clamp(3.25rem, 0.5rem + 11vw, 12.5rem); /* 52 → 166px at 1440 → 200px (A-tier Israeli max 200, A median 88) */
+  --lh-tight: 0.92; --tr-display: -0.01em;           /* declared exception to antipatterns #20, see Typography */
+  --stmt-w: 12ch;
+}
+:root:where([lang="he"]) { --f-display: "Noto Sans Hebrew", "Hubot Sans", system-ui, sans-serif; --f-body: "Noto Sans Hebrew", "Hubot Sans", system-ui, sans-serif; }
+/* chapters (tone-shift built-in tones): ink = charcoal chapter, accent = the one field. Children re-map the ink tokens so modules
+   (accordion, buttons, rules) stay legible; set on children, not on [data-tone] itself (tone-shift reads --c-ink there). */
+[data-tone="ink"] > * { --c-canvas: oklch(25% 0.008 250); --c-ink: oklch(92.6% 0.006 250); --c-ink-2: oklch(84% 0.008 250); --c-muted: oklch(74% 0.008 250); --c-rule: oklch(92.6% 0.006 250 / 0.2); --c-focus: oklch(92.6% 0.006 250); } /* 12.9 / 9.8 / 6.9 on charcoal */
+[data-tone="accent"] > * { --c-ink: oklch(20% 0.012 345); --c-ink-2: oklch(20% 0.012 345); --c-muted: oklch(20% 0.012 345); --c-rule: oklch(20% 0.012 345 / 0.3); --c-focus: oklch(20% 0.012 345); } /* 5.8 on magenta; pill = near-black with sheet text 16.5 */
+</style>
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); background: var(--c-canvas); color: var(--c-ink); font-weight: 400; }
+.wrap { max-inline-size: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+/* nav: Latin wordmark keeps its physical left position on the Hebrew page (israel.md §4) */
+.nav { display: flex; align-items: center; gap: var(--sp-6); block-size: 88px; }
+.wm { font-family: "Hubot Sans", sans-serif; font-weight: 900; font-stretch: 125%; font-size: 1.5rem; letter-spacing: -0.02em; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+.wm i { display: inline-block; inline-size: .62em; block-size: .62em; border-radius: 50%; background: var(--c-accent); }
+.nav ul { display: flex; gap: var(--sp-6); list-style: none; margin: 0 0 0 auto; margin-inline-start: auto; padding: 0; }
+.nav a:not(.pill):not(.wm) { text-decoration: none; }
+.nav a:not(.pill):not(.wm):hover { text-decoration: underline 2px; text-underline-offset: .3em; }
+[dir="rtl"] .nav ul { order: 0; margin-inline-start: 0; }
+[dir="rtl"] .nav .pill { order: 2; margin-inline-start: auto; }
+[dir="rtl"] .nav .wm { order: 3; }
+.lang { color: var(--c-ink-2); }
+.pill { display: inline-flex; align-items: center; gap: 10px; block-size: 52px; padding-inline: 26px; border-radius: var(--r-pill); background: var(--c-ink); color: var(--c-canvas); text-decoration: none; font-size: var(--fs-base); position: relative; isolation: isolate; overflow: clip; white-space: nowrap; }
+.pill::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--c-accent); clip-path: inset(0 100% 0 0); transition: clip-path var(--d-med) var(--ease-out); }
+[dir="rtl"] .pill::before { clip-path: inset(0 0 0 100%); }
+.pill:hover, .pill.is-hover { color: var(--c-accent-ink); }
+.pill:hover::before, .pill.is-hover::before { clip-path: inset(0); }
+.pill.is-focus, .pill:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 3px; }
+.pill--sm { block-size: 44px; padding-inline: 20px; }
+.arr { display: inline-block; }
+[dir="rtl"] .arr { transform: scaleX(-1); }
+/* hero */
+.hero { position: relative; min-block-size: calc(100svh - 88px); display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); align-content: start; padding-block: clamp(24px, 5vh, 64px) var(--sp-9); }
+.stmt { grid-column: 1 / span 9; font-family: var(--f-display); font-weight: 900; font-stretch: 115%; font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); max-inline-size: var(--stmt-w); margin-inline-start: -0.05em; text-wrap: balance; position: relative; z-index: 2; }
+[lang="he"] .stmt { font-stretch: 100%; margin-inline-start: -0.02em; }
+.stmt .ln { display: block; white-space: nowrap; }
+.lead { grid-column: 1 / span 5; margin-block-start: var(--sp-7); display: grid; gap: var(--sp-6); justify-items: start; position: relative; z-index: 2; }
+.lead p { font-size: var(--fs-lg); line-height: 1.45; max-inline-size: 36ch; color: var(--c-ink-2); }
+.lead .acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-6); }
+.tlink { text-decoration: underline 2px; text-underline-offset: .32em; }
+.obj { position: absolute; inset-inline-end: 0; inset-block-end: -64px; inline-size: var(--obj-w); z-index: 1; }
+.obj svg { display: block; inline-size: 100%; block-size: auto; overflow: visible; }
+.obj figcaption { position: absolute; inset-block-start: 26%; inset-inline-start: -2%; font-size: var(--fs-xs); color: var(--c-muted); max-inline-size: 15ch; line-height: 1.35; }
+/* chapters */
+.ch { padding-block: calc(var(--section-y) * 1.3) var(--section-y); position: relative; }
+.ch h2 { font-family: var(--f-display); font-weight: 900; font-stretch: 115%; font-size: var(--fs-2xl); line-height: .92; letter-spacing: -0.02em; max-inline-size: 14ch; }
+[lang="he"] .ch h2 { font-stretch: 100%; letter-spacing: 0; line-height: .98; }
+.rows { margin: var(--sp-8) 0 0; border-block-start: 1px solid var(--c-rule); }
+.rows details { border-block-end: 1px solid var(--c-rule); }
+.rows summary { list-style: none; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--sp-5); padding-block: var(--sp-5); cursor: pointer; }
+.rows summary::-webkit-details-marker { display: none; }
+.rows summary:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 4px; }
+.rows .t { font-weight: 900; font-stretch: 112%; font-size: var(--fs-xl); line-height: 1; letter-spacing: -0.015em; }
+[lang="he"] .rows .t { font-stretch: 100%; letter-spacing: 0; }
+.rows .d { font-size: var(--fs-base); max-inline-size: 46ch; padding-block-end: var(--sp-5); }
+.rows { --acc-icon: 44px; }
+[data-tone="accent"] .pill::before { background: var(--c-surface); }
+.ch--ink .rows { margin-block-start: 0; }
+.ch--ink .grid2 { display: grid; grid-template-columns: 5fr 7fr; gap: var(--gutter); align-items: start; }
+.field h2 { font-size: var(--fs-3xl); max-inline-size: 12ch; }
+.field .row { display: flex; flex-wrap: wrap; gap: var(--sp-6) var(--sp-8); align-items: center; margin-block-start: var(--sp-7); }
+.field .tel { font-weight: 900; font-size: var(--fs-2xl); font-stretch: 112%; letter-spacing: -0.02em; text-decoration: none; }
+.legal { display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-6); margin-block-start: var(--sp-9); padding-block-start: var(--sp-5); border-block-start: 1px solid var(--c-rule); font-size: var(--fs-sm); }
+.legal a { text-decoration: underline 1px; text-underline-offset: .25em; }
+@media (max-width: 900px) {
+  .nav ul li:not(.lang) { display: none; } .nav { block-size: 72px; gap: var(--sp-4); } .nav .pill { block-size: 44px; padding-inline: 18px; font-size: var(--fs-sm); }
+  .stmt, .lead { grid-column: 1 / -1; } .stmt { max-inline-size: none; }
+  .hero { min-block-size: auto; padding-block-end: 0; }
+  .obj { position: relative; inset: auto; inline-size: min(100%, 420px); margin-block-start: var(--sp-6); margin-inline-start: auto; grid-column: 1 / -1; }
+  .obj figcaption { display: none; }
+  .ch--ink .grid2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header class="nav wrap">
+  <a class="wm" href="#" aria-label="Ofek home" data-he-aria-label="אופק, דף הבית"><i aria-hidden="true"></i>OFEK</a>
+  <ul role="list">
+    <li><a href="#" data-he="פנסיה">Pension</a></li>
+    <li><a href="#" data-he="קרן השתלמות">Study fund</a></li>
+    <li><a href="#" data-he="איך זה עובד">How it works</a></li>
+    <li class="lang"><a href="#" lang="he" data-he="EN">עב</a></li>
+  </ul>
+  <a class="pill pill--sm" href="#" data-he="פתיחת חשבון">Open an account</a>
+</header>
+<main data-fx="tone-shift" data-line="0.55" data-blend="0.3">
+<section class="wrap" data-tone="canvas">
+  <div class="hero">
+    <h1 class="stmt"><span class="ln" data-he="הפנסיה שלך,">Your pension,</span><span class="ln" data-he="בלי האותיות">minus the</span><span class="ln" data-he="הקטנות.">small print.</span></h1>
+    <div class="lead">
+      <p data-he="מעבירים את החיסכון אלינו בחמש דקות, רואים כל שקל בעברית פשוטה, ומדברים עם בן אדם כשצריך.">Move your savings in five minutes, see every shekel in plain words, and reach a person when you need one.</p>
+      <div class="acts"><a class="pill" href="#" data-spec-btn data-he="לבדיקת החיסכון שלי">Check my savings</a><a class="tlink" href="#" data-he="איך מעבירים קרן">How a transfer works</a></div>
+    </div>
+    <figure class="obj" aria-hidden="true">
+      <svg viewBox="0 0 600 600" direction="ltr">
+        <!-- back plinth: charcoal, tall -->
+        <path d="M290 168 L290 470 A110 55 0 0 0 510 470 L510 168 Z" fill="var(--img-ink-side)"/>
+        <ellipse cx="400" cy="168" rx="110" ry="55" fill="var(--c-ink)"/>
+        <!-- upright half-disc in the field colour (the piece that travels) -->
+        <g class="pc">
+          <path d="M346 150 A62 62 0 0 1 470 150 Z" fill="var(--img-field-side)" transform="translate(14 8)"/>
+          <path d="M346 150 A62 62 0 0 1 470 150 L484 158 L360 158 Z" fill="var(--img-field-side)"/>
+          <path d="M346 150 A62 62 0 0 1 470 150 Z" fill="var(--c-accent)"/>
+        </g>
+        <!-- front-left plinth: paper -->
+        <path d="M80 330 L80 520 A118 59 0 0 0 316 520 L316 330 Z" fill="var(--img-paper-side)"/>
+        <ellipse cx="198" cy="330" rx="118" ry="59" fill="var(--c-surface)"/>
+        <!-- cube on paper plinth -->
+        <g class="pc">
+          <path d="M138 270 L198 300 L198 362 L138 332 Z" fill="var(--c-ink-2)"/>
+          <path d="M198 300 L258 270 L258 332 L198 362 Z" fill="var(--img-ink-side)"/>
+          <path d="M138 270 L198 240 L258 270 L198 300 Z" fill="var(--c-ink)"/>
+        </g>
+        <!-- front-right plinth: field -->
+        <path d="M352 452 L352 548 A92 46 0 0 0 536 548 L536 452 Z" fill="var(--img-field-side)"/>
+        <ellipse cx="444" cy="452" rx="92" ry="46" fill="var(--img-field-top)"/>
+        <!-- sphere on field plinth -->
+        <g class="pc">
+          <ellipse cx="462" cy="450" rx="44" ry="13" fill="var(--img-field-side)"/>
+          <circle cx="444" cy="404" r="50" fill="var(--c-surface)"/>
+          <path d="M478 368 A50 50 0 0 1 444 454 A62 62 0 0 0 478 368 Z" fill="var(--img-paper-side)"/>
+        </g>
+      </svg>
+    </figure>
+  </div>
+</section>
+<section class="ch ch--ink" data-tone="ink">
+  <div class="wrap grid2">
+    <h2 data-he="מה אנחנו מנהלים בשבילך">What we look after for you</h2>
+    <div class="rows sd-acc" data-fx="accordion" data-exclusive="true">
+      <details class="sd-acc__item" open><summary><span class="t" data-he="קרן פנסיה">Pension fund</span><span class="sd-acc__icon" aria-hidden="true"></span></summary><div class="sd-acc__body"><p class="d" data-he="מסלול לפי גיל, דמי ניהול שכתובים במספר אחד, ודוח רבעוני שאפשר לקרוא בשתי דקות.">A track that follows your age, management fees written as one number, and a quarterly report you can read in two minutes.</p></div></details>
+      <details class="sd-acc__item"><summary><span class="t" data-he="קרן השתלמות">Study fund</span><span class="sd-acc__icon" aria-hidden="true"></span></summary><div class="sd-acc__body"><p class="d" data-he="נזילה אחרי שש שנים, ואנחנו מזכירים לך חודש לפני.">Liquid after six years, and we remind you a month before.</p></div></details>
+      <details class="sd-acc__item"><summary><span class="t" data-he="קופת גמל">Provident fund</span><span class="sd-acc__icon" aria-hidden="true"></span></summary><div class="sd-acc__body"><p class="d" data-he="איחוד קופות ישנות למקום אחד, בלי טפסים.">Old funds merged into one place, without forms.</p></div></details>
+      <details class="sd-acc__item"><summary><span class="t" data-he="בדיקת ביטוחים כפולים">Double-insurance check</span><span class="sd-acc__icon" aria-hidden="true"></span></summary><div class="sd-acc__body"><p class="d" data-he="אנחנו מוצאים פוליסות שאתה משלם עליהן פעמיים.">We find the policies you are paying for twice.</p></div></details>
+    </div>
+  </div>
+</section>
+<section class="ch field" data-tone="accent">
+  <div class="wrap">
+    <h2 data-he="מדברים עם בן אדם, לא עם תפריט.">Talk to a person, not a menu.</h2>
+    <div class="row"><a class="tel" href="tel:*1234" dir="ltr">*1234</a><a class="pill" href="#" data-he="קביעת שיחה">Book a call</a><span data-he-html="א׳–ה׳ &lt;bdi dir=&quot;ltr&quot;&gt;08:00–20:00&lt;/bdi&gt;">Sun–Thu 08:00–20:00</span></div>
+    <nav class="legal" aria-label="Legal" data-he-aria-label="משפטי"><a href="#" data-he="הצהרת נגישות">Accessibility statement</a><a href="#" data-he="פרטיות">Privacy</a><a href="#" data-he="תנאי שימוש">Terms</a><span data-he="אופק פנסיה בע״מ, רישיון 512">Ofek Pension Ltd., licence 512</span></nav>
+  </div>
+</section>
+</main>
+<section class="spec-system" data-spec-system data-extra="--img-field-top,--img-field-side,--img-ink-side" data-display="minus the small print" data-display-he="בלי האותיות הקטנות"></section>
+<footer class="spec-foot"><span>Specimen · kikar-heavy · fictional pension app “Ofek”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="../../runtime/core.js"></script>
+<script src="../../runtime/fx/tone-shift.js"></script>
+<script src="../../runtime/fx/accordion.js"></script>
+<script>
+/* entrance: statement lines rise, object pieces drop onto their plinths (once) */
+(function () { if (!window.gsap || SD.reduced()) return;
+  gsap.from('.stmt .ln', { yPercent: 40, opacity: 0, duration: .8, ease: 'power3.out', stagger: .06 });
+  gsap.from('.obj .pc', { y: -40, opacity: 0, duration: .5, ease: 'power2.out', stagger: .08, delay: .3 });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>quickview · studio-design demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Karla:wght@400;500;700&family=Suez+One&family=Assistant:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="../fx/quickview.css">
+<style>
+  :root {
+    --c-canvas: oklch(95.5% 0.015 60); --c-surface: oklch(91% 0.02 60); --c-surface-2: oklch(86% 0.025 60);
+    --c-ink: oklch(25% 0.03 40); --c-ink-2: oklch(38% 0.03 40); --c-muted: oklch(52% 0.03 40); --c-rule: oklch(83% 0.025 60);
+    --c-accent: oklch(52% 0.11 35); --c-accent-ink: #fff; --c-focus: oklch(50% 0.13 35);
+    --f-display: "Libre Caslon Display", "Suez One", Georgia, serif; --f-body: "Karla", "Assistant", system-ui, sans-serif; --r-lg: 18px;
+  }
+  h1 { font-size: var(--fs-3xl); font-weight: 400; margin-block-end: var(--sp-7); }
+  .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-6) var(--sp-4); }
+  .card__img { position: relative; border-radius: 12px; overflow: hidden; background: var(--c-surface); }
+  .card__img img { inline-size: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .card h3 { font-family: var(--f-body); font-size: var(--fs-sm); font-weight: 500; letter-spacing: 0; display: flex; justify-content: space-between; gap: var(--sp-3); margin-block-start: var(--sp-3); }
+  .card h3 span:last-child { white-space: nowrap; }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>
+</head>
+<body>
+<main class="section container">
+  <h1 data-he="חדר מגורים, בשקט">The quiet living room</h1>
+  <div class="grid">
+    <article class="card" data-product>
+      <div class="card__img"><img src="https://picsum.photos/seed/loungeoak/600/750" alt="Oak lounge chair" data-he-alt="כורסת אלון" width="600" height="750">
+        <button class="sd-qv-trigger" type="button" data-quickview data-id="loungeoak" data-title="Oak lounge chair" data-he-attr-data-title="כורסת אלון" data-price="2890" data-text="Steam-bent solid oak with a woven paper-cord seat. Sits low and wide, made for long evenings." data-he-attr-data-text="אלון מלא מכופף בקיטור עם מושב קלוע מחבל נייר. נמוכה ורחבה, לערבים ארוכים." data-img="https://picsum.photos/seed/loungeoak/1000/1250" data-url="#" data-he="תצוגה מהירה">Quick view</button></div>
+      <h3><span data-he="כורסת אלון">Oak lounge chair</span><span>₪2,890</span></h3>
+    </article>
+    <article class="card" data-product>
+      <div class="card__img"><img src="https://picsum.photos/seed/sofalinen/600/750" alt="Linen sofa, three seat" data-he-alt="ספת פשתן, שלושה מושבים" width="600" height="750">
+        <button class="sd-qv-trigger" type="button" data-quickview data-id="sofalinen" data-title="Linen sofa, three seat" data-he-attr-data-title="ספת פשתן, שלושה מושבים" data-price="8400" data-text="Removable washed-linen covers over a kiln-dried beech frame. Feather and foam cushions." data-he-attr-data-text="כיסויי פשתן רחיץ נשלפים על שלד אשור מיובש. כריות נוצות וספוג." data-img="https://picsum.photos/seed/sofalinen/1000/1250" data-url="#" data-he="תצוגה מהירה">Quick view</button></div>
+      <h3><span data-he="ספת פשתן, שלושה מושבים">Linen sofa, three seat</span><span>₪8,400</span></h3>
+    </article>
+    <article class="card" data-product>
+      <div class="card__img"><img src="https://picsum.photos/seed/travertine/600/750" alt="Travertine side table" data-he-alt="שולחן צד טרוורטין" width="600" height="750">
+        <button class="sd-qv-trigger" type="button" data-quickview data-id="travertine" data-title="Travertine side table" data-he-attr-data-title="שולחן צד טרוורטין" data-price="1650" data-text="A single block of honed Italian travertine. Each piece carries its own veining." data-he-attr-data-text="גוש אחד של טרוורטין איטלקי מלוטש. לכל פריט עורקים משלו." data-img="https://picsum.photos/seed/travertine/1000/1250" data-url="#" data-he="תצוגה מהירה">Quick view</button></div>
+      <h3><span data-he="שולחן צד טרוורטין">Travertine side table</span><span>₪1,650</span></h3>
+    </article>
+    <article class="card" data-product>
+      <div class="card__img"><img src="https://picsum.photos/seed/paperlamp/600/750" alt="Paper pendant lamp" data-he-alt="מנורת תלייה מנייר" width="600" height="750">
+        <button class="sd-qv-trigger" type="button" data-quickview data-id="paperlamp" data-title="Paper pendant lamp" data-he-attr-data-title="מנורת תלייה מנייר" data-price="740" data-text="Hand-pleated rice paper on a steel frame. Soft, even light for dining tables." data-he-attr-data-text="נייר אורז מקופל ביד על שלד פלדה. אור רך ואחיד לשולחן אוכל." data-img="https://picsum.photos/seed/paperlamp/1000/1250" data-url="#" data-he="תצוגה מהירה">Quick view</button></div>
+      <h3><span data-he="מנורת תלייה מנייר">Paper pendant lamp</span><span>₪740</span></h3>
+    </article>
+  </div>
+</main>
+<dialog class="sd-qv" data-fx="quickview" data-currency="ILS" data-locale="en-IL" data-he-attr-data-locale="he-IL" data-he-attr-data-label-added="נוסף" aria-labelledby="qv-title">
+  <div class="sd-qv__bg" aria-hidden="true"></div>
+  <div class="sd-qv__grid">
+    <div class="sd-qv__media"><img data-qv-img alt="" width="1000" height="1250"></div>
+    <div class="sd-qv__body">
+      <h2 id="qv-title" data-qv-title></h2>
+      <p class="sd-qv__price" data-qv-price></p>
+      <p class="sd-qv__text" data-qv-text></p>
+      <fieldset class="sd-qv__sizes"><legend data-he="גימור">Finish</legend>
+        <label><input type="radio" name="qv-finish" value="natural" checked><span data-he="טבעי">Natural</span></label>
+        <label><input type="radio" name="qv-finish" value="smoked"><span data-he="מעושן">Smoked</span></label>
+        <label><input type="radio" name="qv-finish" value="black"><span data-he="שחור">Black</span></label>
+      </fieldset>
+      <div class="sd-qv__actions">
+        <button class="sd-qv__atc" type="button" data-qv-atc data-add-to-cart data-he="הוספה לסל">Add to cart</button>
+        <a class="sd-qv__link" data-qv-link href="#" data-he="לכל הפרטים">View full details</a>
+      </div>
+    </div>
+  </div>
+  <button class="sd-qv__close" type="button" data-qv-close aria-label="Close" data-he-aria="סגירה"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</dialog>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="_demo.js"></script>
+<script src="../core.js"></script>
+<script src="../fx/quickview.js"></script>
+</body>
+</html>

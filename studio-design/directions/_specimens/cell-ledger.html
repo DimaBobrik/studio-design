@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/[?&]rtl=1/.test(location.search)){document.documentElement.dir='rtl';document.documentElement.lang='he'}</script>
+<title>Cell Ledger · specimen</title>
+<meta name="he-title" content="Cell Ledger · דוגמית">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;500;600&family=Chivo+Mono:wght@400;500&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../runtime/core.css">
+<style>
+/* tokens.css — verbatim from directions/cell-ledger.md */
+:root {
+  --c-canvas: oklch(98.4% 0.002 250); --c-surface: oklch(99.6% 0.001 250); --c-surface-2: oklch(91.5% 0.003 250);
+  --c-ink: oklch(24.5% 0.005 250); --c-ink-2: oklch(38% 0.005 250); --c-muted: oklch(52% 0.005 250);
+  --c-rule: oklch(24.5% 0.005 250); --c-accent: oklch(92.5% 0.105 162); --c-accent-ink: oklch(24.5% 0.005 250);
+  --c-focus: oklch(52% 0.2 262);
+  --f-display: "Chivo", "IBM Plex Sans Hebrew", system-ui, sans-serif; --f-body: "Chivo", "IBM Plex Sans Hebrew", system-ui, sans-serif;
+  --f-mono: "Chivo Mono", "IBM Plex Sans Hebrew", ui-monospace, monospace; --f-outlier: "Chivo Mono", ui-monospace, monospace;
+  --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-base: 1rem; --fs-lg: 1.25rem; --fs-xl: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  --fs-2xl: clamp(2rem, 1.3rem + 2.4vw, 3.25rem); --fs-3xl: clamp(3rem, 1.6rem + 5vw, 6rem);
+  --fs-display: clamp(3.5rem, 1rem + 9.5vw, 11.25rem); /* 56 → 180px: the wordmark/number cell */
+  --lh-tight: 0.92; --lh-body: 1.45; --tr-display: -0.03em; --tr-label: 0.06em;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-7: 32px; --sp-8: 48px; --sp-9: 72px; --sp-10: 120px;
+  --section-y: 0px; /* sections are rows of cells; air lives INSIDE cells (--cell-pad) */
+  --gutter: clamp(16px, 1.6vw, 24px); --maxw: 1920px;
+  --r-sm: 0px; --r-md: 0px; --r-lg: 0px; --r-pill: 0px;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1); --ease-in: cubic-bezier(0.6, 0, 1, 1); --ease-in-out: cubic-bezier(0.6, 0, 0.2, 1);
+  --d-fast: 90ms; --d-med: 200ms; --d-slow: 420ms;
+  --shadow-1: none; --shadow-2: inset 0 0 0 1px var(--c-rule);
+  /* direction extras */
+  --cell-pad: clamp(16px, 1.6vw, 24px); --cell-min: clamp(160px, 18vw, 280px); --rule-w: 1px;
+  --img-dither-ink: oklch(24.5% 0.005 250); --img-dither-paper: oklch(91.5% 0.003 250);
+}
+:root[dir="rtl"] { --f-display: "IBM Plex Sans Hebrew", "Chivo", sans-serif; --f-body: "IBM Plex Sans Hebrew", "Chivo", sans-serif; --tr-display: 0; --tr-label: 0; }
+</style>
+<link rel="stylesheet" href="_spec.css">
+<style>
+body { font-family: var(--f-body); font-size: var(--fs-base); line-height: var(--lh-body); background: var(--c-canvas); color: var(--c-ink); }
+.mono { font-family: var(--f-mono); font-size: var(--fs-xs); letter-spacing: var(--tr-label); text-transform: uppercase; }
+.cells { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--rule-w); background: var(--c-rule); border-block-end: var(--rule-w) solid var(--c-rule); }
+.cells > * { background: var(--c-canvas); padding: var(--cell-pad); min-inline-size: 0; }
+.nav > * { display: flex; align-items: center; min-block-size: 60px; padding-block: 0; text-decoration: none; }
+.nav .wm { grid-column: span 3; font-weight: 600; letter-spacing: -0.02em; font-size: 1.05rem; }
+.nav .clock { grid-column: span 3; gap: 10px; }
+.nav .clock b { font-weight: 500; font-variant-numeric: tabular-nums; }
+.nav a.lk { grid-column: span 1; justify-content: center; font-size: var(--fs-sm); }
+.nav a.lk:hover, .nav a.lk:focus-visible { background: var(--c-ink); color: var(--c-canvas); }
+.nav .cta { grid-column: span 3; background: var(--c-ink); color: var(--c-canvas); justify-content: space-between; font-weight: 500; }
+.nav .cta:hover span:first-child, .nav .cta:focus-visible span:first-child { text-decoration: underline; text-underline-offset: 4px; }
+.hero > .word { grid-column: span 7; display: flex; align-items: flex-end; min-block-size: clamp(260px, 34vw, 480px); }
+.hero h1 { font-family: var(--f-display); font-weight: 500; font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--tr-display); }
+[lang="he"] .hero h1 { font-weight: 600; font-size: calc(var(--fs-display) * .9); }
+.hero .art { grid-column: span 5; padding: 0; position: relative; background: var(--img-dither-paper); min-block-size: 280px; }
+.art canvas { display: block; inline-size: 100%; block-size: 100%; image-rendering: pixelated; }
+.art .mono { position: absolute; inset-block-end: var(--sp-3); inset-inline-start: var(--sp-3); background: var(--c-canvas); padding: 2px 6px; }
+.hero .txt { grid-column: span 4; display: grid; align-content: space-between; gap: var(--sp-6); font-size: var(--fs-lg); line-height: 1.35; }
+.hero .inv { grid-column: span 3; background: var(--c-ink); color: var(--c-canvas); display: grid; align-content: space-between; gap: var(--sp-6); }
+.hero .inv strong { font-family: var(--f-display); font-weight: 500; font-size: var(--fs-2xl); line-height: 1; letter-spacing: var(--tr-display); }
+.hero .mint { grid-column: span 5; background: var(--c-accent); color: var(--c-accent-ink); display: grid; align-content: space-between; gap: var(--sp-5); }
+.mint ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px var(--sp-5); font-size: var(--fs-sm); }
+.stats > .s { grid-column: span 3; display: grid; align-content: space-between; min-block-size: 220px; gap: var(--sp-6); }
+.stats .n { font-family: var(--f-display); font-weight: 500; font-size: var(--fs-3xl); line-height: .9; letter-spacing: var(--tr-display); font-variant-numeric: tabular-nums; }
+.stats .s--grey { background: var(--c-surface-2); } .stats .s--wide { grid-column: span 6; }
+.stats .s--wide p { font-size: var(--fs-xl); line-height: 1.25; max-inline-size: 28ch; }
+.btn { display: inline-flex; align-items: center; justify-content: space-between; gap: var(--sp-5); min-block-size: 56px; padding-inline: var(--sp-5); background: var(--c-ink); color: var(--c-canvas); text-decoration: none; font-weight: 500; min-inline-size: 220px; }
+.btn:hover, .btn.is-hover { background: var(--c-ink-2); }
+.btn.is-focus, .btn:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 2px; }
+.btn--ghost { background: transparent; color: var(--c-ink); box-shadow: var(--shadow-2); }
+.btn--ghost:hover, .btn--ghost.is-hover { background: var(--c-ink); color: var(--c-canvas); }
+.tbl > .h { grid-column: span 12; display: flex; justify-content: space-between; align-items: baseline; }
+.tbl > .h h2 { font-family: var(--f-display); font-weight: 500; font-size: var(--fs-2xl); letter-spacing: var(--tr-display); line-height: 1; }
+.row { display: contents; }
+.row > * { padding-block: var(--sp-4); }
+.row .no { grid-column: span 1; } .row .t { grid-column: span 6; font-size: var(--fs-lg); } .row .c { grid-column: span 3; color: var(--c-ink-2); } .row .y { grid-column: span 2; text-align: end; }
+@media (max-width: 900px) {
+  .nav .wm { grid-column: span 7; } .nav .clock { grid-column: span 5; justify-content: end; } .nav .clock > span { display: none; } .nav a.lk { display: none; } .nav .cta { grid-column: span 12; }
+  .hero > * , .stats > .s, .stats .s--wide { grid-column: span 12 !important; } .stats > .s:not(.s--wide) { grid-column: span 6 !important; }
+  .row .no { grid-column: span 2; } .row .t { grid-column: span 10; } .row .c { grid-column: span 7; } .row .y { grid-column: span 5; }
+}
+</style>
+</head>
+<body>
+<nav class="cells nav" aria-label="Main" data-he-aria-label="ראשי">
+  <a class="wm" href="#">Tallis &amp; Row</a>
+  <span class="clock mono"><span data-he="לונדון">London</span> <b dir="ltr" data-clock>09:41:07</b></span>
+  <a class="lk" href="#" data-he="מחקר">Research</a><a class="lk" href="#" data-he="דאטה">Data</a><a class="lk" href="#" data-he="צוות">People</a>
+  <a class="cta" href="#"><span data-he="לשיחה עם אנליסט">Talk to an analyst</span><span class="flip-x" aria-hidden="true">→</span></a>
+</nav>
+<main>
+<section class="cells hero">
+  <div class="word"><h1 data-he="טאליס ורו">Tallis &amp; Row</h1></div>
+  <div class="art"><canvas data-dither="terrain" width="300" height="220" aria-hidden="true"></canvas><span class="mono" data-he="מחקר · עיבוד דיתר">Study · dithered render</span></div>
+  <div class="txt"><p data-he="מחקר עצמאי על שוקי האנרגיה של אירופה. דוחות שנבדקים מול נתוני המדידה, לא מול התחזית.">Independent research on Europe's power markets. Every report is checked against metered data, not against the forecast.</p><p class="mono" data-he="מאז 2011">Since 2011</p></div>
+  <div class="inv"><span class="mono" data-he="דוח אחרון">Latest report</span><strong data-he="מחירי לילה 2027">Night prices 2027</strong><a class="btn btn--ghost" style="color:var(--c-canvas);box-shadow:inset 0 0 0 1px currentColor" href="#"><span data-he="לקריאה">Read</span><span class="flip-x" aria-hidden="true">→</span></a></div>
+  <div class="mint"><span class="mono" data-he="לקוחות · [להשלמה]">Clients · [TODO: confirm]</span><ul role="list"><li>[Grid operator]</li><li>[Utility]</li><li>[Fund]</li><li>[Ministry]</li><li>[Trader]</li><li>[Insurer]</li></ul></div>
+</section>
+<section class="cells stats">
+  <div class="s"><span class="n" dir="ltr">214</span><span class="mono" data-he="דוחות שפורסמו">Reports published</span></div>
+  <div class="s s--grey"><span class="n" dir="ltr">31</span><span class="mono" data-he="שווקים במעקב">Markets tracked</span></div>
+  <div class="s s--wide"><p data-he="אנחנו לא מוכרים תחזיות. אנחנו מראים איפה התחזיות טעו, ולמה.">We don't sell forecasts. We show where the forecasts went wrong, and why.</p><span><a class="btn" href="#" data-spec-btn><span data-he="המתודולוגיה">Our method</span><span class="flip-x" aria-hidden="true">→</span></a></span></div>
+</section>
+<section class="cells tbl">
+  <div class="h"><h2 data-he="דוחות">Reports</h2><span class="mono" dir="ltr">2026 · 04</span></div>
+  <div class="row"><span class="no mono" dir="ltr">R-214</span><span class="t" data-he="מחירי לילה ב־2027: מה הסוללות ישנו">Night prices in 2027: what storage changes</span><span class="c" data-he="אחסון">Storage</span><span class="y mono" dir="ltr">12.03.26</span></div>
+  <div class="row"><span class="no mono" dir="ltr">R-213</span><span class="t" data-he="רוח ימית: עלות החיבור לרשת">Offshore wind: the cost of connection</span><span class="c" data-he="רשת">Grid</span><span class="y mono" dir="ltr">20.02.26</span></div>
+  <div class="row"><span class="no mono" dir="ltr">R-212</span><span class="t" data-he="מי משלם על הגמישות">Who pays for flexibility</span><span class="c" data-he="רגולציה">Regulation</span><span class="y mono" dir="ltr">02.02.26</span></div>
+</section>
+<section class="spec-system" data-spec-system data-extra="--img-dither-ink,--img-dither-paper" data-display="Tallis & Row" data-display-he="טאליס ורו"></section>
+</main>
+<footer class="spec-foot"><span>Specimen · cell-ledger · fictional research firm “Tallis &amp; Row”</span><a href="index.html">All directions</a></footer>
+<script src="../../runtime/demo/_demo.js"></script>
+<script src="_spec.js"></script>
+<script src="../../runtime/core.js"></script>
+<script>
+/* 1-bit Bayer dither of a procedural contour terrain, in the direction's --img-dither-* colours; threshold "develops" once. */
+(function () {
+  var M = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+  function rgb(v) { var c = document.createElement('canvas').getContext('2d'); c.fillStyle = v; c.fillRect(0, 0, 1, 1); return c.getImageData(0, 0, 1, 1).data; }
+  var cs = getComputedStyle(document.documentElement);
+  var ink = rgb(cs.getPropertyValue('--img-dither-ink').trim()), paper = rgb(cs.getPropertyValue('--img-dither-paper').trim());
+  document.querySelectorAll('canvas[data-dither]').forEach(function (cv) {
+    var w = cv.width, h = cv.height, x = cv.getContext('2d'), src = new Float32Array(w * h);
+    for (var j = 0; j < h; j++) for (var i = 0; i < w; i++) {
+      var u = i / w, v = j / h;
+      var ridge = Math.sin(u * 7 + Math.sin(v * 3) * 1.6) * .5 + Math.sin(u * 17 - v * 5) * .18;
+      var hgt = 1 - v - .25 + ridge * .22;
+      var sky = v < .42 + ridge * .1 ? .15 + v * .6 : 0;
+      var val = hgt > 0 ? Math.min(1, .35 + hgt * .9 + (Math.sin(hgt * 40) > .7 ? .25 : 0)) : sky;
+      var sun = Math.hypot(u - .72, v - .22); if (sun < .09) val = 0;
+      src[j * w + i] = val;
+    }
+    function paint(t) {
+      var img = x.createImageData(w, h), d = img.data;
+      for (var k = 0; k < w * h; k++) {
+        var i = k % w, j = (k / w) | 0, on = src[k] * t > (M[(j % 4) * 4 + (i % 4)] + .5) / 16, c = on ? ink : paper;
+        d[k * 4] = c[0]; d[k * 4 + 1] = c[1]; d[k * 4 + 2] = c[2]; d[k * 4 + 3] = 255;
+      }
+      x.putImageData(img, 0, 0);
+    }
+    if (window.SD && SD.reduced && SD.reduced()) { paint(1); return; }
+    var t0 = performance.now(); (function f(now) { var p = Math.min(1, (now - t0) / 700); paint(p); if (p < 1) requestAnimationFrame(f); })(t0);
+  });
+  var ck = document.querySelector('[data-clock]');
+  if (ck && Intl.DateTimeFormat) { var fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }); var tick = function () { ck.textContent = fmt.format(new Date()); }; tick(); setInterval(tick, 1000); }
+})();
+</script>
+</body>
+</html>

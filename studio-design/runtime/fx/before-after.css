@@ -1,0 +1,32 @@
+/* studio-design · fx/before-after.css — accessible before/after slider (native <input type=range> overlay)
+   --p = position of the divider in % from the inline-start edge (horizontal) or from the top (vertical). */
+.sd-ba { --p: 50%; --ba-line: 2px; --ba-knob: 48px; position: relative; overflow: hidden; border-radius: var(--r-lg); background: var(--c-surface); isolation: isolate; user-select: none; -webkit-user-select: none; margin: 0; }
+.sd-ba > img, .sd-ba__before img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; pointer-events: none; }
+.sd-ba > img { aspect-ratio: var(--ba-ratio, 16 / 10); }
+.sd-ba__before { position: absolute; inset: 0; z-index: 1; clip-path: inset(0 calc(100% - var(--p)) 0 0); }
+[dir="rtl"] .sd-ba__before, .sd-ba[dir="rtl"] .sd-ba__before { clip-path: inset(0 0 0 calc(100% - var(--p))); }
+.sd-ba[data-orientation="vertical"] .sd-ba__before { clip-path: inset(0 0 calc(100% - var(--p)) 0); }
+
+/* divider + knob */
+.sd-ba__handle { position: absolute; z-index: 2; inset-block: 0; inset-inline-start: var(--p); inline-size: var(--ba-line); margin-inline-start: calc(var(--ba-line) / -2); background: var(--c-canvas); pointer-events: none; box-shadow: 0 0 12px oklch(0% 0 0 / 0.25); }
+.sd-ba__handle::after { content: ""; position: absolute; inset-block-start: 50%; inset-inline-start: 50%; inline-size: var(--ba-knob); block-size: var(--ba-knob); margin: calc(var(--ba-knob) / -2); margin-inline-start: calc(var(--ba-knob) / -2);
+  border-radius: 50%; background: var(--c-canvas) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23222' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 7l-5 5 5 5M15 7l5 5-5 5'/%3E%3C/svg%3E") center / 22px no-repeat;
+  box-shadow: var(--shadow-2); transition: transform var(--d-fast) var(--ease-out); }
+.sd-ba[data-orientation="vertical"] .sd-ba__handle { inset-inline: 0; inset-block-start: var(--p); inline-size: auto; block-size: var(--ba-line); margin: 0; margin-block-start: calc(var(--ba-line) / -2); }
+.sd-ba[data-orientation="vertical"] .sd-ba__handle::after { transform: rotate(90deg); }
+.sd-ba:hover .sd-ba__handle::after { transform: scale(1.08); }
+.sd-ba[data-orientation="vertical"]:hover .sd-ba__handle::after { transform: rotate(90deg) scale(1.08); }
+.sd-ba:has(.sd-ba__range:focus-visible) .sd-ba__handle::after { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+
+/* the real control: full-size, invisible, native keyboard + a11y */
+.sd-ba__range { position: absolute; inset: 0; z-index: 3; inline-size: 100%; block-size: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; -webkit-appearance: none; appearance: none; background: none; }
+.sd-ba[data-orientation="vertical"] .sd-ba__range { writing-mode: vertical-lr; direction: ltr; cursor: ns-resize; touch-action: pan-x; }
+/* 2px thumb: native pointer→value mapping stays linear across the full width, so the divider tracks the finger exactly */
+.sd-ba__range::-webkit-slider-thumb { -webkit-appearance: none; inline-size: 2px; block-size: 2px; }
+.sd-ba__range::-moz-range-thumb { inline-size: 2px; block-size: 2px; border: 0; }
+
+.sd-ba__label { position: absolute; z-index: 2; inset-block-start: var(--sp-4); padding: 6px 12px; border-radius: var(--r-pill); background: var(--c-media-scrim); color: var(--c-on-media); backdrop-filter: blur(6px); font-size: var(--fs-xs); pointer-events: none; transition: opacity var(--d-med); }
+.sd-ba__label--before { inset-inline-start: var(--sp-4); }
+.sd-ba__label--after { inset-inline-end: var(--sp-4); }
+.sd-ba[data-orientation="vertical"] .sd-ba__label--after { inset-block: auto var(--sp-4); }
+.sd-ba.is-near-start .sd-ba__label--before, .sd-ba.is-near-end .sd-ba__label--after { opacity: 0; }

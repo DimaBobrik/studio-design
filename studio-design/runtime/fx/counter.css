@@ -1,0 +1,7 @@
+/* studio-design fx · counter */
+.sd-counter { font-variant-numeric: tabular-nums; unicode-bidi: isolate; display: inline-block; }
+.sd-roll { display: inline-flex; direction: ltr; unicode-bidi: isolate; line-height: 1; }
+.sd-roll__col { display: inline-block; block-size: 1em; overflow: clip; overflow-clip-margin: 0.08em; position: relative; }
+.sd-roll__reel { display: flex; flex-direction: column; will-change: transform; }
+.sd-roll__reel > span { block-size: 1em; display: block; text-align: center; }
+.sd-roll__sym { display: inline-block; white-space: pre; }
