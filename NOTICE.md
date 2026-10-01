@@ -9,7 +9,7 @@ studio-design itself is released under the [MIT License](LICENSE). It **does not
 | **Paper Shaders** (`@paper-design/shaders`) | WebGL backgrounds in `fx/shader-bg` | Dynamically imported from jsDelivr (`0.0.81`); not bundled; attribution kept in the module header. Our code only maps tokens to its uniforms. | Apache-2.0 |
 | **cobe** | WebGL dotted globe in `fx/globe` | Dynamically imported from jsDelivr (`cobe@2.0.1`); not bundled | MIT |
 | **Playwright** | `verify.mjs`, `scan.mjs`, `render-stills.mjs`, `extract-catalog.mjs` (development tools only) | Installed by the user (`npm i playwright`); not bundled | Apache-2.0 |
-| **axe-core** | Accessibility checks in `verify.mjs` | Injected from jsDelivr at QA time; not bundled | MPL-2.0 |
+| **axe-core** | Accessibility checks in `verify.mjs` | Injected from jsDelivr at QA time (`axe-core@4.13.0`); not bundled | MPL-2.0 |
 | **Fonts** | Typography of the art directions | Not bundled. Loaded from Google Fonts or self-hosted by the user from Fontshare. Check each family's license before shipping. | Google Fonts: SIL Open Font License 1.1 (most families) · Fontshare: ITF Free Font License |
 
 ## Demo media

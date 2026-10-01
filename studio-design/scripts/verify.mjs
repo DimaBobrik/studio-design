@@ -79,7 +79,7 @@ for (let i = 0; i < argv.length; i++) {
 }
 if (opt.framesForced) opt.pins = true;
 const H_FOR = w => ({ 320: 640, 390: 844, 768: 1024, 1280: 800 })[w] || 900;
-const AXE_URL = 'https://cdn.jsdelivr.net/npm/axe-core@4/axe.min.js';
+const AXE_URL = 'https://cdn.jsdelivr.net/npm/axe-core@4.13.0/axe.min.js';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const slug = s => s.replace(/^https?:\/\//, '').replace(/[?#].*$/, '').replace(/[^a-z0-9]+/gi, '_').replace(/^_+|_+$/g, '').slice(0, 60) || 'index';
 

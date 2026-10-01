@@ -41,8 +41,9 @@
     var dlg = document.createElement('dialog');
     dlg.className = 'sd-testi__dialog';
     dlg.setAttribute('aria-labelledby', '');
-    dlg.innerHTML = '<button type="button" class="sd-testi__close" aria-label="' + SD.data(el, 'label-close', 'Close') + '">' + ICON_X + '</button>' +
+    dlg.innerHTML = '<button type="button" class="sd-testi__close">' + ICON_X + '</button>' +
       '<blockquote></blockquote><div class="sd-testi__who"><img alt="" width="52" height="52"><div><b></b><small></small></div></div>';
+    dlg.querySelector('.sd-testi__close').setAttribute('aria-label', String(SD.data(el, 'label-close', 'Close')));
     el.appendChild(dlg); st.built.push(dlg);
     var uid = 'sdt' + Math.random().toString(36).slice(2, 8);
     dlg.querySelector('b').id = uid; dlg.setAttribute('aria-labelledby', uid);
